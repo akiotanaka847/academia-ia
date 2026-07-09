@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 26 · Proyecto final — Academia IA</title>
+  <meta name="description" content="El proyecto final del programa: diseña, construye y presenta tu propio agente de IA para automatizar un proceso real de la empresa, con checklist de entrega y repaso del curso." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 07 · Caso empresa</a> <span>—</span>
+        <span>Módulo 26</span>
+      </div>
+      <span class="kicker reveal in">Nivel 07 · Caso empresa · Cierre</span>
+      <h1 class="reveal in">Tu <em>proyecto final</em></h1>
+      <p class="lead reveal in">
+        Llegó el momento de convertir todo lo aprendido en algo real. El reto: <b>diseña, construye y presenta
+        tu propio agente de IA</b> para automatizar un proceso concreto de la empresa. No es un examen; es tu
+        primera pieza de valor.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">Proyecto</span>
+        <span class="mod-meta__item">Nivel avanzado</span>
+        <span class="mod-meta__item">De aprender a construir</span>
+        <span class="mod-meta__item">5 pasos + checklist</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1400&q=80" alt="Presentar un proyecto final" />
+        <span class="mod-cover__badge">De aprender a construir</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="reto">
+          <h2><span class="n">01</span> El reto</h2>
+          <p>
+            Elige <b>un proceso real</b> de tu día a día que sea repetitivo y molesto, y automatízalo con lo que
+            aprendiste. Puede ser pequeño —un reporte, una notificación, clasificar solicitudes—. Lo importante
+            no es el tamaño, sino que <b>funcione y ahorre tiempo real</b>.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">Criterio de éxito</span>
+            <h4>Que le quite trabajo a una persona de verdad</h4>
+            <p>Un buen proyecto final no es el más complejo, sino el que alguien empezará a usar el lunes. Si
+            ahorra aunque sean 15 minutos repetidos cada día, es un éxito.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="paso-1">
+          <h2><span class="n">02</span> Pasos 1 y 2 · Elige y mapea</h2>
+          <p>Empieza como en el Nivel 03: entendiendo el proceso antes de tocar herramientas.</p>
+          <ul class="bullets">
+            <li><b>Elige el proceso</b>: repetitivo, basado en reglas, que te robe tiempo.</li>
+            <li><b>Mapéalo</b>: disparador → entradas → pasos → decisiones → salida.</li>
+            <li><b>Define el «hecho»</b>: ¿qué resultado significa que funcionó?</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Consejo</span>
+            <h4>Pide ayuda a la IA para mapear</h4>
+            <p>Describe tu proceso a un chatbot y pídele que lo ordene en disparador, pasos y decisiones. Te dará
+            un buen borrador que luego ajustas.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="paso-3">
+          <h2><span class="n">03</span> Pasos 3 y 4 · Construye y gobierna</h2>
+          <p>Con el mapa claro, elige tus piezas del curso y móntalo:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Orquestador<span class="src">El flujo</span></h4><ul><li>Workfront Fusion (o n8n)</li><li>Disparador + módulos</li></ul></div>
+            <div class="compare-card"><h4>Cerebro<span class="src">La IA</span></h4><ul><li>El modelo adecuado (Módulo 20)</li><li>Con su prompt de sistema</li></ul></div>
+            <div class="compare-card"><h4>Skill<span class="src">El conocimiento</span></h4><ul><li>Tu formato y tus pasos</li><li>En un <code>.md</code></li></ul></div>
+            <div class="compare-card"><h4>Gobernanza<span class="src">El control</span></h4><ul><li>Permisos mínimos</li><li>Persona en el bucle</li></ul></div>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">No te saltes esto</span>
+            <h4>Pruébalo con datos de mentira primero</h4>
+            <p>Antes de conectarlo a datos o sistemas reales, prueba con ejemplos inventados. Cuando funcione y
+            esté gobernado (permisos, revisión humana), pásalo a producción.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="paso-5">
+          <h2><span class="n">04</span> Paso 5 · Presenta</h2>
+          <p>Preparar una mini presentación de 5 minutos ordena tus ideas y comparte el valor con el equipo. Cuenta:</p>
+          <ul class="bullets">
+            <li><b>El problema</b>: qué proceso era y cuánto tiempo costaba.</li>
+            <li><b>La solución</b>: qué construiste y qué piezas usaste.</li>
+            <li><b>La demo</b>: enséñalo funcionando (aunque sea con datos de prueba).</li>
+            <li><b>El impacto</b>: cuánto tiempo ahorra y qué riesgos controlaste.</li>
+            <li><b>Lo siguiente</b>: cómo lo mejorarías o qué otro proceso automatizarías.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="checklist">
+          <h2><span class="n">05</span> Checklist de entrega</h2>
+          <p>Antes de dar por terminado tu proyecto, repasa que tienes todo:</p>
+          <ul class="bullets">
+            <li>El proceso está <b>mapeado</b> (disparador, pasos, decisiones, salida).</li>
+            <li>El agente o escenario <b>funciona</b> con datos de prueba.</li>
+            <li>Tiene <b>permisos mínimos</b> y revisión humana donde toca.</li>
+            <li>Mediste (o estimaste) el <b>tiempo que ahorra</b>.</li>
+            <li>Preparaste una <b>presentación</b> corta con la demo.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Has llegado al final</span>
+            <h4>Enhorabuena: completaste el programa</h4>
+            <p>Empezaste sin saber qué era la IA y ahora puedes diseñar un agente que automatiza trabajo real.
+            Repasaste fundamentos, conceptos técnicos, automatización, agentes, skills, gobernanza y scraping —y
+            los aplicaste a Workfront. El siguiente paso ya no es aprender: es construir.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Repaso final del programa</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Cuál es el primer paso al automatizar un proceso?</p>
+            <button class="quiz__opt" data-correct="true">Entenderlo y mapearlo (disparador, pasos, decisiones, salida).</button>
+            <button class="quiz__opt" data-correct="false">Comprar la herramienta más cara.</button>
+            <button class="quiz__opt" data-correct="false">Conectarlo directo a datos reales sin probar.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Primero se entiende y se mapea; construir viene después. Lo viste en el Nivel 03.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué hace que un proyecto final sea bueno?</p>
+            <button class="quiz__opt" data-correct="false">Que sea lo más complejo posible.</button>
+            <button class="quiz__opt" data-correct="true">Que funcione, esté gobernado y le ahorre tiempo real a una persona.</button>
+            <button class="quiz__opt" data-correct="false">Que use todos los modelos a la vez.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Valor real y con control &gt; complejidad. El mejor proyecto es el que se empieza a usar.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-25-workfront-ia.html"><span>← Anterior</span><b>25 · Adobe Workfront + IA</b></a>
+          <a href="../index.html" class="next"><span>Fin del programa ✦</span><b>Volver al inicio</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#reto">El reto</a>
+          <a href="#paso-1">Elige y mapea</a>
+          <a href="#paso-3">Construye y gobierna</a>
+          <a href="#paso-5">Presenta</a>
+          <a href="#checklist">Checklist de entrega</a>
+          <a href="#quiz">Repaso final</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 26 · Fin del programa</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

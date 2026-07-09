@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 15 · Agentes autónomos — Academia IA</title>
+  <meta name="description" content="Qué es un agente autónomo que planifica y ejecuta varios pasos solo, cómo funciona su ciclo, los ajustes de lógica y límites (guardrails) y los riesgos a gobernar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 04 · Agentes de IA</a> <span>—</span>
+        <span>Módulo 15</span>
+      </div>
+      <span class="kicker reveal in">Nivel 04 · Agentes de IA</span>
+      <h1 class="reveal in">Agentes <em>autónomos</em></h1>
+      <p class="lead reveal in">
+        Hasta ahora, el agente respondía a una petición. Un <b>agente autónomo</b> va más allá: recibe un
+        objetivo, lo <b>divide en pasos</b> y los ejecuta solo, sin que le digas cada movimiento. Es lo más
+        potente —y lo que más hay que gobernar.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">45 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">Autonomía con control</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&q=80" alt="Inteligencia artificial autónoma" />
+        <span class="mod-cover__badge">Recibe un objetivo, ejecuta el plan</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> De asistente a autónomo</h2>
+          <p>
+            Un agente normal ejecuta <b>una tarea</b> que le pides. Un agente autónomo recibe un <b>objetivo
+            más amplio</b> y decide por sí mismo qué pasos dar, en qué orden y qué herramientas usar, hasta
+            lograrlo. Tú defines el «qué»; él resuelve el «cómo».
+          </p>
+          <p>
+            Ejemplo: en vez de «resume este informe», le dices «prepara el reporte semanal del proyecto». El
+            agente consulta Workfront, reúne los datos, redacta el resumen, lo formatea y lo envía —varios
+            pasos encadenados sin supervisión paso a paso.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Objetivo, no instrucciones</h4>
+            <p>La autonomía está en que planifica. Le das una meta y confías en que encuentre el camino,
+            corrigiéndose si algo falla. Cuanta más autonomía, más útil… y más importante el control.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Agentes autónomos, explicados</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/ZYf9V2fSFwU" title="Agentes autónomos de IA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" data-video-placeholder="true"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="ciclo">
+          <h2><span class="n">03</span> El ciclo: planificar, ejecutar, evaluar</h2>
+          <p>Un agente autónomo repite un ciclo hasta cumplir el objetivo. Es el bucle del Módulo 12, pero con un plan por delante:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">agente-autonomo.txt</span></div>
+            <pre><code><span class="tok-com"># Objetivo: "Prepara el reporte semanal del proyecto Acme"</span>
+
+<span class="tok-key">PLANIFICAR</span>  Divide el objetivo en pasos:
+            1) obtener tareas  2) obtener avances
+            3) redactar  4) enviar
+<span class="tok-key">EJECUTAR</span>    Hace el paso 1 → API de Workfront
+<span class="tok-key">EVALUAR</span>     ¿Salió bien? ¿Tengo lo que necesito?
+            ├─ Sí → siguiente paso
+            └─ No → reintenta o cambia de enfoque
+<span class="tok-key">REPETIR</span>     …hasta completar todos los pasos
+<span class="tok-key">TERMINAR</span>    Objetivo cumplido → avisa a la persona</code></pre>
+          </div>
+          <p>La capacidad de <b>evaluar y corregirse</b> es lo que lo hace autónomo: no se rinde al primer tropiezo, ajusta el plan.</p>
+        </div>
+
+        <div class="content-block reveal" id="limites">
+          <h2><span class="n">04</span> Ajustes de lógica y límites</h2>
+          <p>
+            Autonomía sin frenos es peligrosa: un agente que actúa solo también se equivoca solo, a escala.
+            Estos son los controles (<i>guardrails</i>) que nunca deben faltar:
+          </p>
+          <ul class="bullets">
+            <li><b>Límite de pasos</b>: un tope para que no entre en bucles infinitos ni gaste de más.</li>
+            <li><b>Persona en el bucle</b>: para decisiones importantes, que pida aprobación antes de actuar.</li>
+            <li><b>Permisos acotados</b>: acceso solo a los sistemas y acciones estrictamente necesarios.</li>
+            <li><b>Zonas prohibidas</b>: en el prompt de sistema, qué NO puede hacer bajo ningún concepto.</li>
+            <li><b>Registro y revisión</b>: guardar cada paso para auditar y mejorar.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Puente al Nivel 05</span>
+            <h4>La autonomía exige gobernanza</h4>
+            <p>Cuanto más autónomo es un agente, más importan los permisos, la privacidad y las reglas. El
+            Nivel 05 está dedicado por completo a configurar la IA de forma segura para la empresa.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué caracteriza a un agente autónomo?</p>
+            <button class="quiz__opt" data-correct="true">Recibe un objetivo y planifica y ejecuta varios pasos por sí mismo.</button>
+            <button class="quiz__opt" data-correct="false">Solo responde preguntas, sin actuar.</button>
+            <button class="quiz__opt" data-correct="false">Necesita que le indiques cada paso a mano.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Tú das el «qué» (el objetivo); el agente resuelve el «cómo», corrigiéndose por el camino.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Cuál es un control (guardrail) esencial en un agente autónomo?</p>
+            <button class="quiz__opt" data-correct="false">Darle acceso total a todos los sistemas para que sea más útil.</button>
+            <button class="quiz__opt" data-correct="true">Pedir aprobación humana antes de acciones importantes.</button>
+            <button class="quiz__opt" data-correct="false">Quitarle el registro para que vaya más rápido.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La persona en el bucle, junto a permisos mínimos y límites de pasos, mantiene la autonomía bajo control.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-14-whatsapp.html"><span>← Anterior</span><b>14 · Conectar a WhatsApp</b></a>
+          <a href="../index.html#ruta" class="next"><span>Siguiente nivel →</span><b>Nivel 05 · Skills y Gobernanza</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">De asistente a autónomo</a>
+          <a href="#video">Video</a>
+          <a href="#ciclo">El ciclo del agente</a>
+          <a href="#limites">Ajustes y límites</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 15</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

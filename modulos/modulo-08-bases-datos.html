@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 08 · Bases de datos relacionales — Academia IA</title>
+  <meta name="description" content="Qué es una base de datos relacional, tablas, filas y columnas, relaciones con claves, una consulta SQL básica y por qué tu agente de IA necesita memoria ordenada." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 02 · Conceptos técnicos</a> <span>—</span>
+        <span>Módulo 08</span>
+      </div>
+      <span class="kicker reveal in">Nivel 02 · Conceptos técnicos</span>
+      <h1 class="reveal in">Bases de datos <em>relacionales</em></h1>
+      <p class="lead reveal in">
+        Cierra el Nivel 02. Una base de datos es la <b>memoria ordenada</b> de cualquier sistema. Vas a
+        entender tablas, relaciones y una consulta básica —lo justo para saber dónde «vive» la información
+        de tus agentes.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">25 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">La memoria de los sistemas</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1400&q=80" alt="Servidores y almacenamiento de datos" />
+        <span class="mod-cover__badge">La memoria ordenada</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> Una hoja de cálculo con superpoderes</h2>
+          <p>
+            Una <b>base de datos relacional</b> guarda información en <b>tablas</b>, igual que una hoja de
+            Excel: <b>filas</b> (cada registro) y <b>columnas</b> (cada atributo). La diferencia es que puede
+            manejar millones de registros y <b>relacionar</b> unas tablas con otras de forma fiable.
+          </p>
+          <p>Por ejemplo, una tabla de <b>Clientes</b>:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">tabla · clientes</span></div>
+            <pre><code><span class="tok-com">id  | nombre       | ciudad     | vip</span>
+<span class="tok-num">1</span>   | <span class="tok-str">Ana Torres</span>   | <span class="tok-str">Madrid</span>     | <span class="tok-key">true</span>
+<span class="tok-num">2</span>   | <span class="tok-str">Luis Gómez</span>   | <span class="tok-str">Sevilla</span>    | <span class="tok-key">false</span>
+<span class="tok-num">3</span>   | <span class="tok-str">Marta Ruiz</span>   | <span class="tok-str">Valencia</span>   | <span class="tok-key">true</span></code></pre>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">La clave primaria</span>
+            <h4>Cada fila tiene un identificador único</h4>
+            <p>La columna <code>id</code> es la <b>clave primaria</b>: un número único que identifica a cada
+            registro sin confusión, aunque dos clientes se llamen igual.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Bases de datos, explicadas</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/wR0jg0eQsZA" title="Qué es una base de datos relacional" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="relaciones">
+          <h2><span class="n">03</span> Relaciones y consultas</h2>
+          <p>
+            Lo «relacional» viene de conectar tablas. Una tabla de <b>Pedidos</b> no repite los datos del
+            cliente: solo guarda su <code>id</code>. Así, si Ana cambia de ciudad, se actualiza en un único sitio.
+          </p>
+          <p>Para pedir datos usamos <b>SQL</b>, un lenguaje que se lee casi como inglés:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">consulta.sql</span></div>
+            <pre><code><span class="tok-key">SELECT</span> nombre, ciudad
+<span class="tok-key">FROM</span> clientes
+<span class="tok-key">WHERE</span> vip = <span class="tok-key">true</span>;
+
+<span class="tok-com">-- Devuelve: Ana Torres (Madrid), Marta Ruiz (Valencia)</span></code></pre>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Cómo leerlo</span>
+            <h4>SELECT … FROM … WHERE …</h4>
+            <p><b>SELECT</b> qué columnas quieres, <b>FROM</b> de qué tabla, <b>WHERE</b> con qué condición.
+            Con ese patrón entiendes la mayoría de consultas que verás.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="agentes">
+          <h2><span class="n">04</span> Por qué tu agente la necesita</h2>
+          <p>Un agente de IA sin base de datos olvida todo entre conversaciones. Con ella, gana <b>memoria</b>:</p>
+          <ul class="bullets">
+            <li><b>Recordar</b>: quién es cada usuario, sus preferencias, su historial.</li>
+            <li><b>Registrar</b>: cada pedido, ticket o interacción para consultarlo después.</li>
+            <li><b>Consultar</b>: responder «¿cuántos pedidos hizo este cliente?» con datos reales.</li>
+            <li><b>Auditar</b>: dejar rastro de lo que el agente hizo y cuándo.</li>
+          </ul>
+          <div class="callout callout--info reveal">
+            <span class="label">Cierre del Nivel 02</span>
+            <h4>Ya tienes el vocabulario técnico</h4>
+            <p>API, JSON, front/back/RAG y bases de datos. Con esta base entenderás cualquier herramienta de
+            automatización. En el Nivel 03 empezamos a construir flujos reales.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Para qué sirve la clave primaria (columna id)?</p>
+            <button class="quiz__opt" data-correct="true">Para identificar cada fila de forma única.</button>
+            <button class="quiz__opt" data-correct="false">Para ordenar las columnas alfabéticamente.</button>
+            <button class="quiz__opt" data-correct="false">Para cifrar la base de datos.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El id único evita confundir registros aunque dos tengan el mismo nombre.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. En SQL, ¿qué parte indica la <em>condición</em> del filtro?</p>
+            <button class="quiz__opt" data-correct="false">SELECT</button>
+            <button class="quiz__opt" data-correct="false">FROM</button>
+            <button class="quiz__opt" data-correct="true">WHERE</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>WHERE define la condición: «solo las filas donde vip = true».</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-07-front-back-rag.html"><span>← Anterior</span><b>07 · Front, Back y RAG</b></a>
+          <a href="../index.html#ruta" class="next"><span>Siguiente nivel →</span><b>Nivel 03 · Automatización</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">Hoja de cálculo con superpoderes</a>
+          <a href="#video">Video</a>
+          <a href="#relaciones">Relaciones y consultas</a>
+          <a href="#agentes">Por qué tu agente la necesita</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 08</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

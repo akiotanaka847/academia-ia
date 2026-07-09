@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academia IA · Programa interno de Inteligencia Artificial</title>
+  <meta name="description" content="Programa interno de Inteligencia Artificial: de los fundamentos a los agentes autónomos, automatización, web scraping y casos reales con Adobe Workfront." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="#ruta">Temario</a></li>
+        <li><a href="#cohortes">Cohortes</a></li>
+        <li><a href="tareas.html">Tareas</a></li>
+        <li><a href="modulos/modulo-01-introduccion-ia.html" class="nav__cta">Empezar</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="container hero__grid">
+      <div class="reveal in">
+        <span class="kicker">Programa de formación interna · 2026</span>
+        <h1 class="hero__title">Inteligencia<br>Artificial, <em>aplicada</em><br>a tu trabajo.</h1>
+        <p class="hero__lead">
+          Un programa práctico, de los fundamentos a los agentes autónomos. Aprende a automatizar
+          procesos, crear tus propios asistentes y conectarlos a WhatsApp, Telegram y Adobe Workfront.
+        </p>
+        <div class="hero__actions">
+          <a href="modulos/modulo-01-introduccion-ia.html" class="btn btn--primary">
+            Comenzar el programa <span class="arrow">→</span>
+          </a>
+          <a href="#ruta" class="btn btn--text">Ver el temario</a>
+        </div>
+        <div class="hero__meta">
+          <div><b>08</b><span>Niveles</span></div>
+          <div><b>30</b><span>Módulos</span></div>
+          <div><b>03</b><span>Cohortes</span></div>
+        </div>
+      </div>
+
+      <figure class="hero__fig reveal in">
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&q=80" alt="Sistema de inteligencia artificial" />
+        </div>
+        <figcaption class="hero__figcap"><span>Fig. 01 — Sistemas inteligentes</span><span>MMXXVI</span></figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <main>
+  <!-- ============ TEMARIO ============ -->
+  <section class="section" id="ruta">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">El temario</span>
+        <h2>Siete niveles, de lo esencial a lo <em>avanzado</em>.</h2>
+        <p>Cada nivel se apoya en el anterior. Empieza por los fundamentos y avanza a tu ritmo hasta construir agentes de IA autónomos para la empresa.</p>
+      </div>
+
+      <!-- NIVEL 1 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 01</span>
+          <div class="level__meta"><h3>Fundamentos de la IA</h3><span>Qué es, cómo razona y cómo usarla para aprender</span></div>
+          <span class="level__tag basico">Básico</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-01-introduccion-ia.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="Inteligencia artificial" loading="lazy" /><span class="card__num">01</span></div>
+            <div class="card__body">
+              <h4>Introducción a la IA</h4>
+              <p>Qué es (y qué no es) la inteligencia artificial, el machine learning y cómo llegamos a ChatGPT.</p>
+              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+            </div>
+          </a>
+          <a class="card" href="modulos/modulo-02-ia-generativa.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80" alt="IA generativa" loading="lazy" /><span class="card__num">02</span></div>
+            <div class="card__body">
+              <h4>IA Generativa</h4>
+              <p>Texto, imágenes, audio y video: cómo los modelos crean y por qué son una revolución.</p>
+              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+            </div>
+          </a>
+          <a class="card" href="modulos/modulo-03-chatbots.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Chatbot" loading="lazy" /><span class="card__num">03</span></div>
+            <div class="card__body">
+              <h4>Chatbots como herramienta</h4>
+              <p>ChatGPT, Claude y Gemini: cómo hablarles bien (prompting) para obtener resultados útiles.</p>
+              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+            </div>
+          </a>
+          <a class="card" href="modulos/modulo-04-notebooklm.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80" alt="Aprendizaje" loading="lazy" /><span class="card__num">04</span></div>
+            <div class="card__body">
+              <h4>Aprender con NotebookLM</h4>
+              <p>Domina cualquier tema a partir de tus propios documentos, con respuestas citadas.</p>
+              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 2 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 02</span>
+          <div class="level__meta"><h3>Conceptos técnicos esenciales</h3><span>El lenguaje que necesitas para construir</span></div>
+          <span class="level__tag basico">Básico</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-05-api.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="API" loading="lazy" /><span class="card__num">05</span></div>
+            <div class="card__body"><h4>¿Qué es una API?</h4><p>El «enchufe» que conecta programas entre sí y la base de toda automatización.</p>
+              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-06-json.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&q=80" alt="Datos JSON" loading="lazy" /><span class="card__num">06</span></div>
+            <div class="card__body"><h4>JSON y tipos de datos</h4><p>Cómo viaja la información entre sistemas: texto, números, listas y objetos.</p>
+              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-07-front-back-rag.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Front y back" loading="lazy" /><span class="card__num">07</span></div>
+            <div class="card__body"><h4>Front, Back y RAG</h4><p>Frontend, backend y RAG (búsqueda + IA) explicados sin tecnicismos.</p>
+              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-08-bases-datos.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80" alt="Base de datos" loading="lazy" /><span class="card__num">08</span></div>
+            <div class="card__body"><h4>Bases de datos relacionales</h4><p>Tablas y relaciones: por qué tu agente necesita una memoria ordenada.</p>
+              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 3 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 03</span>
+          <div class="level__meta"><h3>Automatización de procesos</h3><span>Deja que las máquinas hagan lo repetitivo</span></div>
+          <span class="level__tag inter">Intermedio</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-09-mapear-procesos.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Mapeo de procesos" loading="lazy" /><span class="card__num">09</span></div>
+            <div class="card__body"><h4>Identificar y mapear procesos</h4><p>Cómo detectar qué tareas conviene automatizar, antes de tocar ninguna herramienta.</p>
+              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-10-workfront-fusion.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Workfront Fusion" loading="lazy" /><span class="card__num">10</span></div>
+            <div class="card__body"><h4>Automatización con Workfront Fusion</h4><p>Nuestro orquestador: escenarios, módulos y conexiones. Con n8n, Make y Zapier como alternativas.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-11-creacion-web.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80" alt="Desarrollo web" loading="lazy" /><span class="card__num">11</span></div>
+            <div class="card__body"><h4>Creación de páginas web</h4><p>De la idea al sitio publicado —como esta academia— sin ser programador.</p>
+              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 4 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 04</span>
+          <div class="level__meta"><h3>Agentes de IA</h3><span>Asistentes que actúan, no solo responden</span></div>
+          <span class="level__tag inter">Intermedio</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-12-anatomia-agente.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Agente de IA" loading="lazy" /><span class="card__num">12</span></div>
+            <div class="card__body"><h4>Anatomía de un agente</h4><p>Memoria, prompts de sistema y herramientas: lo que convierte un chat en un agente.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-13-agente-telegram.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=800&q=80" alt="Telegram" loading="lazy" /><span class="card__num">13</span></div>
+            <div class="card__body"><h4>Tu agente en Telegram</h4><p>Un bot conectado a IA que responde a tu equipo las 24 horas.</p>
+              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-14-whatsapp.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=800&q=80" alt="WhatsApp" loading="lazy" /><span class="card__num">14</span></div>
+            <div class="card__body"><h4>Conectar a WhatsApp</h4><p>Lleva tu agente al canal donde ya están tus clientes y compañeros.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-15-agentes-autonomos.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="Agente autónomo" loading="lazy" /><span class="card__num">15</span></div>
+            <div class="card__body"><h4>Agentes autónomos</h4><p>Agentes que planifican, deciden y ejecutan varios pasos solos, con límites claros.</p>
+              <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 5 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 05</span>
+          <div class="level__meta"><h3>Skills, Cloud y Gobernanza</h3><span>Capacidades para tus modelos, con control</span></div>
+          <span class="level__tag avanz">Avanzado</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-16-github.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&q=80" alt="GitHub" loading="lazy" /><span class="card__num">16</span></div>
+            <div class="card__body"><h4>Por qué necesitas GitHub</h4><p>Versiona tu trabajo, publica webs y accede al ecosistema donde viven las skills y los agentes.</p>
+              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-17-skills.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80" alt="Skill" loading="lazy" /><span class="card__num">17</span></div>
+            <div class="card__body"><h4>¿Qué es una Skill?</h4><p>Skills, archivos <code>.md</code> y cómo crear una para ampliar lo que la IA sabe hacer.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-18-extensiones.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Extensiones" loading="lazy" /><span class="card__num">18</span></div>
+            <div class="card__body"><h4>Extensiones y capacidades</h4><p>Skills, herramientas, conectores (MCP) y extensiones: qué es cada una y cómo combinarlas.</p>
+              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-19-skills-proveedores.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Ecosistema cloud" loading="lazy" /><span class="card__num">19</span></div>
+            <div class="card__body"><h4>Claude, Gemini y OpenAI</h4><p>El ecosistema cloud de cada proveedor y qué ofrece frente a los demás.</p>
+              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-20-elegir-modelo.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Elegir modelo" loading="lazy" /><span class="card__num">20</span></div>
+            <div class="card__body"><h4>¿Qué modelo elegir?</h4><p>Guía práctica para escoger el modelo correcto según coste, velocidad y tarea.</p>
+              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-21-privacidad-gobernanza.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="Seguridad" loading="lazy" /><span class="card__num">21</span></div>
+            <div class="card__body"><h4>Privacidad, gobernanza y permisos</h4><p>Configura la IA de forma segura: datos, accesos y cumplimiento.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 6 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 06</span>
+          <div class="level__meta"><h3>Web Scraping</h3><span>Extrae datos de la web de forma responsable</span></div>
+          <span class="level__tag avanz">Avanzado</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-22-scraping-fundamentos.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&q=80" alt="Scraping" loading="lazy" /><span class="card__num">22</span></div>
+            <div class="card__body"><h4>Nociones fundamentales</h4><p>Qué es el web scraping, cuándo es legal y ético, y las herramientas básicas.</p>
+              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-23-scraping-avanzado.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Scraping avanzado" loading="lazy" /><span class="card__num">23</span></div>
+            <div class="card__body"><h4>Scraping avanzado</h4><p>Páginas dinámicas, paginación y cómo evitar bloqueos con buenas prácticas.</p>
+              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-24-apis-ocultas.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="APIs ocultas" loading="lazy" /><span class="card__num">24</span></div>
+            <div class="card__body"><h4>APIs ocultas</h4><p>Descubre las APIs que las webs usan por detrás para obtener datos limpios.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 7 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 07</span>
+          <div class="level__meta"><h3>Caso real: la empresa</h3><span>Aplica todo a tus herramientas del día a día</span></div>
+          <span class="level__tag avanz">Avanzado</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-25-workfront-ia.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Adobe Workfront" loading="lazy" /><span class="card__num">25</span></div>
+            <div class="card__body"><h4>Adobe Workfront + IA</h4><p>Automatiza proyectos, aprobaciones y reportes en Workfront con agentes de IA.</p>
+              <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-26-proyecto-final.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Proyecto final" loading="lazy" /><span class="card__num">26</span></div>
+            <div class="card__body"><h4>Proyecto final</h4><p>Diseña, construye y presenta tu propio agente para un proceso real de la empresa.</p>
+              <div class="card__foot"><span>PROYECTO</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NIVEL 8 -->
+      <div class="level reveal">
+        <div class="level__header">
+          <span class="level__num">Nivel 08</span>
+          <div class="level__meta"><h3>Casos de uso que generan valor</h3><span>Aplicaciones concretas de alto impacto</span></div>
+          <span class="level__tag avanz">Avanzado</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="modulos/modulo-27-videos-ia.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80" alt="Videos con IA" loading="lazy" /><span class="card__num">27</span></div>
+            <div class="card__body"><h4>Crear videos con IA</h4><p>Avatares que hablan, video desde texto y voces realistas: de un guion a un video sin grabar.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-28-linkedin-portafolio.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80" alt="Portafolio web" loading="lazy" /><span class="card__num">28</span></div>
+            <div class="card__body"><h4>De LinkedIn a portafolio web</h4><p>Convierte tu perfil en una página profesional con IA, sin código, y publícala gratis.</p>
+              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-29-automatizaciones-recetas.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Automatizaciones" loading="lazy" /><span class="card__num">29</span></div>
+            <div class="card__body"><h4>Automatizaciones prácticas</h4><p>Recetas de automatización con IA listas para copiar: bandeja inteligente, respuestas y reportes.</p>
+              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+          <a class="card" href="modulos/modulo-30-flujos-agenticos.html">
+            <div class="card__cover"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Flujos agénticos" loading="lazy" /><span class="card__num">30</span></div>
+            <div class="card__body"><h4>Flujos agénticos avanzados</h4><p>De un agente a varios coordinados: patrones multi-agente y cuándo (y cuándo no) usarlos.</p>
+              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COHORTES ============ -->
+  <section class="section section--alt" id="cohortes">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Tres velocidades</span>
+        <h2>Empieza en el punto que te <em>corresponde</em>.</h2>
+        <p>Según tu experiencia previa, arranca en el nivel adecuado. Siempre puedes avanzar.</p>
+      </div>
+      <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card card--plain reveal">
+          <span class="marker">Cohorte · Básico</span>
+          <h4>Empieza desde cero</h4>
+          <p>Niveles 1 y 2. Para quien nunca ha usado IA más allá de un chatbot. Sin código.</p>
+          <ul class="bullets" style="margin-top:18px;"><li>Fundamentos de IA</li><li>Prompting efectivo</li><li>APIs y JSON sin miedo</li></ul>
+        </div>
+        <div class="card card--plain reveal">
+          <span class="marker">Cohorte · Intermedio</span>
+          <h4>Automatiza y crea agentes</h4>
+          <p>Niveles 3 y 4. Para quien ya domina lo básico y quiere construir flujos y bots.</p>
+          <ul class="bullets" style="margin-top:18px;"><li>n8n, Make y Zapier</li><li>Agentes en Telegram y WhatsApp</li><li>Memoria y herramientas</li></ul>
+        </div>
+        <div class="card card--plain reveal">
+          <span class="marker">Cohorte · Avanzado</span>
+          <h4>Autonomía y scraping</h4>
+          <p>Niveles 5 a 7. Skills, gobernanza, scraping avanzado y el caso real con Workfront.</p>
+          <ul class="bullets" style="margin-top:18px;"><li>Skills y extensiones</li><li>Web scraping avanzado</li><li>Proyecto final en la empresa</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LA EMPRESA ============ -->
+  <section class="section" id="empresa">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Hecho a medida</span>
+        <h2>Pensado para tu <em>equipo</em>.</h2>
+        <p>Cada módulo cierra con un ejercicio aplicado a herramientas reales que ya usan, como Adobe Workfront.</p>
+      </div>
+      <div class="cards reveal" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card card--plain"><span class="marker">01</span><h4>Aprendizaje activo</h4><p>Videos, ejemplos y autoevaluaciones en cada módulo. Se aprende haciendo.</p></div>
+        <div class="card card--plain"><span class="marker">02</span><h4>Casos reales</h4><p>Ejemplos con Workfront, WhatsApp y las herramientas de tu operación diaria.</p></div>
+        <div class="card card--plain"><span class="marker">03</span><h4>Seguro y gobernado</h4><p>Un nivel completo dedicado a privacidad, permisos y uso responsable.</p></div>
+        <div class="card card--plain"><span class="marker">04</span><h4>Resultados medibles</h4><p>La meta: que cada persona automatice al menos un proceso real al terminar.</p></div>
+      </div>
+      <div class="reveal" style="margin-top:48px;">
+        <a href="modulos/modulo-01-introduccion-ia.html" class="btn btn--primary">Empezar por el Módulo 01 <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__intro">
+          <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+          <p>Programa interno de Inteligencia Artificial aplicada. De los fundamentos a los agentes autónomos.</p>
+        </div>
+        <div>
+          <h5>Nivel 01</h5>
+          <a href="modulos/modulo-01-introduccion-ia.html">Introducción a la IA</a>
+          <a href="modulos/modulo-02-ia-generativa.html">IA Generativa</a>
+          <a href="modulos/modulo-03-chatbots.html">Chatbots</a>
+          <a href="modulos/modulo-04-notebooklm.html">NotebookLM</a>
+        </div>
+        <div>
+          <h5>Programa</h5>
+          <a href="#ruta">Temario completo</a>
+          <a href="tareas.html">Tareas prácticas</a>
+          <a href="#cohortes">Cohortes</a>
+          <a href="#empresa">Para la empresa</a>
+        </div>
+        <div>
+          <h5>Empezar</h5>
+          <a href="modulos/modulo-01-introduccion-ia.html">Módulo 01</a>
+          <a href="#cohortes">Elegir cohorte</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> · Academia IA · Formación interna</span>
+        <span>Hecho para aprender IA aplicada</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

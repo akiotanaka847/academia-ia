@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 01 · Introducción a la IA — Academia IA</title>
+  <meta name="description" content="Qué es (y qué no es) la inteligencia artificial, cómo aprende, la diferencia entre IA, Machine Learning e IA generativa, y cómo empezar a usarla hoy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO DEL MÓDULO ============ -->
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 01 · Fundamentos</a> <span>—</span>
+        <span>Módulo 01</span>
+      </div>
+      <span class="kicker reveal in">Nivel 01 · Fundamentos</span>
+      <h1 class="reveal in">Introducción a la <em>Inteligencia Artificial</em></h1>
+      <p class="lead reveal in">
+        Antes de crear agentes o automatizar procesos, necesitas una base sólida: qué es
+        realmente la IA, cómo «aprende», en qué se diferencia del Machine Learning y de la
+        IA generativa, y cómo empezar a usarla hoy mismo en tu trabajo.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">25 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">Sin requisitos previos</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&q=80" alt="Inteligencia artificial y ChatGPT" />
+        <span class="mod-cover__badge">De cero a entender la IA</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ CUERPO ============ -->
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> ¿Qué es la Inteligencia Artificial?</h2>
+          <p>
+            La <b>Inteligencia Artificial (IA)</b> es la capacidad de una máquina para realizar
+            tareas que normalmente requerirían inteligencia humana: entender lenguaje, reconocer
+            imágenes, tomar decisiones o generar contenido nuevo.
+          </p>
+          <p>
+            Una forma sencilla de verlo: en la programación tradicional, una persona escribe
+            <i>reglas exactas</i> («si el cliente escribe “factura”, responde X»). En la IA moderna,
+            en cambio, le mostramos <i>muchos ejemplos</i> y el sistema <b>aprende el patrón</b> por sí mismo.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>La IA no «piensa» como un humano</h4>
+            <p>Reconoce patrones estadísticos en enormes cantidades de datos y predice la respuesta
+            más probable. Entender esto te ahorrará muchos malentendidos.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> La IA en cinco minutos</h2>
+          <p>Un repaso visual y rápido antes de entrar en los conceptos. Míralo y luego seguimos:</p>
+          <div class="media-frame">
+            <div class="video-embed">
+              <!-- REEMPLAZABLE: cambia el ID tras /embed/ por el de tu propio video -->
+              <iframe src="https://www.youtube.com/embed/ad79nYk2keg" title="¿Qué es la Inteligencia Artificial?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="tipos">
+          <h2><span class="n">03</span> IA, Machine Learning e IA Generativa</h2>
+          <p>Estos tres términos se mezclan mucho. Piénsalos como <b>círculos, uno dentro de otro</b>:</p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h4>Inteligencia Artificial<span class="src">El campo más amplio</span></h4>
+              <ul><li>Cualquier máquina «inteligente»</li><li>Incluye reglas, robótica, etc.</li><li>Ej.: un termostato inteligente</li></ul>
+            </div>
+            <div class="compare-card">
+              <h4>Machine Learning<span class="src">Subconjunto de la IA</span></h4>
+              <ul><li>Aprende de datos, no de reglas</li><li>Detecta patrones y predice</li><li>Ej.: detectar correo spam</li></ul>
+            </div>
+            <div class="compare-card">
+              <h4>IA Generativa<span class="src">Un tipo de Machine Learning</span></h4>
+              <ul><li>Crea contenido nuevo</li><li>Texto, imágenes, audio, video</li><li>Ej.: ChatGPT, Gemini, Claude</li></ul>
+            </div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Regla mnemotécnica</span>
+            <h4>Todo cabe dentro de la IA</h4>
+            <p>Toda IA generativa es Machine Learning, y todo Machine Learning es IA —pero no al revés.
+            Cuando alguien dice «IA» hoy, casi siempre se refiere a la <b>generativa</b>.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="como-aprende">
+          <h2><span class="n">04</span> ¿Cómo «aprende» un modelo?</h2>
+          <p>
+            Un modelo de lenguaje como ChatGPT se entrena prediciendo <b>la siguiente palabra</b> millones
+            de veces. Si le das «El cielo es de color ___», aprende que «azul» es muy probable. Repetido
+            a escala gigante, esto produce algo que parece comprensión.
+          </p>
+          <p>Cuando le hablas (esto se llama <b>prompt</b>), en el fondo ocurre algo así:</p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">ejemplo-prompt.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Tú escribes (el prompt):</span>
+<span class="tok-str">"Resume este correo en una frase amable para un cliente."</span>
+
+<span class="tok-com"># El modelo predice la respuesta más probable, palabra a palabra:</span>
+<span class="tok-key">→</span> <span class="tok-str">"¡Gracias por tu mensaje! Hemos recibido tu solicitud
+   y te responderemos antes del viernes."</span>
+
+<span class="tok-com"># No buscó la frase en una base de datos: la GENERÓ,</span>
+<span class="tok-com"># calculando qué palabras encajan mejor.</span></code></pre>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">Precaución</span>
+            <h4>Las «alucinaciones»</h4>
+            <p>Como el modelo predice lo <i>probable</i>, a veces inventa datos que suenan creíbles pero
+            son falsos. Por eso siempre verificamos la información importante. Lo veremos a fondo en el nivel de gobernanza.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="empezar">
+          <h2><span class="n">05</span> Cómo empezar a usarla hoy</h2>
+          <p>No necesitas programar para obtener valor desde el primer día. Estos son los primeros pasos:</p>
+          <ul class="bullets">
+            <li><b>Elige un chatbot</b> (ChatGPT, Claude o Gemini) y crea una cuenta gratuita.</li>
+            <li><b>Empieza por una tarea real</b>: redactar un correo, resumir un documento, hacer una lluvia de ideas.</li>
+            <li><b>Sé específico</b>: da contexto, formato deseado y tono. «Actúa como…», «en 3 puntos…», «para un cliente enfadado…».</li>
+            <li><b>Itera</b>: si la respuesta no te gusta, pídele que la ajuste. Es una conversación.</li>
+            <li><b>Verifica</b> todo dato sensible antes de usarlo.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Ejercicio · 5 min</span>
+            <h4>Descubre qué automatizar</h4>
+            <p>Abre tu chatbot favorito y pídele: <i>«Actúa como experto en mi sector. Dame 5 tareas
+            repetitivas de mi trabajo que podría automatizar con IA.»</i> Guarda la respuesta: la usaremos en el Nivel 03.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué relación hay entre IA, Machine Learning e IA Generativa?</p>
+            <button class="quiz__opt" data-correct="false">Son tres tecnologías completamente distintas y sin relación.</button>
+            <button class="quiz__opt" data-correct="true">La IA generativa es parte del Machine Learning, que a su vez es parte de la IA.</button>
+            <button class="quiz__opt" data-correct="false">El Machine Learning es más amplio que la Inteligencia Artificial.</button>
+            <div class="quiz__feedback">
+              <div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Son círculos concéntricos: Generativa ⊂ Machine Learning ⊂ Inteligencia Artificial.</p></div>
+            </div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Por qué a veces la IA «inventa» datos falsos?</p>
+            <button class="quiz__opt" data-correct="false">Porque tiene errores de conexión a internet.</button>
+            <button class="quiz__opt" data-correct="false">Porque copia mal la información de una base de datos.</button>
+            <button class="quiz__opt" data-correct="true">Porque predice la respuesta más probable, y lo probable no siempre es lo verdadero.</button>
+            <div class="quiz__feedback">
+              <div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Se llaman «alucinaciones». Por eso siempre verificamos la información importante.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="../index.html"><span>← Índice</span><b>Todos los módulos</b></a>
+          <a href="modulo-02-ia-generativa.html" class="next"><span>Siguiente →</span><b>02 · IA Generativa</b></a>
+        </div>
+
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">¿Qué es la IA?</a>
+          <a href="#video">La IA en 5 minutos</a>
+          <a href="#tipos">IA vs ML vs Generativa</a>
+          <a href="#como-aprende">¿Cómo aprende?</a>
+          <a href="#empezar">Cómo empezar hoy</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 01</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

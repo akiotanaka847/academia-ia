@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 28 · De LinkedIn a portafolio web — Academia IA</title>
+  <meta name="description" content="Cómo convertir tu perfil de LinkedIn en una página de portafolio profesional usando IA, sin saber programar, y publicarla gratis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 08 · Casos de uso</a> <span>—</span>
+        <span>Módulo 28</span>
+      </div>
+      <span class="kicker reveal in">Nivel 08 · Casos de uso que generan valor</span>
+      <h1 class="reveal in">De LinkedIn a un <em>portafolio profesional</em></h1>
+      <p class="lead reveal in">
+        Tu perfil de LinkedIn cuenta quién eres, pero se ve igual que el de todos. Una <b>página propia</b>
+        te distingue. Aquí conviertes tu información de LinkedIn en un portafolio web profesional con IA —sin
+        programar— y lo publicas gratis, como hiciste con esta academia.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">35 minutos</span>
+        <span class="mod-meta__item">Caso de uso</span>
+        <span class="mod-meta__item">Tu marca personal</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1400&q=80" alt="Portafolio web profesional" />
+        <span class="mod-cover__badge">Tu perfil, convertido en página propia</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="por-que">
+          <h2><span class="n">01</span> Por qué una página propia</h2>
+          <p>
+            LinkedIn es un buen escaparate, pero tiene el formato de todos. Un <b>portafolio propio</b> lo
+            controlas tú: tu diseño, tus proyectos destacados, tu historia. Es la diferencia entre «un perfil
+            más» y «esta persona sabe lo que hace».
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Reutilizas lo que ya tienes</h4>
+            <p>No partes de cero: tu experiencia, logros y proyectos ya están en LinkedIn. Solo hay que darles
+            una casa mejor. La IA hace el trabajo pesado de convertirlos en una web.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Un portafolio con IA, sin código</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/1ivylkBS7FE" title="Build a Portfolio Website Using AI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Tutorial de portafolio con IA (Claude). Puedes cambiarlo por otro editando el src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="ingredientes">
+          <h2><span class="n">03</span> Los ingredientes (de tu LinkedIn)</h2>
+          <p>Antes de construir, reúne esto —cópialo directo de tu perfil:</p>
+          <ul class="bullets">
+            <li><b>Titular y resumen</b>: quién eres y a qué te dedicas, en pocas líneas.</li>
+            <li><b>Experiencia</b>: tus puestos, con 2–3 logros medibles por cada uno.</li>
+            <li><b>Proyectos</b>: lo que has construido (¡esta academia cuenta como uno!).</li>
+            <li><b>Habilidades</b>: las 6–8 más relevantes para lo que buscas.</li>
+            <li><b>Contacto</b>: correo, LinkedIn y, si aplica, tu GitHub (Módulo 16).</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Atajo</span>
+            <h4>Deja que la IA lo ordene</h4>
+            <p>Pega el texto de tu LinkedIn en un chatbot y pídele: «Organiza esto en secciones para un
+            portafolio: titular, sobre mí, experiencia con logros, proyectos, habilidades y contacto.»</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="construir">
+          <h2><span class="n">04</span> Cómo construirlo y publicarlo</h2>
+          <p>Tres caminos, según cuánto control quieras (recuerda el Módulo 11):</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Con IA<span class="src">El equilibrio</span></h4><ul><li>Pide a la IA el HTML del portafolio</li><li>Con tus datos y estilo</li><li>Ajustas y listo</li></ul></div>
+            <div class="compare-card"><h4>Sin código<span class="src">Lo más fácil</span></h4><ul><li>Framer, Durable, Carrd</li><li>Plantillas bonitas</li><li>Arrastrar y soltar</li></ul></div>
+            <div class="compare-card"><h4>A medida<span class="src">Máximo control</span></h4><ul><li>Tú editas el HTML/CSS</li><li>100% tuyo</li><li>Más trabajo</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Publícalo gratis</span>
+            <h4>Como esta academia</h4>
+            <p>Cuando tengas los archivos, súbelos a GitHub Pages (Módulo 16) o Netlify y tendrás una URL para
+            poner en tu LinkedIn y tu firma de correo. Cero coste, siempre en línea.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="incluir">
+          <h2><span class="n">05</span> Qué incluye un buen portafolio</h2>
+          <ul class="bullets">
+            <li><b>Un titular claro</b>: qué haces y para quién, en una frase.</li>
+            <li><b>Proyectos con resultado</b>: no solo «qué», también «qué logró».</li>
+            <li><b>Prueba</b>: enlaces, capturas, números, testimonios.</li>
+            <li><b>Una llamada a la acción</b>: «Escríbeme», con tu contacto visible.</li>
+            <li><b>Que cargue rápido y se vea en el móvil</b>: la mayoría te verá desde el teléfono.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Cuál es la ventaja de un portafolio propio frente a solo LinkedIn?</p>
+            <button class="quiz__opt" data-correct="true">Lo controlas tú: diseño, proyectos e historia, y te distingue del formato común.</button>
+            <button class="quiz__opt" data-correct="false">Que LinkedIn deja de existir.</button>
+            <button class="quiz__opt" data-correct="false">Que no necesitas mostrar tu experiencia.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Reutilizas tu info de LinkedIn, pero con tu diseño y tu enfoque. Te diferencia.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. Ya tienes el HTML de tu portafolio. ¿Cómo lo pones en línea gratis?</p>
+            <button class="quiz__opt" data-correct="true">Publicándolo en GitHub Pages o Netlify.</button>
+            <button class="quiz__opt" data-correct="false">Enviándotelo por correo a ti mismo.</button>
+            <button class="quiz__opt" data-correct="false">No se puede publicar sin pagar.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El mismo hosting gratuito del Módulo 11 y 16: subes los archivos y obtienes una URL.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-27-videos-ia.html"><span>← Anterior</span><b>27 · Crear videos con IA</b></a>
+          <a href="modulo-29-automatizaciones-recetas.html" class="next"><span>Siguiente →</span><b>29 · Automatizaciones prácticas</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#por-que">Por qué una página propia</a>
+          <a href="#video">Video</a>
+          <a href="#ingredientes">Los ingredientes</a>
+          <a href="#construir">Construir y publicar</a>
+          <a href="#incluir">Qué incluir</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 28</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

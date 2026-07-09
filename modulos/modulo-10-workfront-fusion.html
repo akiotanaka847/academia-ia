@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 10 · Automatización con Workfront Fusion — Academia IA</title>
+  <meta name="description" content="Adobe Workfront Fusion como orquestador: qué es un iPaaS, los conceptos de escenario, módulo, disparador y conexión, la anatomía de un escenario real y comparación con Make, n8n y Zapier." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 03 · Automatización</a> <span>—</span>
+        <span>Módulo 10</span>
+      </div>
+      <span class="kicker reveal in">Nivel 03 · Automatización · Nuestra herramienta</span>
+      <h1 class="reveal in">Automatización con <em>Workfront Fusion</em></h1>
+      <p class="lead reveal in">
+        Fusion es <b>nuestro orquestador</b>: la plataforma con la que conectamos Adobe Workfront con el
+        resto de sistemas y automatizamos procesos sin escribir código. En este módulo entenderás cómo
+        funciona y construirás mentalmente tu primer escenario.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">35 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">Herramienta principal de la empresa</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=80" alt="Circuitos y conexiones de automatización" />
+        <span class="mod-cover__badge">Adobe Workfront Fusion · iPaaS</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="orquestador">
+          <h2><span class="n">01</span> ¿Qué es un orquestador?</h2>
+          <p>
+            <b>Workfront Fusion</b> es un <b>iPaaS</b> (<i>plataforma de integración y automatización en la
+            nube</i>). En cristiano: es un director de orquesta que hace que tus aplicaciones —Workfront,
+            correo, hojas de cálculo, Jira, Salesforce, una IA— <b>trabajen juntas</b> automáticamente,
+            sin que nadie mueva datos a mano.
+          </p>
+          <p>
+            Recuerda lo del Nivel 02: las apps se hablan por <b>API</b> y se intercambian <b>JSON</b>. Fusion
+            hace justo eso por ti, pero con una interfaz visual de arrastrar y soltar, para que no tengas que
+            programar.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Conecta casi cualquier cosa</h4>
+            <p>Fusion trae conectores para apps de Adobe (Experience Cloud, Marketo, AEM) y de terceros
+            (Google Sheets, Salesforce, Jira, ServiceNow). Y si una app no tiene conector, se conecta a
+            <b>cualquier API pública</b> con el módulo HTTP.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Fusion en acción</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/videoseries?list=PLBOmQ2r7hVsih985Bn2uIzGhQJXLsBN45" title="Adobe Workfront Fusion — Serie de formación" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Serie de formación de Adobe Workfront Fusion (playlist). Puedes cambiarla por un video interno de la empresa editando el src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="conceptos">
+          <h2><span class="n">03</span> Los 4 conceptos de Fusion</h2>
+          <p>Todo en Fusion se reduce a cuatro piezas. Si dominas estas, dominas la herramienta:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Escenario<span class="src">El flujo completo</span></h4><ul><li>La automatización entera</li><li>Una serie de módulos en orden</li><li>Mueve y transforma datos</li></ul></div>
+            <div class="compare-card"><h4>Módulo<span class="src">Cada paso</span></h4><ul><li>Una acción concreta</li><li>«Crear tarea», «enviar correo»</li><li>Se encadenan uno tras otro</li></ul></div>
+            <div class="compare-card"><h4>Disparador<span class="src">El arranque</span></h4><ul><li>El primer módulo</li><li>Vigila datos nuevos o cambios</li><li>Por horario o instantáneo (webhook)</li></ul></div>
+            <div class="compare-card"><h4>Conexión<span class="src">El acceso</span></h4><ul><li>Credenciales a cada app</li><li>Se configura una vez</li><li>Se reutiliza en tus escenarios</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Analogía</span>
+            <h4>Un escenario es una receta</h4>
+            <p>El <b>disparador</b> es «cuando suene el temporizador», los <b>módulos</b> son los pasos de la
+            receta, y las <b>conexiones</b> son las llaves de la despensa. Fusion cocina solo, cada vez que se
+            cumple el disparador.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="anatomia">
+          <h2><span class="n">04</span> Anatomía de un escenario real</h2>
+          <p>
+            Veamos un caso concreto y útil: cuando entra una nueva solicitud de trabajo en Workfront, queremos
+            que una IA la <b>resuma y clasifique</b>, y avisar al equipo. Así se vería el escenario:
+          </p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">escenario-fusion.txt</span></div>
+            <pre><code><span class="tok-com"># DISPARADOR (Workfront)</span>
+<span class="tok-key">1.</span> Watch Records → nueva solicitud creada en Workfront
+
+<span class="tok-com"># MÓDULOS (los pasos)</span>
+<span class="tok-key">2.</span> HTTP → enviar la descripción a una IA (OpenAI / Azure)
+       ↳ recibe: { <span class="tok-str">"resumen"</span>, <span class="tok-str">"prioridad"</span>, <span class="tok-str">"equipo"</span> }
+<span class="tok-key">3.</span> Router → según la prioridad, dos caminos:
+       ├─ Alta → crear tarea urgente + avisar por Teams
+       └─ Normal → añadir a la cola del equipo
+<span class="tok-key">4.</span> Workfront → actualizar el registro con el resumen
+
+<span class="tok-com"># RESULTADO: cada solicitud llega resumida, clasificada</span>
+<span class="tok-com"># y enrutada al equipo correcto, sin intervención manual.</span></code></pre>
+          </div>
+          <p>Fíjate cómo reaparece todo lo aprendido: el <b>disparador</b> del módulo anterior, la <b>API</b> e <b>IA</b> del Nivel 01–02, y el <b>JSON</b> que devuelve el modelo. Fusion es el pegamento que lo une.</p>
+        </div>
+
+        <div class="content-block reveal" id="comparativa">
+          <h2><span class="n">05</span> Fusion frente a otras herramientas</h2>
+          <p>Fusion es nuestro estándar, pero es útil ubicarlo en el mercado. Todas comparten la misma idea (escenarios visuales); cambian el enfoque:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Workfront Fusion<span class="src">Nuestro estándar</span></h4><ul><li>Integrado con Workfront y Adobe</li><li>Nivel empresarial</li><li>Ideal para nuestros procesos</li></ul></div>
+            <div class="compare-card"><h4>Make<span class="src">Alternativa visual</span></h4><ul><li>Muy parecido a Fusion</li><li>Enorme catálogo de apps</li><li>Bueno para proyectos personales</li></ul></div>
+            <div class="compare-card"><h4>Zapier<span class="src">El más simple</span></h4><ul><li>Muy fácil de empezar</li><li>Automatizaciones lineales</li><li>Menos control fino</li></ul></div>
+            <div class="compare-card"><h4>n8n<span class="src">Para técnicos</span></h4><ul><li>Código abierto, autoalojable</li><li>Máxima flexibilidad</li><li>Requiere más conocimiento</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Por qué Fusion en la empresa</span>
+            <h4>Está donde ya trabajamos</h4>
+            <p>Como nuestros proyectos viven en Workfront, Fusion es la opción natural: conecta nativamente con
+            él, cumple los requisitos de seguridad corporativa y evita sacar los datos a herramientas externas.
+            Lo que aprendas aquí (escenarios, módulos, disparadores) se traslada casi igual a Make o Zapier.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. En Fusion, ¿qué es un «escenario»?</p>
+            <button class="quiz__opt" data-correct="true">La automatización completa: una serie de módulos que mueven y transforman datos.</button>
+            <button class="quiz__opt" data-correct="false">La contraseña para conectar una app.</button>
+            <button class="quiz__opt" data-correct="false">Un único botón que ejecuta una acción.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El escenario es el flujo entero; los módulos son cada paso dentro de él.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué hace el «disparador» de un escenario?</p>
+            <button class="quiz__opt" data-correct="false">Guarda las credenciales de acceso.</button>
+            <button class="quiz__opt" data-correct="true">Vigila datos nuevos o cambios y arranca el escenario cuando ocurren.</button>
+            <button class="quiz__opt" data-correct="false">Envía el correo final del proceso.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El disparador es el primer módulo: arranca por horario (polling) o al instante (webhook).</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-09-mapear-procesos.html"><span>← Anterior</span><b>09 · Mapear procesos</b></a>
+          <a href="modulo-11-creacion-web.html" class="next"><span>Siguiente →</span><b>11 · Creación de webs</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#orquestador">¿Qué es un orquestador?</a>
+          <a href="#video">Video</a>
+          <a href="#conceptos">Los 4 conceptos</a>
+          <a href="#anatomia">Anatomía de un escenario</a>
+          <a href="#comparativa">Fusion vs. otras</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 10</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

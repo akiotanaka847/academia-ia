@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 05 · ¿Qué es una API? — Academia IA</title>
+  <meta name="description" content="Qué es una API, cómo funciona una petición y su respuesta, endpoints y métodos, y por qué las APIs son la base de toda automatización." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 02 · Conceptos técnicos</a> <span>—</span>
+        <span>Módulo 05</span>
+      </div>
+      <span class="kicker reveal in">Nivel 02 · Conceptos técnicos</span>
+      <h1 class="reveal in">¿Qué es una <em>API</em>?</h1>
+      <p class="lead reveal in">
+        Es la palabra que más se repite cuando hablamos de automatización e integraciones. Aquí la
+        entenderás para siempre con una analogía sencilla, verás cómo funciona una petición y por qué
+        las APIs son el <b>pegamento</b> que conecta todas tus herramientas.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">25 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">La base de la automatización</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80" alt="Conexiones y cables de red" />
+        <span class="mod-cover__badge">El pegamento entre programas</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> La analogía del restaurante</h2>
+          <p>
+            <b>API</b> significa <i>Application Programming Interface</i>. Suena técnico, pero la idea es simple:
+            es un <b>intermediario</b> que permite que dos programas se hablen sin conocer sus interioridades.
+          </p>
+          <p>
+            Imagina un restaurante. Tú (una aplicación) no entras a la cocina (otra aplicación) a cocinar.
+            Le dices al <b>mesero</b> lo que quieres; él lo lleva a la cocina y te trae el plato. La API es
+            ese mesero: recibe tu pedido, lo entrega y te devuelve la respuesta.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>No necesitas saber cómo funciona por dentro</h4>
+            <p>Cuando tu app pide el clima a una API, no le importa cómo mide la temperatura ese servicio.
+            Solo hace la pregunta correcta y recibe la respuesta. Esa separación es lo que hace posible conectar todo.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Las APIs, explicadas</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/s7wmiS2mSXY" title="¿Qué es una API?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="como-funciona">
+          <h2><span class="n">03</span> Petición y respuesta</h2>
+          <p>Toda API funciona con dos movimientos: tú envías una <b>petición</b> (request) y recibes una <b>respuesta</b> (response).</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Endpoint<span class="src">La dirección</span></h4><ul><li>La URL a la que llamas</li><li>Ej.: /clima/madrid</li><li>Cada uno hace una cosa</li></ul></div>
+            <div class="compare-card"><h4>Método<span class="src">La intención</span></h4><ul><li>GET: pedir datos</li><li>POST: enviar datos</li><li>PUT / DELETE: actualizar / borrar</li></ul></div>
+            <div class="compare-card"><h4>Respuesta<span class="src">El resultado</span></h4><ul><li>Suele venir en JSON</li><li>Trae un código (200 = ok)</li><li>404 = no encontrado</li></ul></div>
+          </div>
+          <p>Así se ve una petición real para pedir el clima y su respuesta:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">peticion-api.txt</span></div>
+            <pre><code><span class="tok-com"># Petición: método + endpoint</span>
+<span class="tok-key">GET</span> https://api.clima.com/v1/<span class="tok-fn">madrid</span>
+
+<span class="tok-com"># Respuesta (en JSON):</span>
+{
+  <span class="tok-str">"ciudad"</span>: <span class="tok-str">"Madrid"</span>,
+  <span class="tok-str">"temperatura"</span>: <span class="tok-num">28</span>,
+  <span class="tok-str">"estado"</span>: <span class="tok-str">"soleado"</span>
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="por-que">
+          <h2><span class="n">04</span> Por qué deberían importarte</h2>
+          <p>Las APIs son la razón por la que puedes automatizar de verdad. Sin ellas, cada herramienta sería una isla.</p>
+          <ul class="bullets">
+            <li><b>Conectan tus herramientas</b>: que un formulario cree una tarea en Workfront automáticamente.</li>
+            <li><b>Dan poderes a la IA</b>: un agente usa APIs para consultar datos, enviar correos o publicar.</li>
+            <li><b>Ahorran trabajo manual</b>: nada de copiar y pegar entre sistemas.</li>
+            <li><b>Están en todo</b>: pagos, mapas, mensajería, clima… casi todo servicio ofrece una API.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Conexión con la empresa</span>
+            <h4>Adobe Workfront tiene API</h4>
+            <p>Gracias a su API, un agente de IA puede crear proyectos, mover tareas o generar reportes en
+            Workfront sin que nadie los teclee a mano. Lo construiremos en el Nivel 07.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="glosario">
+          <h2><span class="n">05</span> Glosario mínimo</h2>
+          <ul class="bullets">
+            <li><b>API key</b>: una contraseña que identifica quién hace la petición (no la compartas).</li>
+            <li><b>Rate limit</b>: cuántas peticiones puedes hacer por minuto antes de que te frene.</li>
+            <li><b>Documentación</b>: el «manual» de una API; siempre empieza por leerla.</li>
+            <li><b>Webhook</b>: al revés que una API normal —el servicio te avisa a ti cuando pasa algo.</li>
+          </ul>
+          <div class="callout callout--info reveal">
+            <span class="label">Siguiente paso</span>
+            <h4>Las respuestas vienen en JSON</h4>
+            <p>Notaste que la respuesta del clima venía en un formato con llaves y comillas. Eso es JSON,
+            y es justo el tema del próximo módulo.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. En la analogía del restaurante, ¿qué representa la API?</p>
+            <button class="quiz__opt" data-correct="false">La cocina donde se prepara todo.</button>
+            <button class="quiz__opt" data-correct="true">El mesero que lleva tu pedido y te trae la respuesta.</button>
+            <button class="quiz__opt" data-correct="false">El cliente que hace el pedido.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La API es el intermediario: recibe la petición, la entrega y devuelve la respuesta.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué método usarías para <em>pedir</em> datos a una API?</p>
+            <button class="quiz__opt" data-correct="true">GET</button>
+            <button class="quiz__opt" data-correct="false">DELETE</button>
+            <button class="quiz__opt" data-correct="false">POST</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>GET pide datos; POST envía datos nuevos; DELETE borra.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-04-notebooklm.html"><span>← Anterior</span><b>04 · NotebookLM</b></a>
+          <a href="modulo-06-json.html" class="next"><span>Siguiente →</span><b>06 · JSON y tipos de datos</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">La analogía del restaurante</a>
+          <a href="#video">Video</a>
+          <a href="#como-funciona">Petición y respuesta</a>
+          <a href="#por-que">Por qué importan</a>
+          <a href="#glosario">Glosario mínimo</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 05</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 02 · IA Generativa — Academia IA</title>
+  <meta name="description" content="Qué es la IA generativa, cómo crea texto, imágenes, audio y video, las herramientas más usadas y cómo escribir buenos prompts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 01 · Fundamentos</a> <span>—</span>
+        <span>Módulo 02</span>
+      </div>
+      <span class="kicker reveal in">Nivel 01 · Fundamentos</span>
+      <h1 class="reveal in">¿Qué es la <em>IA Generativa</em>?</h1>
+      <p class="lead reveal in">
+        La revolución que puso la IA en manos de todos. Verás cómo los modelos <b>crean</b> texto,
+        imágenes, audio y video desde cero, qué herramientas existen y cómo pedirles resultados de calidad.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">20 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">Texto, imagen, audio y video</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1400&q=80" alt="Arte generado por inteligencia artificial" />
+        <span class="mod-cover__badge">Crear, no solo responder</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> La IA que crea</h2>
+          <p>
+            La <b>IA Generativa</b> es un tipo de inteligencia artificial capaz de <b>producir contenido
+            nuevo</b> —texto, imágenes, audio, video o código— que no existía antes, en lugar de solo
+            clasificar o predecir sobre datos existentes.
+          </p>
+          <p>
+            Piensa en la diferencia: una IA tradicional puede decirte <i>«esta foto contiene un gato»</i>.
+            Una IA generativa puede <i>dibujarte un gato astronauta en acuarela</i> a partir de una simple frase.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">Por qué importa</span>
+            <h4>Creación al alcance de todos</h4>
+            <p>Por primera vez, cualquier persona puede crear contenido profesional —un texto, una imagen,
+            una voz— escribiendo instrucciones en lenguaje natural. No necesitas saber diseño ni programación.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> IA generativa explicada</h2>
+          <p>Un vistazo rápido a lo que estos modelos pueden crear hoy:</p>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/2IK3DFHRFfw" title="IA Generativa explicada" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="modalidades">
+          <h2><span class="n">03</span> Las cuatro modalidades</h2>
+          <p>La IA generativa trabaja sobre distintos tipos de contenido. Estas son las principales:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Texto<span class="src">Redacción y análisis</span></h4><ul><li>Resúmenes y traducción</li><li>Ideas y código</li><li>ChatGPT, Claude, Gemini</li></ul></div>
+            <div class="compare-card"><h4>Imagen<span class="src">Visual</span></h4><ul><li>Ilustraciones y logos</li><li>Fotos de producto</li><li>Midjourney, DALL·E, Firefly</li></ul></div>
+            <div class="compare-card"><h4>Audio<span class="src">Voz y música</span></h4><ul><li>Voces realistas (TTS)</li><li>Música y efectos</li><li>ElevenLabs, Suno</li></ul></div>
+            <div class="compare-card"><h4>Video<span class="src">Movimiento</span></h4><ul><li>Clips desde texto</li><li>Avatares que hablan</li><li>Sora, Runway, HeyGen</li></ul></div>
+          </div>
+          <div class="content-img reveal">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80" alt="Creación visual con IA" loading="lazy" />
+          </div>
+          <p class="img-caption">La misma idea puede volverse texto, imagen, voz o video con la herramienta adecuada.</p>
+        </div>
+
+        <div class="content-block reveal" id="como-crea">
+          <h2><span class="n">04</span> ¿Cómo genera algo nuevo?</h2>
+          <p>
+            Los modelos generativos aprenden los <b>patrones</b> de millones de ejemplos y luego los
+            recombinan de formas nuevas. No copian: predicen, paso a paso, qué elemento (palabra o píxel)
+            es más coherente con tu instrucción, que se llama <b>prompt</b>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">prompt-imagen.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Prompt vago (resultado impredecible):</span>
+<span class="tok-str">"un logo bonito"</span>
+
+<span class="tok-com"># Prompt específico (resultado profesional):</span>
+<span class="tok-str">"Logo minimalista de una cafetería llamada 'Aroma',
+ taza estilizada, colores marrón y crema,
+ fondo transparente, estilo plano moderno"</span>
+
+<span class="tok-com"># Regla de oro: sujeto + estilo + detalles + formato</span></code></pre>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">Precaución</span>
+            <h4>Derechos y verificación</h4>
+            <p>El contenido generado puede parecerse a obras existentes o contener errores (una mano con
+            seis dedos, un dato inventado). Revisa siempre antes de publicar, sobre todo con fines comerciales.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="prompting">
+          <h2><span class="n">05</span> Cómo obtener buenos resultados</h2>
+          <ul class="bullets">
+            <li><b>Da contexto</b>: para quién es, dónde se usará, qué tono quieres.</li>
+            <li><b>Especifica el formato</b>: «en 3 viñetas», «tabla», «200 palabras», «estilo acuarela».</li>
+            <li><b>Muestra ejemplos</b>: pega un texto o imagen de referencia del estilo que buscas.</li>
+            <li><b>Itera</b>: pide ajustes («más formal», «más colorido»). Es un diálogo, no un botón mágico.</li>
+            <li><b>Combina herramientas</b>: el texto en una, la imagen en otra, la voz en otra.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Ejercicio · 5 min</span>
+            <h4>Vago contra detallado</h4>
+            <p>Elige una herramienta de imagen (DALL·E en ChatGPT, o Firefly de Adobe) y genera una portada
+            para un post de tu empresa con la fórmula <i>sujeto + estilo + detalles + formato</i>. Compara un prompt vago con uno detallado.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué distingue a la IA generativa de la IA tradicional?</p>
+            <button class="quiz__opt" data-correct="false">Que funciona sin conexión a internet.</button>
+            <button class="quiz__opt" data-correct="true">Que crea contenido nuevo, en lugar de solo clasificar o predecir sobre datos existentes.</button>
+            <button class="quiz__opt" data-correct="false">Que solo funciona con texto.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>«Generativa» = genera. Crea texto, imágenes, audio o video nuevos.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Cuál es la mejor estructura para un buen prompt de imagen?</p>
+            <button class="quiz__opt" data-correct="true">Sujeto + estilo + detalles + formato.</button>
+            <button class="quiz__opt" data-correct="false">Cuantas menos palabras, mejor.</button>
+            <button class="quiz__opt" data-correct="false">Solo el nombre del artista que quieres imitar.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Ser específico en esos cuatro elementos separa un resultado amateur de uno profesional.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-01-introduccion-ia.html"><span>← Anterior</span><b>01 · Introducción a la IA</b></a>
+          <a href="modulo-03-chatbots.html" class="next"><span>Siguiente →</span><b>03 · Chatbots</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">La IA que crea</a>
+          <a href="#video">Video</a>
+          <a href="#modalidades">Las 4 modalidades</a>
+          <a href="#como-crea">¿Cómo genera?</a>
+          <a href="#prompting">Buenos resultados</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 02</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 11 · Creación de páginas web — Academia IA</title>
+  <meta name="description" content="Las tres piezas de una web (HTML, CSS, JS), las formas de crear sitios hoy (no-code, con IA, a mano) y cómo publicar un sitio en internet con Netlify, Vercel o GitHub Pages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 03 · Automatización</a> <span>—</span>
+        <span>Módulo 11</span>
+      </div>
+      <span class="kicker reveal in">Nivel 03 · Automatización</span>
+      <h1 class="reveal in">Crear <em>páginas web</em></h1>
+      <p class="lead reveal in">
+        Saber montar una web te da un lienzo para tus ideas: una landing, un panel interno, una herramienta
+        para el equipo. Verás de qué está hecha una web, las formas de crearla hoy (incluida la IA) y cómo
+        <b>publicarla</b> —igual que esta misma academia.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">30 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">De la idea al sitio publicado</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1400&q=80" alt="Diseño y desarrollo web" />
+        <span class="mod-cover__badge">De la idea al sitio publicado</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="piezas">
+          <h2><span class="n">01</span> De qué está hecha una web</h2>
+          <p>Toda página, por compleja que sea, se apoya en tres lenguajes. Recuérdalos con la analogía del cuerpo humano:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>HTML<span class="src">El esqueleto</span></h4><ul><li>La estructura y el contenido</li><li>Títulos, textos, imágenes</li><li>«Qué hay en la página»</li></ul></div>
+            <div class="compare-card"><h4>CSS<span class="src">La piel y la ropa</span></h4><ul><li>El estilo visual</li><li>Colores, tipografía, espaciado</li><li>«Cómo se ve»</li></ul></div>
+            <div class="compare-card"><h4>JavaScript<span class="src">Los músculos</span></h4><ul><li>La interacción</li><li>Botones, menús, animaciones</li><li>«Qué hace»</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Dato</span>
+            <h4>Esta academia es exactamente eso</h4>
+            <p>El sitio que estás leyendo son solo tres archivos: <code>index.html</code> (esqueleto),
+            <code>styles.css</code> (estilo) y <code>main.js</code> (interacción). Nada más.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Cómo funciona la web</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/erEgovG9WBs" title="Cómo se crea una página web" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" data-video-placeholder="true"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="formas">
+          <h2><span class="n">03</span> Tres formas de crear una web hoy</h2>
+          <p>No hay una única manera correcta. Elige según tu objetivo y tu tiempo:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Sin código<span class="src">No-code</span></h4><ul><li>Framer, Webflow, WordPress</li><li>Arrastrar y soltar</li><li>Rápido, sin programar</li><li>Ideal para webs de marketing</li></ul></div>
+            <div class="compare-card"><h4>Con IA<span class="src">El punto medio</span></h4><ul><li>Describe lo que quieres</li><li>La IA genera el código</li><li>Tú ajustas y publicas</li><li>Así se creó esta academia</li></ul></div>
+            <div class="compare-card"><h4>A mano<span class="src">Máximo control</span></h4><ul><li>Escribir HTML/CSS/JS</li><li>O frameworks (React, etc.)</li><li>Total flexibilidad</li><li>Requiere más conocimiento</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Recomendación</span>
+            <h4>Empieza con IA + retoques</h4>
+            <p>Para la mayoría de necesidades internas, pedirle a una IA que genere la base y ajustarla es lo
+            más rápido y educativo. Entiendes lo que se construye sin partir de cero.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="publicar">
+          <h2><span class="n">04</span> De tu computadora a internet</h2>
+          <p>
+            Una web en tu computadora solo la ves tú. Para que tu equipo la abra desde cualquier lado hay que
+            <b>publicarla</b> (hosting). Hoy es gratis y toma minutos:
+          </p>
+          <ul class="bullets">
+            <li><b>Netlify</b> y <b>Vercel</b>: arrastras la carpeta o conectas un repositorio y queda online.</li>
+            <li><b>GitHub Pages</b>: publica directamente desde un repositorio de GitHub.</li>
+            <li><b>Dominio propio</b>: puedes apuntar una dirección tipo <code>academia.tuempresa.com</code>.</li>
+          </ul>
+          <div class="callout callout--info reveal">
+            <span class="label">Siguiente paso</span>
+            <h4>Podemos publicar esta academia</h4>
+            <p>Cuando el contenido esté listo, subir este sitio a Netlify o Vercel toma unos minutos y te da un
+            enlace para compartir con todo el equipo, sin depender de tu computadora.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué lenguaje da el <em>estilo visual</em> (colores, tipografía) a una web?</p>
+            <button class="quiz__opt" data-correct="false">HTML</button>
+            <button class="quiz__opt" data-correct="true">CSS</button>
+            <button class="quiz__opt" data-correct="false">JavaScript</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>HTML es el esqueleto, CSS la piel/ropa (el estilo) y JavaScript los músculos (la interacción).</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Para qué sirve un servicio como Netlify o Vercel?</p>
+            <button class="quiz__opt" data-correct="false">Para diseñar el logo del sitio.</button>
+            <button class="quiz__opt" data-correct="true">Para publicar la web en internet y obtener un enlace para compartir.</button>
+            <button class="quiz__opt" data-correct="false">Para escribir el contenido automáticamente.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Son servicios de hosting: publican tu sitio y te dan una URL accesible desde cualquier lado.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-10-workfront-fusion.html"><span>← Anterior</span><b>10 · Workfront Fusion</b></a>
+          <a href="../index.html#ruta" class="next"><span>Siguiente nivel →</span><b>Nivel 04 · Agentes de IA</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#piezas">De qué está hecha una web</a>
+          <a href="#video">Video</a>
+          <a href="#formas">Tres formas de crearla</a>
+          <a href="#publicar">Publicar en internet</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 11</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

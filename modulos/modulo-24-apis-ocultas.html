@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 24 · Scraping con APIs ocultas — Academia IA</title>
+  <meta name="description" content="Cómo descubrir las APIs internas que las webs usan por detrás para obtener datos limpios en JSON, usando las herramientas de desarrollo del navegador, de forma responsable." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 06 · Web Scraping</a> <span>—</span>
+        <span>Módulo 24</span>
+      </div>
+      <span class="kicker reveal in">Nivel 06 · Web Scraping</span>
+      <h1 class="reveal in">Scraping con <em>APIs ocultas</em></h1>
+      <p class="lead reveal in">
+        La técnica más limpia de todas. Muchas webs cargan sus datos desde una API interna que devuelve JSON
+        ordenado. Si la descubres, obtienes los datos directamente —sin pelearte con el HTML—. Aquí aprendes a
+        encontrarla.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">35 minutos</span>
+        <span class="mod-meta__item">Nivel avanzado</span>
+        <span class="mod-meta__item">Datos limpios en su origen</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80" alt="Peticiones de red y APIs" />
+        <span class="mod-cover__badge">La puerta de atrás, ordenada</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> El truco de las APIs ocultas</h2>
+          <p>
+            Cuando abres una web moderna, lo que ves no siempre viene en el HTML: muchas veces la página pide
+            los datos <b>por detrás</b> a una API propia y los pinta al momento. Esa API existe, aunque no esté
+            anunciada. Si la usas <b>directamente</b>, te ahorras leer el HTML: recibes <b>JSON limpio</b>.
+          </p>
+          <p>Aquí se juntan dos piezas del Nivel 02: las <b>APIs</b> y el <b>JSON</b>. Descubrir la API oculta es, muchas veces, la mejor forma de scrapear.</p>
+          <div class="callout callout--info reveal">
+            <span class="label">Por qué es mejor</span>
+            <h4>Más limpio, más rápido, más estable</h4>
+            <p>El HTML cambia de aspecto a menudo y rompe los scrapers. Una API interna suele devolver los datos
+            ya estructurados y cambia menos. Menos esfuerzo, resultados más fiables.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Encontrar la API por detrás</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/DqtlR0y0suo" title="Descubrir APIs ocultas" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" data-video-placeholder="true"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="como">
+          <h2><span class="n">03</span> Cómo descubrirla, paso a paso</h2>
+          <p>Se hace con las <b>herramientas de desarrollo</b> del navegador (tecla F12), en la pestaña «Network» (Red):</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">descubrir-api.txt</span></div>
+            <pre><code><span class="tok-key">1.</span> Abre la web y pulsa F12 → pestaña <span class="tok-str">"Network"</span>
+<span class="tok-key">2.</span> Filtra por <span class="tok-str">"Fetch/XHR"</span> (las peticiones de datos)
+<span class="tok-key">3.</span> Interactúa con la web (busca, cambia de página)
+<span class="tok-key">4.</span> Observa qué peticiones aparecen
+<span class="tok-key">5.</span> Busca la que devuelve <span class="tok-str">JSON</span> con tus datos
+<span class="tok-key">6.</span> Copia su URL → esa es la API oculta
+
+<span class="tok-com"># Ahora puedes pedir esa URL directamente y</span>
+<span class="tok-com"># recibir los datos limpios, sin tocar el HTML.</span></code></pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="cautelas">
+          <h2><span class="n">04</span> Ventajas y cautelas</h2>
+          <ul class="bullets">
+            <li><b>Ventaja</b>: datos estructurados, menos código y mayor estabilidad.</li>
+            <li><b>Cautela legal</b>: es una API <b>interna</b>, no pública. Aplican las mismas reglas del Módulo 22 (términos, datos personales, volumen).</li>
+            <li><b>Puede requerir claves</b>: a veces necesita un token o cabeceras; si está protegida, respétalo.</li>
+            <li><b>Puede cambiar</b>: al no ser pública, el sitio puede modificarla sin avisar.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Cierre del Nivel 06</span>
+            <h4>Poder técnico, criterio responsable</h4>
+            <p>Descubrir una API interna es potente, pero no cambia lo esencial: extrae solo datos legítimos,
+            respeta los términos y no sobrecargues. Con esto cierras el web scraping; en el Nivel 07 aplicamos
+            todo el curso a un caso real con Adobe Workfront.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué es una «API oculta»?</p>
+            <button class="quiz__opt" data-correct="true">Una API interna que la web usa por detrás para cargar sus datos, y que puedes descubrir.</button>
+            <button class="quiz__opt" data-correct="false">Una web que no se puede abrir.</button>
+            <button class="quiz__opt" data-correct="false">Un tipo de contraseña secreta.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Es la API propia del sitio; usarla directamente te da JSON limpio sin parsear HTML.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Dónde buscas esas peticiones de datos?</p>
+            <button class="quiz__opt" data-correct="false">En el código fuente del CSS.</button>
+            <button class="quiz__opt" data-correct="true">En las herramientas de desarrollo (F12), pestaña «Network», filtro Fetch/XHR.</button>
+            <button class="quiz__opt" data-correct="false">En el historial del navegador.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La pestaña Network muestra las peticiones; filtrando Fetch/XHR encuentras la que trae el JSON.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-23-scraping-avanzado.html"><span>← Anterior</span><b>23 · Scraping avanzado</b></a>
+          <a href="../index.html#ruta" class="next"><span>Siguiente nivel →</span><b>Nivel 07 · Caso empresa</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#idea">El truco de las APIs ocultas</a>
+          <a href="#video">Video</a>
+          <a href="#como">Cómo descubrirla</a>
+          <a href="#cautelas">Ventajas y cautelas</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 24</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 13 · Tu agente en Telegram — Academia IA</title>
+  <meta name="description" content="Cómo crear un bot de Telegram conectado a IA: el token de BotFather, el cerebro (modelo) y el orquestador (Workfront Fusion o n8n), con el flujo paso a paso." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 04 · Agentes de IA</a> <span>—</span>
+        <span>Módulo 13</span>
+      </div>
+      <span class="kicker reveal in">Nivel 04 · Agentes de IA</span>
+      <h1 class="reveal in">Tu agente en <em>Telegram</em></h1>
+      <p class="lead reveal in">
+        Telegram es la forma más rápida y gratuita de darle a tu agente una «cara»: un bot al que tu equipo
+        escribe como a cualquier contacto. Verás las piezas que necesitas y el flujo completo, sin código.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">Tu primer bot con IA</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=1400&q=80" alt="Aplicación de mensajería Telegram" />
+        <span class="mod-cover__badge">Un bot para tu equipo, 24/7</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="por-que">
+          <h2><span class="n">01</span> ¿Por qué empezar por Telegram?</h2>
+          <p>
+            De todos los canales de mensajería, Telegram es el más amable para empezar: crear un bot es
+            <b>gratis</b>, no requiere aprobación de nadie y su sistema de bots es sencillo y bien documentado.
+            Es el campo de entrenamiento perfecto antes de pasar a WhatsApp.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>El canal es solo la «cara»</h4>
+            <p>Telegram no es el agente; es por donde el usuario habla con él. El cerebro (la IA) y la lógica
+            (el orquestador) son los mismos que usarías en WhatsApp o en una web. Cambias la cara, no el cuerpo.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Crear un bot de Telegram</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/UQrcOj63S2o" title="Crear un bot de Telegram con IA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" data-video-placeholder="true"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="piezas">
+          <h2><span class="n">03</span> Las tres piezas que necesitas</h2>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>BotFather<span class="src">La identidad</span></h4><ul><li>Bot oficial de Telegram</li><li>Creas tu bot y su nombre</li><li>Te da un <b>token</b> (su llave)</li></ul></div>
+            <div class="compare-card"><h4>El cerebro<span class="src">La IA</span></h4><ul><li>Un modelo (OpenAI, Claude…)</li><li>Genera las respuestas</li><li>Con su prompt de sistema</li></ul></div>
+            <div class="compare-card"><h4>El orquestador<span class="src">El pegamento</span></h4><ul><li>Fusion, n8n o Make</li><li>Conecta Telegram con la IA</li><li>Sin escribir código</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Con nuestras herramientas</span>
+            <h4>Fusion también orquesta bots</h4>
+            <p>El mismo Workfront Fusion del Módulo 10 puede ser el orquestador: un escenario que recibe el
+            mensaje de Telegram, lo pasa a la IA y devuelve la respuesta. Todo lo aprendido se reutiliza.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="flujo">
+          <h2><span class="n">04</span> El flujo, paso a paso</h2>
+          <p>Cuando alguien escribe a tu bot, esto ocurre en menos de un segundo:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">flujo-telegram.txt</span></div>
+            <pre><code><span class="tok-key">1.</span> El usuario escribe al bot en Telegram
+<span class="tok-key">2.</span> Telegram avisa al orquestador (webhook / disparador)
+<span class="tok-key">3.</span> El orquestador envía el mensaje a la IA
+       ↳ junto al prompt de sistema y la memoria
+<span class="tok-key">4.</span> La IA genera la respuesta
+<span class="tok-key">5.</span> El orquestador la devuelve a Telegram
+<span class="tok-key">6.</span> El usuario recibe la respuesta en el chat
+
+<span class="tok-com"># ¿Reconoces el webhook? Es el "disparador instantáneo"</span>
+<span class="tok-com"># que vimos en Workfront Fusion (Módulo 10).</span></code></pre>
+          </div>
+          <ul class="bullets">
+            <li><b>Consultar Workfront</b>: «¿qué tareas tengo hoy?» y el bot responde con datos reales.</li>
+            <li><b>Registrar cosas</b>: enviar una nota de voz o texto y que quede guardada como tarea.</li>
+            <li><b>Notificar</b>: avisos automáticos del equipo directo al chat.</li>
+            <li><b>Preguntas frecuentes</b>: un asistente que responde dudas internas al instante.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Para qué sirve BotFather?</p>
+            <button class="quiz__opt" data-correct="true">Para crear el bot y obtener su token (su llave de acceso).</button>
+            <button class="quiz__opt" data-correct="false">Para generar las respuestas del bot.</button>
+            <button class="quiz__opt" data-correct="false">Para alojar la base de datos.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>BotFather es el bot oficial de Telegram para crear bots; te entrega el token que los identifica.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. En el flujo, ¿qué papel cumple el orquestador (Fusion / n8n)?</p>
+            <button class="quiz__opt" data-correct="false">Es la cara con la que habla el usuario.</button>
+            <button class="quiz__opt" data-correct="true">Conecta Telegram con la IA y coordina el ida y vuelta del mensaje.</button>
+            <button class="quiz__opt" data-correct="false">Sustituye al modelo de lenguaje.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El orquestador es el pegamento: recibe el mensaje, lo pasa a la IA y devuelve la respuesta.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-12-anatomia-agente.html"><span>← Anterior</span><b>12 · Anatomía de un agente</b></a>
+          <a href="modulo-14-whatsapp.html" class="next"><span>Siguiente →</span><b>14 · Conectar a WhatsApp</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#por-que">¿Por qué Telegram?</a>
+          <a href="#video">Video</a>
+          <a href="#piezas">Las tres piezas</a>
+          <a href="#flujo">El flujo paso a paso</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 13</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

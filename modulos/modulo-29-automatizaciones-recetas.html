@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 29 · Automatizaciones prácticas con IA — Academia IA</title>
+  <meta name="description" content="Recetas de automatización con IA listas para copiar: correo entrante que se resume y clasifica, respuestas automáticas y reportes, con Workfront Fusion o n8n." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 08 · Casos de uso</a> <span>—</span>
+        <span>Módulo 29</span>
+      </div>
+      <span class="kicker reveal in">Nivel 08 · Casos de uso que generan valor</span>
+      <h1 class="reveal in">Automatizaciones prácticas <em>con IA</em></h1>
+      <p class="lead reveal in">
+        Menos teoría, más recetas. Aquí tienes automatizaciones concretas —con IA y un orquestador como
+        Workfront Fusion o n8n— listas para adaptar a tu trabajo. Cada una ahorra tiempo real desde el primer día.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Caso de uso</span>
+        <span class="mod-meta__item">Recetas para copiar</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=80" alt="Automatización con inteligencia artificial" />
+        <span class="mod-cover__badge">Recetas listas para tu día a día</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> De la teoría a las recetas</h2>
+          <p>
+            En el Nivel 03 viste cómo funciona la automatización; aquí la aplicamos. Una «receta» es una
+            automatización probada que puedes copiar cambiando los ingredientes. Todas siguen el mismo patrón:
+            <b>disparador → IA → acción</b>.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>La IA es el paso «inteligente» del flujo</h4>
+            <p>El orquestador (Fusion, n8n) mueve los datos; la IA los <b>entiende</b>: resume, clasifica,
+            redacta o decide. Juntos convierten trabajo manual en un flujo automático.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Tu primera automatización con IA</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/Fy1UCBcgF2o" title="n8n AI Automation Tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Tutorial de automatización con IA en n8n. Puedes cambiarlo por otro editando el src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="recetas">
+          <h2><span class="n">03</span> Tres recetas listas</h2>
+          <p>Adáptalas a tus herramientas. El patrón se repite: algo llega, la IA lo procesa, ocurre una acción.</p>
+
+          <h3>Receta 1 · Bandeja de entrada inteligente</h3>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">receta-1.txt</span></div>
+            <pre><code><span class="tok-key">DISPARADOR</span>  Llega un correo o una solicitud
+<span class="tok-key">IA</span>          Resume el mensaje y le pone prioridad y categoría
+<span class="tok-key">ACCIÓN</span>      Crea la tarea en Workfront y avisa al equipo correcto</code></pre>
+          </div>
+
+          <h3>Receta 2 · Respuesta borrador automática</h3>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">receta-2.txt</span></div>
+            <pre><code><span class="tok-key">DISPARADOR</span>  Un cliente escribe una pregunta frecuente
+<span class="tok-key">IA</span>          Redacta un borrador de respuesta con tu tono
+<span class="tok-key">ACCIÓN</span>      Lo deja listo para que una persona revise y envíe</code></pre>
+          </div>
+
+          <h3>Receta 3 · Reporte semanal sin esfuerzo</h3>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">receta-3.txt</span></div>
+            <pre><code><span class="tok-key">DISPARADOR</span>  Cada viernes por la tarde (por horario)
+<span class="tok-key">IA</span>          Resume avances y riesgos de los proyectos
+<span class="tok-key">ACCIÓN</span>      Envía el reporte por correo o Teams</code></pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="montar">
+          <h2><span class="n">04</span> Cómo montar una receta</h2>
+          <ul class="bullets">
+            <li><b>Elige la receta</b> más parecida a tu necesidad.</li>
+            <li><b>Cambia los ingredientes</b>: qué la dispara, qué le pides a la IA, qué acción final.</li>
+            <li><b>Escribe bien el prompt de la IA</b> (Módulo 03): rol, tarea, contexto y formato de salida.</li>
+            <li><b>Prueba con datos de mentira</b> antes de conectarla a lo real.</li>
+            <li><b>Deja revisión humana</b> en lo sensible (respuestas a clientes, envíos).</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Empieza pequeño</span>
+            <h4>Una receta, un proceso</h4>
+            <p>No intentes automatizar todo de golpe. Monta una receta, mídela, y cuando funcione, pasa a la
+            siguiente. El valor se acumula.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Cuál es el patrón común de estas recetas?</p>
+            <button class="quiz__opt" data-correct="true">Disparador → IA (procesa) → acción.</button>
+            <button class="quiz__opt" data-correct="false">Solo enviar correos masivos.</button>
+            <button class="quiz__opt" data-correct="false">Programar en varios lenguajes a la vez.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Algo dispara el flujo, la IA lo entiende (resume/clasifica/redacta) y ocurre una acción.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. En una respuesta automática a clientes, ¿qué conviene mantener?</p>
+            <button class="quiz__opt" data-correct="true">Una revisión humana antes de enviar.</button>
+            <button class="quiz__opt" data-correct="false">Enviar sin que nadie lo mire, para ir más rápido.</button>
+            <button class="quiz__opt" data-correct="false">Quitar el prompt de sistema.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La IA deja el borrador; una persona revisa lo sensible. Persona en el bucle (Nivel 04–05).</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-28-linkedin-portafolio.html"><span>← Anterior</span><b>28 · LinkedIn → portafolio</b></a>
+          <a href="modulo-30-flujos-agenticos.html" class="next"><span>Siguiente →</span><b>30 · Flujos agénticos</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#idea">De la teoría a las recetas</a>
+          <a href="#video">Video</a>
+          <a href="#recetas">Tres recetas listas</a>
+          <a href="#montar">Cómo montar una receta</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 29</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

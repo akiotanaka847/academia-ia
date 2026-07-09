@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 14 · Conectar a WhatsApp — Academia IA</title>
+  <meta name="description" content="Cómo llevar tu agente de IA a WhatsApp: la API de WhatsApp Business, proveedores como Twilio o 360dialog, plantillas, la ventana de 24 horas y costes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 04 · Agentes de IA</a> <span>—</span>
+        <span>Módulo 14</span>
+      </div>
+      <span class="kicker reveal in">Nivel 04 · Agentes de IA</span>
+      <h1 class="reveal in">Conectar tu agente a <em>WhatsApp</em></h1>
+      <p class="lead reveal in">
+        WhatsApp es donde ya están tus clientes y compañeros. Llevar tu agente ahí multiplica su alcance,
+        pero tiene reglas propias. Aquí verás cómo se conecta de forma oficial y qué debes tener en cuenta.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">35 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">El canal donde ya están</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=1400&q=80" alt="Aplicación de WhatsApp en un teléfono" />
+        <span class="mod-cover__badge">Tu agente donde están tus clientes</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="oficial">
+          <h2><span class="n">01</span> La vía oficial</h2>
+          <p>
+            A diferencia de Telegram, WhatsApp <b>no permite bots libremente</b>. Para conectar un agente de
+            forma legal y estable se usa la <b>API de WhatsApp Business</b> (de Meta). Suele accederse a través
+            de un <b>proveedor</b> que simplifica el proceso.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>WhatsApp Business API<span class="src">La base oficial</span></h4><ul><li>La ofrece Meta</li><li>Para empresas, no personal</li><li>Requiere verificar el negocio</li></ul></div>
+            <div class="compare-card"><h4>Un proveedor<span class="src">El atajo</span></h4><ul><li>Twilio, 360dialog, etc.</li><li>Facilitan la conexión</li><li>Se integran con Fusion / n8n</li></ul></div>
+            <div class="compare-card"><h4>El orquestador<span class="src">La lógica</span></h4><ul><li>El mismo del Módulo 10 y 13</li><li>Conecta WhatsApp con la IA</li><li>Reutilizas lo aprendido</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Mismo cuerpo, otra cara</h4>
+            <p>El agente (cerebro + memoria + herramientas) es el mismo que en Telegram. Solo cambias el canal
+            de entrada y salida. Por eso practicamos primero en Telegram: la lógica se reaprovecha.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Agente de IA en WhatsApp</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/bmFt3xb2spQ" title="Conectar IA a WhatsApp" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" data-video-placeholder="true"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="reglas">
+          <h2><span class="n">03</span> Las reglas de WhatsApp</h2>
+          <p>WhatsApp protege a sus usuarios del spam. Conviene conocer estas reglas antes de construir:</p>
+          <ul class="bullets">
+            <li><b>Ventana de 24 horas</b>: puedes responder libremente durante 24 h tras el último mensaje del usuario.</li>
+            <li><b>Plantillas aprobadas</b>: para escribir <i>fuera</i> de esa ventana (ej. una notificación), Meta debe aprobar el mensaje antes.</li>
+            <li><b>Consentimiento</b>: el usuario debe haber aceptado que le escribas (opt-in).</li>
+            <li><b>Coste por conversación</b>: a diferencia de Telegram, WhatsApp cobra según el tipo y volumen de conversaciones.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">A tener en cuenta</span>
+            <h4>No es gratis ni instantáneo</h4>
+            <p>Verificar el negocio con Meta y aprobar plantillas lleva tiempo, y hay costes por conversación.
+            Planifícalo: WhatsApp es potente, pero exige más preparación que Telegram.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="casos">
+          <h2><span class="n">04</span> Cuándo vale la pena</h2>
+          <ul class="bullets">
+            <li><b>Atención al cliente</b>: responder dudas frecuentes al instante, 24/7.</li>
+            <li><b>Notificaciones</b>: avisar de un pedido, una cita o una aprobación pendiente en Workfront.</li>
+            <li><b>Recogida de datos</b>: formularios conversacionales que rellenan hablando.</li>
+            <li><b>Soporte interno</b>: un asistente para el equipo de campo que no está frente a un ordenador.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Recomendación</span>
+            <h4>Prototipa en Telegram, produce en WhatsApp</h4>
+            <p>Construye y prueba toda la lógica en Telegram (gratis y rápido). Cuando funcione, conéctala a
+            WhatsApp para llegar a tus clientes. Ahorras tiempo y evitas costes durante las pruebas.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué necesitas para conectar un agente a WhatsApp de forma oficial?</p>
+            <button class="quiz__opt" data-correct="false">Solo tu número de WhatsApp personal.</button>
+            <button class="quiz__opt" data-correct="true">La API de WhatsApp Business, normalmente a través de un proveedor.</button>
+            <button class="quiz__opt" data-correct="false">Nada; los bots son libres como en Telegram.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>WhatsApp exige la API de Business (de Meta), y un proveedor como Twilio o 360dialog facilita la conexión.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué es la «ventana de 24 horas»?</p>
+            <button class="quiz__opt" data-correct="true">El periodo tras el mensaje del usuario en el que puedes responder libremente.</button>
+            <button class="quiz__opt" data-correct="false">El tiempo que tarda Meta en aprobar tu negocio.</button>
+            <button class="quiz__opt" data-correct="false">El máximo que puede durar una conversación.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Dentro de esas 24 h respondes libre; fuera de ellas necesitas una plantilla aprobada por Meta.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-13-agente-telegram.html"><span>← Anterior</span><b>13 · Agente en Telegram</b></a>
+          <a href="modulo-15-agentes-autonomos.html" class="next"><span>Siguiente →</span><b>15 · Agentes autónomos</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#oficial">La vía oficial</a>
+          <a href="#video">Video</a>
+          <a href="#reglas">Las reglas de WhatsApp</a>
+          <a href="#casos">Cuándo vale la pena</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 14</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

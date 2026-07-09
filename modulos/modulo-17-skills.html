@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 17 · ¿Qué es una Skill? — Academia IA</title>
+  <meta name="description" content="Qué es una skill, qué son los archivos .md (Markdown), la anatomía de un SKILL.md y cómo crear tu propia skill para ampliar lo que la IA sabe hacer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 05 · Skills y Gobernanza</a> <span>—</span>
+        <span>Módulo 17</span>
+      </div>
+      <span class="kicker reveal in">Nivel 05 · Skills y Gobernanza</span>
+      <h1 class="reveal in">¿Qué es una <em>Skill</em>?</h1>
+      <p class="lead reveal in">
+        Una skill es una <b>habilidad extra</b> que le enseñas a la IA: un manual con instrucciones que el
+        modelo activa solo cuando lo necesita. Aquí verás qué son los archivos <code>.md</code>, cómo se
+        estructura una skill y cómo crear la tuya.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">35 minutos</span>
+        <span class="mod-meta__item">Nivel avanzado</span>
+        <span class="mod-meta__item">Amplía lo que la IA sabe hacer</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1400&q=80" alt="Piezas que encajan como una skill" />
+        <span class="mod-cover__badge">Una habilidad que le enseñas a la IA</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> Una habilidad bajo demanda</h2>
+          <p>
+            Una <b>skill</b> es un paquete de instrucciones y recursos que le da a la IA una capacidad concreta:
+            «redactar informes con nuestro formato», «revisar un contrato», «crear una tarea en Workfront». En
+            lugar de explicárselo cada vez, lo guardas una vez como skill y la IA lo usa cuando hace falta.
+          </p>
+          <p>
+            Lo elegante es que el modelo <b>solo la carga cuando es relevante</b>. Tú describes «para qué sirve»
+            y «cuándo usarla»; la IA la activa sola en el momento adecuado, sin saturar la conversación.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Es como contratar a un especialista</h4>
+            <p>Sin skills, la IA es un generalista. Con skills, es como tener a mano especialistas que aparecen
+            justo cuando su tema entra en juego, cada uno con su manual de instrucciones.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Las skills, explicadas</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/fOxC44g8vig" title="Claude Agent Skills Explained" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Video oficial de Anthropic. Puedes cambiarlo por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="md">
+          <h2><span class="n">03</span> Los archivos <code>.md</code> (Markdown)</h2>
+          <p>
+            Las skills se escriben en <b>Markdown</b>, archivos con extensión <code>.md</code>. Markdown es
+            texto normal con unos pocos símbolos para dar formato: <code>#</code> para títulos,
+            <code>-</code> para listas, <code>**negrita**</code>. Legible para humanos y para la IA.
+          </p>
+          <p>Por eso es el formato del ecosistema: los <code>README.md</code> de GitHub, la documentación y las skills, todo es Markdown.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">ejemplo.md</span></div>
+            <pre><code><span class="tok-key"># Título principal</span>
+<span class="tok-key">## Subtítulo</span>
+
+Texto normal con una palabra en <span class="tok-str">**negrita**</span>.
+
+- Punto de una lista
+- Otro punto
+
+<span class="tok-com">&gt; Una cita o nota destacada</span></code></pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="anatomia">
+          <h2><span class="n">04</span> Anatomía de una skill</h2>
+          <p>Una skill suele ser una carpeta con un archivo <code>SKILL.md</code>. Tiene dos partes: una ficha con datos y las instrucciones.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">SKILL.md</span></div>
+            <pre><code><span class="tok-com">---</span>
+<span class="tok-key">name:</span> <span class="tok-str">reporte-semanal</span>
+<span class="tok-key">description:</span> <span class="tok-str">Genera el reporte semanal de un proyecto
+  de Workfront con nuestro formato. Usar cuando pidan
+  "reporte semanal" o "resumen del proyecto".</span>
+<span class="tok-com">---</span>
+
+<span class="tok-key"># Reporte semanal</span>
+
+<span class="tok-com">## Pasos</span>
+1. Obtener las tareas del proyecto en Workfront.
+2. Resumir avances y bloqueos.
+3. Formatear con: Título, Logros, Riesgos, Próximos pasos.</code></pre>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Lo más importante</span>
+            <h4>La descripción decide cuándo se activa</h4>
+            <p>El campo <code>description</code> es clave: le dice a la IA <b>para qué sirve y cuándo usarla</b>.
+            Una buena descripción hace que la skill aparezca en el momento justo; una vaga, que nunca se use.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="crear">
+          <h2><span class="n">05</span> Cómo crear tu propia skill</h2>
+          <ul class="bullets">
+            <li><b>Elige una tarea repetitiva</b> que expliques a la IA una y otra vez.</li>
+            <li><b>Escribe el <code>SKILL.md</code></b>: nombre, una descripción clara de cuándo usarla, y los pasos.</li>
+            <li><b>Añade recursos</b> si hace falta: plantillas, ejemplos, un archivo con el formato.</li>
+            <li><b>Pruébala</b>: pide algo que debería activarla y ajusta la descripción hasta que aparezca sola.</li>
+            <li><b>Compártela</b>: guárdala en GitHub (Módulo 16) para que la use todo el equipo.</li>
+          </ul>
+          <div class="callout callout--info reveal">
+            <span class="label">Consejo</span>
+            <h4>La IA te ayuda a escribir la skill</h4>
+            <p>No partas de cero: pídele a un chatbot «ayúdame a escribir una skill que haga X, con su
+            descripción y sus pasos». Tú aportas el conocimiento del proceso; la IA lo ordena en formato.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué es una skill?</p>
+            <button class="quiz__opt" data-correct="true">Un paquete de instrucciones que le da a la IA una capacidad concreta, y que activa cuando es relevante.</button>
+            <button class="quiz__opt" data-correct="false">Un modelo de lenguaje más rápido.</button>
+            <button class="quiz__opt" data-correct="false">Una contraseña para acceder a la IA.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Es una habilidad guardada: la escribes una vez y la IA la usa cuando la situación lo pide.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué campo de una skill decide cuándo se activa?</p>
+            <button class="quiz__opt" data-correct="false">El nombre del archivo.</button>
+            <button class="quiz__opt" data-correct="true">La descripción (para qué sirve y cuándo usarla).</button>
+            <button class="quiz__opt" data-correct="false">El color del texto.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Una <code>description</code> clara hace que la IA active la skill en el momento adecuado.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-16-github.html"><span>← Anterior</span><b>16 · GitHub</b></a>
+          <a href="modulo-18-extensiones.html" class="next"><span>Siguiente →</span><b>18 · Extensiones y capacidades</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">Una habilidad bajo demanda</a>
+          <a href="#video">Video</a>
+          <a href="#md">Los archivos .md</a>
+          <a href="#anatomia">Anatomía de una skill</a>
+          <a href="#crear">Cómo crear la tuya</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 17</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

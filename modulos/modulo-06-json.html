@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 06 · JSON y tipos de datos — Academia IA</title>
+  <meta name="description" content="Qué es JSON, cómo se estructura, los tipos de datos (texto, número, booleano, lista, objeto, nulo) y por qué es el idioma común entre sistemas e IA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 02 · Conceptos técnicos</a> <span>—</span>
+        <span>Módulo 06</span>
+      </div>
+      <span class="kicker reveal in">Nivel 02 · Conceptos técnicos</span>
+      <h1 class="reveal in">JSON y los <em>tipos de datos</em></h1>
+      <p class="lead reveal in">
+        Si las APIs son los mensajeros, JSON es el idioma en el que hablan. Es tan legible que lo
+        entenderás de un vistazo, y conocer los tipos de datos te dará el vocabulario para trabajar con
+        cualquier sistema o agente de IA.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">20 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">El idioma común de los datos</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1400&q=80" alt="Datos estructurados" />
+        <span class="mod-cover__badge">El idioma de los datos</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> ¿Qué es JSON?</h2>
+          <p>
+            <b>JSON</b> (<i>JavaScript Object Notation</i>) es una forma de escribir datos que tanto las
+            personas como las máquinas leen con facilidad. Organiza la información en pares de
+            <b>«clave: valor»</b>, como una ficha ordenada.
+          </p>
+          <p>
+            Es el formato en el que casi todas las APIs devuelven su respuesta, y en el que los agentes de
+            IA reciben y entregan información. Reconocerlo es un superpoder cotidiano.
+          </p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">empleado.json</span></div>
+            <pre><code>{
+  <span class="tok-str">"nombre"</span>: <span class="tok-str">"Ana Torres"</span>,
+  <span class="tok-str">"edad"</span>: <span class="tok-num">34</span>,
+  <span class="tok-str">"activo"</span>: <span class="tok-key">true</span>,
+  <span class="tok-str">"departamento"</span>: <span class="tok-str">"Marketing"</span>
+}</code></pre>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Cómo leerlo</span>
+            <h4>Clave a la izquierda, valor a la derecha</h4>
+            <p>«nombre» es la clave, «Ana Torres» es el valor. Las llaves <code>{ }</code> agrupan una ficha
+            completa. Con eso ya sabes leer el 90% del JSON que verás.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> JSON en pocos minutos</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/iiADhChRriM" title="Qué es JSON" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="tipos">
+          <h2><span class="n">03</span> Los tipos de datos</h2>
+          <p>Cada valor en JSON es de un <b>tipo</b>. Con estos seis cubres prácticamente todo:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Texto<span class="src">string</span></h4><ul><li>Va entre comillas</li><li>"Madrid", "Ana"</li></ul></div>
+            <div class="compare-card"><h4>Número<span class="src">number</span></h4><ul><li>Sin comillas</li><li>34, 3.14, -5</li></ul></div>
+            <div class="compare-card"><h4>Booleano<span class="src">boolean</span></h4><ul><li>Verdadero o falso</li><li>true, false</li></ul></div>
+            <div class="compare-card"><h4>Lista<span class="src">array</span></h4><ul><li>Varios valores</li><li>["a", "b", "c"]</li></ul></div>
+            <div class="compare-card"><h4>Objeto<span class="src">object</span></h4><ul><li>Ficha anidada</li><li>{ "clave": valor }</li></ul></div>
+            <div class="compare-card"><h4>Nulo<span class="src">null</span></h4><ul><li>Ausencia de valor</li><li>null</li></ul></div>
+          </div>
+          <p>Combinados, permiten describir cualquier cosa —incluso datos dentro de datos:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">proyecto.json</span></div>
+            <pre><code>{
+  <span class="tok-str">"proyecto"</span>: <span class="tok-str">"Campaña Q3"</span>,
+  <span class="tok-str">"activo"</span>: <span class="tok-key">true</span>,
+  <span class="tok-str">"presupuesto"</span>: <span class="tok-num">15000</span>,
+  <span class="tok-str">"responsables"</span>: [<span class="tok-str">"Ana"</span>, <span class="tok-str">"Luis"</span>],
+  <span class="tok-str">"cliente"</span>: {
+    <span class="tok-str">"nombre"</span>: <span class="tok-str">"Acme"</span>,
+    <span class="tok-str">"vip"</span>: <span class="tok-key">true</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="por-que">
+          <h2><span class="n">04</span> Por qué te sirve saberlo</h2>
+          <ul class="bullets">
+            <li><b>Depurar automatizaciones</b>: cuando un flujo falla, casi siempre es por leer mal un JSON.</li>
+            <li><b>Configurar herramientas</b>: n8n, Make y muchas apps usan JSON para sus ajustes.</li>
+            <li><b>Hablar con la IA</b>: puedes pedirle a un modelo que responda «en formato JSON» para conectarlo a otro sistema.</li>
+            <li><b>Leer respuestas de API</b>: sabrás exactamente dónde está el dato que necesitas.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Ejercicio · 5 min</span>
+            <h4>Pide un JSON a la IA</h4>
+            <p>Escribe a tu chatbot: <i>«Dame los datos de 3 empleados ficticios (nombre, edad, departamento)
+            en formato JSON.»</i> Observa la estructura de claves y valores que devuelve.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. En <code>"edad": 34</code>, ¿qué es «edad»?</p>
+            <button class="quiz__opt" data-correct="true">La clave (el nombre del dato).</button>
+            <button class="quiz__opt" data-correct="false">El valor.</button>
+            <button class="quiz__opt" data-correct="false">Un tipo de dato booleano.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>«edad» es la clave; 34 es el valor. Clave a la izquierda, valor a la derecha.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Cuál de estos es una <em>lista</em> (array)?</p>
+            <button class="quiz__opt" data-correct="false">{ "nombre": "Ana" }</button>
+            <button class="quiz__opt" data-correct="true">["rojo", "verde", "azul"]</button>
+            <button class="quiz__opt" data-correct="false">"true"</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Los corchetes <code>[ ]</code> indican una lista de varios valores.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-05-api.html"><span>← Anterior</span><b>05 · ¿Qué es una API?</b></a>
+          <a href="modulo-07-front-back-rag.html" class="next"><span>Siguiente →</span><b>07 · Front, Back y RAG</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">¿Qué es JSON?</a>
+          <a href="#video">Video</a>
+          <a href="#tipos">Los tipos de datos</a>
+          <a href="#por-que">Por qué te sirve</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 06</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

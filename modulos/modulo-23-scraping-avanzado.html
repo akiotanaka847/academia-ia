@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 23 · Scraping avanzado — Academia IA</title>
+  <meta name="description" content="Retos del scraping avanzado: páginas dinámicas con JavaScript, paginación y bloqueos. Soluciones con navegadores headless y buenas prácticas para no saturar servidores." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 06 · Web Scraping</a> <span>—</span>
+        <span>Módulo 23</span>
+      </div>
+      <span class="kicker reveal in">Nivel 06 · Web Scraping</span>
+      <h1 class="reveal in">Scraping <em>avanzado</em></h1>
+      <p class="lead reveal in">
+        No todas las webs se dejan leer con facilidad: unas cargan datos con JavaScript, otras reparten el
+        contenido en muchas páginas y algunas bloquean a los bots. Aquí verás los retos reales y cómo
+        resolverlos —sin dejar de ser responsable.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Nivel avanzado</span>
+        <span class="mod-meta__item">Cuando lo básico no basta</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=80" alt="Código de scraping avanzado" />
+        <span class="mod-cover__badge">Páginas difíciles, con criterio</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="retos">
+          <h2><span class="n">01</span> Por qué se complica</h2>
+          <p>
+            El scraping básico (Módulo 22) funciona cuando el dato ya viene en el HTML. Pero las webs modernas
+            son más complejas: el contenido aparece <b>después</b> de cargar, exige <b>navegar</b> por muchas
+            páginas o detecta y <b>bloquea</b> a los programas. Cada reto tiene su solución.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Un scraper avanzado imita a una persona</h4>
+            <p>Cuanto más se parezca a un usuario real —esperando a que cargue, navegando con calma— más webs
+            podrá leer. Pero «parecerse a una persona» no es excusa para saltarse las reglas del sitio.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Técnicas avanzadas</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/tuf9KoZ6JyI" title="Web scraping avanzado" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" data-video-placeholder="true"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="soluciones">
+          <h2><span class="n">03</span> Retos y soluciones</h2>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Contenido dinámico<span class="src">Reto</span></h4><ul><li>Los datos cargan con JavaScript</li><li>El HTML inicial viene «vacío»</li><li>Solución: navegador «headless»</li></ul></div>
+            <div class="compare-card"><h4>Paginación<span class="src">Reto</span></h4><ul><li>Los datos están en muchas páginas</li><li>O con «cargar más» al hacer scroll</li><li>Solución: recorrerlas en bucle</li></ul></div>
+            <div class="compare-card"><h4>Bloqueos<span class="src">Reto</span></h4><ul><li>La web detecta al bot</li><li>Límites de velocidad, captchas</li><li>Solución: ir despacio y ordenado</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Navegador headless, en una frase</span>
+            <h4>Un navegador sin ventana, controlado por código</h4>
+            <p>Herramientas como Playwright o Puppeteer abren la página «de verdad» (ejecutando su JavaScript)
+            pero sin pantalla, y dejan que tu programa lea el contenido ya cargado. Es la clave para las webs dinámicas.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="buenas-practicas">
+          <h2><span class="n">04</span> Cómo no ser (justamente) bloqueado</h2>
+          <p>Las webs bloquean a los scrapers <b>abusivos</b>. Si te comportas con respeto, ni molestas ni te bloquean:</p>
+          <ul class="bullets">
+            <li><b>Ve despacio</b>: pon pausas entre peticiones; no dispares cientos por segundo.</li>
+            <li><b>Limita el volumen</b>: extrae solo lo que necesitas, en horas de poco tráfico si es posible.</li>
+            <li><b>Identifícate</b>: usa un «user-agent» honesto; no finjas ser algo que no eres.</li>
+            <li><b>Cachea</b>: guarda lo que ya bajaste para no volver a pedirlo.</li>
+            <li><b>Respeta el «no»</b>: si el robots.txt o los términos lo prohíben, detente.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Ética, no solo técnica</span>
+            <h4>Evitar un bloqueo ≠ saltarse la ley</h4>
+            <p>Existen proxies y trucos para esquivar bloqueos, pero usarlos para acceder a lo que una web
+            prohíbe expresamente cruza la línea. La meta es no molestar, no burlar defensas. Ante datos
+            sensibles o webs que lo prohíben, no sigas.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. Una web carga sus datos con JavaScript y el HTML inicial viene vacío. ¿Qué usarías?</p>
+            <button class="quiz__opt" data-correct="true">Un navegador «headless» (Playwright/Puppeteer) que ejecuta el JavaScript.</button>
+            <button class="quiz__opt" data-correct="false">Nada; esa web es imposible de leer.</button>
+            <button class="quiz__opt" data-correct="false">Pedir el HTML más rápido, muchas veces seguidas.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El navegador headless carga la página «de verdad» y te deja leer el contenido ya renderizado.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Cuál es una buena práctica para no saturar ni ser bloqueado?</p>
+            <button class="quiz__opt" data-correct="false">Hacer cientos de peticiones por segundo.</button>
+            <button class="quiz__opt" data-correct="true">Poner pausas entre peticiones y extraer solo lo necesario.</button>
+            <button class="quiz__opt" data-correct="false">Fingir ser un navegador distinto en cada intento.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Ir despacio y con volumen moderado respeta el servidor y evita bloqueos legítimos.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-22-scraping-fundamentos.html"><span>← Anterior</span><b>22 · Fundamentos</b></a>
+          <a href="modulo-24-apis-ocultas.html" class="next"><span>Siguiente →</span><b>24 · APIs ocultas</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#retos">Por qué se complica</a>
+          <a href="#video">Video</a>
+          <a href="#soluciones">Retos y soluciones</a>
+          <a href="#buenas-practicas">No ser bloqueado</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 23</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

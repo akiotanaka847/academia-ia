@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 30 · Flujos agénticos avanzados — Academia IA</title>
+  <meta name="description" content="Flujos agénticos avanzados: de un agente a varios coordinados. Patrones (secuencial, con herramientas, multi-agente, human-in-the-loop) y cuándo usarlos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 08 · Casos de uso</a> <span>—</span>
+        <span>Módulo 30</span>
+      </div>
+      <span class="kicker reveal in">Nivel 08 · Casos de uso que generan valor</span>
+      <h1 class="reveal in">Flujos <em>agénticos avanzados</em></h1>
+      <p class="lead reveal in">
+        El siguiente nivel de los agentes: en vez de uno solo, varios agentes especializados que <b>trabajan
+        en equipo</b>. Aquí ves los patrones que más valor generan, un ejemplo real de flujo multi-agente y
+        —clave— cuándo conviene y cuándo es exagerado.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Caso de uso</span>
+        <span class="mod-meta__item">Agentes que trabajan en equipo</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1400&q=80" alt="Sistema multi-agente de IA" />
+        <span class="mod-cover__badge">De un agente a un equipo de agentes</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="mas-alla">
+          <h2><span class="n">01</span> Más allá de un agente</h2>
+          <p>
+            En el Nivel 04 construiste un agente. Un <b>flujo agéntico</b> va más allá: encadena varios pasos
+            de razonamiento o coordina <b>varios agentes especializados</b>, cada uno con su rol, sus
+            herramientas y su memoria —como un equipo de personas.
+          </p>
+          <p>
+            La idea: dividir un trabajo grande entre «especialistas» que se pasan el resultado, en vez de pedirle
+            todo a un solo agente que se satura.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea clave</span>
+            <h4>Un especialista por tarea</h4>
+            <p>Igual que un equipo humano: uno investiga, otro redacta, otro revisa. Cada agente hace bien una
+            cosa y se coordinan para un objetivo común.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Sistemas multi-agente, explicados</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/sWH0T4Zez6I" title="Multi Agent Systems Explained" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Video de IBM Technology sobre sistemas multi-agente. Puedes cambiarlo editando el src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="patrones">
+          <h2><span class="n">03</span> Los patrones que generan valor</h2>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Secuencial<span class="src">En cadena</span></h4><ul><li>Paso 1 → paso 2 → paso 3</li><li>La salida de uno alimenta al siguiente</li><li>Ej.: investigar → redactar → revisar</li></ul></div>
+            <div class="compare-card"><h4>Con herramientas<span class="src">Un agente equipado</span></h4><ul><li>Un agente + varias herramientas</li><li>Decide cuál usar en cada paso</li><li>Ej.: buscar, calcular, enviar</li></ul></div>
+            <div class="compare-card"><h4>Coordinador<span class="src">Jefe y trabajadores</span></h4><ul><li>Un agente reparte el trabajo</li><li>Otros ejecutan y devuelven</li><li>Ej.: planificador + especialistas</li></ul></div>
+            <div class="compare-card"><h4>Con persona<span class="src">Human-in-the-loop</span></h4><ul><li>El flujo pausa para aprobar</li><li>Un humano valida y continúa</li><li>Para decisiones importantes</li></ul></div>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="ejemplo">
+          <h2><span class="n">04</span> Un flujo multi-agente real</h2>
+          <p>Objetivo: preparar un informe de mercado. En vez de un agente, un pequeño equipo:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">flujo-multiagente.txt</span></div>
+            <pre><code><span class="tok-key">COORDINADOR</span>  Divide el objetivo y reparte el trabajo
+    │
+    ├─ <span class="tok-fn">Agente Investigador</span> → busca datos y fuentes
+    ├─ <span class="tok-fn">Agente Analista</span>     → detecta tendencias
+    ├─ <span class="tok-fn">Agente Redactor</span>     → escribe el informe
+    └─ <span class="tok-fn">Agente Revisor</span>      → verifica y corrige
+    │
+<span class="tok-key">PERSONA</span>      Aprueba antes de publicar
+<span class="tok-key">RESULTADO</span>    Informe listo, hecho por un "equipo" de IA</code></pre>
+          </div>
+          <p>Cada agente reutiliza lo del curso: prompt de sistema, herramientas, memoria y permisos mínimos.</p>
+        </div>
+
+        <div class="content-block reveal" id="cuando">
+          <h2><span class="n">05</span> Cuándo usarlo (y cuándo no)</h2>
+          <ul class="bullets">
+            <li><b>Úsalo</b> cuando la tarea tiene fases distintas y claras (investigar, crear, revisar).</li>
+            <li><b>Úsalo</b> cuando un solo agente se «pierde» por hacer demasiado a la vez.</li>
+            <li><b>Evítalo</b> si un flujo simple o una receta (Módulo 29) ya resuelve el problema.</li>
+            <li><b>Evítalo</b> como capricho técnico: más agentes = más coste y más cosas que pueden fallar.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Regla de sensatez</span>
+            <h4>La solución más simple que funcione</h4>
+            <p>Lo agéntico impresiona, pero el objetivo es resolver un problema, no lucir complejidad. Empieza
+            simple; sube a multi-agente solo cuando de verdad haga falta. Con esto cierras el programa: ya
+            piensas como quien construye, no solo como quien usa.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué es un flujo multi-agente?</p>
+            <button class="quiz__opt" data-correct="true">Varios agentes especializados que se coordinan para un objetivo común.</button>
+            <button class="quiz__opt" data-correct="false">Un solo agente que responde muy rápido.</button>
+            <button class="quiz__opt" data-correct="false">Una hoja de cálculo con fórmulas.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Como un equipo humano: cada agente hace bien una parte y juntos logran la meta.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Cuándo NO conviene un flujo multi-agente?</p>
+            <button class="quiz__opt" data-correct="true">Cuando un flujo simple o una receta ya resuelve el problema.</button>
+            <button class="quiz__opt" data-correct="false">Cuando la tarea tiene fases claras y distintas.</button>
+            <button class="quiz__opt" data-correct="false">Nunca; siempre es mejor tener más agentes.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La solución más simple que funcione. Más agentes = más coste y más puntos de fallo.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-29-automatizaciones-recetas.html"><span>← Anterior</span><b>29 · Automatizaciones prácticas</b></a>
+          <a href="../index.html" class="next"><span>Fin del programa ✦</span><b>Volver al inicio</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#mas-alla">Más allá de un agente</a>
+          <a href="#video">Video</a>
+          <a href="#patrones">Patrones que generan valor</a>
+          <a href="#ejemplo">Flujo multi-agente real</a>
+          <a href="#cuando">Cuándo usarlo</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 30</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

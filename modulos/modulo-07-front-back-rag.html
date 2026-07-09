@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 07 · Front, Back y RAG — Academia IA</title>
+  <meta name="description" content="Qué es el frontend, el backend y el RAG (Retrieval-Augmented Generation) explicados sin tecnicismos, con el flujo completo de una aplicación con IA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 02 · Conceptos técnicos</a> <span>—</span>
+        <span>Módulo 07</span>
+      </div>
+      <span class="kicker reveal in">Nivel 02 · Conceptos técnicos</span>
+      <h1 class="reveal in">Frontend, Backend y <em>RAG</em></h1>
+      <p class="lead reveal in">
+        Tres palabras que oirás en cada proyecto. Vas a entender qué es la parte que se ve, la que trabaja
+        por detrás, y el <b>RAG</b>: la técnica que hace que una IA responda con la información <b>de tu empresa</b>.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">25 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">La arquitectura, sin tecnicismos</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=80" alt="Código en una pantalla" />
+        <span class="mod-cover__badge">La sala y la cocina de una app</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="front-back">
+          <h2><span class="n">01</span> La sala y la cocina</h2>
+          <p>
+            Volvamos al restaurante. El <b>frontend</b> es la <b>sala</b>: lo que el cliente ve y toca —las
+            mesas, la carta, la decoración—. El <b>backend</b> es la <b>cocina</b>: donde se prepara todo,
+            fuera de la vista.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Frontend<span class="src">La sala · lo que se ve</span></h4><ul><li>Botones, textos, colores</li><li>Se ejecuta en tu navegador</li><li>HTML, CSS y JavaScript</li><li>Esta misma página es frontend</li></ul></div>
+            <div class="compare-card"><h4>Backend<span class="src">La cocina · lo que trabaja</span></h4><ul><li>Lógica y cálculos</li><li>Se ejecuta en un servidor</li><li>Guarda y procesa datos</li><li>Habla con las bases de datos</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Cómo se conectan</span>
+            <h4>Se hablan por API</h4>
+            <p>El frontend le pide cosas al backend a través de una API (Módulo 05), y el backend responde
+            con datos en JSON (Módulo 06). Ves cómo todo empieza a encajar.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Frontend vs Backend</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/ByURN0ZFFMw" title="Frontend vs Backend" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="rag">
+          <h2><span class="n">03</span> ¿Qué es el RAG?</h2>
+          <p>
+            <b>RAG</b> significa <i>Retrieval-Augmented Generation</i>: «generación aumentada por recuperación».
+            Traducido: antes de responder, la IA primero <b>busca</b> información relevante en tus documentos y
+            luego <b>redacta</b> la respuesta basándose en lo que encontró.
+          </p>
+          <p>Resuelve el problema de que un modelo general no conoce los datos privados de tu empresa. El flujo es:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>1 · Pregunta<span class="src">El usuario</span></h4><ul><li>«¿Cuál es la política de vacaciones?»</li></ul></div>
+            <div class="compare-card"><h4>2 · Recupera<span class="src">Retrieval</span></h4><ul><li>Busca en tus documentos</li><li>Encuentra los fragmentos útiles</li></ul></div>
+            <div class="compare-card"><h4>3 · Genera<span class="src">Generation</span></h4><ul><li>La IA redacta con esos datos</li><li>Responde citando la fuente</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Ya lo conoces</span>
+            <h4>NotebookLM es RAG</h4>
+            <p>La herramienta del Módulo 04 es un ejemplo perfecto de RAG: responde solo con tus fuentes y
+            cita de dónde saca cada dato. Ahora sabes cómo se llama la técnica por dentro.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="cuando">
+          <h2><span class="n">04</span> Cuándo usar RAG</h2>
+          <ul class="bullets">
+            <li><b>Documentación interna</b>: manuales, políticas, procedimientos que la IA debe conocer.</li>
+            <li><b>Atención al cliente</b>: responder con tu catálogo y tus FAQs, no con inventos.</li>
+            <li><b>Datos que cambian</b>: precios, inventario o normativa actualizada.</li>
+            <li><b>Fiabilidad</b>: cuando necesitas que las respuestas sean verificables y con fuente.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">A tener en cuenta</span>
+            <h4>RAG no es magia</h4>
+            <p>La calidad depende de tus documentos y de una buena búsqueda. Si la fuente está desactualizada
+            o mal organizada, la respuesta lo estará. «Basura entra, basura sale».</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Cuál es la diferencia entre frontend y backend?</p>
+            <button class="quiz__opt" data-correct="true">El frontend es lo que se ve; el backend es la lógica que trabaja por detrás.</button>
+            <button class="quiz__opt" data-correct="false">El frontend es más rápido que el backend.</button>
+            <button class="quiz__opt" data-correct="false">Son dos nombres para lo mismo.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Sala (frontend, lo visible) y cocina (backend, el trabajo interno). Se comunican por API.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué hace un sistema RAG antes de responder?</p>
+            <button class="quiz__opt" data-correct="false">Inventa la respuesta con lo que ya sabe.</button>
+            <button class="quiz__opt" data-correct="true">Busca información relevante en tus documentos y redacta con ella.</button>
+            <button class="quiz__opt" data-correct="false">Traduce la pregunta a otro idioma.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Retrieval (busca) + Generation (redacta): responde con tus datos, no con suposiciones.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-06-json.html"><span>← Anterior</span><b>06 · JSON y tipos de datos</b></a>
+          <a href="modulo-08-bases-datos.html" class="next"><span>Siguiente →</span><b>08 · Bases de datos</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#front-back">La sala y la cocina</a>
+          <a href="#video">Video</a>
+          <a href="#rag">¿Qué es el RAG?</a>
+          <a href="#cuando">Cuándo usar RAG</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 07</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

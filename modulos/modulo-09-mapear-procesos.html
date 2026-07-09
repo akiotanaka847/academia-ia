@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 09 · Identificar y mapear procesos — Academia IA</title>
+  <meta name="description" content="Cómo detectar qué tareas conviene automatizar, mapear un proceso paso a paso y priorizar por retorno, con ejemplos de flujos de aprobación en Adobe Workfront." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 03 · Automatización</a> <span>—</span>
+        <span>Módulo 09</span>
+      </div>
+      <span class="kicker reveal in">Nivel 03 · Automatización</span>
+      <h1 class="reveal in">Identificar y <em>mapear procesos</em></h1>
+      <p class="lead reveal in">
+        Automatizar empieza antes de tocar ninguna herramienta: se empieza <b>entendiendo el proceso</b>.
+        Aquí aprendes a detectar qué vale la pena automatizar, a dibujarlo paso a paso y a priorizar por
+        retorno —usando las aprobaciones de Workfront como ejemplo.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">30 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">Antes de automatizar</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80" alt="Diagrama y planificación de procesos" />
+        <span class="mod-cover__badge">Primero entender, luego automatizar</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-automatizar">
+          <h2><span class="n">01</span> ¿Qué conviene automatizar?</h2>
+          <p>
+            No todo proceso debe automatizarse. Los mejores candidatos comparten cuatro señales. Si una
+            tarea cumple varias, es oro para automatizar:
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Repetitiva<span class="src">Señal 1</span></h4><ul><li>Se hace igual una y otra vez</li><li>Cada día, semana o mes</li></ul></div>
+            <div class="compare-card"><h4>Basada en reglas<span class="src">Señal 2</span></h4><ul><li>Sigue una lógica clara</li><li>«Si pasa X, hago Y»</li></ul></div>
+            <div class="compare-card"><h4>Alto volumen<span class="src">Señal 3</span></h4><ul><li>Consume mucho tiempo total</li><li>Muchos casos al mes</li></ul></div>
+            <div class="compare-card"><h4>Propensa a errores<span class="src">Señal 4</span></h4><ul><li>Copiar y pegar entre sistemas</li><li>Fácil olvidar un paso</li></ul></div>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">Cuidado</span>
+            <h4>No automatices el caos</h4>
+            <p>Si un proceso está mal diseñado, automatizarlo solo hace que los errores ocurran más rápido.
+            Primero ordénalo; luego automatízalo.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Mapear procesos, explicado</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/F1Kg-e8VtVU" title="Cómo mapear un proceso" data-video-placeholder="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por uno propio (o interno) editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="mapear">
+          <h2><span class="n">03</span> Cómo mapear un proceso</h2>
+          <p>Mapear es dibujar el proceso como una receta. Para cada proceso, responde estas preguntas en orden:</p>
+          <ul class="bullets">
+            <li><b>Disparador</b>: ¿qué lo inicia? (llega un correo, se crea una tarea, es viernes…)</li>
+            <li><b>Entradas</b>: ¿qué información necesito? (datos del cliente, un archivo, una fecha…)</li>
+            <li><b>Pasos</b>: ¿qué acciones ocurren y en qué orden?</li>
+            <li><b>Decisiones</b>: ¿dónde el camino se bifurca? («si el importe &gt; 1000€, pide aprobación»)</li>
+            <li><b>Salida</b>: ¿cuál es el resultado final? (una tarea creada, un correo enviado, un reporte)</li>
+          </ul>
+          <p>Ejemplo real: una <b>solicitud de aprobación</b> de contenido en Adobe Workfront se mapea así:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">proceso-aprobacion.txt</span></div>
+            <pre><code><span class="tok-key">DISPARADOR</span>  Se sube una pieza de diseño a Workfront
+<span class="tok-key">ENTRADAS</span>   Archivo, proyecto, responsable
+<span class="tok-key">PASOS</span>      1. Notificar al revisor
+           2. Esperar su decisión
+<span class="tok-key">DECISIÓN</span>   ¿Aprobado?
+           ├─ Sí  → marcar tarea como completada
+           └─ No  → devolver al diseñador con comentarios
+<span class="tok-key">SALIDA</span>     Estado actualizado + aviso al equipo</code></pre>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Conexión con la empresa</span>
+            <h4>Este mapa es la base de un escenario de Fusion</h4>
+            <p>Ese diagrama de disparador → pasos → decisión → salida es exactamente lo que construirás en
+            Workfront Fusion en el próximo módulo. Mapear bien es la mitad del trabajo.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="roi">
+          <h2><span class="n">04</span> Prioriza por retorno</h2>
+          <p>Cuando tengas varios procesos candidatos, no los automatices todos a la vez. Ordénalos con una cuenta simple:</p>
+          <div class="callout callout--tip reveal">
+            <span class="label">La fórmula</span>
+            <h4>Tiempo ahorrado × frecuencia − esfuerzo de montarlo</h4>
+            <p>Empieza por lo que se hace <b>muy seguido</b> y quita <b>mucho</b> trabajo manual, aunque sea
+            sencillo. Un ahorro pequeño repetido cientos de veces gana a uno grande que ocurre una vez al año.</p>
+          </div>
+          <ul class="bullets">
+            <li><b>Rápido de ganar</b>: alta frecuencia, baja complejidad. Empieza aquí.</li>
+            <li><b>Proyecto</b>: alto valor pero complejo. Planifícalo con calma.</li>
+            <li><b>Evitar</b>: baja frecuencia y mucho esfuerzo de montaje. No compensa.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Cuál de estas tareas es el <em>mejor</em> candidato para automatizar?</p>
+            <button class="quiz__opt" data-correct="false">Una decisión estratégica que se toma una vez al año.</button>
+            <button class="quiz__opt" data-correct="true">Copiar datos de un formulario a Workfront, varias veces al día.</button>
+            <button class="quiz__opt" data-correct="false">Una tarea creativa distinta cada vez.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Repetitiva + alto volumen + basada en reglas + propensa a errores: las cuatro señales.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué debes hacer antes de automatizar un proceso desordenado?</p>
+            <button class="quiz__opt" data-correct="true">Ordenarlo y mapearlo primero.</button>
+            <button class="quiz__opt" data-correct="false">Automatizarlo tal cual, para ir más rápido.</button>
+            <button class="quiz__opt" data-correct="false">Ignorar los pasos con decisiones.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Automatizar el caos solo acelera los errores. Primero se ordena, luego se automatiza.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-08-bases-datos.html"><span>← Anterior</span><b>08 · Bases de datos</b></a>
+          <a href="modulo-10-workfront-fusion.html" class="next"><span>Siguiente →</span><b>10 · Workfront Fusion</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-automatizar">¿Qué automatizar?</a>
+          <a href="#video">Video</a>
+          <a href="#mapear">Cómo mapear un proceso</a>
+          <a href="#roi">Prioriza por retorno</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 09</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

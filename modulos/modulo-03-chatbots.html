@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 03 · Chatbots como herramienta — Academia IA</title>
+  <meta name="description" content="ChatGPT, Claude y Gemini comparados. Cómo escribir prompts efectivos, la anatomía de una buena instrucción y casos de uso reales en la empresa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 01 · Fundamentos</a> <span>—</span>
+        <span>Módulo 03</span>
+      </div>
+      <span class="kicker reveal in">Nivel 01 · Fundamentos</span>
+      <h1 class="reveal in">Chatbots como <em>herramienta de trabajo</em></h1>
+      <p class="lead reveal in">
+        ChatGPT, Claude y Gemini no son juguetes: bien usados, son el asistente más versátil que tendrás.
+        Aquí aprendes a compararlos y, sobre todo, a <b>hablarles bien</b> para obtener resultados de calidad.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">30 minutos</span>
+        <span class="mod-meta__item">Nivel básico</span>
+        <span class="mod-meta__item">Prompting práctico</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1400&q=80" alt="Conversación con un chatbot de IA" />
+        <span class="mod-cover__badge">Tu asistente conversacional</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> ¿Qué es un chatbot de IA?</h2>
+          <p>
+            Un chatbot moderno está impulsado por un <b>modelo de lenguaje grande (LLM)</b>: un sistema
+            entrenado con enormes cantidades de texto que mantiene conversaciones, entiende contexto y
+            genera respuestas útiles.
+          </p>
+          <p>
+            A diferencia de los chatbots antiguos (con respuestas fijas por botones), estos <b>razonan
+            sobre lo que escribes</b> y se adaptan. Por eso sirven para casi cualquier tarea de conocimiento:
+            redactar, analizar, traducir, programar o hacer lluvia de ideas.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">Cambia el chip</span>
+            <h4>No es un buscador: es un colega experto</h4>
+            <p>No lo trates con palabras clave. Dale contexto, explícale el objetivo y pídele lo que
+            necesitas con detalle, como harías con un compañero de confianza.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Sácale partido a ChatGPT</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/JTxsNm9IdYU" title="Cómo usar chatbots de IA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Sustituye este video por tu preferido editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="comparativa">
+          <h2><span class="n">03</span> ChatGPT · Claude · Gemini</h2>
+          <p>Los tres son excelentes. Estas son sus fortalezas típicas (cambian rápido, revísalas):</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>ChatGPT<span class="src">OpenAI</span></h4><ul><li>Muy versátil y popular</li><li>Genera imágenes (DALL·E)</li><li>Gran ecosistema y plugins</li><li>Ideal para empezar</li></ul></div>
+            <div class="compare-card"><h4>Claude<span class="src">Anthropic</span></h4><ul><li>Excelente con textos largos</li><li>Redacción natural y matizada</li><li>Fuerte en análisis y código</li><li>Enfoque en seguridad</li></ul></div>
+            <div class="compare-card"><h4>Gemini<span class="src">Google</span></h4><ul><li>Integrado con Google (Docs, Gmail)</li><li>Búsqueda actualizada</li><li>Multimodal potente</li><li>Bueno en Workspace</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Consejo</span>
+            <h4>No te cases con uno</h4>
+            <p>Ten cuenta en dos y compara la misma tarea: cada modelo «brilla» en cosas distintas.
+            Elegir modelo lo veremos a fondo en el Nivel 05.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="prompting">
+          <h2><span class="n">04</span> La anatomía de un buen prompt</h2>
+          <p>Un prompt efectivo suele tener cuatro partes. Compara estos dos ejemplos:</p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">prompt-efectivo.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Prompt pobre:</span>
+<span class="tok-str">"escribe un correo"</span>
+
+<span class="tok-com"># Prompt efectivo:</span>
+<span class="tok-key">[Rol]</span>      <span class="tok-str">Actúa como responsable de atención al cliente.</span>
+<span class="tok-key">[Tarea]</span>    <span class="tok-str">Redacta un correo de disculpa por un envío retrasado.</span>
+<span class="tok-key">[Contexto]</span> <span class="tok-str">El cliente es VIP y ya se quejó una vez.</span>
+<span class="tok-key">[Formato]</span>  <span class="tok-str">Máx. 120 palabras, tono cálido, ofrece 10% de descuento.</span></code></pre>
+          </div>
+          <h3>Las cuatro piezas</h3>
+          <ul class="bullets">
+            <li><b>Rol</b>: «Actúa como…» enfoca el conocimiento del modelo.</li>
+            <li><b>Tarea</b>: el verbo claro de lo que quieres (redacta, resume, analiza…).</li>
+            <li><b>Contexto</b>: datos que solo tú conoces y cambian la respuesta.</li>
+            <li><b>Formato</b>: longitud, tono, estructura y restricciones.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="casos">
+          <h2><span class="n">05</span> Casos de uso en la empresa</h2>
+          <div class="content-img reveal">
+            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?w=1200&q=80" alt="Equipo trabajando con IA" loading="lazy" />
+          </div>
+          <ul class="bullets">
+            <li><b>Comunicación</b>: correos, respuestas a clientes, actas de reunión.</li>
+            <li><b>Análisis</b>: resumir informes largos, extraer puntos clave, comparar documentos.</li>
+            <li><b>Creación</b>: borradores de propuestas, publicaciones, guiones.</li>
+            <li><b>Aprendizaje</b>: explicar conceptos difíciles «como si tuviera 12 años».</li>
+            <li><b>Productividad</b>: convertir notas desordenadas en tareas y listas claras.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Cuidado</span>
+            <h4>Datos sensibles</h4>
+            <p>No pegues información confidencial de clientes o de la empresa en herramientas públicas
+            sin autorización. Veremos privacidad y gobernanza en el Nivel 05.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Cuál es la mejor forma de pensar un chatbot de IA?</p>
+            <button class="quiz__opt" data-correct="false">Como un buscador donde pones palabras clave.</button>
+            <button class="quiz__opt" data-correct="true">Como un colega experto al que le das contexto y objetivo.</button>
+            <button class="quiz__opt" data-correct="false">Como una base de datos con respuestas fijas.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Cuanto mejor le expliques el contexto y el objetivo, mejor será la respuesta.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué cuatro piezas forman un buen prompt?</p>
+            <button class="quiz__opt" data-correct="true">Rol, tarea, contexto y formato.</button>
+            <button class="quiz__opt" data-correct="false">Nombre, fecha, hora y lugar.</button>
+            <button class="quiz__opt" data-correct="false">Solo el verbo de la acción.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Rol + Tarea + Contexto + Formato: la fórmula que transforma tus resultados.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-02-ia-generativa.html"><span>← Anterior</span><b>02 · IA Generativa</b></a>
+          <a href="modulo-04-notebooklm.html" class="next"><span>Siguiente →</span><b>04 · NotebookLM</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">¿Qué es un chatbot?</a>
+          <a href="#video">Video</a>
+          <a href="#comparativa">ChatGPT · Claude · Gemini</a>
+          <a href="#prompting">Anatomía de un prompt</a>
+          <a href="#casos">Casos de uso</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 03</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

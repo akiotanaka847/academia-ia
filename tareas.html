@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tareas · Academia IA — Aplica lo aprendido</title>
+  <meta name="description" content="Cuaderno de tareas prácticas de la Academia IA: una tarea aplicada por módulo, con objetivo y entregable, y seguimiento de progreso." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html#ruta">Temario</a></li>
+        <li><a href="tareas.html">Tareas</a></li>
+        <li><a href="index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="tasks-intro">
+    <div class="container">
+      <span class="kicker">Cuaderno de práctica</span>
+      <h1>Tareas para <em>aplicar</em> lo aprendido</h1>
+      <p class="lead">
+        Una tarea aplicada por cada módulo, pensada para hacerse con herramientas reales de tu trabajo. Marca
+        cada una al completarla: tu progreso se guarda en este navegador. Cada tarea indica su <b>objetivo</b>
+        y su <b>entregable</b> —lo que debes producir.
+      </p>
+    </div>
+  </header>
+
+  <div class="progress-panel">
+    <div class="container progress-panel__inner">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <span class="progress-count"><b>0</b> de 30 tareas</span>
+      <button class="progress-reset">Reiniciar</button>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <div class="tasks-done-banner">
+      <h3>¡Completaste las 30 tareas! 🎉</h3>
+      <p>Aplicaste cada módulo del programa a tu trabajo real. Ese es el objetivo cumplido.</p>
+    </div>
+
+    <!-- NIVEL 1 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 01</span>
+        <h2>Fundamentos de la IA</h2>
+        <span class="task-group__done">0/4</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t01"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">01</span><span class="task__title">Introducción a la IA</span></div>
+          <p class="task__goal"><b>Tarea:</b> Pídele a un chatbot que actúe como experto en tu sector y te dé 5 tareas repetitivas de tu trabajo que podrías automatizar con IA.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Lista de 5 tareas candidatas a automatizar.</span>
+          <a class="task__link" href="modulos/modulo-01-introduccion-ia.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t02"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">02</span><span class="task__title">IA Generativa</span></div>
+          <p class="task__goal"><b>Tarea:</b> Genera una imagen de portada para un post usando la fórmula <i>sujeto + estilo + detalles + formato</i>. Hazlo dos veces: con un prompt vago y con uno detallado.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Las 2 imágenes junto a los prompts que usaste.</span>
+          <a class="task__link" href="modulos/modulo-02-ia-generativa.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t03"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">03</span><span class="task__title">Chatbots como herramienta</span></div>
+          <p class="task__goal"><b>Tarea:</b> Escribe un prompt con las 4 piezas (rol, tarea, contexto, formato) para un correo real de tu trabajo y ejecútalo.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El prompt de 4 piezas + la respuesta que generó.</span>
+          <a class="task__link" href="modulos/modulo-03-chatbots.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t04"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">04</span><span class="task__title">Aprender con NotebookLM</span></div>
+          <p class="task__goal"><b>Tarea:</b> Crea un cuaderno en NotebookLM con 2–3 documentos de tu área, genera una guía de estudio y el resumen en audio (podcast).</p>
+          <span class="task__deliverable"><b>Entregable:</b> Captura del cuaderno con la guía y el audio generados.</span>
+          <a class="task__link" href="modulos/modulo-04-notebooklm.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 2 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 02</span>
+        <h2>Conceptos técnicos esenciales</h2>
+        <span class="task-group__done">0/4</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t05"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">05</span><span class="task__title">¿Qué es una API?</span></div>
+          <p class="task__goal"><b>Tarea:</b> Elige una herramienta que uses (Workfront, Google Sheets…) y averigua si tiene API buscando «[herramienta] API docs».</p>
+          <span class="task__deliverable"><b>Entregable:</b> Nombre de la API + una acción que podrías automatizar con ella.</span>
+          <a class="task__link" href="modulos/modulo-05-api.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t06"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">06</span><span class="task__title">JSON y tipos de datos</span></div>
+          <p class="task__goal"><b>Tarea:</b> Pide a la IA los datos de 3 empleados ficticios en formato JSON e identifica claves, valores y el tipo de cada uno.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El JSON con notas señalando clave, valor y tipo.</span>
+          <a class="task__link" href="modulos/modulo-06-json.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t07"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">07</span><span class="task__title">Front, Back y RAG</span></div>
+          <p class="task__goal"><b>Tarea:</b> Toma una herramienta que uses y describe qué parte es el «frontend» (lo que ves) y qué haría el «backend». Indica si un asistente sobre tu documentación interna usaría RAG.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Media página explicándolo con tus palabras.</span>
+          <a class="task__link" href="modulos/modulo-07-front-back-rag.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t08"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">08</span><span class="task__title">Bases de datos relacionales</span></div>
+          <p class="task__goal"><b>Tarea:</b> Diseña en una tabla una base de datos simple para un proceso tuyo: define columnas, tipos y cuál es la clave primaria.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El diseño de la tabla (nombre, columnas y clave primaria).</span>
+          <a class="task__link" href="modulos/modulo-08-bases-datos.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 3 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 03</span>
+        <h2>Automatización de procesos</h2>
+        <span class="task-group__done">0/3</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t09"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">09</span><span class="task__title">Identificar y mapear procesos</span></div>
+          <p class="task__goal"><b>Tarea:</b> Elige un proceso repetitivo de tu trabajo y mapéalo: disparador → entradas → pasos → decisiones → salida.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El mapa del proceso (diagrama o lista ordenada).</span>
+          <a class="task__link" href="modulos/modulo-09-mapear-procesos.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t10"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">10</span><span class="task__title">Automatización con Workfront Fusion</span></div>
+          <p class="task__goal"><b>Tarea:</b> Con el proceso que mapeaste, diseña (en papel) su escenario de Fusion: el disparador y los módulos en orden.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Diagrama del escenario (disparador + pasos + decisiones).</span>
+          <a class="task__link" href="modulos/modulo-10-workfront-fusion.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t11"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">11</span><span class="task__title">Creación de páginas web</span></div>
+          <p class="task__goal"><b>Tarea:</b> Pídele a una IA que genere una landing de una sola página para una idea tuya (un servicio, un evento interno) y ábrela en el navegador.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El archivo HTML o una captura de la página.</span>
+          <a class="task__link" href="modulos/modulo-11-creacion-web.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 4 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 04</span>
+        <h2>Agentes de IA</h2>
+        <span class="task-group__done">0/4</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t12"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">12</span><span class="task__title">Anatomía de un agente</span></div>
+          <p class="task__goal"><b>Tarea:</b> Define las 3 piezas de un agente que resuelva una tarea tuya: su prompt de sistema, qué memoria necesita y qué herramientas usaría.</p>
+          <span class="task__deliverable"><b>Entregable:</b> La ficha del agente (prompt de sistema + memoria + herramientas).</span>
+          <a class="task__link" href="modulos/modulo-12-anatomia-agente.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t13"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">13</span><span class="task__title">Tu agente en Telegram</span></div>
+          <p class="task__goal"><b>Tarea:</b> Crea un bot con @BotFather en Telegram y obtén su token (aún sin conectarlo a la IA).</p>
+          <span class="task__deliverable"><b>Entregable:</b> Captura del bot creado (sin compartir el token real).</span>
+          <a class="task__link" href="modulos/modulo-13-agente-telegram.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t14"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">14</span><span class="task__title">Conectar a WhatsApp</span></div>
+          <p class="task__goal"><b>Tarea:</b> Investiga qué proveedor de WhatsApp Business API usarías y anota las reglas clave (ventana de 24 h, plantillas, costes).</p>
+          <span class="task__deliverable"><b>Entregable:</b> Mini-informe de viabilidad (proveedor + reglas + coste estimado).</span>
+          <a class="task__link" href="modulos/modulo-14-whatsapp.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t15"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">15</span><span class="task__title">Agentes autónomos</span></div>
+          <p class="task__goal"><b>Tarea:</b> Escribe los guardrails (límites) para un agente autónomo de un proceso tuyo: límite de pasos, permisos, zonas prohibidas y dónde interviene una persona.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Lista de límites + el punto de revisión humana.</span>
+          <a class="task__link" href="modulos/modulo-15-agentes-autonomos.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 5 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 05</span>
+        <h2>Skills, Cloud y Gobernanza</h2>
+        <span class="task-group__done">0/6</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t16"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">16</span><span class="task__title">Por qué necesitas GitHub</span></div>
+          <p class="task__goal"><b>Tarea:</b> Crea tu cuenta en github.com, activa la verificación en dos pasos (2FA) y crea tu primer repositorio para guardar tus prompts y plantillas.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El enlace de tu primer repositorio.</span>
+          <a class="task__link" href="modulos/modulo-16-github.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t17"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">17</span><span class="task__title">¿Qué es una Skill?</span></div>
+          <p class="task__goal"><b>Tarea:</b> Escribe un <code>SKILL.md</code> para una tarea repetitiva tuya: su <i>name</i>, una <i>description</i> clara de cuándo usarla, y los pasos.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El archivo <code>SKILL.md</code>.</span>
+          <a class="task__link" href="modulos/modulo-17-skills.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t18"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">18</span><span class="task__title">Extensiones y capacidades</span></div>
+          <p class="task__goal"><b>Tarea:</b> Para el agente que diseñaste (tarea 12), lista qué skill, qué herramienta y qué conector (MCP) necesitaría.</p>
+          <span class="task__deliverable"><b>Entregable:</b> La lista de capacidades (skill + herramienta + conector).</span>
+          <a class="task__link" href="modulos/modulo-18-extensiones.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t19"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">19</span><span class="task__title">Claude, Gemini y OpenAI</span></div>
+          <p class="task__goal"><b>Tarea:</b> Haz exactamente la misma tarea en dos chatbots distintos (ej. ChatGPT y Claude) y compara los resultados.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Cuál dio mejor resultado y por qué.</span>
+          <a class="task__link" href="modulos/modulo-19-skills-proveedores.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t20"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">20</span><span class="task__title">¿Qué modelo elegir?</span></div>
+          <p class="task__goal"><b>Tarea:</b> Para 3 tareas distintas de tu trabajo, decide qué tipo de modelo usarías (rápido y barato, o potente) y justifica cada elección.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Tabla con 3 tareas y el modelo elegido para cada una.</span>
+          <a class="task__link" href="modulos/modulo-20-elegir-modelo.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t21"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">21</span><span class="task__title">Privacidad, gobernanza y permisos</span></div>
+          <p class="task__goal"><b>Tarea:</b> Redacta una mini-política de uso de IA para tu equipo: qué datos se pueden usar, cuáles no, y con qué herramientas.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Una página con la política de uso de IA.</span>
+          <a class="task__link" href="modulos/modulo-21-privacidad-gobernanza.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 6 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 06</span>
+        <h2>Web Scraping</h2>
+        <span class="task-group__done">0/3</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t22"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">22</span><span class="task__title">Nociones fundamentales</span></div>
+          <p class="task__goal"><b>Tarea:</b> Elige una web pública de datos que te interese y revisa su <code>robots.txt</code> (añade /robots.txt a la URL) y sus términos.</p>
+          <span class="task__deliverable"><b>Entregable:</b> ¿Se puede scrapear de forma responsable? Sí/No + por qué.</span>
+          <a class="task__link" href="modulos/modulo-22-scraping-fundamentos.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t23"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">23</span><span class="task__title">Scraping avanzado</span></div>
+          <p class="task__goal"><b>Tarea:</b> Identifica una web con contenido dinámico (que carga más al hacer scroll o al filtrar) y anota qué reto tendría scrapearla.</p>
+          <span class="task__deliverable"><b>Entregable:</b> La URL + el reto (dinámico, paginación o bloqueos).</span>
+          <a class="task__link" href="modulos/modulo-23-scraping-avanzado.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t24"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">24</span><span class="task__title">APIs ocultas</span></div>
+          <p class="task__goal"><b>Tarea:</b> Abre una web, pulsa F12 → pestaña «Network» → filtro «Fetch/XHR», interactúa con la página y encuentra una petición que devuelva JSON.</p>
+          <span class="task__deliverable"><b>Entregable:</b> Captura de la petición (la API oculta) con su respuesta JSON.</span>
+          <a class="task__link" href="modulos/modulo-24-apis-ocultas.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 7 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 07</span>
+        <h2>Caso real: la empresa</h2>
+        <span class="task-group__done">0/2</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t25"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">25</span><span class="task__title">Adobe Workfront + IA</span></div>
+          <p class="task__goal"><b>Tarea:</b> Elige un proceso real de Workfront (solicitudes, aprobaciones o reportes) y describe cómo lo automatizarías con Fusion + IA, paso a paso.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El flujo del proceso (disparador, pasos de IA y resultado).</span>
+          <a class="task__link" href="modulos/modulo-25-workfront-ia.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t26"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">26</span><span class="task__title">Proyecto final</span></div>
+          <p class="task__goal"><b>Tarea:</b> Diseña, construye y prueba tu propio agente/automatización para un proceso real, y prepara una demo de 5 minutos para presentarlo.</p>
+          <span class="task__deliverable"><b>Entregable:</b> La automatización funcionando (con datos de prueba) + la presentación.</span>
+          <a class="task__link" href="modulos/modulo-26-proyecto-final.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+    <!-- NIVEL 8 -->
+    <section class="task-group">
+      <div class="task-group__header">
+        <span class="task-group__num">Nivel 08</span>
+        <h2>Casos de uso que generan valor</h2>
+        <span class="task-group__done">0/4</span>
+      </div>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t27"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">27</span><span class="task__title">Crear videos con IA</span></div>
+          <p class="task__goal"><b>Tarea:</b> Genera un video corto (30–60 s) con un avatar de IA (HeyGen o Synthesia) a partir de un guion tuyo de trabajo.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El video generado (o su enlace).</span>
+          <a class="task__link" href="modulos/modulo-27-videos-ia.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t28"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">28</span><span class="task__title">De LinkedIn a portafolio web</span></div>
+          <p class="task__goal"><b>Tarea:</b> Reúne tu información de LinkedIn, pide a una IA que genere el HTML de un portafolio profesional y publícalo (GitHub Pages o Netlify).</p>
+          <span class="task__deliverable"><b>Entregable:</b> El enlace de tu portafolio publicado.</span>
+          <a class="task__link" href="modulos/modulo-28-linkedin-portafolio.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t29"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">29</span><span class="task__title">Automatizaciones prácticas</span></div>
+          <p class="task__goal"><b>Tarea:</b> Elige una de las 3 recetas y adáptala a un proceso tuyo: define su disparador, qué le pides a la IA y la acción final.</p>
+          <span class="task__deliverable"><b>Entregable:</b> La receta adaptada (los 3 pasos con tus datos).</span>
+          <a class="task__link" href="modulos/modulo-29-automatizaciones-recetas.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+
+      <label class="task">
+        <span class="task__toggle"><input type="checkbox" class="task__check" data-task="t30"><span class="task__box"><svg viewBox="0 0 24 24" fill="none"><polyline points="5 12 10 17 19 7"></polyline></svg></span></span>
+        <div class="task__body">
+          <div class="task__head"><span class="task__num">30</span><span class="task__title">Flujos agénticos avanzados</span></div>
+          <p class="task__goal"><b>Tarea:</b> Diseña un flujo multi-agente para una tarea tuya: define 3–4 agentes con su rol y dónde interviene una persona.</p>
+          <span class="task__deliverable"><b>Entregable:</b> El diagrama del flujo (coordinador + agentes + punto de revisión humana).</span>
+          <a class="task__link" href="modulos/modulo-30-flujos-agenticos.html" onclick="event.stopPropagation()">Ver módulo →</a>
+        </div>
+      </label>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> · Academia IA · Cuaderno de tareas</span>
+        <a href="index.html" style="color:var(--accent);">Volver al índice →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

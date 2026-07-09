@@ -1,0 +1,3 @@
+# Configuración local del entorno (no necesaria para el sitio publicado)
+.claude/
+.DS_Store

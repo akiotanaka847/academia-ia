@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 22 · Fundamentos del web scraping — Academia IA</title>
+  <meta name="description" content="Qué es el web scraping, cuándo es legal y ético (robots.txt, términos de servicio, datos personales), cómo funciona y las herramientas básicas para extraer datos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 06 · Web Scraping</a> <span>—</span>
+        <span>Módulo 22</span>
+      </div>
+      <span class="kicker reveal in">Nivel 06 · Web Scraping</span>
+      <h1 class="reveal in">Fundamentos del <em>web scraping</em></h1>
+      <p class="lead reveal in">
+        El web scraping es extraer datos de páginas web de forma automática. Bien usado, ahorra horas de
+        copiar y pegar; mal usado, cruza líneas legales. Empezamos por lo más importante: qué es, cuándo se
+        puede, y cómo funciona.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">30 minutos</span>
+        <span class="mod-meta__item">Nivel avanzado</span>
+        <span class="mod-meta__item">Extraer datos con responsabilidad</span>
+        <span class="mod-meta__item">4 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1400&q=80" alt="Datos extraídos de la web" />
+        <span class="mod-cover__badge">Copiar y pegar, automatizado</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="que-es">
+          <h2><span class="n">01</span> ¿Qué es el web scraping?</h2>
+          <p>
+            <b>Web scraping</b> es usar un programa para <b>leer una página web y quedarse con los datos</b> que
+            te interesan —precios, contactos, artículos— de forma automática y estructurada. Piénsalo como un
+            «copiar y pegar» a gran velocidad, que además ordena lo que recoge en una tabla o en JSON.
+          </p>
+          <p>Aquí reaparece el Nivel 02: como una web es <b>HTML</b>, el scraping consiste en localizar los datos dentro de esa estructura y extraerlos.</p>
+          <div class="callout callout--info reveal">
+            <span class="label">Casos legítimos</span>
+            <h4>Para qué se usa en la empresa</h4>
+            <p>Monitorizar precios de la competencia, reunir estadísticas públicas, recopilar noticias del
+            sector, alimentar una base de datos interna. El objetivo es ahorrar trabajo manual sobre datos que
+            ya son accesibles.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="video">
+          <h2><span class="n">02</span> Web scraping, por dónde empezar</h2>
+          <div class="media-frame">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/EJNJ5_i_zu8" title="Want To Learn Web Scraping? Start HERE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+          <p class="img-caption">Video de John Watson Rooney. Puedes cambiarlo por uno propio editando el atributo src del iframe.</p>
+        </div>
+
+        <div class="content-block reveal" id="legal">
+          <h2><span class="n">03</span> ¿Es legal? Lee esto primero</h2>
+          <p>
+            El scraping no es ilegal en sí, pero <b>cómo</b> y <b>qué</b> extraes marca la diferencia entre una
+            práctica legítima y un problema serio. Antes de scrapear nada, revisa estas cuatro reglas:
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Datos públicos<span class="src">Sí, con cuidado</span></h4><ul><li>Información visible sin login</li><li>No datos privados ni tras registro</li></ul></div>
+            <div class="compare-card"><h4>robots.txt<span class="src">Respétalo</span></h4><ul><li>El archivo que dice qué se puede rastrear</li><li>Míralo antes de empezar</li></ul></div>
+            <div class="compare-card"><h4>Términos de servicio<span class="src">Léelos</span></h4><ul><li>Algunas webs lo prohíben</li><li>Ignorarlos tiene consecuencias</li></ul></div>
+            <div class="compare-card"><h4>Datos personales<span class="src">Zona roja</span></h4><ul><li>Nombres, correos, teléfonos</li><li>Sujeto a RGPD y privacidad</li></ul></div>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">Regla de oro</span>
+            <h4>Ante la duda, no lo hagas (o consúltalo)</h4>
+            <p>No sobrecargues los servidores de nadie, no extraigas datos personales sin base legal, y respeta
+            lo que la web pide en su <code>robots.txt</code> y sus términos. Un scraping agresivo o de datos
+            protegidos puede ser una infracción. Ante casos sensibles, consulta con el área legal.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="como">
+          <h2><span class="n">04</span> Cómo funciona, en tres pasos</h2>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">scraping-basico.txt</span></div>
+            <pre><code><span class="tok-key">1. PEDIR</span>       Descargar el HTML de la página
+<span class="tok-key">2. LOCALIZAR</span>  Encontrar el dato dentro del HTML
+             (ej. el precio está en &lt;span class="precio"&gt;)
+<span class="tok-key">3. EXTRAER</span>    Guardar el valor en una tabla o JSON
+
+<span class="tok-com"># Repetir para cada página o producto</span></code></pre>
+          </div>
+          <p>Para hacerlo tienes tres caminos, de menos a más técnico:</p>
+          <ul class="bullets">
+            <li><b>Sin código</b>: extensiones y apps (Instant Data Scraper, Octoparse) que señalas y extraen.</li>
+            <li><b>Con IA</b>: pegas el contenido o la URL y pides a la IA que estructure los datos.</li>
+            <li><b>Con código</b>: Python (con librerías como BeautifulSoup) para casos a medida y a escala.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="cuando">
+          <h2><span class="n">05</span> ¿Scraping o API?</h2>
+          <p>
+            Antes de scrapear, pregunta si la web ofrece una <b>API</b> (Nivel 02). Si existe, casi siempre es
+            mejor: es la vía oficial, más estable y pensada para eso. El scraping es el plan para cuando <b>no
+            hay API</b> disponible.
+          </p>
+          <div class="callout callout--tip reveal">
+            <span class="label">Orden recomendado</span>
+            <h4>1) API oficial → 2) API oculta → 3) scraping de HTML</h4>
+            <p>Primero busca una API pública. Si no hay, en el Módulo 24 verás cómo descubrir «APIs ocultas».
+            Y solo si nada de eso existe, scrapeas el HTML directamente. De lo más limpio a lo más frágil.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Qué debes revisar antes de scrapear una web?</p>
+            <button class="quiz__opt" data-correct="true">Su robots.txt, sus términos de servicio y si contiene datos personales.</button>
+            <button class="quiz__opt" data-correct="false">Nada; todo lo que está en internet es de uso libre.</button>
+            <button class="quiz__opt" data-correct="false">Solo el color de la página.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Datos públicos, robots.txt, términos y privacidad: las cuatro reglas antes de empezar.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. Si una web ofrece una API oficial, ¿qué conviene hacer?</p>
+            <button class="quiz__opt" data-correct="true">Usar la API: es la vía oficial, más estable y pensada para obtener datos.</button>
+            <button class="quiz__opt" data-correct="false">Ignorarla y scrapear el HTML igualmente.</button>
+            <button class="quiz__opt" data-correct="false">Las APIs no sirven para obtener datos.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Primero la API oficial; el scraping es el plan cuando no hay una disponible.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-21-privacidad-gobernanza.html"><span>← Anterior</span><b>21 · Privacidad y gobernanza</b></a>
+          <a href="modulo-23-scraping-avanzado.html" class="next"><span>Siguiente →</span><b>23 · Scraping avanzado</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#que-es">¿Qué es el scraping?</a>
+          <a href="#video">Video</a>
+          <a href="#legal">¿Es legal?</a>
+          <a href="#como">Cómo funciona</a>
+          <a href="#cuando">¿Scraping o API?</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 22</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
