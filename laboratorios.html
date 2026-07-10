@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorios interactivos · Academia IA</title>
+  <meta name="description" content="Laboratorios interactivos de la Academia IA: prueba una inyección SQL en un formulario ficticio y aprende a prevenirla, y estima π con una simulación de Monte Carlo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html#ruta">Temario</a></li>
+        <li><a href="tareas.html">Tareas</a></li>
+        <li><a href="laboratorios.html">Laboratorios</a></li>
+        <li><a href="index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="labs-intro">
+    <div class="container">
+      <span class="kicker">Aprender haciendo</span>
+      <h1>Laboratorios <em>interactivos</em></h1>
+      <p class="lead">
+        Aquí no solo lees: <b>experimentas</b>. Mira el video corto de cada tema y luego prueba tú mismo en el
+        simulador. Cuando lo hagas bien, aparece la insignia de <b>lección aprendida</b>. Todo corre en tu
+        navegador, sin riesgo.
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- LAB 1 · SQL INJECTION -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 01</span>
+        <h2>¿Qué es una inyección SQL?</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Una <b>inyección SQL</b> ocurre cuando una web mete <i>texto del usuario</i> directamente dentro de una
+          consulta a la base de datos. Si no se protege, un atacante puede escribir código que <b>cambia el
+          significado</b> de la consulta y, por ejemplo, entrar sin contraseña. Míralo en 3 minutos y luego pruébalo:
+        </p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/O9Yye537soM" title="¿Qué son las inyecciones SQL?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <h3>Pruébalo tú: rompe el login</h3>
+        <p>Cambia entre la versión <b>vulnerable</b> y la <b>segura</b>. En la vulnerable, escribe un ataque en «Usuario» (o toca un ejemplo) y mira cómo entras sin credenciales. Luego, en la segura, comprueba que el mismo ataque ya no funciona.</p>
+
+        <div class="sqlab">
+          <div class="sqlab__modes">
+            <button class="sqlab__mode-btn active" data-mode="vulnerable">Versión vulnerable</button>
+            <button class="sqlab__mode-btn" data-mode="segura">Versión segura</button>
+          </div>
+          <div class="sqlab__grid">
+            <div class="sqlab__form">
+              <div class="sqlab__form-title">🔐 Iniciar sesión (ficticio)</div>
+              <div class="sqlab__field">
+                <label>Usuario</label>
+                <input type="text" data-sql="user" placeholder="admin" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="sqlab__field">
+                <label>Contraseña</label>
+                <input type="text" data-sql="pass" placeholder="admin123" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="sqlab__hints">
+                <span style="font-size:.8rem;color:var(--text-dim);width:100%;">Ataques de ejemplo (toca para probar):</span>
+                <button class="sqlab__chip" data-fill="' OR '1'='1">' OR '1'='1</button>
+                <button class="sqlab__chip" data-fill="admin' --">admin' --</button>
+                <button class="sqlab__chip" data-fill="' OR 1=1 --">' OR 1=1 --</button>
+              </div>
+            </div>
+            <div class="sqlab__panel">
+              <div style="font-size:.8rem;color:var(--text-dim);font-weight:600;">Consulta que se ejecuta en la base de datos:</div>
+              <pre class="sqlab__query"></pre>
+              <div class="sqlab__result"></div>
+            </div>
+          </div>
+
+          <div class="sqlab__lesson callout callout--tip" style="margin-top:24px;">
+            <span class="label">Lección aprendida · cómo se previene</span>
+            <h4>Nunca concatenes texto del usuario en la consulta</h4>
+            <p>La solución son las <b>consultas parametrizadas</b> (con <code>?</code>): la base de datos recibe el
+            texto del usuario como un <b>dato</b>, no como código, así que aunque escriban <code>' OR '1'='1</code>
+            se busca literalmente un usuario con ese nombre —y no existe—. Complétalo con <b>validación de entradas</b>
+            y <b>permisos mínimos</b> en la base de datos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 2 · MONTE CARLO -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 02</span>
+        <h2>Monte Carlo: estimar π con azar</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          El <b>método de Monte Carlo</b> resuelve problemas… ¡lanzando dados! Usa muchos números aleatorios para
+          estimar un resultado. El ejemplo clásico: si lanzas puntos al azar dentro de un cuadrado con un círculo
+          dibujado, la proporción que cae dentro del círculo te permite estimar <b>π</b>. Míralo y pruébalo:
+        </p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/PLURfYr-rdU" title="Monte Carlo para estimar Pi" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <h3>Lánzalo tú: ¿cuánto vale π?</h3>
+        <p>Cada punto azul cae dentro del círculo; cada punto rojo, fuera. Lanza miles y observa cómo el cálculo <b>4 × (dentro ÷ total)</b> se acerca al valor real de π (3.1416…).</p>
+
+        <div class="mclab">
+          <div class="mclab__grid">
+            <div class="mclab__canvas-wrap">
+              <canvas class="mclab__canvas" width="360" height="360"></canvas>
+            </div>
+            <div class="mclab__side">
+              <div class="mclab__stats">
+                <div class="mclab__stat pi"><span>π estimado</span><b data-mc="pi">—</b></div>
+                <div class="mclab__stat"><span>Error</span><b data-mc="err">—</b></div>
+                <div class="mclab__stat"><span>Dentro</span><b data-mc="in">0</b></div>
+                <div class="mclab__stat"><span>Total</span><b data-mc="total">0</b></div>
+              </div>
+              <div class="mclab__formula">π ≈ 4 × (dentro ÷ total) &nbsp;→&nbsp; real = <b>3.14159…</b></div>
+              <div class="mclab__controls">
+                <button class="lab-btn" data-mc-add="1000">Lanzar 1000 puntos</button>
+                <button class="lab-btn lab-btn--ghost" data-mc-add="100">+100</button>
+                <button class="lab-btn lab-btn--ghost" data-mc-reset>Reiniciar</button>
+              </div>
+              <p style="font-size:.88rem;margin:0;">Cuantos más puntos lances, más se acerca la estimación a π. Eso es Monte Carlo: <b>el azar, a gran escala, da respuestas precisas</b>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="callout callout--info" style="margin-bottom:40px;">
+      <span class="label">¿Y otros temas?</span>
+      <h4>Estos son los dos primeros laboratorios</h4>
+      <p>El mismo formato (video + simulador + insignia) sirve para más temas: predecir el clima con Monte Carlo,
+      probar prompts, validar formularios… Dime cuáles quieres y los añadimos.</p>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> · Academia IA · Laboratorios interactivos</span>
+        <a href="index.html" style="color:var(--accent);">Volver al índice →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/labs.js"></script>
+</body>
+</html>
