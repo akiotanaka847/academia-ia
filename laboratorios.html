@@ -153,11 +153,125 @@
       </div>
     </section>
 
+    <!-- LAB 3 · JSON -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 03</span>
+        <h2>JSON: ¿de qué tipo es cada dato?</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>Recuerda los tipos de datos (Módulo 06). Abajo tienes un JSON real; para cada valor, elige su tipo. Cuando aciertes todos, ¡lección aprendida!</p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/iiADhChRriM" title="Aprende JSON" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <h3>Clasifica cada valor</h3>
+        <div class="jsonlab">
+          <div class="jsonlab__row" data-answer="string"><span class="jsonlab__code"><span class="k">"nombre"</span>: <span class="v">"Ana Torres"</span></span><select class="jsonlab__select"><option value="">Elige tipo…</option><option value="string">Texto</option><option value="number">Número</option><option value="boolean">Booleano</option><option value="array">Lista</option><option value="object">Objeto</option><option value="null">Nulo</option></select></div>
+          <div class="jsonlab__row" data-answer="number"><span class="jsonlab__code"><span class="k">"edad"</span>: <span class="v">34</span></span><select class="jsonlab__select"><option value="">Elige tipo…</option><option value="string">Texto</option><option value="number">Número</option><option value="boolean">Booleano</option><option value="array">Lista</option><option value="object">Objeto</option><option value="null">Nulo</option></select></div>
+          <div class="jsonlab__row" data-answer="boolean"><span class="jsonlab__code"><span class="k">"activo"</span>: <span class="v">true</span></span><select class="jsonlab__select"><option value="">Elige tipo…</option><option value="string">Texto</option><option value="number">Número</option><option value="boolean">Booleano</option><option value="array">Lista</option><option value="object">Objeto</option><option value="null">Nulo</option></select></div>
+          <div class="jsonlab__row" data-answer="array"><span class="jsonlab__code"><span class="k">"etiquetas"</span>: <span class="v">["vip", "activo"]</span></span><select class="jsonlab__select"><option value="">Elige tipo…</option><option value="string">Texto</option><option value="number">Número</option><option value="boolean">Booleano</option><option value="array">Lista</option><option value="object">Objeto</option><option value="null">Nulo</option></select></div>
+          <div class="jsonlab__row" data-answer="object"><span class="jsonlab__code"><span class="k">"jefe"</span>: <span class="v">{ "nombre": "Luis" }</span></span><select class="jsonlab__select"><option value="">Elige tipo…</option><option value="string">Texto</option><option value="number">Número</option><option value="boolean">Booleano</option><option value="array">Lista</option><option value="object">Objeto</option><option value="null">Nulo</option></select></div>
+          <div class="jsonlab__row" data-answer="null"><span class="jsonlab__code"><span class="k">"nota"</span>: <span class="v">null</span></span><select class="jsonlab__select"><option value="">Elige tipo…</option><option value="string">Texto</option><option value="number">Número</option><option value="boolean">Booleano</option><option value="array">Lista</option><option value="object">Objeto</option><option value="null">Nulo</option></select></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 4 · Prompt builder -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 04</span>
+        <h2>Construye un prompt efectivo</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>Un buen prompt tiene 4 piezas (Módulo 03): <b>rol, tarea, contexto y formato</b>. Rellénalas y observa cómo se arma el prompt y sube el medidor de calidad.</p>
+        <div class="promptlab">
+          <div class="promptlab__grid">
+            <div class="promptlab__fields">
+              <div class="sqlab__field"><label>1 · Rol («Actúa como…»)</label><textarea data-piece="rol" placeholder="Actúa como responsable de atención al cliente."></textarea></div>
+              <div class="sqlab__field"><label>2 · Tarea (el verbo claro)</label><textarea data-piece="tarea" placeholder="Redacta un correo de disculpa por un envío retrasado."></textarea></div>
+              <div class="sqlab__field"><label>3 · Contexto (lo que solo tú sabes)</label><textarea data-piece="contexto" placeholder="El cliente es VIP y ya se quejó una vez."></textarea></div>
+              <div class="sqlab__field"><label>4 · Formato (longitud, tono, estructura)</label><textarea data-piece="formato" placeholder="Máx. 120 palabras, tono cálido, ofrece 10% de descuento."></textarea></div>
+            </div>
+            <div>
+              <div style="font-size:.8rem;color:var(--text-dim);font-weight:600;margin-bottom:8px;">Prompt ensamblado:</div>
+              <div class="promptlab__preview"></div>
+              <div class="promptlab__meter"><i></i></div>
+              <div class="promptlab__meter-label"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 5 · API simulator -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 05</span>
+        <h2>Simula una petición a una API</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>Elige un método y un endpoint, pulsa <b>Enviar</b> y mira la petición y la respuesta en JSON. Prueba un endpoint válido (<b>200</b>) y uno que no existe (<b>404</b>) para ver ambos.</p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/s7wmiS2mSXY" title="¿Qué es una API?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <h3>Haz tu petición</h3>
+        <div class="apilab">
+          <div class="apilab__bar">
+            <select class="apilab__select" data-api="method"><option>GET</option><option>POST</option></select>
+            <select class="apilab__select" data-api="endpoint">
+              <option value="/clima/madrid">/clima/madrid</option>
+              <option value="/usuarios/7">/usuarios/7</option>
+              <option value="/productos">/productos</option>
+              <option value="/pedidos/500">/pedidos/500 (no existe)</option>
+            </select>
+            <button class="lab-btn" data-api="send">Enviar →</button>
+          </div>
+          <div class="apilab__io"><span style="color:#8b949e;">// Pulsa «Enviar» para ver la respuesta</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 6 · Monte Carlo clima -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 06</span>
+        <h2>Monte Carlo: ¿lloverá en tu viaje?</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>Igual que estimamos π (Lab 02), Monte Carlo también <b>predice probabilidades del mundo real</b>. Ajusta la probabilidad diaria de lluvia, los días de viaje y cuántos quieres que llueva, y simula <b>10 000 viajes</b> de golpe.</p>
+        <div class="wxlab">
+          <div class="wxlab__grid">
+            <div>
+              <div class="wxlab__controls">
+                <div class="wxlab__ctrl"><label>Prob. de lluvia por día <b data-wx="probVal">30%</b></label><input type="range" min="0" max="100" value="30" data-wx="prob" /></div>
+                <div class="wxlab__ctrl"><label>Días de viaje <b data-wx="daysVal">5</b></label><input type="range" min="1" max="14" value="5" data-wx="days" /></div>
+                <div class="wxlab__ctrl"><label>Que llueva al menos <b data-wx="threshVal">2</b> días</label><input type="range" min="0" max="5" value="2" data-wx="thresh" /></div>
+              </div>
+              <button class="lab-btn" data-wx="run">Simular 10 000 viajes</button>
+            </div>
+            <div>
+              <div class="wxlab__result"><span class="big" data-wx="result">—</span><span data-wx="desc">ajusta los valores y simula</span></div>
+              <canvas class="wxlab__canvas" width="380" height="180"></canvas>
+              <p style="font-size:.82rem;color:var(--text-dim);margin:10px 0 0;">Cada barra = cuántos de los 10 000 viajes tuvieron ese número de días de lluvia. Las azules cumplen tu condición.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Estos son los dos primeros laboratorios</h4>
-      <p>El mismo formato (video + simulador + insignia) sirve para más temas: predecir el clima con Monte Carlo,
-      probar prompts, validar formularios… Dime cuáles quieres y los añadimos.</p>
+      <h4>Seis laboratorios y sumando</h4>
+      <p>El mismo formato (video + simulador + insignia) sirve para más temas: validar formularios, comparar modelos,
+      detectar phishing, un mini-scraper… Dime cuáles quieres y los añadimos.</p>
     </div>
 
   </main>

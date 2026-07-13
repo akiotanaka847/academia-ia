@@ -420,8 +420,48 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .mclab__formula { font-family: var(--mono); font-size: .82rem; color: var(--text-soft); background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; }
 .mclab__formula b { color: var(--accent); }
 
+/* --- Lab JSON: identificar tipos --- */
+.jsonlab__row { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-alt); margin-bottom: 10px; transition: all .2s; }
+.jsonlab__row.correct { border-color: var(--ok); background: #f0fdf4; }
+.jsonlab__row.wrong { border-color: var(--err); background: #fef2f2; }
+.jsonlab__code { font-family: var(--mono); font-size: .9rem; color: var(--ink); }
+.jsonlab__code .k { color: var(--accent-hover); }
+.jsonlab__code .v { color: var(--text-soft); }
+.jsonlab__select { font-family: var(--font); padding: 8px 12px; border: 1px solid var(--border-2); border-radius: 8px; background: var(--surface); color: var(--ink); font-size: .86rem; cursor: pointer; }
+
+/* --- Lab Prompt builder --- */
+.promptlab__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.promptlab__fields textarea { width: 100%; padding: 10px 13px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); font-family: var(--font); font-size: .92rem; background: var(--surface); color: var(--ink); resize: vertical; min-height: 52px; }
+.promptlab__fields textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.promptlab__preview { background: #0d1117; border: 1px solid #1f2530; border-radius: var(--radius-sm); padding: 16px; font-family: var(--mono); font-size: .82rem; line-height: 1.7; color: #c9d1d9; white-space: pre-wrap; word-break: break-word; min-height: 150px; }
+.promptlab__preview .lbl { color: #79c0ff; }
+.promptlab__preview .empty { color: #6b7280; }
+.promptlab__meter { height: 10px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; margin: 16px 0 8px; }
+.promptlab__meter i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .35s ease; }
+.promptlab__meter-label { font-size: .86rem; color: var(--text-soft); font-weight: 600; }
+
+/* --- Lab API simulator --- */
+.apilab__bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.apilab__select { font-family: var(--mono); padding: 10px 12px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font-size: .86rem; }
+.apilab__io { background: #0d1117; border: 1px solid #1f2530; border-radius: var(--radius-sm); padding: 16px; font-family: var(--mono); font-size: .82rem; line-height: 1.7; color: #c9d1d9; white-space: pre-wrap; word-break: break-word; margin-top: 12px; }
+.apilab__io .kw { color: #79c0ff; } .apilab__io .str { color: #7ee787; } .apilab__io .num { color: #ffa657; } .apilab__io .cmt { color: #8b949e; }
+.apilab__status { display: inline-block; padding: 3px 11px; border-radius: 999px; font-weight: 700; font-size: .78rem; margin-bottom: 6px; }
+.apilab__status.ok { background: #0f2a1a; color: #7ee787; }
+.apilab__status.err { background: #3a1a1a; color: #ff7b72; }
+
+/* --- Lab Monte Carlo clima --- */
+.wxlab__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+.wxlab__controls { display: grid; gap: 18px; margin-bottom: 18px; }
+.wxlab__ctrl label { display: flex; justify-content: space-between; font-size: .88rem; font-weight: 600; margin-bottom: 7px; }
+.wxlab__ctrl label b { color: var(--accent); font-family: var(--mono); }
+.wxlab__ctrl input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+.wxlab__result { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--bg-alt); text-align: center; }
+.wxlab__result .big { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--accent); font-family: var(--mono); display: block; }
+.wxlab__result span { font-size: .88rem; color: var(--text-soft); }
+.wxlab__canvas { display: block; width: 100%; max-width: 380px; height: 180px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); background: var(--surface); margin-top: 14px; }
+
 @media (max-width: 720px) {
-  .sqlab__grid { grid-template-columns: 1fr; }
+  .sqlab__grid, .promptlab__grid, .wxlab__grid { grid-template-columns: 1fr; }
   .mclab__grid { grid-template-columns: 1fr; justify-items: center; }
   .mclab__stats { width: 100%; }
 }

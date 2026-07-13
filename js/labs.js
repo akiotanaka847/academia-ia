@@ -203,3 +203,172 @@
 
   reset();
 })();
+
+/* ---------------------------------------------------------------------
+   LAB 3 · JSON — identifica el tipo de cada dato
+--------------------------------------------------------------------- */
+(function jsonTypesLab() {
+  const lab = document.querySelector(".jsonlab");
+  if (!lab) return;
+  const rows = lab.querySelectorAll(".jsonlab__row");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+
+  function check() {
+    let allCorrect = rows.length > 0;
+    rows.forEach((r) => {
+      const sel = r.querySelector("select");
+      if (!sel.value) { r.classList.remove("correct", "wrong"); allCorrect = false; return; }
+      const ok = sel.value === r.dataset.answer;
+      r.classList.toggle("correct", ok);
+      r.classList.toggle("wrong", !ok);
+      if (!ok) allCorrect = false;
+    });
+    if (allCorrect && passBadge) passBadge.classList.add("show");
+  }
+  rows.forEach((r) => r.querySelector("select").addEventListener("change", check));
+})();
+
+/* ---------------------------------------------------------------------
+   LAB 4 · Construye un prompt efectivo (rol + tarea + contexto + formato)
+--------------------------------------------------------------------- */
+(function promptBuilderLab() {
+  const lab = document.querySelector(".promptlab");
+  if (!lab) return;
+  const fields = lab.querySelectorAll("textarea[data-piece]");
+  const preview = lab.querySelector(".promptlab__preview");
+  const meterFill = lab.querySelector(".promptlab__meter i");
+  const meterLabel = lab.querySelector(".promptlab__meter-label");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+  const NAMES = { rol: "Rol", tarea: "Tarea", contexto: "Contexto", formato: "Formato" };
+
+  function render() {
+    preview.textContent = "";
+    let filled = 0;
+    fields.forEach((f) => {
+      const val = f.value.trim();
+      const line = document.createElement("div");
+      const lbl = document.createElement("span");
+      lbl.className = "lbl";
+      lbl.textContent = "[" + NAMES[f.dataset.piece] + "] ";
+      line.appendChild(lbl);
+      if (val.length >= 8) {
+        filled++;
+        line.appendChild(document.createTextNode(val));
+      } else {
+        const e = document.createElement("span");
+        e.className = "empty";
+        e.textContent = "(añade " + NAMES[f.dataset.piece].toLowerCase() + "…)";
+        line.appendChild(e);
+      }
+      preview.appendChild(line);
+    });
+    const pct = Math.round((filled / fields.length) * 100);
+    meterFill.style.width = pct + "%";
+    meterLabel.textContent =
+      filled + " de " + fields.length + " piezas · " +
+      (filled === fields.length ? "¡Prompt completo!" : "sigue construyendo");
+    if (filled === fields.length && passBadge) passBadge.classList.add("show");
+  }
+  fields.forEach((f) => f.addEventListener("input", render));
+  render();
+})();
+
+/* ---------------------------------------------------------------------
+   LAB 5 · Simula una petición a una API (request → response JSON)
+--------------------------------------------------------------------- */
+(function apiSimLab() {
+  const lab = document.querySelector(".apilab");
+  if (!lab) return;
+  const methodSel = lab.querySelector('[data-api="method"]');
+  const endSel = lab.querySelector('[data-api="endpoint"]');
+  const sendBtn = lab.querySelector('[data-api="send"]');
+  const io = lab.querySelector(".apilab__io");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+  let saw200 = false, saw404 = false;
+
+  const DB = {
+    "/clima/madrid": { ciudad: "Madrid", temperatura: 28, estado: "soleado" },
+    "/usuarios/7": { id: 7, nombre: "Ana Torres", rol: "editor" },
+    "/productos": [{ id: 1, nombre: "Café" }, { id: 2, nombre: "Té" }],
+  };
+  const span = (cls, t) => { const s = document.createElement("span"); if (cls) s.className = cls; s.textContent = t; return s; };
+
+  function send() {
+    const m = methodSel.value, ep = endSel.value;
+    const found = Object.prototype.hasOwnProperty.call(DB, ep);
+    io.textContent = "";
+
+    const status = document.createElement("div");
+    status.className = "apilab__status " + (found ? "ok" : "err");
+    status.textContent = found ? "200 OK" : "404 Not Found";
+    io.appendChild(status);
+
+    const body = document.createElement("div");
+    body.appendChild(span("cmt", "// Petición\n"));
+    body.appendChild(span("kw", m + " "));
+    body.appendChild(document.createTextNode("https://api.demo.com" + ep + "\n\n"));
+    body.appendChild(span("cmt", "// Respuesta\n"));
+    const data = found ? DB[ep] : { error: "Recurso no encontrado" };
+    body.appendChild(document.createTextNode(JSON.stringify(data, null, 2)));
+    io.appendChild(body);
+
+    if (found) saw200 = true; else saw404 = true;
+    if (saw200 && saw404 && passBadge) passBadge.classList.add("show");
+  }
+  sendBtn.addEventListener("click", send);
+})();
+
+/* ---------------------------------------------------------------------
+   LAB 6 · Monte Carlo — ¿lloverá en tu viaje? (predicción por simulación)
+--------------------------------------------------------------------- */
+(function weatherMonteCarloLab() {
+  const lab = document.querySelector(".wxlab");
+  if (!lab) return;
+  const q = (s) => lab.querySelector(s);
+  const probS = q('[data-wx="prob"]'), daysS = q('[data-wx="days"]'), thrS = q('[data-wx="thresh"]');
+  const probV = q('[data-wx="probVal"]'), daysV = q('[data-wx="daysVal"]'), thrV = q('[data-wx="threshVal"]');
+  const runBtn = q('[data-wx="run"]'), bigEl = q('[data-wx="result"]'), descEl = q('[data-wx="desc"]');
+  const canvas = q("canvas"), ctx = canvas.getContext("2d");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+
+  function syncLabels() {
+    probV.textContent = probS.value + "%";
+    daysV.textContent = daysS.value;
+    thrS.max = daysS.value;
+    if (+thrS.value > +daysS.value) thrS.value = daysS.value;
+    thrV.textContent = thrS.value;
+  }
+
+  function drawDist(dist, thr) {
+    const W = canvas.width, H = canvas.height, pad = 8, n = dist.length;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+    const max = Math.max.apply(null, dist) || 1;
+    const bw = (W - pad * 2) / n;
+    dist.forEach((c, i) => {
+      const h = (c / max) * (H - pad * 2);
+      ctx.fillStyle = i >= thr ? "#2563eb" : "#cbd5e1";
+      ctx.fillRect(pad + i * bw + 2, H - pad - h, bw - 4, h);
+    });
+  }
+
+  function run() {
+    const p = +probS.value / 100, days = +daysS.value, thr = +thrS.value, N = 10000;
+    const dist = new Array(days + 1).fill(0);
+    let success = 0;
+    for (let i = 0; i < N; i++) {
+      let rainy = 0;
+      for (let d = 0; d < days; d++) if (Math.random() < p) rainy++;
+      dist[rainy]++;
+      if (rainy >= thr) success++;
+    }
+    bigEl.textContent = (success / N * 100).toFixed(1) + "%";
+    descEl.textContent = "de que llueva al menos " + thr + " de " + days + " días";
+    drawDist(dist, thr);
+    if (passBadge) passBadge.classList.add("show");
+  }
+
+  [probS, daysS, thrS].forEach((s) => s.addEventListener("input", syncLabels));
+  runBtn.addEventListener("click", run);
+  syncLabels();
+})();
