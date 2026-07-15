@@ -372,3 +372,79 @@
   runBtn.addEventListener("click", run);
   syncLabels();
 })();
+
+/* ---------------------------------------------------------------------
+   LAB 7 y 8 · Card quiz genérico (Detectar phishing / Verificar la IA)
+   Cada tarjeta tiene data-answer; el usuario elige y se revela el veredicto.
+--------------------------------------------------------------------- */
+document.querySelectorAll(".cardquiz").forEach((quiz) => {
+  const cards = quiz.querySelectorAll(".cardquiz__card");
+  const scoreEl = quiz.querySelector("[data-cq-score]");
+  const passBadge = quiz.closest(".lab").querySelector(".lab__pass");
+  let answered = 0, correct = 0;
+
+  cards.forEach((card) => {
+    card.querySelectorAll(".cardquiz__btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (card.dataset.done) return;
+        card.dataset.done = "1";
+        const ok = btn.dataset.choice === card.dataset.answer;
+        card.classList.add(ok ? "correct" : "wrong");
+        const verdict = card.querySelector(".cardquiz__verdict");
+        if (verdict) verdict.classList.add("show");
+        card.querySelectorAll(".cardquiz__btn").forEach((b) => (b.disabled = true));
+        answered++;
+        if (ok) correct++;
+        if (scoreEl) scoreEl.textContent = correct + "/" + cards.length;
+        if (answered === cards.length && correct === cards.length && passBadge) {
+          passBadge.classList.add("show");
+        }
+      });
+    });
+  });
+});
+
+/* ---------------------------------------------------------------------
+   LAB 9 · Evaluador de prompts — detecta las 4 piezas en un prompt libre
+--------------------------------------------------------------------- */
+(function promptEvalLab() {
+  const lab = document.querySelector(".promptevallab");
+  if (!lab) return;
+  const ta = lab.querySelector("textarea");
+  const items = {
+    rol: lab.querySelector('[data-eval="rol"]'),
+    tarea: lab.querySelector('[data-eval="tarea"]'),
+    contexto: lab.querySelector('[data-eval="contexto"]'),
+    formato: lab.querySelector('[data-eval="formato"]'),
+  };
+  const scoreEl = lab.querySelector("[data-eval-score]");
+  const feedbackEl = lab.querySelector(".promptevallab__feedback");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+
+  function evaluate() {
+    const t = ta.value.trim();
+    const s = t.toLowerCase();
+    const map = {
+      rol: /(act[uú]a como|eres un|eres una|como experto|en el rol de|haz de|comp[oó]rtate como)/.test(s),
+      tarea: /\b(redacta|resume|analiza|crea|escribe|traduce|genera|lista|explica|compara|corrige|clasifica|dise[nñ]a|propon|propón|calcula|ordena|extrae|convierte)\b/.test(s),
+      contexto: t.length >= 60,
+      formato: /(\d+\s*palabras|m[aá]x|tono|formato|lista|tabla|vi[nñ]etas|puntos|p[aá]rrafos|%|idioma|json|correo|breve|conciso)/.test(s),
+    };
+    let met = 0;
+    Object.keys(items).forEach((k) => {
+      if (items[k]) items[k].classList.toggle("met", map[k]);
+      if (map[k]) met++;
+    });
+    if (scoreEl) scoreEl.textContent = Math.round((met / 4) * 100);
+    if (feedbackEl) {
+      feedbackEl.textContent = !t.length
+        ? "Escribe un prompt para evaluarlo."
+        : met === 4
+        ? "¡Excelente! Tu prompt tiene las 4 piezas."
+        : "Te faltan piezas — revisa la lista.";
+    }
+    if (met === 4 && passBadge) passBadge.classList.add("show");
+  }
+  ta.addEventListener("input", evaluate);
+  evaluate();
+})();

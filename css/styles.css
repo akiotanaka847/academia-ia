@@ -460,8 +460,45 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .wxlab__result span { font-size: .88rem; color: var(--text-soft); }
 .wxlab__canvas { display: block; width: 100%; max-width: 380px; height: 180px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); background: var(--surface); margin-top: 14px; }
 
+/* --- Card quiz (phishing / verificar IA) --- */
+.cardquiz__score { font-weight: 700; font-size: .92rem; margin-bottom: 16px; }
+.cardquiz__score b { color: var(--accent); }
+.cardquiz__card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; margin-bottom: 14px; transition: border-color .2s; }
+.cardquiz__card.correct { border-color: var(--ok); }
+.cardquiz__card.wrong { border-color: var(--err); }
+.cardquiz__mail { padding: 16px 18px; }
+.cardquiz__from { font-size: .8rem; color: var(--text-dim); font-family: var(--mono); margin-bottom: 5px; word-break: break-all; }
+.cardquiz__subject { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+.cardquiz__body { font-size: .92rem; color: var(--text-soft); }
+.cardquiz__btns { display: flex; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--border); background: var(--bg-alt); flex-wrap: wrap; }
+.cardquiz__btn { padding: 9px 16px; border: 1px solid var(--border-2); border-radius: 999px; background: var(--surface); font-family: var(--font); font-weight: 600; font-size: .88rem; cursor: pointer; transition: all .15s; }
+.cardquiz__btn:hover:not(:disabled) { border-color: var(--ink); }
+.cardquiz__btn:disabled { opacity: .5; cursor: default; }
+.cardquiz__verdict { display: none; padding: 14px 18px; font-size: .9rem; border-top: 1px solid var(--border); }
+.cardquiz__verdict.show { display: block; }
+.cardquiz__card.correct .cardquiz__verdict { background: #f0fdf4; color: #15803d; }
+.cardquiz__card.wrong .cardquiz__verdict { background: #fef2f2; color: #b91c1c; }
+.cardquiz__verdict b { font-weight: 800; }
+
+/* --- Evaluador de prompt --- */
+.promptevallab__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.promptevallab textarea { width: 100%; min-height: 170px; padding: 13px 15px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); font-family: var(--font); font-size: .95rem; background: var(--surface); color: var(--ink); resize: vertical; }
+.promptevallab textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.promptevallab__score { text-align: center; margin-bottom: 14px; }
+.promptevallab__score b { font-size: 2.3rem; font-weight: 800; color: var(--accent); font-family: var(--mono); }
+.promptevallab__score span { font-size: .85rem; color: var(--text-dim); display: block; }
+.evalcheck { margin: 0; }
+.evalcheck li { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; color: var(--text-dim); font-size: .95rem; border-bottom: 1px solid var(--border); transition: color .2s; }
+.evalcheck li:last-child { border-bottom: 0; }
+.evalcheck li .ic { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border-2); flex-shrink: 0; display: grid; place-items: center; font-size: 12px; color: transparent; margin-top: 1px; transition: all .2s; }
+.evalcheck li.met { color: var(--ink); }
+.evalcheck li.met .ic { background: var(--ok); border-color: var(--ok); color: #fff; }
+.evalcheck li b { font-weight: 700; }
+.evalcheck li .hint { display: block; font-size: .82rem; color: var(--text-dim); font-weight: 400; }
+.promptevallab__feedback { font-size: .9rem; color: var(--text-soft); font-weight: 600; text-align: center; margin-top: 12px; }
+
 @media (max-width: 720px) {
-  .sqlab__grid, .promptlab__grid, .wxlab__grid { grid-template-columns: 1fr; }
+  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid { grid-template-columns: 1fr; }
   .mclab__grid { grid-template-columns: 1fr; justify-items: center; }
   .mclab__stats { width: 100%; }
 }
