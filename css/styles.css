@@ -497,8 +497,40 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .evalcheck li .hint { display: block; font-size: .82rem; color: var(--text-dim); font-weight: 400; }
 .promptevallab__feedback { font-size: .9rem; color: var(--text-soft); font-weight: 600; text-align: center; margin-top: 12px; }
 
+/* --- Constructor de flujos (Fusion / n8n / Make / Zapier / agentes) --- */
+.flowlab__grid { display: grid; grid-template-columns: 250px 1fr; gap: 24px; align-items: start; }
+.flowlab__palette-title { font-size: .74rem; color: var(--text-dim); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+.flowlab__palette { display: flex; flex-direction: column; gap: 8px; }
+.flowlab__pal-btn { display: flex; align-items: center; gap: 11px; padding: 11px 13px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; text-align: left; transition: all .15s; font-family: var(--font); }
+.flowlab__pal-btn:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateX(2px); }
+.flowlab__pal-btn .i { font-size: 18px; line-height: 1; }
+.flowlab__pal-btn b { font-size: .9rem; }
+.flowlab__pal-btn span { display: block; font-size: .74rem; color: var(--text-dim); }
+.flowlab__canvas { min-height: 240px; border: 1.5px dashed var(--border-2); border-radius: var(--radius); padding: 20px; background: var(--bg-alt); display: flex; flex-direction: column; align-items: center; }
+.flowlab__hint { color: var(--text-dim); font-size: .92rem; text-align: center; margin: auto; max-width: 260px; }
+.flowlab__step { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 400px; padding: 13px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); animation: stepIn .25s ease; }
+@keyframes stepIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.flowlab__step-ic { font-size: 20px; line-height: 1; }
+.flowlab__step b { font-size: .92rem; display: block; }
+.flowlab__step-desc { font-size: .76rem; color: var(--text-dim); }
+.flowlab__remove { margin-left: auto; border: none; background: none; color: var(--text-dim); font-size: 1.35rem; line-height: 1; cursor: pointer; padding: 0 4px; }
+.flowlab__remove:hover { color: var(--err); }
+.flowlab__arrow { color: var(--accent); font-size: 1.15rem; line-height: 1; padding: 4px 0; }
+.step--disparador { border-left: 3px solid var(--accent); }
+.step--agente { border-left: 3px solid #7c3aed; }
+.step--accion { border-left: 3px solid var(--ok); }
+.step--router { border-left: 3px solid var(--warn); }
+.step--humano { border-left: 3px solid var(--text-dim); }
+.flowlab__foot { display: flex; gap: 10px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+.flowmap { width: 100%; border-collapse: collapse; font-size: .84rem; margin-top: 4px; }
+.flowmap th, .flowmap td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.flowmap th { color: var(--text-dim); font-weight: 700; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; }
+.flowmap td:first-child { font-weight: 700; }
+.flowmap tr:last-child td { border-bottom: 0; }
+.flowmap-wrap { overflow-x: auto; }
+
 @media (max-width: 720px) {
-  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid { grid-template-columns: 1fr; }
+  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid, .flowlab__grid { grid-template-columns: 1fr; }
   .mclab__grid { grid-template-columns: 1fr; justify-items: center; }
   .mclab__stats { width: 100%; }
 }

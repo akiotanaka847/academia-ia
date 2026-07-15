@@ -430,11 +430,73 @@
       </div>
     </section>
 
+    <!-- LAB 10 · Constructor de flujos -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 10</span>
+        <h2>Construye un flujo agéntico</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>Los orquestadores —<b>Workfront Fusion, n8n, Make, Zapier</b>— funcionan igual: algo <b>dispara</b> el flujo, unos <b>pasos</b> lo transforman (hoy, muchos con un <b>agente de IA</b>) y ocurre una <b>acción</b>. Arma un flujo válido añadiendo bloques. Meta: <b>disparador → agente de IA → acción</b>.</p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/Fy1UCBcgF2o" title="Construir flujos con IA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <h3>Arma tu flujo: añade bloques</h3>
+        <div class="flowlab">
+          <div class="flowlab__grid">
+            <div>
+              <div class="flowlab__palette-title">Bloques disponibles</div>
+              <div class="flowlab__palette">
+                <button class="flowlab__pal-btn" data-block="disparador"><span class="i">⚡</span><span><b>Disparador</b><span>Cuando pasa algo</span></span></button>
+                <button class="flowlab__pal-btn" data-block="agente"><span class="i">🤖</span><span><b>Agente de IA</b><span>Razona y decide</span></span></button>
+                <button class="flowlab__pal-btn" data-block="accion"><span class="i">🔧</span><span><b>Herramienta / Acción</b><span>Crear, enviar…</span></span></button>
+                <button class="flowlab__pal-btn" data-block="router"><span class="i">🔀</span><span><b>Router / Condición</b><span>Si… entonces…</span></span></button>
+                <button class="flowlab__pal-btn" data-block="humano"><span class="i">👤</span><span><b>Revisión humana</b><span>Una persona aprueba</span></span></button>
+              </div>
+            </div>
+            <div>
+              <div class="flowlab__canvas">
+                <div class="flowlab__hint">Tu flujo está vacío.<br />Añade bloques desde la izquierda para construirlo. Empieza por un <b>Disparador</b>.</div>
+              </div>
+              <div class="flowlab__foot">
+                <button class="lab-btn lab-btn--ghost" data-flow-clear>Vaciar</button>
+                <span style="font-size:.82rem;color:var(--text-dim);">Quita un paso con la ×.</span>
+              </div>
+              <ul class="evalcheck" style="margin-top:18px;">
+                <li data-flow="trigger"><span class="ic">✓</span><span><b>Empieza con un disparador</b><span class="hint">todo flujo arranca por un evento</span></span></li>
+                <li data-flow="agent"><span class="ic">✓</span><span><b>Incluye un agente de IA</b><span class="hint">el paso «inteligente» — lo que está de moda</span></span></li>
+                <li data-flow="action"><span class="ic">✓</span><span><b>Termina con una acción</b><span class="hint">el flujo produce un resultado</span></span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout callout--info" style="margin-top:24px;">
+            <span class="label">Los mismos conceptos, otro nombre</span>
+            <h4>Tu flujo se traduce a cualquier herramienta</h4>
+            <div class="flowmap-wrap">
+              <table class="flowmap">
+                <thead><tr><th>Concepto</th><th>Workfront Fusion</th><th>n8n</th><th>Make</th><th>Zapier</th></tr></thead>
+                <tbody>
+                  <tr><td>Disparador</td><td>Trigger / Watch</td><td>Trigger node</td><td>Trigger</td><td>Trigger</td></tr>
+                  <tr><td>Paso</td><td>Módulo</td><td>Node</td><td>Módulo</td><td>Action</td></tr>
+                  <tr><td>Agente de IA</td><td>Módulo IA / HTTP</td><td>AI Agent node</td><td>Módulo OpenAI</td><td>AI by Zapier</td></tr>
+                  <tr><td>Condición</td><td>Router</td><td>IF / Switch</td><td>Router</td><td>Paths / Filter</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Nueve laboratorios y sumando</h4>
-      <p>El mismo formato (video + simulador + insignia) sirve para más temas: constructor de escenarios de Workfront Fusion,
-      comparar dos modelos, un mini-scraper, validar formularios… Dime cuáles quieres y los añadimos.</p>
+      <h4>Diez laboratorios y sumando</h4>
+      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos, un mini-scraper,
+      validar formularios, estimar costo de tokens… Dime cuáles quieres y los añadimos.</p>
     </div>
 
   </main>

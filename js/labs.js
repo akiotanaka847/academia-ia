@@ -448,3 +448,91 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   ta.addEventListener("input", evaluate);
   evaluate();
 })();
+
+/* ---------------------------------------------------------------------
+   LAB 10 · Constructor de flujos (tool-agnostic)
+   El usuario arma un workflow: disparador → agente de IA → acción.
+   Los mismos conceptos valen en Fusion, n8n, Make, Zapier.
+--------------------------------------------------------------------- */
+(function flowLab() {
+  const lab = document.querySelector(".flowlab");
+  if (!lab) return;
+  const canvas = lab.querySelector(".flowlab__canvas");
+  const hint = lab.querySelector(".flowlab__hint");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+
+  const BLOCKS = {
+    disparador: { name: "Disparador", icon: "⚡", desc: "Cuando pasa algo (correo, tarea, horario…)" },
+    agente: { name: "Agente de IA", icon: "🤖", desc: "La IA razona, decide o genera" },
+    accion: { name: "Herramienta / Acción", icon: "🔧", desc: "Hace algo: crear, enviar, guardar" },
+    router: { name: "Router / Condición", icon: "🔀", desc: "Si… entonces… (bifurca)" },
+    humano: { name: "Revisión humana", icon: "👤", desc: "Una persona aprueba antes de seguir" },
+  };
+  let flow = [];
+
+  function setCheck(key, ok) {
+    const el = lab.querySelector('[data-flow="' + key + '"]');
+    if (el) el.classList.toggle("met", ok);
+  }
+
+  function validate() {
+    const okTrigger = flow[0] === "disparador";
+    const okAgent = flow.indexOf("agente") !== -1;
+    const okAction = flow[flow.length - 1] === "accion";
+    setCheck("trigger", okTrigger);
+    setCheck("agent", okAgent);
+    setCheck("action", okAction);
+    if (okTrigger && okAgent && okAction && flow.length >= 3 && passBadge) {
+      passBadge.classList.add("show");
+    }
+  }
+
+  function render() {
+    canvas.querySelectorAll(".flowlab__step, .flowlab__arrow").forEach((e) => e.remove());
+    hint.style.display = flow.length ? "none" : "block";
+
+    flow.forEach((key, i) => {
+      if (i > 0) {
+        const arrow = document.createElement("div");
+        arrow.className = "flowlab__arrow";
+        arrow.textContent = "↓";
+        canvas.appendChild(arrow);
+      }
+      const b = BLOCKS[key];
+      const step = document.createElement("div");
+      step.className = "flowlab__step step--" + key;
+
+      const ic = document.createElement("span");
+      ic.className = "flowlab__step-ic";
+      ic.textContent = b.icon;
+
+      const txt = document.createElement("div");
+      const nm = document.createElement("b");
+      nm.textContent = b.name;
+      const ds = document.createElement("span");
+      ds.className = "flowlab__step-desc";
+      ds.textContent = b.desc;
+      txt.appendChild(nm);
+      txt.appendChild(ds);
+
+      const rm = document.createElement("button");
+      rm.className = "flowlab__remove";
+      rm.textContent = "×";
+      rm.setAttribute("aria-label", "Quitar paso");
+      rm.addEventListener("click", () => { flow.splice(i, 1); render(); });
+
+      step.appendChild(ic);
+      step.appendChild(txt);
+      step.appendChild(rm);
+      canvas.appendChild(step);
+    });
+    validate();
+  }
+
+  lab.querySelectorAll("[data-block]").forEach((p) =>
+    p.addEventListener("click", () => { flow.push(p.dataset.block); render(); })
+  );
+  const clearBtn = lab.querySelector("[data-flow-clear]");
+  if (clearBtn) clearBtn.addEventListener("click", () => { flow = []; render(); });
+  render();
+})();
