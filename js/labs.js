@@ -536,3 +536,146 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   if (clearBtn) clearBtn.addEventListener("click", () => { flow = []; render(); });
   render();
 })();
+
+/* ---------------------------------------------------------------------
+   LAB 11 · Estimador de costo de tokens
+   Trocea el prompt en tokens (aprox.), deja elegir cuánto responderá la IA
+   y calcula el costo por ejecución y por 1 000 ejecuciones en 3 tramos.
+   Los precios son de EJEMPLO (ilustrativos) para enseñar el modelo mental:
+   la salida se cobra más que la entrada, y el tramo premium cuesta mucho más.
+--------------------------------------------------------------------- */
+(function tokenCostLab() {
+  const lab = document.querySelector(".tokenlab");
+  if (!lab) return;
+  const ta = lab.querySelector('[data-tok="input"]');
+  const inCountEl = lab.querySelector('[data-tok="inCount"]');
+  const outCountEl = lab.querySelector('[data-tok="outCount"]');
+  const viz = lab.querySelector('[data-tok="viz"]');
+  const rowsEl = lab.querySelector('[data-tok="rows"]');
+  const insightEl = lab.querySelector('[data-tok="insight"]');
+  const presets = lab.querySelectorAll("[data-out]");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+
+  // Tramos de ejemplo — precios ilustrativos por 1M de tokens [entrada, salida].
+  const TIERS = [
+    { key: "eco",  cls: "tier-eco",  name: "Económico",   in: 0.25, out: 1.25 },
+    { key: "bal",  cls: "tier-bal",  name: "Equilibrado", in: 3,    out: 15 },
+    { key: "prem", cls: "tier-prem", name: "Premium",     in: 15,   out: 75 },
+  ];
+  const TINTS = ["#dbeafe", "#ede9fe", "#dcfce7", "#fef3c7", "#fee2e2", "#e0f2fe"];
+
+  let outTok = 0;    // tokens de salida elegidos (0 = aún no elige)
+
+  // Trocea el texto en piezas tipo token (aprox.): palabras cortas = 1 token,
+  // palabras largas se parten cada ~4 letras y cada signo va por su cuenta.
+  // Usamos matchAll (iterador) para recorrer todas las coincidencias sin estado mutable.
+  function tokenize(text) {
+    const out = [];
+    const re = /(\s+)|([A-Za-zÀ-ÿ0-9]+)|([^\sA-Za-zÀ-ÿ0-9])/g;
+    for (const m of text.matchAll(re)) {
+      if (m[1]) { out.push({ t: m[1], space: true }); }
+      else if (m[2]) {
+        const w = m[2];
+        if (w.length <= 5) out.push({ t: w });
+        else for (let i = 0; i < w.length; i += 4) out.push({ t: w.slice(i, i + 4) });
+      } else { out.push({ t: m[3] }); }
+    }
+    return out;
+  }
+
+  // Formato USD con punto decimal (consistente en toda la tabla); más decimales
+  // cuando el importe es diminuto para que no aparezca como "$0".
+  function money(n) {
+    if (n === 0) return "$0";
+    if (n < 0.01) return "$" + n.toFixed(4);
+    if (n < 1) return "$" + n.toFixed(3);
+    return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function render() {
+    const text = ta.value;
+    const pieces = tokenize(text);
+    const inTok = pieces.filter((p) => !p.space).length;
+    const typed = inTok >= 3;
+
+    inCountEl.textContent = inTok.toLocaleString("es");
+    outCountEl.textContent = outTok ? outTok.toLocaleString("es") : "—";
+
+    // Visualización: cada token como una pastilla de color
+    viz.textContent = "";
+    if (!text.trim()) {
+      const e = document.createElement("span");
+      e.className = "tokenlab__viz-empty";
+      e.textContent = "Escribe arriba para ver los tokens…";
+      viz.appendChild(e);
+    } else {
+      let ti = 0;
+      const MAX = 240;
+      pieces.forEach((p) => {
+        if (p.space) { viz.appendChild(document.createTextNode(p.t)); return; }
+        if (ti >= MAX) return;
+        const s = document.createElement("span");
+        s.className = "tokenlab__tok";
+        s.style.background = TINTS[ti % TINTS.length];
+        s.textContent = p.t; // texto del usuario → siempre como texto, nunca HTML
+        viz.appendChild(s);
+        ti++;
+      });
+      if (inTok > MAX) viz.appendChild(document.createTextNode(" …"));
+    }
+
+    // Tabla de costos por tramo
+    rowsEl.textContent = "";
+    TIERS.forEach((tier) => {
+      const c1 = (inTok / 1e6) * tier.in + (outTok / 1e6) * tier.out;
+      const tr = document.createElement("tr");
+      tr.className = tier.cls;
+      tr.setAttribute("data-tier", tier.key);
+      const cells = [
+        [tier.name, ""],
+        ["$" + tier.in + " /1M", "muted"],
+        ["$" + tier.out + " /1M", "muted"],
+        [outTok ? money(c1) : "—", "cell-run"],
+        [outTok ? money(c1 * 1000) : "—", "cell-bulk"],
+      ];
+      cells.forEach(([txt, cls]) => {
+        const td = document.createElement("td");
+        if (cls) td.className = cls;
+        td.textContent = txt;
+        tr.appendChild(td);
+      });
+      rowsEl.appendChild(tr);
+    });
+
+    // Insight dinámico: por qué la salida y el tramo importan tanto
+    if (typed && outTok) {
+      const bal = TIERS[1];
+      const ratio = (outTok * bal.out) / (inTok * bal.in);
+      const eco = TIERS[0], prem = TIERS[2];
+      const spread =
+        (prem.in * inTok + prem.out * outTok) /
+        (eco.in * inTok + eco.out * outTok);
+      insightEl.textContent =
+        "💡 Tu respuesta (" + outTok + " tokens) pesa más que tu pregunta (" + inTok +
+        " tokens) y la salida se cobra más cara: en el tramo equilibrado, responder cuesta " +
+        "≈ " + ratio.toFixed(1) + "× lo que tu prompt. Además, elegir el tramo premium en vez " +
+        "del económico multiplica el costo ≈ " + spread.toFixed(0) + "× para el mismo trabajo.";
+      insightEl.classList.add("show");
+    } else {
+      insightEl.classList.remove("show");
+    }
+
+    // Lección aprendida: escribió un prompt real Y eligió el largo de la respuesta
+    if (typed && outTok && passBadge) passBadge.classList.add("show");
+  }
+
+  ta.addEventListener("input", render);
+  presets.forEach((b) =>
+    b.addEventListener("click", () => {
+      outTok = parseInt(b.dataset.out, 10);
+      presets.forEach((x) => x.classList.toggle("active", x === b));
+      render();
+    })
+  );
+  render();
+})();

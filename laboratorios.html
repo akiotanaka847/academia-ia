@@ -492,11 +492,82 @@
       </div>
     </section>
 
+    <!-- LAB 11 · Estimador de costo de tokens -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 11</span>
+        <h2>¿Cuánto cuesta tu prompt? Tokens y dinero</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          La IA no cobra por palabras, sino por <b>tokens</b>: trocitos de texto (~4 caracteres cada uno). Pagas por los
+          tokens que <b>envías</b> (tu prompt) y por los que la IA <b>responde</b> —y la respuesta suele costar bastante
+          más—. Mira el video y luego estima el costo de un prompt real:
+        </p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/p3cPzA4S_wk" title="¿Qué son los tokens? | Grandes Modelos de Lenguaje" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <h3>Estímalo tú: escribe y elige cuánto responderá la IA</h3>
+        <p>Escribe un prompt y observa cómo se <b>trocea en tokens</b> de colores. Luego elige el largo de la respuesta y mira el costo por <b>1 ejecución</b> y por <b>1 000 ejecuciones</b> en tres tramos de modelo.</p>
+
+        <div class="tokenlab">
+          <div class="tokenlab__grid">
+            <div>
+              <div class="sqlab__field">
+                <label>Tu prompt (lo que envías)</label>
+                <textarea data-tok="input" placeholder="Actúa como analista de datos. Resume este informe de ventas en 5 puntos clave y sugiere 3 acciones concretas para el próximo trimestre."></textarea>
+              </div>
+              <div class="tokenlab__out">
+                <span class="tokenlab__out-label">¿Cuánto responderá la IA?</span>
+                <div class="tokenlab__presets">
+                  <button class="tokenlab__preset" data-out="150">Corta<span>~150 tokens</span></button>
+                  <button class="tokenlab__preset" data-out="500">Media<span>~500 tokens</span></button>
+                  <button class="tokenlab__preset" data-out="1500">Larga<span>~1500 tokens</span></button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="tokenlab__counts">
+                <div class="tokenlab__count"><span>Tokens de entrada</span><b data-tok="inCount">0</b></div>
+                <div class="tokenlab__count out"><span>Tokens de salida</span><b data-tok="outCount">—</b></div>
+              </div>
+              <div class="tokenlab__viz-label">Así se trocea tu texto en tokens (aproximado):</div>
+              <div class="tokenlab__viz" data-tok="viz"><span class="tokenlab__viz-empty">Escribe arriba para ver los tokens…</span></div>
+            </div>
+          </div>
+
+          <div class="tokenlab__table-wrap">
+            <table class="tokenlab__table">
+              <thead>
+                <tr><th>Tramo de modelo</th><th>Entrada /1M</th><th>Salida /1M</th><th>1 ejecución</th><th>1 000 ejecuciones</th></tr>
+              </thead>
+              <tbody data-tok="rows"></tbody>
+            </table>
+          </div>
+          <p class="tokenlab__disclaimer">Precios de <b>ejemplo</b> (redondeados, ilustrativos) para comparar tramos —no son tarifas de ningún producto concreto—. Consulta la web de cada proveedor para los precios reales y actuales.</p>
+          <div class="tokenlab__insight" data-tok="insight"></div>
+
+          <div class="callout callout--tip" style="margin-top:24px;">
+            <span class="label">Lección aprendida · cómo ahorrar</span>
+            <h4>El costo lo mandan la salida y el tramo de modelo</h4>
+            <p>Dos palancas bajan la factura sin perder calidad: <b>(1)</b> pedir respuestas más <b>cortas y al grano</b>
+            (la salida es lo más caro) y <b>(2)</b> usar el <b>modelo más barato que resuelva la tarea</b> —reserva el
+            premium solo para lo que de verdad lo necesita—. En un flujo que corre <b>miles de veces</b> (n8n, Make,
+            Fusion, Zapier), esa diferencia por ejecución se multiplica y decide si la automatización es rentable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Diez laboratorios y sumando</h4>
-      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos, un mini-scraper,
-      validar formularios, estimar costo de tokens… Dime cuáles quieres y los añadimos.</p>
+      <h4>Once laboratorios y sumando</h4>
+      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos, un mini-scraper
+      o validar formularios… Dime cuáles quieres y los añadimos.</p>
     </div>
 
   </main>

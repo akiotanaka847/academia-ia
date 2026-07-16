@@ -529,8 +529,47 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .flowmap tr:last-child td { border-bottom: 0; }
 .flowmap-wrap { overflow-x: auto; }
 
+/* --- Estimador de costo de tokens (LAB 11) --- */
+.tokenlab__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.tokenlab textarea { width: 100%; min-height: 150px; padding: 13px 15px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); font-family: var(--font); font-size: .95rem; background: var(--surface); color: var(--ink); resize: vertical; }
+.tokenlab textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.tokenlab__out { margin-top: 16px; }
+.tokenlab__out-label { font-size: .8rem; color: var(--text-dim); font-weight: 600; display: block; margin-bottom: 8px; }
+.tokenlab__presets { display: flex; gap: 8px; flex-wrap: wrap; }
+.tokenlab__preset { flex: 1; min-width: 92px; padding: 10px 8px; border: 1px solid var(--border-2); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; font-family: var(--font); font-weight: 600; font-size: .9rem; color: var(--text); transition: all .15s; }
+.tokenlab__preset span { display: block; font-size: .72rem; color: var(--text-dim); font-weight: 400; font-family: var(--mono); margin-top: 2px; }
+.tokenlab__preset:hover { border-color: var(--accent); background: var(--accent-soft); }
+.tokenlab__preset.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-hover); }
+.tokenlab__preset.active span { color: var(--accent-hover); }
+.tokenlab__counts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.tokenlab__count { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; text-align: center; }
+.tokenlab__count span { font-size: .74rem; color: var(--text-dim); font-weight: 600; }
+.tokenlab__count b { display: block; font-size: 1.6rem; font-weight: 800; font-family: var(--mono); letter-spacing: -.02em; margin-top: 2px; color: var(--accent); }
+.tokenlab__count.out b { color: #7c3aed; }
+.tokenlab__viz-label { font-size: .78rem; color: var(--text-dim); font-weight: 600; margin-bottom: 8px; }
+.tokenlab__viz { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; background: var(--surface); min-height: 88px; line-height: 2.1; font-family: var(--mono); font-size: .82rem; word-break: break-word; }
+.tokenlab__viz-empty { color: var(--text-dim); font-family: var(--font); }
+.tokenlab__tok { border-radius: 4px; padding: 1px 3px; color: #1f2937; }
+.tokenlab__table-wrap { overflow-x: auto; margin-top: 22px; }
+.tokenlab__table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.tokenlab__table th, .tokenlab__table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+.tokenlab__table th:first-child, .tokenlab__table td:first-child { text-align: left; }
+.tokenlab__table th { color: var(--text-dim); font-weight: 700; font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; }
+.tokenlab__table td:first-child { font-weight: 700; }
+.tokenlab__table td.muted { color: var(--text-dim); font-family: var(--mono); font-size: .82rem; }
+.tokenlab__table td.cell-run { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+.tokenlab__table td.cell-bulk { font-family: var(--mono); font-weight: 800; color: var(--accent); }
+.tokenlab__table tr:last-child td { border-bottom: 0; }
+.tokenlab__table tr[data-tier] td:first-child::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+.tokenlab__table tr.tier-eco td:first-child::before { background: var(--ok); }
+.tokenlab__table tr.tier-bal td:first-child::before { background: var(--accent); }
+.tokenlab__table tr.tier-prem td:first-child::before { background: #7c3aed; }
+.tokenlab__disclaimer { font-size: .78rem; color: var(--text-dim); margin: 10px 0 0; }
+.tokenlab__insight { margin-top: 16px; font-size: .92rem; background: var(--accent-soft); border: 1px solid #d6e4ff; border-radius: var(--radius-sm); padding: 13px 16px; color: var(--text-soft); display: none; line-height: 1.6; }
+.tokenlab__insight.show { display: block; }
+
 @media (max-width: 720px) {
-  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid, .flowlab__grid { grid-template-columns: 1fr; }
+  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid, .flowlab__grid, .tokenlab__grid { grid-template-columns: 1fr; }
   .mclab__grid { grid-template-columns: 1fr; justify-items: center; }
   .mclab__stats { width: 100%; }
 }
