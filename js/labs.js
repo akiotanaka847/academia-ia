@@ -679,3 +679,84 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   );
   render();
 })();
+
+/* ---------------------------------------------------------------------
+   LAB 12 · Mini-scraper — extraer datos con selectores CSS
+   El usuario escribe un selector; corremos querySelectorAll DE VERDAD sobre
+   una página ficticia (la .scrlab__page), resaltamos lo que coincide y
+   mostramos los datos extraídos como JSON. Valida contra un objetivo.
+   El selector es texto del usuario pero solo se usa en querySelectorAll
+   (nunca en innerHTML); los selectores inválidos se capturan con try/catch.
+--------------------------------------------------------------------- */
+(function scraperLab() {
+  const lab = document.querySelector(".scrlab");
+  if (!lab) return;
+  const page = lab.querySelector('[data-scr="page"]');
+  const input = lab.querySelector('[data-scr="sel"]');
+  const runBtn = lab.querySelector('[data-scr="run"]');
+  const goalSel = lab.querySelector('[data-scr="goal"]');
+  const statusEl = lab.querySelector('[data-scr="status"]');
+  const jsonEl = lab.querySelector('[data-scr="json"]');
+  const chips = lab.querySelectorAll("[data-scr-fill]");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+  const solved = new Set();
+
+  function clearHits() {
+    page.querySelectorAll(".scr-hit").forEach((e) => e.classList.remove("scr-hit"));
+  }
+  function setStatus(cls, text) {
+    statusEl.className = "scrlab__status" + (cls ? " " + cls : "");
+    statusEl.textContent = text;
+  }
+  // Igualdad de conjuntos de elementos (mismo grupo, sin importar el orden)
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    const sb = new Set(b);
+    return a.every((x) => sb.has(x));
+  }
+
+  function run() {
+    const sel = input.value.trim();
+    clearHits();
+    if (!sel) { setStatus("", "Escribe un selector CSS y pulsa Extraer."); jsonEl.textContent = "[]"; return; }
+
+    let matches;
+    try {
+      matches = Array.prototype.slice.call(page.querySelectorAll(sel));
+    } catch (err) {
+      setStatus("err", "⚠️ Selector inválido: revisa la sintaxis (ej.: .clase, etiqueta, .padre .hijo).");
+      jsonEl.textContent = "[]";
+      return;
+    }
+
+    matches.forEach((el) => el.classList.add("scr-hit"));
+    const data = matches.map((el) => el.textContent.trim().replace(/\s+/g, " "));
+    jsonEl.textContent = JSON.stringify(data, null, 2);
+
+    const goal = goalSel.value;
+    const target = Array.prototype.slice.call(page.querySelectorAll(".product__" + goal));
+    if (matches.length === 0) {
+      setStatus("", "0 elementos: ese selector no encontró nada. Mira las etiquetas de ejemplo abajo.");
+    } else if (sameSet(matches, target)) {
+      solved.add(goal);
+      setStatus("ok", "✅ ¡Correcto! Extrajiste los " + matches.length + " elementos del objetivo. Objetivos resueltos: " + solved.size + "/3.");
+      if (solved.size >= 2 && passBadge) passBadge.classList.add("show");
+    } else {
+      setStatus("", "Extrajiste " + matches.length + " elemento(s), pero no son exactamente los del objetivo. Prueba con otra clase.");
+    }
+  }
+
+  runBtn.addEventListener("click", run);
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter") run(); });
+  chips.forEach((c) =>
+    c.addEventListener("click", () => { input.value = c.dataset.scrFill; run(); input.focus(); })
+  );
+  goalSel.addEventListener("change", () => {
+    clearHits();
+    setStatus("", "Objetivo cambiado. Escribe el selector que extraiga justo eso.");
+    jsonEl.textContent = "[]";
+  });
+
+  setStatus("", "Elige un objetivo, escribe un selector CSS y pulsa Extraer.");
+  jsonEl.textContent = "[]";
+})();

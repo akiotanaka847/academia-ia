@@ -563,10 +563,109 @@
       </div>
     </section>
 
+    <!-- LAB 12 · Mini-scraper -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 12</span>
+        <h2>Mini-scraper: extrae datos con selectores</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          <b>Web scraping</b> es extraer datos de una página web de forma automática. La clave son los
+          <b>selectores CSS</b>: le dices al programa «tráeme todo lo que coincida con <code>.precio</code>» y él
+          recoge esos datos y te los devuelve estructurados (listos para un flujo de Fusion, n8n, Make…). Mira el
+          video y luego <b>scrapea tú</b> una tienda ficticia:
+        </p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/asmAKBsxI4M" title="¿Qué es el Web Scraping? Explicado en 3 minutos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <h3>Pruébalo: escribe un selector y extrae</h3>
+        <p>Elige un <b>objetivo</b>, escribe un selector CSS (o toca uno de ejemplo) y pulsa Extraer. Lo que coincida se resalta en la página y aparece como JSON. Resuelve <b>2 de 3</b> objetivos para la insignia.</p>
+
+        <div class="scrlab">
+          <div class="scrlab__goal">
+            <label for="scr-goal">🎯 Objetivo:</label>
+            <select id="scr-goal" data-scr="goal">
+              <option value="name">Extraer los nombres de los productos</option>
+              <option value="price">Extraer los precios</option>
+              <option value="stock">Extraer el estado de stock</option>
+            </select>
+          </div>
+
+          <div class="scrlab__input">
+            <span class="scrlab__prompt">page.querySelectorAll(&nbsp;"</span>
+            <input data-scr="sel" placeholder=".product__name" autocomplete="off" spellcheck="false" aria-label="Selector CSS" />
+            <span class="scrlab__prompt">"&nbsp;)</span>
+            <button class="lab-btn" data-scr="run">Extraer →</button>
+          </div>
+
+          <div class="scrlab__chips">
+            <span class="lbl">Selectores de ejemplo (toca para probar):</span>
+            <button class="scrlab__chip" data-scr-fill=".product__name">.product__name</button>
+            <button class="scrlab__chip" data-scr-fill=".product__price">.product__price</button>
+            <button class="scrlab__chip" data-scr-fill=".product__stock">.product__stock</button>
+            <button class="scrlab__chip" data-scr-fill="h4">h4</button>
+            <button class="scrlab__chip" data-scr-fill=".product">.product</button>
+            <button class="scrlab__chip" data-scr-fill=".product:first-child .product__price">.product:first-child .product__price</button>
+          </div>
+
+          <div class="scrlab__grid">
+            <div>
+              <div class="scrlab__pane-label">Página ficticia (tienda)</div>
+              <div class="scrlab__page" data-scr="page">
+                <article class="product">
+                  <h4 class="product__name">Café de especialidad</h4>
+                  <div class="product__price">$18.00</div>
+                  <div class="product__rating">★ 4.8</div>
+                  <div class="product__stock">En stock</div>
+                </article>
+                <article class="product">
+                  <h4 class="product__name">Té verde matcha</h4>
+                  <div class="product__price">$24.50</div>
+                  <div class="product__rating">★ 4.6</div>
+                  <div class="product__stock">Agotado</div>
+                </article>
+                <article class="product">
+                  <h4 class="product__name">Prensa francesa</h4>
+                  <div class="product__price">$32.00</div>
+                  <div class="product__rating">★ 4.9</div>
+                  <div class="product__stock">En stock</div>
+                </article>
+                <article class="product">
+                  <h4 class="product__name">Molinillo manual</h4>
+                  <div class="product__price">$45.00</div>
+                  <div class="product__rating">★ 4.7</div>
+                  <div class="product__stock">En oferta</div>
+                </article>
+              </div>
+            </div>
+            <div class="scrlab__out">
+              <div class="scrlab__pane-label">Datos extraídos</div>
+              <div class="scrlab__status" data-scr="status">Elige un objetivo, escribe un selector CSS y pulsa Extraer.</div>
+              <pre class="scrlab__json" data-scr="json">[]</pre>
+            </div>
+          </div>
+
+          <div class="callout callout--info" style="margin-top:24px;">
+            <span class="label">Scrapea con responsabilidad</span>
+            <h4>Extraer datos sí, pero con cabeza</h4>
+            <p>El scraping es legal y útil, pero respeta las reglas: revisa el <code>robots.txt</code> y los términos del
+            sitio, <b>no satures</b> el servidor (pon pausas entre peticiones), no extraigas <b>datos personales</b> sin
+            base legal y, cuando exista una <b>API oficial</b>, úsala en vez de scrapear. En un flujo real, este paso
+            «obtener datos» es el <b>disparador</b> del que parten Fusion, n8n o Make.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Once laboratorios y sumando</h4>
-      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos, un mini-scraper
+      <h4>Doce laboratorios y sumando</h4>
+      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos
       o validar formularios… Dime cuáles quieres y los añadimos.</p>
     </div>
 
