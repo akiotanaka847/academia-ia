@@ -662,11 +662,96 @@
       </div>
     </section>
 
+    <!-- LAB 13 · Validación de formularios -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 13</span>
+        <h2>Valida los datos antes de que rompan tu sistema</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Un formulario sin validar es la puerta por la que entra <b>la basura</b> a tu base de datos: correos que
+          rebotan, teléfonos con letras, edades de 999 años y hasta intentos de inyección. Validar no es solo
+          «rechazar»: también <b>limpia y normaliza</b> lo que sí es correcto. Mira el video y compruébalo tú:
+        </p>
+        <div class="media-frame">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/mlVXOg_Hb_E" title="¿Es seguro validar un formulario con HTML y JavaScript?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <h3>Pruébalo: mete datos malos y mira qué pasa</h3>
+        <p>Toca un ejemplo con datos problemáticos y envíalo <b>sin validación</b>: verás la basura entrar y qué rompe. Luego cambia a <b>con validación</b> con los mismos datos y mira cómo se bloquea. Haz las dos cosas para la insignia.</p>
+
+        <div class="vallab">
+          <div class="vallab__modes">
+            <button class="vallab__mode-btn active" data-vmode="off">Sin validación</button>
+            <button class="vallab__mode-btn" data-vmode="on">Con validación</button>
+          </div>
+
+          <div class="vallab__grid">
+            <div class="sqlab__form">
+              <div class="sqlab__form-title">📝 Registro de usuario (ficticio)</div>
+              <div class="sqlab__field">
+                <label>Nombre</label>
+                <input type="text" data-vf="nombre" placeholder="Carmen Soto" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="sqlab__field">
+                <label>Correo</label>
+                <input type="text" data-vf="email" placeholder="carmen@empresa.com" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="sqlab__field">
+                <label>Teléfono</label>
+                <input type="text" data-vf="telefono" placeholder="600987654" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="sqlab__field">
+                <label>Edad</label>
+                <input type="text" data-vf="edad" placeholder="31" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="sqlab__hints">
+                <span style="font-size:.8rem;color:var(--text-dim);width:100%;">Datos de ejemplo (toca para probar):</span>
+                <button class="sqlab__chip" data-vfill="sinArroba">correo sin @</button>
+                <button class="sqlab__chip" data-vfill="edadMala">edad 999</button>
+                <button class="sqlab__chip" data-vfill="telLetras">teléfono con letras</button>
+                <button class="sqlab__chip" data-vfill="inyeccion">intento de inyección</button>
+                <button class="sqlab__chip" data-vfill="sucio">sucio pero válido</button>
+                <button class="sqlab__chip" data-vfill="correcto">todo correcto</button>
+              </div>
+              <button class="lab-btn" data-val="submit" style="margin-top:16px;">Enviar registro →</button>
+            </div>
+
+            <div class="vallab__panel">
+              <div class="vallab__result" data-val="result">Rellena el formulario (o toca un ejemplo) y pulsa «Enviar registro».</div>
+              <ul class="evalcheck">
+                <li data-vcheck="nombre"><span class="ic">✓</span><span><b>Nombre</b><span class="hint">sin comprobar todavía</span></span></li>
+                <li data-vcheck="email"><span class="ic">✓</span><span><b>Correo</b><span class="hint">sin comprobar todavía</span></span></li>
+                <li data-vcheck="telefono"><span class="ic">✓</span><span><b>Teléfono</b><span class="hint">sin comprobar todavía</span></span></li>
+                <li data-vcheck="edad"><span class="ic">✓</span><span><b>Edad</b><span class="hint">sin comprobar todavía</span></span></li>
+              </ul>
+              <div class="vallab__db-label">Lo que se guarda en la base de datos:</div>
+              <pre class="vallab__db" data-val="db">// Aún no has enviado nada.</pre>
+            </div>
+          </div>
+
+          <div class="callout callout--tip" style="margin-top:24px;">
+            <span class="label">Lección aprendida · la regla de oro</span>
+            <h4>La validación del navegador es comodidad, no seguridad</h4>
+            <p>Las reglas del formulario (y este laboratorio) corren en <b>el navegador</b>: sirven para avisar rápido
+            al usuario, pero <b>cualquiera puede saltárselas</b> desactivando JavaScript o enviando la petición
+            directamente. Por eso hay que <b>volver a validar siempre en el servidor</b>, que es el único lugar que el
+            usuario no controla. Y recuerda las tres capas: <b>validar</b> (¿cumple las reglas?), <b>normalizar</b>
+            (dejarlo limpio y consistente) y <b>parametrizar</b> al guardarlo, como viste en el LAB 01 de inyección SQL.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Doce laboratorios y sumando</h4>
-      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos
-      o validar formularios… Dime cuáles quieres y los añadimos.</p>
+      <h4>Trece laboratorios y sumando</h4>
+      <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos,
+      medir la calidad de un dataset, diseñar un system prompt… Dime cuáles quieres y los añadimos.</p>
     </div>
 
   </main>

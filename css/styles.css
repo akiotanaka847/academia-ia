@@ -598,8 +598,27 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .scrlab__status.err { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
 .scrlab__json { background: #0d1117; border: 1px solid #1f2530; border-radius: var(--radius-sm); padding: 14px; font-family: var(--mono); font-size: .8rem; line-height: 1.6; color: #c9d1d9; white-space: pre-wrap; word-break: break-word; margin: 0; min-height: 80px; }
 
+/* --- Validación de formularios: basura vs datos limpios (LAB 13) --- */
+.vallab__modes { display: inline-flex; gap: 6px; background: var(--bg-alt); padding: 5px; border-radius: 999px; border: 1px solid var(--border); margin-bottom: 22px; }
+.vallab__mode-btn { padding: 9px 18px; border: none; background: none; border-radius: 999px; font-family: var(--font); font-weight: 600; font-size: .9rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
+.vallab__mode-btn.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
+.vallab__mode-btn[data-vmode="off"].active { color: var(--err); }
+.vallab__mode-btn[data-vmode="on"].active { color: var(--ok); }
+.vallab__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.vallab__panel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.vallab__result { border-radius: var(--radius-sm); padding: 14px 16px; font-size: .92rem; font-weight: 600; border: 1px solid var(--border); background: var(--bg-alt); color: var(--text-soft); }
+.vallab__result.bad { background: #fef2f2; border-color: #fecaca; color: #b91c1c; }
+.vallab__result.good { background: #f0fdf4; border-color: #cdefd6; color: #15803d; }
+.vallab__conseq { margin: 10px 0 0; padding: 0; }
+.vallab__conseq li { font-size: .85rem; font-weight: 500; color: var(--text-soft); padding-left: 18px; position: relative; margin-bottom: 6px; }
+.vallab__conseq li::before { content: "→"; position: absolute; left: 0; color: var(--err); font-weight: 700; }
+.vallab__db-label { font-size: .78rem; color: var(--text-dim); font-weight: 600; }
+.vallab__db { background: #0d1117; border: 1px solid #1f2530; border-radius: var(--radius-sm); padding: 14px; font-family: var(--mono); font-size: .8rem; line-height: 1.6; color: #c9d1d9; white-space: pre-wrap; word-break: break-word; margin: 0; min-height: 70px; }
+.evalcheck li.failed { color: var(--ink); }
+.evalcheck li.failed .ic { background: var(--err); border-color: var(--err); color: #fff; }
+
 @media (max-width: 720px) {
-  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid, .flowlab__grid, .tokenlab__grid, .scrlab__grid { grid-template-columns: 1fr; }
+  .sqlab__grid, .promptlab__grid, .wxlab__grid, .promptevallab__grid, .flowlab__grid, .tokenlab__grid, .scrlab__grid, .vallab__grid { grid-template-columns: 1fr; }
   .mclab__grid { grid-template-columns: 1fr; justify-items: center; }
   .mclab__stats { width: 100%; }
 }

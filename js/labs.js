@@ -760,3 +760,188 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   setStatus("", "Elige un objetivo, escribe un selector CSS y pulsa Extraer.");
   jsonEl.textContent = "[]";
 })();
+
+/* ---------------------------------------------------------------------
+   LAB 13 · Validación de formularios
+   Mismo patrón que el LAB 01: un interruptor "sin validación / con validación".
+   Las reglas se evalúan SIEMPRE, pero solo se APLICAN cuando está encendida;
+   así el modo "sin validación" puede mostrar qué basura entró y qué rompe.
+   Todo el texto del usuario se pinta con textContent (nunca innerHTML).
+--------------------------------------------------------------------- */
+(function formValidationLab() {
+  const lab = document.querySelector(".vallab");
+  if (!lab) return;
+
+  const FIELDS = ["nombre", "email", "telefono", "edad"];
+  const inputs = {};
+  FIELDS.forEach((k) => { inputs[k] = lab.querySelector('[data-vf="' + k + '"]'); });
+  const modeBtns = lab.querySelectorAll("[data-vmode]");
+  const submitBtn = lab.querySelector('[data-val="submit"]');
+  const resultEl = lab.querySelector('[data-val="result"]');
+  const dbEl = lab.querySelector('[data-val="db"]');
+  const chips = lab.querySelectorAll("[data-vfill]");
+  const passBadge = lab.closest(".lab").querySelector(".lab__pass");
+
+  let mode = "off";
+  let sawAccepted = false; // vio entrar basura sin validar
+  let sawBlocked = false;  // vio cómo la validación la bloquea
+
+  // Cada regla devuelve null si el valor es correcto, o el motivo del fallo.
+  const RULES = {
+    nombre: function (v) {
+      const s = v.trim();
+      if (!s) return "Obligatorio: está vacío.";
+      if (s.length < 2) return "Demasiado corto (mínimo 2 letras).";
+      if (/[<>]/.test(s)) return "Contiene < o > : posible intento de inyección.";
+      return null;
+    },
+    email: function (v) {
+      const s = v.trim();
+      if (!s) return "Obligatorio: está vacío.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s)) return "No tiene formato de correo (falta @ o el dominio).";
+      return null;
+    },
+    telefono: function (v) {
+      const s = v.trim();
+      if (!s) return "Obligatorio: está vacío.";
+      if (/[^\d\s+()-]/.test(s)) return "Tiene letras u otros signos: solo dígitos y + ( ) -";
+      const digits = s.replace(/\D/g, "");
+      if (digits.length < 7 || digits.length > 15) return "Debe tener entre 7 y 15 dígitos.";
+      return null;
+    },
+    edad: function (v) {
+      const s = v.trim();
+      if (!s) return "Obligatorio: está vacío.";
+      if (!/^\d+$/.test(s)) return "Debe ser un número entero.";
+      const n = parseInt(s, 10);
+      if (n < 18 || n > 120) return "Fuera de rango (18–120).";
+      return null;
+    },
+  };
+
+  // Qué rompe en la práctica cuando ese campo entra sucio
+  const CONSEQ = {
+    nombre: "Registros fantasma, o texto peligroso guardado tal cual: la base de un XSS si luego se muestra en pantalla.",
+    email: "El correo de bienvenida rebota y la persona no puede recuperar su cuenta nunca.",
+    telefono: "El SMS jamás llega y tu proveedor de envíos puede rechazar el lote entero.",
+    edad: "Tus estadísticas quedan corruptas: una edad de 999 arruina cualquier promedio o segmentación.",
+  };
+
+  // Validar también LIMPIA: quita espacios, normaliza el correo y deja el teléfono en dígitos.
+  function normalize(v) {
+    return {
+      nombre: v.nombre.trim().replace(/\s+/g, " "),
+      email: v.email.trim().toLowerCase(),
+      telefono: v.telefono.replace(/\D/g, ""),
+      edad: parseInt(v.edad.trim(), 10),
+    };
+  }
+
+  const PRESETS = {
+    sinArroba: { nombre: "Juan Pérez", email: "juan.perez.empresa.com", telefono: "600123456", edad: "34" },
+    edadMala:  { nombre: "Ana Ruiz", email: "ana@empresa.com", telefono: "600123456", edad: "999" },
+    telLetras: { nombre: "Luis Gómez", email: "luis@empresa.com", telefono: "llámame", edad: "40" },
+    inyeccion: { nombre: "<script>alert(1)</script>", email: "x@y.com", telefono: "600123456", edad: "30" },
+    sucio:     { nombre: "  Marta   Díaz ", email: "  MARTA@Empresa.COM ", telefono: "+34 600 12 34 56", edad: "29" },
+    correcto:  { nombre: "Carmen Soto", email: "carmen@empresa.com", telefono: "600987654", edad: "31" },
+  };
+
+  function setCheck(key, state, msg) {
+    const li = lab.querySelector('[data-vcheck="' + key + '"]');
+    if (!li) return;
+    li.classList.toggle("met", state === "met");
+    li.classList.toggle("failed", state === "failed");
+    const ic = li.querySelector(".ic");
+    if (ic) ic.textContent = state === "failed" ? "✕" : "✓";
+    const hint = li.querySelector(".hint");
+    if (hint) hint.textContent = msg;
+  }
+
+  function setResult(cls, text, conseq) {
+    resultEl.className = "vallab__result" + (cls ? " " + cls : "");
+    resultEl.textContent = "";
+    const head = document.createElement("div");
+    head.textContent = text;
+    resultEl.appendChild(head);
+    if (conseq && conseq.length) {
+      const ul = document.createElement("ul");
+      ul.className = "vallab__conseq";
+      conseq.forEach((c) => {
+        const li = document.createElement("li");
+        li.textContent = c;
+        ul.appendChild(li);
+      });
+      resultEl.appendChild(ul);
+    }
+  }
+
+  function submit() {
+    const vals = {};
+    FIELDS.forEach((k) => { vals[k] = inputs[k].value; });
+
+    const errors = {};
+    FIELDS.forEach((k) => { const e = RULES[k](vals[k]); if (e) errors[k] = e; });
+    const bad = Object.keys(errors);
+
+    if (mode === "off") {
+      // Nada se comprueba: todo entra tal cual.
+      FIELDS.forEach((k) => setCheck(k, "none", "no se comprobó nada"));
+      dbEl.textContent = JSON.stringify(vals, null, 2);
+      if (bad.length) {
+        sawAccepted = true;
+        setResult("bad",
+          "⚠️ Guardado sin comprobar nada. " + bad.length + " campo(s) inválidos acaban de entrar a tu base de datos:",
+          bad.map((k) => CONSEQ[k]));
+      } else {
+        setResult("", "Guardado sin comprobar nada. Esta vez los datos eran correctos… pero fue suerte, no control.", []);
+      }
+      return;
+    }
+
+    // mode === "on": se aplican las reglas
+    FIELDS.forEach((k) => {
+      if (errors[k]) setCheck(k, "failed", errors[k]);
+      else setCheck(k, "met", "correcto");
+    });
+
+    if (bad.length) {
+      sawBlocked = true;
+      dbEl.textContent = "// No se guardó nada.\n// La validación rechazó " + bad.length + " campo(s).";
+      setResult("bad", "🛡️ Registro rechazado: " + bad.length + " campo(s) no cumplen las reglas. Los datos malos no llegan a la base de datos.", []);
+    } else {
+      const clean = normalize(vals);
+      dbEl.textContent = JSON.stringify(clean, null, 2);
+      const limpiado =
+        clean.nombre !== vals.nombre || clean.email !== vals.email || clean.telefono !== vals.telefono;
+      setResult("good", limpiado
+        ? "✅ Registro válido y además NORMALIZADO: se quitaron espacios sobrantes, el correo pasó a minúsculas y el teléfono quedó solo con dígitos."
+        : "✅ Registro válido. Los datos entran limpios y consistentes.", []);
+    }
+
+    if (sawAccepted && sawBlocked && passBadge) passBadge.classList.add("show");
+  }
+
+  function hasData() {
+    return FIELDS.some((k) => inputs[k].value.trim() !== "");
+  }
+
+  modeBtns.forEach((b) =>
+    b.addEventListener("click", () => {
+      mode = b.dataset.vmode;
+      modeBtns.forEach((x) => x.classList.toggle("active", x === b));
+      if (hasData()) submit(); // mismo dato, otro resultado: ahí está la lección
+    })
+  );
+  chips.forEach((c) =>
+    c.addEventListener("click", () => {
+      const p = PRESETS[c.dataset.vfill];
+      if (!p) return;
+      FIELDS.forEach((k) => { inputs[k].value = p[k]; });
+      submit();
+    })
+  );
+  submitBtn.addEventListener("click", submit);
+
+  FIELDS.forEach((k) => setCheck(k, "none", "sin comprobar todavía"));
+  dbEl.textContent = "// Aún no has enviado nada.";
+})();
