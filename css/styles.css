@@ -623,6 +623,57 @@ a.card:hover .card__cover img { transform: scale(1.05); }
   .mclab__stats { width: 100%; }
 }
 
+/* =====================================================================
+   PROGRESO DEL CURSO — secciones plegables, barra y bloqueo por módulo
+   ===================================================================== */
+.modprog { position: sticky; top: calc(var(--nav-h) + 8px); z-index: 40; background: rgba(255,255,255,.94); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 26px; box-shadow: var(--shadow-sm); }
+.modprog__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 9px; }
+.modprog__label { font-size: .82rem; font-weight: 700; color: var(--text-soft); }
+.modprog__pct { font-family: var(--mono); font-weight: 800; font-size: 1.1rem; color: var(--accent); }
+.modprog__track { height: 8px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.modprog__fill { display: block; height: 100%; width: 0%; background: var(--accent); border-radius: 999px; transition: width .45s ease; }
+.modprog__hint { font-size: .8rem; color: var(--text-dim); margin-top: 8px; }
+.modprog.done .modprog__fill { background: var(--ok); }
+.modprog.done .modprog__pct { color: var(--ok); }
+.modprog.done .modprog__hint { color: var(--ok); font-weight: 600; }
+
+/* Secciones plegables */
+.content-block.cb { margin-bottom: 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; scroll-margin-top: calc(var(--nav-h) + 90px); }
+.cb__head { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 15px 18px; background: none; border: none; font-family: var(--font); cursor: pointer; transition: background .15s; }
+.cb__head:hover { background: var(--bg-alt); }
+.cb__dot { width: 21px; height: 21px; border-radius: 50%; border: 2px solid var(--border-2); flex-shrink: 0; display: grid; place-items: center; font-size: 11px; color: transparent; transition: all .2s; }
+.cb.read .cb__dot { background: var(--ok); border-color: var(--ok); color: #fff; }
+.cb__title { flex: 1; min-width: 0; font-size: 1.08rem; font-weight: 700; letter-spacing: -.02em; color: var(--text); }
+.cb__title .n { font-size: .76rem; color: var(--accent); font-weight: 700; background: var(--accent-soft); padding: 2px 8px; border-radius: 6px; margin-right: 9px; }
+.cb__chev { color: var(--text-dim); font-size: 1.1rem; line-height: 1; flex-shrink: 0; transition: transform .25s ease; }
+.cb.open .cb__chev { transform: rotate(180deg); }
+.cb__panel { display: none; padding: 0 18px 18px; }
+.cb.open .cb__panel { display: block; animation: cbIn .25s ease; }
+@keyframes cbIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.cb__mark { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--border-2); background: var(--surface); font-family: var(--font); font-weight: 600; font-size: .88rem; cursor: pointer; color: var(--text); transition: all .2s; }
+.cb__mark:hover { border-color: var(--ok); color: var(--ok); }
+.cb.read .cb__mark { background: #f0fdf4; border-color: #cdefd6; color: #15803d; }
+
+/* Módulo bloqueado */
+.modlock { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-alt); padding: 46px 28px; text-align: center; margin: 20px 0 40px; }
+.modlock__ic { font-size: 2.6rem; line-height: 1; margin-bottom: 14px; }
+.modlock h3 { font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+.modlock p { color: var(--text-soft); font-size: .98rem; max-width: 46ch; margin: 0 auto 22px; }
+
+/* Candados y progreso en las tarjetas del índice */
+.card.locked { opacity: .5; filter: grayscale(.6); pointer-events: none; }
+.card__state { position: absolute; top: 12px; right: 12px; z-index: 2; background: rgba(255,255,255,.94); backdrop-filter: blur(4px); border-radius: 8px; padding: 4px 10px; font-size: .74rem; font-weight: 700; box-shadow: var(--shadow-sm); }
+.card__state.ok { color: var(--ok); }
+.card__state.mid { color: var(--accent); }
+.mod-nav a.next.locked { opacity: .45; cursor: not-allowed; }
+
+@media (max-width: 640px) {
+  .modprog { position: static; padding: 12px 14px; }
+  .cb__head { padding: 13px 14px; gap: 10px; }
+  .cb__title { font-size: .98rem; }
+  .cb__panel { padding: 0 14px 16px; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 940px) {
   .hero__grid { grid-template-columns: 1fr; gap: 44px; }
