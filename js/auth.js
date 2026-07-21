@@ -134,17 +134,29 @@ async function entrar(ev) {
     return verVista("pendiente");
   }
 
-  // Segundo factor: cerramos la sesión y exigimos el código del correo
+  // Segundo factor: cerramos la sesión y exigimos la prueba del correo
   await sb.auth.signOut();
-  const { error: errOtp } = await sb.auth.signInWithOtp({ email, shouldCreateUser: false });
+  const { error: errOtp } = await sb.auth.signInWithOtp({
+    email,
+    // OJO: en supabase-js v2 estas opciones van DENTRO de "options".
+    // Si shouldCreateUser queda fuera, se ignora y vale true: cualquiera
+    // podría crearse una cuenta por esta vía saltándose tu aprobación.
+    options: { shouldCreateUser: false, emailRedirectTo: urlDeVuelta() },
+  });
   cargando(btn, false, "Entrar →");
 
-  if (errOtp) return msg("err", "No se pudo enviar el código: " + errOtp.message);
+  if (errOtp) return msg("err", "No se pudo enviar el correo: " + errOtp.message);
   correoPendiente = email;
   const destino = $("#codigo-destino");
   if (destino) destino.textContent = email;
   verVista("codigo");
-  msg("ok", "Te enviamos un código de 6 dígitos a tu correo.");
+  msg("ok", "Te enviamos un correo. Ábrelo para terminar de entrar.");
+}
+
+/* A dónde debe volver el enlace del correo: la misma página, sin ancla.
+   Así funciona igual en Netlify que en GitHub Pages (ambas autorizadas). */
+function urlDeVuelta() {
+  return window.location.href.split("#")[0].split("?")[0];
 }
 
 /* ---------- 3 · Verificar el código (segundo factor) ---------- */
@@ -174,8 +186,11 @@ async function verificarCodigo(ev) {
 
 async function reenviarCodigo() {
   if (!correoPendiente) return;
-  const { error } = await sb.auth.signInWithOtp({ email: correoPendiente, shouldCreateUser: false });
-  msg(error ? "err" : "ok", error ? "No se pudo reenviar: " + error.message : "Código reenviado.");
+  const { error } = await sb.auth.signInWithOtp({
+    email: correoPendiente,
+    options: { shouldCreateUser: false, emailRedirectTo: urlDeVuelta() },
+  });
+  msg(error ? "err" : "ok", error ? "No se pudo reenviar: " + error.message : "Correo reenviado.");
 }
 
 /* ---------- 4 · Salir ---------- */

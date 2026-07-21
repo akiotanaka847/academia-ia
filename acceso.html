@@ -35,7 +35,7 @@
       <!-- ===== 1 · ENTRAR ===== -->
       <section id="vista-login" hidden>
         <h1>Iniciar sesión</h1>
-        <p class="auth__lead">Entra con tu correo y contraseña. Después te enviaremos un <b>código de 6 dígitos</b> a tu correo para confirmar que eres tú.</p>
+        <p class="auth__lead">Entra con tu correo y contraseña. Después te enviaremos un <b>mensaje a tu correo</b> para confirmar que eres tú: es la verificación en dos pasos.</p>
         <form id="form-login" novalidate>
           <div class="sqlab__field">
             <label for="log-email">Correo</label>
@@ -75,15 +75,25 @@
       <!-- ===== 3 · CÓDIGO (segundo factor) ===== -->
       <section id="vista-codigo" hidden>
         <h1>Verificación en dos pasos</h1>
-        <p class="auth__lead">Enviamos un código de 6 dígitos a <b id="codigo-destino">tu correo</b>. Escríbelo aquí para terminar de entrar.</p>
+        <p class="auth__lead">
+          Tu contraseña es correcta. Ahora comprobamos que el correo es tuyo: te enviamos un mensaje a
+          <b id="codigo-destino">tu correo</b>.
+        </p>
+        <div class="callout callout--info" style="margin-bottom:20px;">
+          <span class="label">El correo puede traer dos cosas</span>
+          <p style="margin:0;font-size:.9rem;">
+            Si trae un <b>enlace</b>, haz clic en él y entrarás directamente. Si trae un <b>código de 6 dígitos</b>,
+            escríbelo aquí abajo.
+          </p>
+        </div>
         <form id="form-codigo" novalidate>
           <div class="sqlab__field">
-            <label for="cod-input">Código de 6 dígitos</label>
+            <label for="cod-input">Código de 6 dígitos (si tu correo lo incluye)</label>
             <input type="text" id="cod-input" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="123456" class="auth__code" />
           </div>
           <button class="btn btn--primary auth__btn" id="cod-btn" type="submit">Verificar y entrar →</button>
         </form>
-        <p class="auth__alt">¿No te llegó? <a href="#" id="cod-reenviar">Reenviar código</a></p>
+        <p class="auth__alt">¿No te llegó? <a href="#" id="cod-reenviar">Reenviar correo</a></p>
       </section>
 
       <!-- ===== 4 · PENDIENTE DE APROBACIÓN ===== -->
