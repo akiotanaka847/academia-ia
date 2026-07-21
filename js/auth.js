@@ -52,15 +52,38 @@ function cargando(boton, activo, textoOriginal) {
   boton.textContent = activo ? "Un momento…" : textoOriginal;
 }
 
+/* A dónde ir después de entrar: si el guardián nos mandó aquí desde una
+   página concreta, volvemos ahí. Solo aceptamos rutas internas (que empiecen
+   por "/" pero no por "//"), para que nadie pueda usar esto como trampolín
+   hacia otro sitio web. */
+function destinoTrasLogin() {
+  const p = new URLSearchParams(window.location.search).get("volver");
+  if (p && p.charAt(0) === "/" && p.charAt(1) !== "/") return p;
+  return "index.html";
+}
+
 /* ---------- Estado inicial: ¿ya hay sesión? ---------- */
 async function estadoInicial() {
+  // Si el guardián nos redirigió, explicamos por qué
+  const params = new URLSearchParams(window.location.search);
+  const motivo = params.get("motivo");
+  const veniaDeOtraPagina = params.get("volver") !== null;
   const { data } = await sb.auth.getSession();
-  if (!data || !data.session) { verVista("login"); return; }
+
+  if (!data || !data.session) {
+    verVista("login");
+    if (motivo === "pendiente") msg("err", "Tu cuenta todavía no está aprobada por el administrador.");
+    else if (motivo === "error" || motivo === "lento") msg("err", "No pudimos verificar tu sesión. Vuelve a entrar.");
+    else if (veniaDeOtraPagina) msg("err", "Inicia sesión para acceder al curso.");
+    return;
+  }
 
   const perfil = await leerPerfil(data.session.user.id);
   if (perfil && perfil.aprobado) {
     const quien = $("#dentro-email");
     if (quien) quien.textContent = perfil.nombre || perfil.email;
+    const irAlCurso = $("#ir-al-curso");
+    if (irAlCurso) irAlCurso.href = destinoTrasLogin();
     verVista("dentro");
   } else {
     await sb.auth.signOut();
@@ -181,7 +204,7 @@ async function verificarCodigo(ev) {
     await sb.auth.signOut();
     return verVista("pendiente");
   }
-  window.location.href = "index.html";
+  window.location.href = destinoTrasLogin();
 }
 
 async function reenviarCodigo() {

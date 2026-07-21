@@ -4,6 +4,64 @@
    por eso el mismo archivo sirve para el índice y para los módulos.
    ===================================================================== */
 
+/* ---------- 0. Guardián de acceso ----------
+   Ninguna página del curso se puede ver sin sesión iniciada Y aprobada.
+   Va aquí porque las 33 páginas ya cargan este archivo: un solo sitio que
+   mantener. Si no hay sesión, mandamos a acceso.html recordando a dónde
+   quería ir la persona para devolverla ahí después de entrar.
+
+   AVISO HONESTO: esto bloquea la navegación normal, pero un sitio estático
+   sirve sus HTML públicamente; alguien técnico podría descargarlos sin pasar
+   por aquí. Lo que sí está protegido de verdad (por RLS, en el servidor) son
+   los datos: perfiles y progreso. */
+(function guardianDeAcceso() {
+  const ruta = window.location.pathname;
+  if (/(^|\/)acceso\.html$/.test(ruta)) return; // la página de acceso es pública
+
+  const SUPABASE_URL = "https://riqhbhvtfzebosdobdkf.supabase.co";
+  const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWhiaHZ0ZnplYm9zZG9iZGtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2NjI4NzIsImV4cCI6MjEwMDIzODg3Mn0.LR_SblaObzJ5vIC3tRHDyfNxZ65Cq6bh0x6D-66tm8k";
+
+  // Ocultamos el contenido mientras comprobamos, para no enseñarlo de refilón
+  const raiz = document.documentElement;
+  raiz.style.visibility = "hidden";
+  let listo = false;
+  function mostrar() { if (!listo) { listo = true; raiz.style.visibility = ""; } }
+
+  const enModulos = ruta.indexOf("/modulos/") !== -1;
+  const base = enModulos ? "../" : "./";
+
+  function aLogin(motivo) {
+    if (listo) return;
+    listo = true;
+    const volver = encodeURIComponent(ruta + window.location.search + window.location.hash);
+    window.location.replace(base + "acceso.html?volver=" + volver + (motivo ? "&motivo=" + motivo : ""));
+  }
+
+  // Si la comprobación se atasca, no dejamos la página en blanco para siempre
+  const salvavidas = setTimeout(function () { aLogin("lento"); }, 9000);
+
+  import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm")
+    .then(function (mod) {
+      const sb = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      return sb.auth.getSession().then(function (res) {
+        const sesion = res && res.data ? res.data.session : null;
+        if (!sesion) { clearTimeout(salvavidas); aLogin(); return; }
+        return sb.from("perfiles").select("aprobado").eq("id", sesion.user.id).maybeSingle()
+          .then(function (r) {
+            clearTimeout(salvavidas);
+            if (!r.data || !r.data.aprobado) {
+              sb.auth.signOut();
+              aLogin("pendiente");
+              return;
+            }
+            mostrar(); // sesión válida y aprobada: adelante
+          });
+      });
+    })
+    .catch(function () { clearTimeout(salvavidas); aLogin("error"); });
+})();
+
 /* ---------- 1. Revelar elementos al hacer scroll ----------
    Usamos IntersectionObserver: el navegador nos avisa cuándo un
    elemento entra en pantalla, en lugar de escuchar el scroll a cada
