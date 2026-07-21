@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso · Academia IA</title>
+  <meta name="description" content="Inscríbete o inicia sesión en la Academia IA. Las inscripciones pasan por aprobación y el acceso usa verificación en dos pasos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html#ruta">Temario</a></li>
+        <li><a href="laboratorios.html">Laboratorios</a></li>
+        <li><a href="index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="auth-wrap">
+    <div class="auth">
+      <span class="kicker">Academia IA · Programa interno</span>
+
+      <!-- Mensajes de estado (compartido por todas las vistas) -->
+      <div class="auth__msg" id="auth-msg"></div>
+
+      <!-- ===== 1 · ENTRAR ===== -->
+      <section id="vista-login" hidden>
+        <h1>Iniciar sesión</h1>
+        <p class="auth__lead">Entra con tu correo y contraseña. Después te enviaremos un <b>código de 6 dígitos</b> a tu correo para confirmar que eres tú.</p>
+        <form id="form-login" novalidate>
+          <div class="sqlab__field">
+            <label for="log-email">Correo</label>
+            <input type="email" id="log-email" autocomplete="email" placeholder="tu.nombre@empresa.com" />
+          </div>
+          <div class="sqlab__field">
+            <label for="log-pass">Contraseña</label>
+            <input type="password" id="log-pass" autocomplete="current-password" placeholder="••••••••" />
+          </div>
+          <button class="btn btn--primary auth__btn" id="log-btn" type="submit">Entrar →</button>
+        </form>
+        <p class="auth__alt">¿Aún no tienes cuenta? <a href="#" id="ir-registro">Solicita tu inscripción</a></p>
+      </section>
+
+      <!-- ===== 2 · REGISTRO ===== -->
+      <section id="vista-registro" hidden>
+        <h1>Solicitar inscripción</h1>
+        <p class="auth__lead">Crea tu cuenta con tu correo de la empresa. Un administrador revisará tu solicitud y te avisará cuando esté aprobada.</p>
+        <form id="form-registro" novalidate>
+          <div class="sqlab__field">
+            <label for="reg-nombre">Nombre completo</label>
+            <input type="text" id="reg-nombre" autocomplete="name" placeholder="Carmen Soto" />
+          </div>
+          <div class="sqlab__field">
+            <label for="reg-email">Correo de la empresa</label>
+            <input type="email" id="reg-email" autocomplete="email" placeholder="tu.nombre@empresa.com" />
+          </div>
+          <div class="sqlab__field">
+            <label for="reg-pass">Contraseña <span class="auth__hint">mínimo 8 caracteres</span></label>
+            <input type="password" id="reg-pass" autocomplete="new-password" placeholder="••••••••" />
+          </div>
+          <button class="btn btn--primary auth__btn" id="reg-btn" type="submit">Crear mi cuenta</button>
+        </form>
+        <p class="auth__alt">¿Ya tienes cuenta? <a href="#" id="ir-login">Iniciar sesión</a></p>
+      </section>
+
+      <!-- ===== 3 · CÓDIGO (segundo factor) ===== -->
+      <section id="vista-codigo" hidden>
+        <h1>Verificación en dos pasos</h1>
+        <p class="auth__lead">Enviamos un código de 6 dígitos a <b id="codigo-destino">tu correo</b>. Escríbelo aquí para terminar de entrar.</p>
+        <form id="form-codigo" novalidate>
+          <div class="sqlab__field">
+            <label for="cod-input">Código de 6 dígitos</label>
+            <input type="text" id="cod-input" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="123456" class="auth__code" />
+          </div>
+          <button class="btn btn--primary auth__btn" id="cod-btn" type="submit">Verificar y entrar →</button>
+        </form>
+        <p class="auth__alt">¿No te llegó? <a href="#" id="cod-reenviar">Reenviar código</a></p>
+      </section>
+
+      <!-- ===== 4 · PENDIENTE DE APROBACIÓN ===== -->
+      <section id="vista-pendiente" hidden>
+        <div class="auth__ic">⏳</div>
+        <h1>Tu inscripción está en revisión</h1>
+        <p class="auth__lead">
+          Ya recibimos tu solicitud. Si acabas de registrarte, <b>confirma primero tu correo</b> con el enlace que
+          te enviamos. Después, un administrador aprobará tu acceso y te llegará un aviso. En cuanto esté
+          autorizado podrás entrar con normalidad.
+        </p>
+        <p class="auth__alt"><a href="#" id="pendiente-volver">← Volver a iniciar sesión</a></p>
+      </section>
+
+      <!-- ===== 5 · SESIÓN ACTIVA ===== -->
+      <section id="vista-dentro" hidden>
+        <div class="auth__ic">✅</div>
+        <h1>Sesión iniciada</h1>
+        <p class="auth__lead">Hola, <b id="dentro-email">—</b>. Ya tienes acceso al programa completo.</p>
+        <a href="index.html" class="btn btn--primary auth__btn">Ir al curso →</a>
+        <p class="auth__alt"><a href="#" id="btn-salir">Cerrar sesión</a></p>
+      </section>
+
+      <p class="auth__legal">
+        Tus datos se usan solo para gestionar el acceso al programa interno de formación.
+      </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> · Academia IA</span>
+        <a href="index.html" style="color:var(--accent);">Volver al índice →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

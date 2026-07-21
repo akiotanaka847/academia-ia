@@ -674,6 +674,24 @@ a.card:hover .card__cover img { transform: scale(1.05); }
   .cb__panel { padding: 0 14px 16px; }
 }
 
+/* =====================================================================
+   ACCESO (registro / login / código de verificación)
+   ===================================================================== */
+.auth-wrap { min-height: 78vh; display: grid; place-items: center; padding: calc(var(--nav-h) + 40px) 24px 60px; }
+.auth { width: 100%; max-width: 440px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 34px 30px 28px; }
+.auth h1 { font-size: clamp(1.5rem, 0.9rem + 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -.03em; margin: 14px 0 8px; }
+.auth__lead { color: var(--text-soft); font-size: .95rem; margin-bottom: 22px; }
+.auth__btn { width: 100%; justify-content: center; margin-top: 6px; }
+.auth__alt { text-align: center; font-size: .9rem; color: var(--text-soft); margin-top: 18px; }
+.auth__alt a { color: var(--accent); font-weight: 600; }
+.auth__hint { font-weight: 400; color: var(--text-dim); font-size: .78rem; }
+.auth__ic { font-size: 2.6rem; line-height: 1; }
+.auth__code { font-family: var(--mono); font-size: 1.5rem !important; letter-spacing: .35em; text-align: center; }
+.auth__msg { font-size: .9rem; font-weight: 600; border-radius: var(--radius-sm); padding: 0; margin: 0; }
+.auth__msg.ok { background: #f0fdf4; border: 1px solid #cdefd6; color: #15803d; padding: 11px 14px; margin-bottom: 16px; }
+.auth__msg.err { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 11px 14px; margin-bottom: 16px; }
+.auth__legal { font-size: .76rem; color: var(--text-dim); text-align: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 940px) {
   .hero__grid { grid-template-columns: 1fr; gap: 44px; }
