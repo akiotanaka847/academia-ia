@@ -25,6 +25,13 @@ const SUPABASE_ANON_KEY =
 
 export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Segundo factor por correo (código/enlace). TEMPORALMENTE desactivado porque
+// el correo gratis de Supabase está limitado (error 429) y eso bloquea el
+// login. Poner en true otra vez cuando Resend (SMTP propio) esté configurado.
+// Con esto, el acceso sigue protegido por CONTRASEÑA + APROBACIÓN del admin
+// (esa aprobación no se puede saltar: ver RLS en sql/supabase-setup.sql).
+const SEGUNDO_FACTOR = false;
+
 /* ---------- Utilidades de interfaz ---------- */
 const $ = (sel) => document.querySelector(sel);
 const vistas = ["login", "registro", "codigo", "pendiente", "dentro"];
@@ -194,6 +201,14 @@ async function entrar(ev) {
     await sb.auth.signOut();
     cargando(btn, false, "Entrar →");
     return verVista("pendiente");
+  }
+
+  // Segundo factor desactivado (temporal): la contraseña ya creó una sesión
+  // válida y la persona está aprobada, así que entramos directo.
+  if (!SEGUNDO_FACTOR) {
+    cargando(btn, false, "Entrar →");
+    window.location.href = destinoTrasLogin();
+    return;
   }
 
   // Segundo factor: cerramos la sesión y exigimos la prueba del correo
