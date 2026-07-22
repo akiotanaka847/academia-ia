@@ -1,11 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Academia IA">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2563eb"/>
-      <stop offset="1" stop-color="#1d4ed8"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="96" fill="url(#g)"/>
-  <text x="256" y="256" fill="#ffffff" font-family="Arial, Helvetica, sans-serif"
-        font-weight="700" font-size="248" text-anchor="middle" dominant-baseline="central">IA</text>
-</svg>
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#g)"/><g transform="translate(256 262) ">
+  <g fill="#ffffff">
+    <ellipse cx="0" cy="18" rx="150" ry="120"/>
+    <circle cx="-78" cy="-58" r="60"/><circle cx="-4" cy="-80" r="64"/><circle cx="74" cy="-58" r="60"/>
+    <circle cx="-128" cy="6" r="54"/><circle cx="128" cy="6" r="54"/>
+    <circle cx="-70" cy="70" r="52"/><circle cx="70" cy="70" r="52"/>
+  </g>
+  <g fill="none" stroke="#2563eb" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 -128 C 14 -70, -14 -30, 0 20 C 12 70, -8 100, 0 132"/>
+    <path d="M-52 -60 q -34 26 -6 60 q 22 26 -6 56"/>
+    <path d="M52 -60 q 34 26 6 60 q -22 26 6 56"/>
+    <path d="M-104 4 q 26 18 6 44"/><path d="M104 4 q -26 18 -6 44"/>
+  </g>
+</g></svg>
