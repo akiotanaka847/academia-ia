@@ -29,6 +29,44 @@ export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (sel) => document.querySelector(sel);
 const vistas = ["login", "registro", "codigo", "pendiente", "dentro"];
 let correoPendiente = "";
+let reintentos = 0;      // nº de envíos de código en esta sesión de login
+let enfriando = false;   // ¿el botón "reenviar" está en cuenta atrás?
+let tempReenvio = null;
+
+// Back-off exponencial: 30s, 60s, 120s, 240s… con tope de 5 min.
+// Evita golpear el límite de correo de Supabase (error 429).
+function segundosEspera() {
+  return Math.min(300, 30 * Math.pow(2, Math.max(0, reintentos - 1)));
+}
+
+// ¿el error es el límite de tasa del servicio de correo?
+function esLimiteCorreo(error) {
+  return !!error && (error.status === 429 || /rate limit|too many|429/i.test(error.message || ""));
+}
+
+// Deshabilita el enlace "reenviar" y muestra la cuenta atrás.
+function enfriarReenvio(segundos) {
+  const link = $("#cod-reenviar");
+  if (!link) return;
+  enfriando = true;
+  let restante = Math.round(segundos);
+  const base = "Reenviar correo";
+  link.style.pointerEvents = "none";
+  link.style.opacity = "0.5";
+  clearInterval(tempReenvio);
+  const pintar = () => {
+    link.textContent = restante > 0 ? base + " (" + restante + "s)" : base;
+    if (restante <= 0) {
+      clearInterval(tempReenvio);
+      enfriando = false;
+      link.style.pointerEvents = "";
+      link.style.opacity = "";
+    }
+    restante--;
+  };
+  pintar();
+  tempReenvio = setInterval(pintar, 1000);
+}
 
 function verVista(nombre) {
   vistas.forEach((v) => {
@@ -139,6 +177,7 @@ async function entrar(ev) {
   if (!email || !pass) return msg("err", "Escribe tu correo y tu contraseña.");
 
   cargando(btn, true);
+  reintentos = 0; enfriando = false; clearInterval(tempReenvio);
   const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
 
   if (error) {
@@ -168,12 +207,22 @@ async function entrar(ev) {
   });
   cargando(btn, false, "Entrar →");
 
-  if (errOtp) return msg("err", "No se pudo enviar el correo: " + errOtp.message);
   correoPendiente = email;
+  reintentos = 1; // el envío automático de arriba cuenta como el primero
   const destino = $("#codigo-destino");
   if (destino) destino.textContent = email;
   verVista("codigo");
-  msg("ok", "Te enviamos un correo. Ábrelo para terminar de entrar.");
+
+  if (errOtp) {
+    if (esLimiteCorreo(errOtp)) {
+      msg("err", "Tu contraseña es correcta, pero el servicio de correo está saturado ahora mismo (límite del plan gratuito de Supabase). Espera a que termine la cuenta atrás y pulsa «Reenviar correo» —o pide que se configure un proveedor de correo propio para que deje de pasar.");
+    } else {
+      msg("err", "No se pudo enviar el correo: " + errOtp.message);
+    }
+  } else {
+    msg("ok", "Te enviamos un correo. Ábrelo (o escribe el código si lo trae) para terminar de entrar. Revisa también el spam.");
+  }
+  enfriarReenvio(segundosEspera());
 }
 
 /* A dónde debe volver el enlace del correo: la misma página, sin ancla.
@@ -207,13 +256,28 @@ async function verificarCodigo(ev) {
   window.location.href = destinoTrasLogin();
 }
 
-async function reenviarCodigo() {
-  if (!correoPendiente) return;
+async function reenviarCodigo(ev) {
+  if (ev) ev.preventDefault();
+  if (enfriando || !correoPendiente) return; // en cuenta atrás: no dejamos reintentar
+  const link = $("#cod-reenviar");
+  if (link) link.style.pointerEvents = "none";
+
   const { error } = await sb.auth.signInWithOtp({
     email: correoPendiente,
     options: { shouldCreateUser: false, emailRedirectTo: urlDeVuelta() },
   });
-  msg(error ? "err" : "ok", error ? "No se pudo reenviar: " + error.message : "Correo reenviado.");
+  reintentos++; // cada reintento aumenta la espera del siguiente
+
+  if (error) {
+    if (esLimiteCorreo(error)) {
+      msg("err", "El correo sigue limitado por Supabase. Cada reintento espera más para no empeorarlo; prueba otra vez cuando termine la cuenta atrás.");
+    } else {
+      msg("err", "No se pudo reenviar: " + error.message);
+    }
+  } else {
+    msg("ok", "Correo reenviado. Revisa tu bandeja y la carpeta de spam.");
+  }
+  enfriarReenvio(segundosEspera());
 }
 
 /* ---------- 4 · Salir ---------- */
