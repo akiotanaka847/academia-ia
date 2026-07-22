@@ -227,6 +227,17 @@ if (taskChecks.length) {
 const yearEl = document.querySelector("[data-year]");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+/* ---------- 9b. Service Worker (PWA: instalable + respaldo offline) ----------
+   sw.js vive en la raíz del sitio; desde un módulo hay que subir un nivel.
+   Registrarlo con scope de raíz hace que cubra todas las páginas. */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    var enModulo = window.location.pathname.indexOf("/modulos/") !== -1;
+    var swUrl = (enModulo ? "../" : "./") + "sw.js";
+    navigator.serviceWorker.register(swUrl).catch(function () {});
+  });
+}
+
 /* ---------- 10. Progreso del curso: secciones plegables y desbloqueo ----------
    Todo se construye desde aquí, sin tocar el HTML de los 30 módulos:
    · cada .content-block se convierte en una sección plegable
