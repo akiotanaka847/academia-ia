@@ -1,0 +1,9 @@
+# Cabeceras para Netlify (se ignoran en otros hosts)
+
+# El service worker no debe cachearse: así las actualizaciones siempre llegan.
+/sw.js
+  Cache-Control: no-cache
+
+# Tipo MIME correcto del manifiesto de la PWA.
+/manifest.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
