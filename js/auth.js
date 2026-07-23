@@ -30,7 +30,7 @@ export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // login. Poner en true otra vez cuando Resend (SMTP propio) esté configurado.
 // Con esto, el acceso sigue protegido por CONTRASEÑA + APROBACIÓN del admin
 // (esa aprobación no se puede saltar: ver RLS en sql/supabase-setup.sql).
-const SEGUNDO_FACTOR = true;
+const SEGUNDO_FACTOR = false;
 
 /* ---------- Utilidades de interfaz ---------- */
 const $ = (sel) => document.querySelector(sel);
@@ -49,6 +49,20 @@ function segundosEspera() {
 // ¿el error es el límite de tasa del servicio de correo?
 function esLimiteCorreo(error) {
   return !!error && (error.status === 429 || /rate limit|too many|429/i.test(error.message || ""));
+}
+
+// El objeto de error de Supabase a veces no trae .message; sacamos algo legible.
+function detalleError(e) {
+  if (!e) return "error desconocido";
+  return e.message || e.msg || e.error_description || e.error ||
+    (e.code ? "código " + e.code : "") ||
+    (typeof e === "string" ? e : "") || "error desconocido";
+}
+
+// ¿el correo no salió porque el proveedor de correo (SMTP/Resend) lo rechazó?
+function esFalloDeEnvio(error) {
+  if (!error) return false;
+  return error.status === 500 || /sending|smtp|unexpected_failure/i.test(detalleError(error));
 }
 
 // Deshabilita el enlace "reenviar" y muestra la cuenta atrás.
@@ -266,7 +280,8 @@ async function recuperar(ev) {
 
   if (error) {
     if (esLimiteCorreo(error)) return msg("err", "El correo está limitado ahora mismo. Espera un poco e inténtalo otra vez.");
-    return msg("err", "No se pudo enviar: " + error.message);
+    if (esFalloDeEnvio(error)) return msg("err", "El servidor de correo rechazó el envío. Suele faltar verificar el dominio en el proveedor de correo (Resend). Avisa al administrador.");
+    return msg("err", "No se pudo enviar: " + detalleError(error));
   }
   // Por seguridad, el mismo mensaje exista o no la cuenta (no revelamos quién está registrado).
   msg("ok", "Si ese correo tiene cuenta, te enviamos un enlace para crear una contraseña nueva. Revisa tu bandeja y el spam.");
