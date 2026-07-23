@@ -30,7 +30,7 @@ export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // login. Poner en true otra vez cuando Resend (SMTP propio) esté configurado.
 // Con esto, el acceso sigue protegido por CONTRASEÑA + APROBACIÓN del admin
 // (esa aprobación no se puede saltar: ver RLS en sql/supabase-setup.sql).
-const SEGUNDO_FACTOR = false;
+const SEGUNDO_FACTOR = true;
 
 /* ---------- Utilidades de interfaz ---------- */
 const $ = (sel) => document.querySelector(sel);
