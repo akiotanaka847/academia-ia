@@ -196,6 +196,23 @@ async function registrarse(ev) {
   msg("ok", "Cuenta creada. Revisa tu correo y confirma tu dirección.");
 }
 
+/* ---------- 1b · Entrar con Google (OAuth) ----------
+   Un clic: Google verifica la identidad, así que no hacen falta contraseñas
+   ni códigos por correo. Al volver, estadoInicial comprueba la aprobación:
+   quien no esté aprobado por el admin verá "pendiente" igual que siempre. */
+async function entrarConGoogle() {
+  const btn = $("#btn-google");
+  if (btn) { btn.disabled = true; btn.style.opacity = "0.6"; }
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: urlDeVuelta() },
+  });
+  if (error) {
+    if (btn) { btn.disabled = false; btn.style.opacity = ""; }
+    msg("err", "No se pudo iniciar con Google: " + detalleError(error));
+  }
+}
+
 /* ---------- 2 · Entrar (contraseña → aprobación → código) ---------- */
 async function entrar(ev) {
   ev.preventDefault();
@@ -365,6 +382,7 @@ async function salir() {
 function on(sel, evento, fn) { const el = $(sel); if (el) el.addEventListener(evento, fn); }
 
 on("#form-registro", "submit", registrarse);
+on("#btn-google", "click", entrarConGoogle);
 on("#form-login", "submit", entrar);
 on("#form-recuperar", "submit", recuperar);
 on("#form-nueva-clave", "submit", guardarNuevaClave);
