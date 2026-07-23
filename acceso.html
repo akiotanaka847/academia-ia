@@ -55,6 +55,7 @@
           </div>
           <button class="btn btn--primary auth__btn" id="log-btn" type="submit">Entrar →</button>
         </form>
+        <p class="auth__alt"><a href="#" id="ir-recuperar">¿Olvidaste tu contraseña?</a></p>
         <p class="auth__alt">¿Aún no tienes cuenta? <a href="#" id="ir-registro">Solicita tu inscripción</a></p>
       </section>
 
@@ -78,6 +79,37 @@
           <button class="btn btn--primary auth__btn" id="reg-btn" type="submit">Crear mi cuenta</button>
         </form>
         <p class="auth__alt">¿Ya tienes cuenta? <a href="#" id="ir-login">Iniciar sesión</a></p>
+      </section>
+
+      <!-- ===== 2b · RECUPERAR CONTRASEÑA (pedir correo) ===== -->
+      <section id="vista-recuperar" hidden>
+        <h1>Recuperar contraseña</h1>
+        <p class="auth__lead">Escribe tu correo y te enviaremos un enlace para crear una contraseña nueva.</p>
+        <form id="form-recuperar" novalidate>
+          <div class="sqlab__field">
+            <label for="rec-email">Correo</label>
+            <input type="email" id="rec-email" autocomplete="email" placeholder="tu.nombre@empresa.com" />
+          </div>
+          <button class="btn btn--primary auth__btn" id="rec-btn" type="submit">Enviar enlace →</button>
+        </form>
+        <p class="auth__alt"><a href="#" id="rec-volver">← Volver a iniciar sesión</a></p>
+      </section>
+
+      <!-- ===== 2c · NUEVA CONTRASEÑA (tras clic en el enlace del correo) ===== -->
+      <section id="vista-nueva-clave" hidden>
+        <h1>Crea tu nueva contraseña</h1>
+        <p class="auth__lead">Escribe una contraseña nueva para tu cuenta y entrarás directamente.</p>
+        <form id="form-nueva-clave" novalidate>
+          <div class="sqlab__field">
+            <label for="nc-pass">Nueva contraseña <span class="auth__hint">mínimo 8 caracteres</span></label>
+            <input type="password" id="nc-pass" autocomplete="new-password" placeholder="••••••••" />
+          </div>
+          <div class="sqlab__field">
+            <label for="nc-pass2">Repite la contraseña</label>
+            <input type="password" id="nc-pass2" autocomplete="new-password" placeholder="••••••••" />
+          </div>
+          <button class="btn btn--primary auth__btn" id="nc-btn" type="submit">Guardar y entrar →</button>
+        </form>
       </section>
 
       <!-- ===== 3 · CÓDIGO (segundo factor) ===== -->

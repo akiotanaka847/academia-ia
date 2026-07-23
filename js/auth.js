@@ -34,7 +34,7 @@ const SEGUNDO_FACTOR = true;
 
 /* ---------- Utilidades de interfaz ---------- */
 const $ = (sel) => document.querySelector(sel);
-const vistas = ["login", "registro", "codigo", "pendiente", "dentro"];
+const vistas = ["login", "registro", "recuperar", "nueva-clave", "codigo", "pendiente", "dentro"];
 let correoPendiente = "";
 let reintentos = 0;      // nº de envíos de código en esta sesión de login
 let enfriando = false;   // ¿el botón "reenviar" está en cuenta atrás?
@@ -109,6 +109,13 @@ function destinoTrasLogin() {
 
 /* ---------- Estado inicial: ¿ya hay sesión? ---------- */
 async function estadoInicial() {
+  // ¿Venimos del enlace de "recuperar contraseña"? Entonces, aunque el enlace
+  // cree una sesión, no entramos al curso: mostramos el formulario de nueva clave.
+  if (window.location.hash.indexOf("type=recovery") !== -1) {
+    verVista("nueva-clave");
+    return;
+  }
+
   // Si el guardián nos redirigió, explicamos por qué
   const params = new URLSearchParams(window.location.search);
   const motivo = params.get("motivo");
@@ -246,6 +253,43 @@ function urlDeVuelta() {
   return window.location.href.split("#")[0].split("?")[0];
 }
 
+/* ---------- 2b · Recuperar contraseña: enviar el enlace ---------- */
+async function recuperar(ev) {
+  ev.preventDefault();
+  const email = $("#rec-email").value.trim().toLowerCase();
+  const btn = $("#rec-btn");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return msg("err", "Escribe un correo válido.");
+
+  cargando(btn, true);
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: urlDeVuelta() });
+  cargando(btn, false, "Enviar enlace →");
+
+  if (error) {
+    if (esLimiteCorreo(error)) return msg("err", "El correo está limitado ahora mismo. Espera un poco e inténtalo otra vez.");
+    return msg("err", "No se pudo enviar: " + error.message);
+  }
+  // Por seguridad, el mismo mensaje exista o no la cuenta (no revelamos quién está registrado).
+  msg("ok", "Si ese correo tiene cuenta, te enviamos un enlace para crear una contraseña nueva. Revisa tu bandeja y el spam.");
+}
+
+/* ---------- 2c · Guardar la contraseña nueva (tras el enlace) ---------- */
+async function guardarNuevaClave(ev) {
+  ev.preventDefault();
+  const p1 = $("#nc-pass").value;
+  const p2 = $("#nc-pass2").value;
+  const btn = $("#nc-btn");
+  if (p1.length < 8) return msg("err", "La contraseña debe tener al menos 8 caracteres.");
+  if (p1 !== p2) return msg("err", "Las dos contraseñas no coinciden.");
+
+  cargando(btn, true);
+  const { error } = await sb.auth.updateUser({ password: p1 });
+  cargando(btn, false, "Guardar y entrar →");
+  if (error) return msg("err", "No se pudo guardar la contraseña: " + error.message);
+
+  // La sesión de recuperación ya es válida; entramos directo al curso.
+  window.location.href = destinoTrasLogin();
+}
+
 /* ---------- 3 · Verificar el código (segundo factor) ---------- */
 async function verificarCodigo(ev) {
   ev.preventDefault();
@@ -307,11 +351,21 @@ function on(sel, evento, fn) { const el = $(sel); if (el) el.addEventListener(ev
 
 on("#form-registro", "submit", registrarse);
 on("#form-login", "submit", entrar);
+on("#form-recuperar", "submit", recuperar);
+on("#form-nueva-clave", "submit", guardarNuevaClave);
 on("#form-codigo", "submit", verificarCodigo);
 on("#cod-reenviar", "click", reenviarCodigo);
 on("#btn-salir", "click", salir);
 on("#ir-registro", "click", (e) => { e.preventDefault(); verVista("registro"); });
 on("#ir-login", "click", (e) => { e.preventDefault(); verVista("login"); });
+on("#ir-recuperar", "click", (e) => { e.preventDefault(); verVista("recuperar"); });
+on("#rec-volver", "click", (e) => { e.preventDefault(); verVista("login"); });
 on("#pendiente-volver", "click", (e) => { e.preventDefault(); verVista("login"); });
+
+// Si Supabase detecta que la persona llegó desde el enlace de recuperación,
+// mostramos el formulario de contraseña nueva (por si la carga se adelanta al hash).
+sb.auth.onAuthStateChange((evento) => {
+  if (evento === "PASSWORD_RECOVERY") verVista("nueva-clave");
+});
 
 estadoInicial();
