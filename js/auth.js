@@ -191,9 +191,14 @@ async function registrarse(ev) {
   });
   cargando(btn, false, "Crear mi cuenta");
 
-  if (error) return msg("err", "No se pudo crear la cuenta: " + error.message);
+  if (error) {
+    if (esLimiteCorreo(error)) return msg("err", "El servicio de correo está saturado ahora mismo. Espera un poco e inténtalo otra vez.");
+    if (esFalloDeEnvio(error)) return msg("err", "No se pudo crear la cuenta por un problema del servidor de correo. Avisa al administrador.");
+    if (/already registered|already exists/i.test(detalleError(error))) return msg("err", "Ese correo ya tiene una cuenta. Inicia sesión o recupera tu contraseña.");
+    return msg("err", "No se pudo crear la cuenta: " + detalleError(error));
+  }
   verVista("pendiente");
-  msg("ok", "Cuenta creada. Revisa tu correo y confirma tu dirección.");
+  msg("ok", "Cuenta creada. Un administrador revisará tu solicitud y te dará acceso.");
 }
 
 /* ---------- 1b · Entrar con Google (OAuth) ----------
