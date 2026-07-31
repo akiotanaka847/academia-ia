@@ -92,6 +92,9 @@ ul { list-style: none; }
 }
 .nav__cta:hover { background: var(--accent); transform: translateY(-1px); }
 .nav__burger { display: none; background: none; border: none; cursor: pointer; color: var(--text); }
+.nav__user { font-size: .9rem; font-weight: 600; color: var(--text-dim); white-space: nowrap; }
+.nav__salir { font-family: var(--font); font-size: .88rem; font-weight: 600; color: var(--text-soft); background: none; border: 1px solid var(--border-2); border-radius: 999px; padding: 8px 16px; cursor: pointer; transition: color .2s, border-color .2s, background .2s; white-space: nowrap; }
+.nav__salir:hover { color: var(--err); border-color: var(--err); background: #fef2f2; }
 
 .progress-bar { position: fixed; inset: 0 auto auto 0; height: 2px; width: 0%; background: var(--accent); z-index: 200; transition: width .1s linear; }
 

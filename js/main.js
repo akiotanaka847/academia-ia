@@ -47,7 +47,7 @@
       return sb.auth.getSession().then(function (res) {
         const sesion = res && res.data ? res.data.session : null;
         if (!sesion) { clearTimeout(salvavidas); aLogin(); return; }
-        return sb.from("perfiles").select("aprobado").eq("id", sesion.user.id).maybeSingle()
+        return sb.from("perfiles").select("aprobado, nombre, email").eq("id", sesion.user.id).maybeSingle()
           .then(function (r) {
             clearTimeout(salvavidas);
             if (!r.data || !r.data.aprobado) {
@@ -55,11 +55,49 @@
               aLogin("pendiente");
               return;
             }
+            montarSalir(sb, r.data, sesion.user); // barra: saludo + cerrar sesión
             mostrar(); // sesión válida y aprobada: adelante
           });
       });
     })
     .catch(function () { clearTimeout(salvavidas); aLogin("error"); });
+
+  // Inyecta en la barra un saludo y un botón "Cerrar sesión" (en las 33 páginas).
+  function montarSalir(sb, perfil, user) {
+    const links = document.querySelector(".nav__links");
+    if (!links || document.querySelector(".nav__salir")) return;
+
+    // si estamos dentro, el enlace "Acceso" ya no hace falta
+    const accesoLink = links.querySelector('a[href*="acceso.html"]');
+    if (accesoLink && accesoLink.parentElement) accesoLink.parentElement.style.display = "none";
+
+    const nombre = perfil && perfil.nombre ? String(perfil.nombre).trim().split(/\s+/)[0] : "";
+    const correo = (perfil && perfil.email) || (user && user.email) || "";
+
+    if (nombre) {
+      const liH = document.createElement("li");
+      const hola = document.createElement("span");
+      hola.className = "nav__user";
+      hola.textContent = "Hola, " + nombre;
+      liH.appendChild(hola);
+      links.appendChild(liH);
+    }
+
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "nav__salir";
+    btn.textContent = "Cerrar sesión";
+    if (correo) btn.title = "Sesión de " + correo;
+    btn.addEventListener("click", function () {
+      btn.disabled = true;
+      btn.textContent = "Saliendo…";
+      const fin = function () { window.location.replace(base + "acceso.html"); };
+      sb.auth.signOut().then(fin).catch(fin);
+    });
+    li.appendChild(btn);
+    links.appendChild(li);
+  }
 })();
 
 /* ---------- 1. Revelar elementos al hacer scroll ----------
