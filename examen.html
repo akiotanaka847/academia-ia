@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examen de nivelación · Academia IA</title>
+  <meta name="description" content="Examen de nivelación de la Academia IA: mide tu nivel (principiante, intermedio o avanzado) o valida un nivel para empezar directamente ahí. Calificación en el servidor, a prueba de trampas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html#ruta">Temario</a></li>
+        <li><a href="tareas.html">Tareas</a></li>
+        <li><a href="laboratorios.html">Laboratorios</a></li>
+        <li><a href="index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container exam-wrap">
+
+    <!-- ===== INTRO / ELEGIR ===== -->
+    <section id="exam-intro">
+      <header class="exam-intro__head">
+        <span class="kicker">Examen de nivelación</span>
+        <h1>¿En qué nivel <em>empiezas</em>?</h1>
+        <p class="lead">Haz el <b>diagnóstico</b> y te decimos tu nivel, o <b>reta un nivel</b> para validarlo y empezar directamente ahí. La calificación se hace en el servidor: nadie ve las respuestas correctas de antemano, y las preguntas no se repiten al reintentar.</p>
+      </header>
+
+      <div class="exam-choices">
+        <button class="exam-choice" data-modo="diagnostico">
+          <span class="exam-choice__tag">Recomendado</span>
+          <h3>Diagnóstico completo</h3>
+          <p>18 preguntas mezclando los 3 niveles. Al final te decimos dónde te colocas: principiante, intermedio o avanzado.</p>
+          <span class="exam-choice__go">Empezar diagnóstico →</span>
+        </button>
+        <button class="exam-choice" data-modo="reto" data-nivel="intermedio">
+          <h3>Retar <b>Intermedio</b></h3>
+          <p>¿Ya dominas los fundamentos? Aprueba con 80% y validamos los módulos básicos: empiezas en el Nivel 3.</p>
+          <span class="exam-choice__go">Retar intermedio →</span>
+        </button>
+        <button class="exam-choice" data-modo="reto" data-nivel="avanzado">
+          <h3>Retar <b>Avanzado</b></h3>
+          <p>Para perfiles con experiencia. Aprueba con 80% y validamos básico + intermedio: empiezas en el Nivel 5.</p>
+          <span class="exam-choice__go">Retar avanzado →</span>
+        </button>
+      </div>
+      <p class="exam-note" data-exam="aviso"></p>
+    </section>
+
+    <!-- ===== EXAMEN EN CURSO ===== -->
+    <section id="exam-run" hidden>
+      <div class="exam-bar">
+        <div class="exam-bar__track"><i class="exam-bar__fill" data-exam="fill"></i></div>
+        <div class="exam-bar__meta"><span data-exam="contador">1 / 18</span><span data-exam="titulo">Diagnóstico</span></div>
+      </div>
+      <div class="exam-q">
+        <p class="exam-q__text" data-exam="pregunta">…</p>
+        <div class="exam-q__opts" data-exam="opciones"></div>
+      </div>
+      <div class="exam-run__foot">
+        <button class="lab-btn lab-btn--ghost" data-exam="anterior">← Anterior</button>
+        <button class="lab-btn" data-exam="siguiente">Siguiente →</button>
+      </div>
+    </section>
+
+    <!-- ===== RESULTADO ===== -->
+    <section id="exam-result" hidden>
+      <div class="exam-result__head">
+        <span class="exam-result__score" data-exam="score">0%</span>
+        <h2 data-exam="veredicto">…</h2>
+        <p data-exam="subveredicto"></p>
+      </div>
+      <div class="exam-result__niveles" data-exam="niveles"></div>
+      <div class="exam-result__actions" data-exam="acciones"></div>
+      <h3 class="exam-result__revh">Repaso: qué acertaste y qué no</h3>
+      <div class="exam-review" data-exam="review"></div>
+      <div class="exam-result__foot">
+        <button class="lab-btn lab-btn--ghost" data-exam="reiniciar">← Volver al inicio del examen</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> · Academia IA · Examen de nivelación</span>
+        <a href="index.html" style="color:var(--accent);">Volver al índice →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/examen.js"></script>
+</body>
+</html>
