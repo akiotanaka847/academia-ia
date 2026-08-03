@@ -18,6 +18,7 @@
   --text:        #0b0b0f;
   --text-soft:   #55555f;
   --text-dim:    #9a9aa6;
+  --ink:         #0b0b0f;  /* tinta: relleno oscuro de botones (.lab-btn) y código */
 
   /* Acento (azul sobrio) */
   --accent:      #2563eb;
@@ -730,6 +731,9 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .exam-opt__k { width: 28px; height: 28px; flex-shrink: 0; border-radius: 8px; border: 1.5px solid var(--border-2); display: grid; place-items: center; font-family: var(--mono); font-weight: 700; font-size: .85rem; color: var(--text-dim); }
 .exam-opt.sel .exam-opt__k { background: var(--accent); border-color: var(--accent); color: #fff; }
 .exam-run__foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; }
+.exam-run__foot .lab-btn:not(.lab-btn--ghost) { background: #0b0b0f; border-color: #0b0b0f; color: #fff; }
+.exam-run__foot .lab-btn:not(.lab-btn--ghost):hover,
+.exam-run__foot .lab-btn:not(.lab-btn--ghost):focus-visible { background: var(--accent); border-color: var(--accent); }
 
 .exam-result__head { text-align: center; margin-bottom: 28px; }
 .exam-result__score { font-size: 3.2rem; font-weight: 800; letter-spacing: -.03em; color: var(--accent); font-family: var(--mono); display: block; }
