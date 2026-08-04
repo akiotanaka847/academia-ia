@@ -91,6 +91,7 @@ async function calificar() {
 }
 
 function desbloquearHasta(nivel) {
+  try { localStorage.setItem("academiaia-nivel", nivel); } catch (e) {} // tu nivel abre los módulos de ese nivel
   const KEY = "academiaia-progreso";
   let hasta = nivel === "avanzado" ? 15 : (nivel === "intermedio" ? 8 : 0);
   if (!hasta) return;

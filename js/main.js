@@ -293,7 +293,17 @@ if ("serviceWorker" in navigator) {
   function modId(href) { const m = (href || "").match(/modulo-(\d+)/); return m ? m[1] : null; }
   function prevId(id) { const n = parseInt(id, 10) - 1; return n < 1 ? null : String(n).padStart(2, "0"); }
   function pctOf(st, id) { const r = st[id]; return r && typeof r.pct === "number" ? r.pct : 0; }
-  function unlocked(st, id) { const p = prevId(id); return !p || pctOf(st, p) >= UMBRAL; }
+  // Nivel de cada módulo: 1 básico (01-08), 2 intermedio (09-15), 3 avanzado (16+)
+  function nivelModulo(id) { const n = parseInt(id, 10); return n <= 8 ? 1 : (n <= 15 ? 2 : 3); }
+  // Nivel que abrió el examen de nivelación: avanzado=3, intermedio=2, ninguno=0
+  function nivelExamen() {
+    try { const v = localStorage.getItem("academiaia-nivel"); return v === "avanzado" ? 3 : (v === "intermedio" ? 2 : 0); }
+    catch (e) { return 0; }
+  }
+  function unlocked(st, id) {
+    if (nivelModulo(id) <= nivelExamen()) return true; // tu nivel del examen abre estos módulos
+    const p = prevId(id); return !p || pctOf(st, p) >= UMBRAL; // si no, candado por progreso
+  }
   function el(tag, cls, txt) {
     const e = document.createElement(tag);
     if (cls) e.className = cls;
