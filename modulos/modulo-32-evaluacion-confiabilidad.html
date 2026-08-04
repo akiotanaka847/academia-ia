@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 32 · Evaluación y confiabilidad de sistemas de IA — Academia IA</title>
+  <meta name="description" content="Cómo saber si tu agente o automatización de IA realmente sirve: sets de evaluación, métricas, LLM-como-juez, detección de alucinaciones y pruebas de regresión. Nunca despliegues lo que no mediste." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 09 · Fundamentos con profundidad</a> <span>—</span>
+        <span>Módulo 32</span>
+      </div>
+      <span class="kicker reveal in">Nivel 09 · Fundamentos con profundidad</span>
+      <h1 class="reveal in">Evaluación y <em>confiabilidad</em></h1>
+      <p class="lead reveal in">
+        Ya sabes construir agentes y automatizaciones. La pregunta que separa a un aficionado de un
+        profesional es otra: <b>¿cómo sabes que sirve?</b> En este módulo aprendes a <b>medir</b> tu IA
+        —con un set de pruebas, métricas y un juez automático— para poder desplegar con confianza y
+        dormir tranquilo.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">20 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">El rigor que faltaba</span>
+        <span class="mod-meta__item">6 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80" alt="Panel de métricas y evaluación de un sistema" />
+        <span class="mod-cover__badge">Medir antes de confiar</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="problema">
+          <h2><span class="n">01</span> «Funcionó en mis 3 pruebas» no es evaluación</h2>
+          <p>
+            Casi todos caemos en la misma trampa: construimos un agente, lo probamos con dos o tres ejemplos,
+            sale bien, y lo soltamos. El problema es que <b>tres ejemplos no dicen nada</b>. Un modelo puede
+            acertar el 60% de las veces y aun así pasar tus tres pruebas por pura suerte.
+          </p>
+          <p>
+            Recuerda lo del <a href="modulo-31-como-funciona-llm.html">Módulo 31</a>: el modelo no es
+            determinista y puede alucinar con total seguridad. Por eso, en IA, <b>la intuición no basta</b>:
+            necesitas números. Evaluar es pasar de <i>«a mí me funcionó»</i> a <i>«acierta el 92% de 50 casos
+            reales, y sé exactamente en cuáles falla»</i>.
+          </p>
+          <div class="callout callout--warn reveal">
+            <span class="label">El costo de no medir</span>
+            <h4>Un agente sin evaluar es una bomba de tiempo</h4>
+            <p>Si tu automatización clasifica tickets o responde a clientes, un 10% de errores silenciosos
+            se acumula sin que lo notes hasta que alguien se queja. Evaluar es lo que convierte «esperemos que
+            funcione» en «sé que funciona, y sé dónde no».</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="que-medir">
+          <h2><span class="n">02</span> Qué medir: las cuatro dimensiones</h2>
+          <p>«Bueno» es vago. Antes de medir, defines <b>qué</b> es bueno para tu caso. Casi siempre es una mezcla de estas cuatro:</p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Exactitud<span class="src">¿Es correcto?</span></h4><ul><li>¿El dato extraído es el real?</li><li>¿La clasificación es la correcta?</li><li>Se mide contra una respuesta esperada</li></ul></div>
+            <div class="compare-card"><h4>Fundamento<span class="src">¿Está apoyado?</span></h4><ul><li>¿Sale de la fuente o lo inventó?</li><li>Clave en RAG (Módulo 07)</li><li>Es lo contrario de alucinar</li></ul></div>
+            <div class="compare-card"><h4>Formato<span class="src">¿Es usable?</span></h4><ul><li>¿Devolvió JSON válido?</li><li>¿Respetó la estructura pedida?</li><li>Fácil de verificar por código</li></ul></div>
+            <div class="compare-card"><h4>Seguridad<span class="src">¿Es apropiado?</span></h4><ul><li>¿Evitó datos sensibles?</li><li>¿Rechazó lo que debía rechazar?</li><li>Conecta con el Módulo 33</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Regla práctica</span>
+            <h4>Empieza por lo que se verifica solo</h4>
+            <p>Formato y exactitud sobre datos concretos (¿el total de la factura es <i>1.240,50</i>?) se
+            pueden comprobar con código, sin criterio humano. Empieza por ahí: es barato, automático y ya
+            atrapa la mayoría de los fallos graves.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="golden-set">
+          <h2><span class="n">03</span> El set de evaluación (tu «examen» para la IA)</h2>
+          <p>
+            La herramienta central no es un software caro: es una <b>lista de casos con su respuesta correcta</b>.
+            Se le llama <i>golden set</i> o set de evaluación. Con 20–50 casos reales y variados ya tienes una
+            señal sólida. Es, literalmente, el examen que tu IA debe aprobar cada vez que cambias algo.
+          </p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">set-evaluacion.json</span>
+            </div>
+            <pre><code><span class="tok-com">// Cada fila: una entrada real + lo que DEBERÍA responder</span>
+[
+  {
+    <span class="tok-str">"entrada"</span>: <span class="tok-str">"Factura Acme, total 1.240,50 EUR, vence 30/09"</span>,
+    <span class="tok-str">"esperado"</span>: { <span class="tok-str">"total"</span>: <span class="tok-str">"1240.50"</span>, <span class="tok-str">"moneda"</span>: <span class="tok-str">"EUR"</span> }
+  },
+  {
+    <span class="tok-com">// caso difícil a propósito: sin total explícito</span>
+    <span class="tok-str">"entrada"</span>: <span class="tok-str">"Adjunto el pedido, ya hablamos del precio"</span>,
+    <span class="tok-str">"esperado"</span>: { <span class="tok-str">"total"</span>: <span class="tok-str">null</span> }
+  }
+]</code></pre>
+          </div>
+          <ul class="bullets">
+            <li><b>Incluye casos difíciles</b>: los ambiguos, los vacíos, los que ya te fallaron una vez.</li>
+            <li><b>Cada vez que algo falla en producción</b>, agrégalo al set. Así nunca vuelve a romperse igual.</li>
+            <li><b>Corre el set completo</b> antes de cambiar el prompt, el modelo o la temperatura. Compara el «antes» y el «después».</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="llm-juez">
+          <h2><span class="n">04</span> LLM-como-juez: evaluar a escala</h2>
+          <p>
+            Comparar datos exactos es fácil. Pero, ¿cómo calificas 50 respuestas <b>abiertas</b> («¿este
+            resumen es fiel y claro?») sin leerlas una por una? Usas <b>otro modelo como juez</b>: le das la
+            pregunta, la respuesta y una rúbrica, y le pides una nota con justificación.
+          </p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">prompt-juez.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Rúbrica clara + salida estructurada = juez confiable</span>
+<span class="tok-str">"Eres un evaluador estricto. Compara la RESPUESTA con la
+FUENTE. Califica de 1 a 5 la FIDELIDAD (¿todo lo que dice
+está en la fuente?). Responde en JSON:
+{ nota: <número>, alucinaciones: [<frases inventadas>] }"</span></code></pre>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">Precaución</span>
+            <h4>El juez también se equivoca</h4>
+            <p>Un LLM-juez es rápido y barato, pero tiene sesgos (tiende a premiar respuestas largas o al
+            mismo modelo que las escribió). Úsalo para <b>filtrar y priorizar</b>, y revisa a mano una muestra
+            de sus veredictos. Es un asistente de evaluación, no un juez supremo.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="alucinaciones">
+          <h2><span class="n">05</span> Cazar alucinaciones (groundedness)</h2>
+          <p>
+            En cualquier sistema con RAG, la métrica reina es el <b>fundamento</b> (<i>groundedness</i>):
+            qué porcentaje de lo que afirma la respuesta está <b>respaldado por la fuente</b> que se le dio.
+            Una respuesta puede ser fluida y útil… y aun así inventar la mitad.
+          </p>
+          <ul class="bullets">
+            <li><b>Descompón la respuesta</b> en afirmaciones y verifica cada una contra la fuente (esto lo puede hacer el LLM-juez).</li>
+            <li><b>Exige citas</b>: si el sistema debe señalar de qué fragmento sacó cada dato, lo no-citado es sospechoso.</li>
+            <li><b>Vigila el «no lo sé»</b>: un buen sistema admite cuándo la fuente no tiene la respuesta, en vez de rellenar.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Ejercicio · 10 min</span>
+            <h4>Arma tu primer set</h4>
+            <p>Toma un agente o automatización que ya tengas. Escribe 10 casos reales con su respuesta esperada
+            en una hoja de cálculo. Pásalos todos y cuenta los aciertos. Acabas de pasar de «creo que funciona»
+            a un número. Ese número es tu punto de partida.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="regresion">
+          <h2><span class="n">06</span> Regresión y monitoreo: no rompas lo que ya servía</h2>
+          <p>
+            El peligro más traicionero de la IA: mejoras el prompt para arreglar un caso… y sin querer
+            <b>rompes tres que antes funcionaban</b>. Por eso el set de evaluación se corre <b>cada vez</b>
+            que tocas algo. A eso se le llama <b>prueba de regresión</b>: asegurar que lo nuevo no degradó lo viejo.
+          </p>
+          <p>Y una vez en producción, el trabajo no termina —el mundo cambia y el modelo también:</p>
+          <ul class="bullets">
+            <li><b>Registra</b> una muestra de entradas y salidas reales (respetando la privacidad del Módulo 21).</li>
+            <li><b>Revisa</b> periódicamente los casos donde el usuario corrigió o se quejó: son oro para tu set.</li>
+            <li><b>Vigila</b> cambios de proveedor: una actualización del modelo puede mover tus resultados sin avisar.</li>
+          </ul>
+          <div class="callout callout--info reveal">
+            <span class="label">La idea que te llevas</span>
+            <h4>Evaluar es un ciclo, no un trámite</h4>
+            <p>Construir → medir con el set → mejorar → volver a medir. Cada vuelta sube la confiabilidad.
+            El equipo que evalúa avanza con seguridad; el que no, avanza a ciegas y se entera de los fallos
+            por sus clientes.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">07</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Por qué «lo probé con 3 ejemplos y salió bien» no es una evaluación válida?</p>
+            <button class="quiz__opt" data-correct="false">Porque 3 ejemplos tardan mucho en probarse.</button>
+            <button class="quiz__opt" data-correct="true">Porque el modelo no es determinista: puede acertar por suerte y aun así fallar en muchos casos que no probaste.</button>
+            <button class="quiz__opt" data-correct="false">Porque los ejemplos siempre deben ser imágenes.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Necesitas un volumen de casos variados para tener una señal real de qué tan seguido acierta.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. En un sistema con RAG, ¿qué mide el «fundamento» (groundedness)?</p>
+            <button class="quiz__opt" data-correct="true">Qué tanto de la respuesta está respaldado por la fuente que se le dio, en vez de inventado.</button>
+            <button class="quiz__opt" data-correct="false">La velocidad de respuesta del modelo.</button>
+            <button class="quiz__opt" data-correct="false">Cuántas palabras tiene la respuesta.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Es la métrica anti-alucinación: mide si lo que afirma sale de la fuente o se lo inventó.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. Mejoras un prompt para arreglar un caso. ¿Qué debes hacer antes de desplegar?</p>
+            <button class="quiz__opt" data-correct="false">Nada, si el caso que querías arreglar ya funciona.</button>
+            <button class="quiz__opt" data-correct="true">Correr todo el set de evaluación para confirmar que no rompiste casos que antes funcionaban (prueba de regresión).</button>
+            <button class="quiz__opt" data-correct="false">Subir la temperatura para compensar.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Un arreglo puede romper otras cosas. La prueba de regresión lo detecta antes que tus usuarios.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-31-como-funciona-llm.html"><span>← Anterior</span><b>31 · Cómo funciona un LLM</b></a>
+          <a href="modulo-33-seguridad-red-teaming.html" class="next"><span>Siguiente →</span><b>33 · Seguridad de IA</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#problema">No es evaluación</a>
+          <a href="#que-medir">Qué medir</a>
+          <a href="#golden-set">El set de evaluación</a>
+          <a href="#llm-juez">LLM-como-juez</a>
+          <a href="#alucinaciones">Cazar alucinaciones</a>
+          <a href="#regresion">Regresión y monitoreo</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 32</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

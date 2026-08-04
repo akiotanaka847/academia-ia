@@ -293,7 +293,10 @@ if ("serviceWorker" in navigator) {
   function modId(href) { const m = (href || "").match(/modulo-(\d+)/); return m ? m[1] : null; }
   function prevId(id) { const n = parseInt(id, 10) - 1; return n < 1 ? null : String(n).padStart(2, "0"); }
   function pctOf(st, id) { const r = st[id]; return r && typeof r.pct === "number" ? r.pct : 0; }
-  function unlocked(st, id) { const p = prevId(id); return !p || pctOf(st, p) >= UMBRAL; }
+  function unlocked(st, id) {
+    if (parseInt(id, 10) >= 31) return true; // Nivel 09 (refuerzo de fundamentos): siempre accesible, no se encadena tras el 30
+    const p = prevId(id); return !p || pctOf(st, p) >= UMBRAL;
+  }
   function el(tag, cls, txt) {
     const e = document.createElement(tag);
     if (cls) e.className = cls;

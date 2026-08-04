@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 31 · Cómo funciona un LLM por dentro — Academia IA</title>
+  <meta name="description" content="Qué hace realmente un modelo de lenguaje: tokens, embeddings, ventana de contexto, temperatura y por qué alucina. La base conceptual que da poder a todo lo que construyes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../index.html#cohortes">Cohortes</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>—</span>
+        <a href="../index.html#ruta">Nivel 09 · Fundamentos con profundidad</a> <span>—</span>
+        <span>Módulo 31</span>
+      </div>
+      <span class="kicker reveal in">Nivel 09 · Fundamentos con profundidad</span>
+      <h1 class="reveal in">Cómo funciona un <em>LLM</em> por dentro</h1>
+      <p class="lead reveal in">
+        Hasta ahora usaste la IA como una caja negra que responde. En este módulo abrimos la caja:
+        verás <b>qué hace realmente</b> un modelo de lenguaje —tokens, embeddings, ventana de contexto,
+        temperatura— y por qué alucina. No para volverte ingeniero, sino para que <b>controles</b> la
+        herramienta en vez de que ella te controle a ti.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">18 minutos</span>
+        <span class="mod-meta__item">Nivel intermedio</span>
+        <span class="mod-meta__item">Conceptos que dan poder</span>
+        <span class="mod-meta__item">6 secciones + repaso</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1400&q=80" alt="Representación abstracta del interior de un modelo de inteligencia artificial" />
+        <span class="mod-cover__badge">Abrir la caja negra</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <div class="content-block reveal" id="predecir">
+          <h2><span class="n">01</span> Un LLM solo hace una cosa</h2>
+          <p>
+            Suena increíble, pero un modelo de lenguaje (un <b>LLM</b>, por <i>Large Language Model</i>)
+            no «entiende» ni «razona» como una persona. En el fondo hace <b>una sola tarea</b>, repetida
+            millones de veces por segundo: dado un texto, <b>predecir el siguiente trozo de texto más probable</b>.
+          </p>
+          <p>
+            Es como el autocompletar del teléfono, pero entrenado con casi todo el texto de internet y con
+            una capacidad de contexto muchísimo mayor. Escribe <i>«La capital de Francia es…»</i> y el modelo
+            no «sabe» geografía: calcula que, después de esas palabras, lo más probable en todos sus datos
+            es <i>«París»</i>.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">Por qué importa</span>
+            <h4>Cambia cómo le hablas</h4>
+            <p>Si el modelo predice «lo más probable que siga», entonces tu prompt no es una orden: es el
+            <b>inicio</b> que condiciona toda la predicción. Un buen inicio (contexto, ejemplos, formato)
+            empuja la probabilidad hacia la respuesta que quieres. Un inicio vago la deja al azar.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="tokens">
+          <h2><span class="n">02</span> Tokens: cómo el modelo lee tu texto</h2>
+          <p>
+            El modelo no ve <b>palabras</b>, ve <b>tokens</b>: pedazos de texto. Un token suele ser una
+            palabra corta, un trozo de palabra larga o un signo. En español, una regla útil es
+            <b>≈ 1 palabra = 1.3 tokens</b>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">tokenizacion.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Cómo el modelo parte esta frase:</span>
+"Automatizar Workfront con IA"
+
+<span class="tok-com"># Se convierte en tokens (aprox.):</span>
+["Autom", "atizar", " Work", "front", " con", " IA"]
+<span class="tok-com"># 6 tokens para 4 palabras</span></code></pre>
+          </div>
+          <p>Esto no es un tecnicismo inútil. Los tokens explican <b>tres cosas prácticas</b>:</p>
+          <ul class="bullets">
+            <li><b>El costo</b>: las APIs cobran por token (de entrada y de salida). Textos más largos = más caro.</li>
+            <li><b>Los límites</b>: cuando ves «máximo 128k tokens», es cuánto texto cabe entre tu prompt y la respuesta.</li>
+            <li><b>Los errores raros</b>: el modelo cuenta letras mal (¿cuántas «r» tiene «ferrocarril»?) porque no ve letras, ve tokens.</li>
+          </ul>
+          <div class="callout callout--tip reveal">
+            <span class="label">Ejercicio · 3 min</span>
+            <h4>Ve los tokens con tus ojos</h4>
+            <p>Abre <i>platform.openai.com/tokenizer</i> y pega un correo tuyo. Mira cómo se parte y cuántos
+            tokens ocupa. Ahora imagina pasar ese correo 500 veces por una automatización: ahí está tu factura.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="embeddings">
+          <h2><span class="n">03</span> Embeddings: convertir significado en números</h2>
+          <p>
+            Para que una computadora «compare significados», primero traduce cada trozo de texto a una
+            lista larga de números —un <b>embedding</b>, o vector—. La magia es que <b>textos con significado
+            parecido quedan cerca</b> en ese espacio numérico, aunque usen palabras distintas.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Cerca<span class="src">Significado parecido</span></h4><ul><li>«factura» y «recibo»</li><li>«cancelar pedido» y «anular compra»</li><li>«jefe» y «supervisor»</li></ul></div>
+            <div class="compare-card"><h4>Lejos<span class="src">Sin relación</span></h4><ul><li>«factura» y «jirafa»</li><li>«vacaciones» y «compilar código»</li><li>«café» y «hipoteca»</li></ul></div>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Aquí conecta todo</span>
+            <h4>Esto es el corazón del RAG</h4>
+            <p>Cuando en el <a href="modulo-07-front-back-rag.html">Módulo 07</a> hiciste que la IA respondiera
+            con <i>tus</i> documentos, por debajo pasó esto: tus documentos se volvieron embeddings, tu pregunta
+            también, y el sistema trajo los trozos <b>más cercanos</b>. La «búsqueda semántica» es medir cercanía
+            entre vectores.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="contexto">
+          <h2><span class="n">04</span> La ventana de contexto: su memoria de trabajo</h2>
+          <p>
+            La <b>ventana de contexto</b> es todo lo que el modelo puede «tener en mente» a la vez: tu
+            instrucción, el historial de la conversación y los documentos que le pegaste. Se mide en tokens.
+            Es su <b>memoria de trabajo</b>, no su memoria a largo plazo.
+          </p>
+          <p>
+            Cuando una conversación se alarga y el modelo «olvida» algo que dijiste al inicio, no falló:
+            eso viejo <b>se salió de la ventana</b>. El modelo no recuerda entre chats distintos ni guarda
+            nada por su cuenta —cada vez arranca en blanco y solo ve lo que cabe en la ventana de ese momento.
+          </p>
+          <div class="callout callout--warn reveal">
+            <span class="label">Precaución</span>
+            <h4>«Más contexto» no siempre es mejor</h4>
+            <p>Meter documentos enormes «por si acaso» diluye lo importante y sube el costo. Los modelos
+            también sufren el efecto <i>«perdido en el medio»</i>: prestan más atención al inicio y al final
+            de la ventana que al centro. Dale lo <b>relevante</b>, no lo <b>máximo</b>.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="temperatura">
+          <h2><span class="n">05</span> Temperatura: el dial entre preciso y creativo</h2>
+          <p>
+            Como el modelo predice probabilidades, hay un ajuste que decide si elige siempre la opción más
+            probable o si se arriesga con alternativas menos obvias: la <b>temperatura</b> (y su primo, el
+            <i>top-p</i>). Es un dial de <b>0 a ~1</b>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">temperatura.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Temperatura BAJA (~0.2): preciso, repetible, "aburrido"</span>
+<span class="tok-com"># → clasificar, extraer datos, responder con hechos,</span>
+<span class="tok-com">#   cualquier automatización que deba dar SIEMPRE lo mismo</span>
+
+<span class="tok-com"># Temperatura ALTA (~0.8): variado, creativo, sorprendente</span>
+<span class="tok-com"># → lluvia de ideas, nombres, borradores, variantes de copy</span></code></pre>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Regla práctica</span>
+            <h4>Para trabajo serio, baja la temperatura</h4>
+            <p>Si estás construyendo un agente que extrae datos de una factura o clasifica tickets, quieres
+            temperatura baja: que dé <b>el mismo resultado ante la misma entrada</b>. La creatividad es
+            enemiga de la confiabilidad cuando el proceso debe ser estable.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="alucina">
+          <h2><span class="n">06</span> Por qué alucina (y cómo reducirlo)</h2>
+          <p>
+            Ahora se explica solo. Si el modelo predice <b>lo más plausible</b> —no lo más verdadero— y no
+            tiene una base de datos de hechos por dentro, entonces a veces genera algo que <i>suena</i>
+            perfecto pero es <b>inventado</b>: una cita falsa, una ley que no existe, un número plausible.
+            Eso es una <b>alucinación</b>, y no es un bug raro: es consecuencia directa de cómo funciona.
+          </p>
+          <p>El modelo no distingue «lo que sé» de «lo que suena bien». Tú sí puedes empujarlo hacia la verdad:</p>
+          <ul class="bullets">
+            <li><b>Dale la fuente</b>: pega el documento y pídele que responda <i>solo con eso</i> (esto es RAG).</li>
+            <li><b>Pídele que cite</b>: «indica de qué parte del texto sacaste cada dato». Lo que no puede citar, suele ser inventado.</li>
+            <li><b>Dale salida de escape</b>: «si no está en el texto, responde <i>no lo sé</i>». Le quitas la presión de rellenar.</li>
+            <li><b>Baja la temperatura</b> y <b>verifica</b> lo crítico (cifras, nombres, fechas) antes de usarlo.</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Regla de oro</span>
+            <h4>Confianza ≠ veracidad</h4>
+            <p>El modelo dice una mentira con el mismo tono seguro con el que dice una verdad. Por eso el
+            siguiente módulo —<b>Evaluación y confiabilidad</b>— existe: antes de soltar un agente al mundo,
+            hay que <b>medir</b> qué tan seguido acierta. Nunca despliegues lo que no mediste.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">07</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. En el fondo, ¿cuál es la tarea central de un LLM?</p>
+            <button class="quiz__opt" data-correct="false">Buscar la respuesta en una base de datos de hechos.</button>
+            <button class="quiz__opt" data-correct="true">Predecir el siguiente token más probable a partir del texto que recibe.</button>
+            <button class="quiz__opt" data-correct="false">Razonar con lógica formal como un humano.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Predice «lo que sigue». Todo lo demás —incluidas las alucinaciones— se explica desde ahí.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. Estás construyendo un agente que extrae el total de cada factura. ¿Qué temperatura conviene?</p>
+            <button class="quiz__opt" data-correct="true">Baja (~0.2), para que dé siempre el mismo resultado ante la misma factura.</button>
+            <button class="quiz__opt" data-correct="false">Alta (~0.8), para que sea más creativo.</button>
+            <button class="quiz__opt" data-correct="false">Da igual, la temperatura no afecta tareas de datos.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Para procesos que deben ser estables y repetibles, la creatividad estorba. Temperatura baja.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. ¿Por qué la técnica de RAG (darle tus documentos) reduce las alucinaciones?</p>
+            <button class="quiz__opt" data-correct="false">Porque aumenta la temperatura del modelo.</button>
+            <button class="quiz__opt" data-correct="false">Porque hace que el modelo memorice tus datos para siempre.</button>
+            <button class="quiz__opt" data-correct="true">Porque le da la fuente dentro de la ventana de contexto, así predice apoyado en hechos reales en vez de inventar.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Sin fuente, el modelo rellena con lo plausible. Con la fuente en contexto, se apoya en lo real.</p></div></div>
+          </div>
+        </div>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-02-ia-generativa.html"><span>← Repaso</span><b>02 · IA Generativa</b></a>
+          <a href="modulo-32-evaluacion-confiabilidad.html" class="next"><span>Siguiente →</span><b>32 · Evaluación y confiabilidad</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En este módulo</h5>
+          <a href="#predecir">Solo hace una cosa</a>
+          <a href="#tokens">Tokens</a>
+          <a href="#embeddings">Embeddings</a>
+          <a href="#contexto">Ventana de contexto</a>
+          <a href="#temperatura">Temperatura</a>
+          <a href="#alucina">Por qué alucina</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Módulo 31</span>
+        <a href="../index.html" style="color:var(--clay);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
