@@ -55,7 +55,7 @@
         <span class="mod-meta__item">25 minutos</span>
         <span class="mod-meta__item">Nivel básico</span>
         <span class="mod-meta__item">La arquitectura, sin tecnicismos</span>
-        <span class="mod-meta__item">4 secciones + repaso</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
       </div>
       <div class="mod-cover reveal in">
         <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=80" alt="Código en una pantalla" />
@@ -134,8 +134,35 @@
           </div>
         </div>
 
+        <div class="content-block reveal" id="rag-profundo">
+          <h2><span class="n">05</span> RAG por dentro: por qué a veces falla</h2>
+          <p>
+            El RAG suena simple —«busca y responde»—, pero su calidad depende de <b>tres decisiones invisibles</b>.
+            Entenderlas es la diferencia entre un RAG que ayuda y uno que inventa:
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>1 · Trozos<span class="src">Chunking</span></h4><ul><li>El documento se parte en pedazos</li><li>Ni tan grandes (meten ruido)</li><li>Ni tan chicos (pierden contexto)</li><li>Con solapamiento, para no cortar ideas a la mitad</li></ul></div>
+            <div class="compare-card"><h4>2 · Vectores<span class="src">Embeddings</span></h4><ul><li>Cada trozo se vuelve números (Módulo 31)</li><li>Se guardan en una base vectorial (Módulo 08)</li><li>Tu pregunta también se convierte</li></ul></div>
+            <div class="compare-card"><h4>3 · Recuperación<span class="src">Retrieval</span></h4><ul><li>Se traen los trozos más cercanos</li><li>Los «top-k» más parecidos</li><li>Si trae los equivocados, todo falla</li></ul></div>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">El error que casi nadie ve</span>
+            <h4>La mayoría de los «fallos del modelo» son de recuperación</h4>
+            <p>Cuando un RAG responde mal, el instinto es culpar al modelo. Pero casi siempre el problema es
+            que <b>recuperó los trozos equivocados</b>: la mejor redacción del mundo no salva una respuesta
+            construida sobre la fuente incorrecta. Antes de cambiar el prompt, revisa <b>qué trozos trajo</b>.</p>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Cómo mejorarlo</span>
+            <h4>Mide y ajusta</h4>
+            <p>Ajusta el tamaño de los trozos, prueba con más o menos «top-k», y sobre todo <b>mide el
+            fundamento</b> (¿la respuesta sale de los trozos recuperados?) con las técnicas del
+            <a href="modulo-32-evaluacion-confiabilidad.html">Módulo 32</a>. RAG no se «configura una vez»: se afina midiendo.</p>
+          </div>
+        </div>
+
         <div class="content-block reveal" id="quiz">
-          <h2><span class="n">05</span> Comprueba lo aprendido</h2>
+          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
           <div class="quiz">
             <p class="quiz__q">1. ¿Cuál es la diferencia entre frontend y backend?</p>
             <button class="quiz__opt" data-correct="true">El frontend es lo que se ve; el backend es la lógica que trabaja por detrás.</button>
@@ -165,6 +192,7 @@
           <a href="#video">Video</a>
           <a href="#rag">¿Qué es el RAG?</a>
           <a href="#cuando">Cuándo usar RAG</a>
+          <a href="#rag-profundo">RAG por dentro</a>
           <a href="#quiz">Comprueba lo aprendido</a>
         </nav>
       </aside>

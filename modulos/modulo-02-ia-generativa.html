@@ -55,7 +55,7 @@
         <span class="mod-meta__item">20 minutos</span>
         <span class="mod-meta__item">Nivel básico</span>
         <span class="mod-meta__item">Texto, imagen, audio y video</span>
-        <span class="mod-meta__item">5 secciones + repaso</span>
+        <span class="mod-meta__item">6 secciones + repaso</span>
       </div>
       <div class="mod-cover reveal in">
         <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1400&q=80" alt="Arte generado por inteligencia artificial" />
@@ -160,8 +160,47 @@
           </div>
         </div>
 
+        <div class="content-block reveal" id="patrones">
+          <h2><span class="n">06</span> Patrones de prompt con nombre</h2>
+          <p>
+            Los consejos de arriba funcionan, pero los usuarios expertos no improvisan cada vez: reutilizan
+            <b>patrones con nombre</b>, como recetas probadas. Estos cinco resuelven el 90% de los casos:
+          </p>
+          <ul class="bullets">
+            <li><b>Persona</b>: le das un rol experto. <i>«Actúa como un abogado laboral y revisa este contrato…»</i></li>
+            <li><b>Plantilla</b>: fijas el formato exacto de salida. <i>«Responde SIEMPRE con esta estructura: Resumen · Riesgos · Acción.»</i></li>
+            <li><b>Pocos ejemplos</b> (<i>few-shot</i>): le muestras 2–3 ejemplos de entrada→salida para que copie el estilo.</li>
+            <li><b>Cadena de pensamiento</b>: para tareas con lógica, <i>«razona paso a paso antes de dar la respuesta final»</i>.</li>
+            <li><b>Interacción invertida</b>: <i>«Hazme las preguntas que necesites antes de responder.»</i> Deja que la IA recolecte contexto.</li>
+          </ul>
+          <div class="code-block">
+            <div class="code-block__head">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="margin-left:8px;">patron-combinado.txt</span>
+            </div>
+            <pre><code><span class="tok-com"># Persona + Plantilla + Pocos ejemplos, todo junto:</span>
+<span class="tok-str">"Actúa como analista de soporte. Clasifica cada ticket
+en: Urgente / Normal / Spam. Responde solo la categoría.
+
+Ejemplos:
+'No puedo entrar a mi cuenta' -> Urgente
+'¿Tienen versión en francés?' -> Normal
+'GANA DINERO YA!!!' -> Spam
+
+Ticket: 'La app se cierra sola al abrir un reporte'"</span>
+<span class="tok-com"># Salida esperada: Urgente</span></code></pre>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">Para automatizaciones</span>
+            <h4>Combina patrones para resultados confiables</h4>
+            <p>Cuando un prompt alimenta una automatización (en Workfront, un agente, un flujo), combina
+            <b>Persona + Plantilla + Pocos ejemplos</b>: fijas el rol, el formato y el criterio. Es la receta
+            que hace que la IA dé <b>siempre la misma estructura</b>, lista para que el resto del flujo la use.</p>
+          </div>
+        </div>
+
         <div class="content-block reveal" id="quiz">
-          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <h2><span class="n">07</span> Comprueba lo aprendido</h2>
           <div class="quiz">
             <p class="quiz__q">1. ¿Qué distingue a la IA generativa de la IA tradicional?</p>
             <button class="quiz__opt" data-correct="false">Que funciona sin conexión a internet.</button>
@@ -192,6 +231,7 @@
           <a href="#modalidades">Las 4 modalidades</a>
           <a href="#como-crea">¿Cómo genera?</a>
           <a href="#prompting">Buenos resultados</a>
+          <a href="#patrones">Patrones de prompt</a>
           <a href="#quiz">Comprueba lo aprendido</a>
         </nav>
       </aside>

@@ -54,7 +54,7 @@
         <span class="mod-meta__item">25 minutos</span>
         <span class="mod-meta__item">Nivel avanzado</span>
         <span class="mod-meta__item">El modelo correcto para cada tarea</span>
-        <span class="mod-meta__item">4 secciones + repaso</span>
+        <span class="mod-meta__item">5 secciones + repaso</span>
       </div>
       <div class="mod-cover reveal in">
         <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1400&q=80" alt="Elección entre modelos de IA" />
@@ -120,8 +120,28 @@
           </div>
         </div>
 
+        <div class="content-block reveal" id="adaptar">
+          <h2><span class="n">05</span> Prompt, RAG o fine-tuning</h2>
+          <p>
+            Elegir el modelo base es un lado de la moneda. El otro es <b>adaptarlo a tu necesidad</b>. Hay tres
+            palancas, y el error caro es empezar por la más pesada. Van de menor a mayor esfuerzo:
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>1 · Prompt<span class="src">Instrucciones</span></h4><ul><li>Cambias el comportamiento con instrucciones y ejemplos</li><li>Rápido, barato, sin tocar el modelo</li><li><b>Empieza SIEMPRE aquí</b></li></ul></div>
+            <div class="compare-card"><h4>2 · RAG<span class="src">Tus datos</span></h4><ul><li>Le das tu información en el contexto</li><li>Para datos privados o que cambian</li><li>Es el <a href="modulo-07-front-back-rag.html">Módulo 07</a></li></ul></div>
+            <div class="compare-card"><h4>3 · Fine-tuning<span class="src">Reentrenar</span></h4><ul><li>Ajustas el modelo con miles de ejemplos</li><li>Para un estilo o tarea muy específica</li><li>Caro, lento, rara vez necesario</li></ul></div>
+          </div>
+          <div class="callout callout--tip reveal">
+            <span class="label">La regla que ahorra meses</span>
+            <h4>El 90% se resuelve con prompt + RAG</h4>
+            <p>Mucha gente pide «fine-tuning» cuando en realidad necesitaba un mejor prompt o darle sus datos
+            con RAG. El fine-tuning es el <b>último recurso</b>: solo cuando ya exprimiste prompt y RAG y aún
+            necesitas un comportamiento muy específico y repetitivo. Sube de palanca solo cuando la anterior se quede corta.</p>
+          </div>
+        </div>
+
         <div class="content-block reveal" id="probar">
-          <h2><span class="n">05</span> Pruébalo, no lo adivines</h2>
+          <h2><span class="n">06</span> Pruébalo, no lo adivines</h2>
           <p>
             La teoría orienta, pero la decisión final se toma probando. Coge una tarea real tuya, pásala por dos
             o tres modelos y compara <b>calidad, velocidad y coste</b>. En cinco minutos sabrás cuál te conviene
@@ -136,7 +156,7 @@
         </div>
 
         <div class="content-block reveal" id="quiz">
-          <h2><span class="n">06</span> Comprueba lo aprendido</h2>
+          <h2><span class="n">07</span> Comprueba lo aprendido</h2>
           <div class="quiz">
             <p class="quiz__q">1. ¿Qué modelo conviene para clasificar miles de correos al día?</p>
             <button class="quiz__opt" data-correct="true">Uno rápido y económico; la tarea es simple y masiva.</button>
@@ -166,6 +186,7 @@
           <a href="#video">Video</a>
           <a href="#criterios">Los cuatro criterios</a>
           <a href="#guia">Guía rápida por caso</a>
+          <a href="#adaptar">Prompt, RAG o fine-tuning</a>
           <a href="#probar">Pruébalo, no lo adivines</a>
           <a href="#quiz">Comprueba lo aprendido</a>
         </nav>
