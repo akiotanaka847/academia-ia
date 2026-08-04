@@ -107,7 +107,7 @@
             <h4>Nunca concatenes texto del usuario en la consulta</h4>
             <p>La solución son las <b>consultas parametrizadas</b> (con <code>?</code>): la base de datos recibe el
             texto del usuario como un <b>dato</b>, no como código, así que aunque escriban <code>' OR '1'='1</code>
-            se busca literalmente un usuario con ese nombre —y no existe—. Complétalo con <b>validación de entradas</b>
+            se busca literalmente un usuario con ese nombre (y no existe). Complétalo con <b>validación de entradas</b>
             y <b>permisos mínimos</b> en la base de datos.</p>
           </div>
         </div>
@@ -143,8 +143,8 @@
             </div>
             <div class="mclab__side">
               <div class="mclab__stats">
-                <div class="mclab__stat pi"><span>π estimado</span><b data-mc="pi">—</b></div>
-                <div class="mclab__stat"><span>Error</span><b data-mc="err">—</b></div>
+                <div class="mclab__stat pi"><span>π estimado</span><b data-mc="pi">…</b></div>
+                <div class="mclab__stat"><span>Error</span><b data-mc="err">…</b></div>
                 <div class="mclab__stat"><span>Dentro</span><b data-mc="in">0</b></div>
                 <div class="mclab__stat"><span>Total</span><b data-mc="total">0</b></div>
               </div>
@@ -266,7 +266,7 @@
               <button class="lab-btn" data-wx="run">Simular 10 000 viajes</button>
             </div>
             <div>
-              <div class="wxlab__result"><span class="big" data-wx="result">—</span><span data-wx="desc">ajusta los valores y simula</span></div>
+              <div class="wxlab__result"><span class="big" data-wx="result">…</span><span data-wx="desc">ajusta los valores y simula</span></div>
               <canvas class="wxlab__canvas" width="380" height="180"></canvas>
               <p style="font-size:.82rem;color:var(--text-dim);margin:10px 0 0;">Cada barra = cuántos de los 10 000 viajes tuvieron ese número de días de lluvia. Las azules cumplen tu condición.</p>
             </div>
@@ -336,7 +336,7 @@
           <div class="cardquiz__card" data-answer="phishing">
             <div class="cardquiz__mail">
               <div class="cardquiz__from">De: it-support@micr0soft-verify.com</div>
-              <div class="cardquiz__subject">Tu contraseña expira HOY — restablécela ahora</div>
+              <div class="cardquiz__subject">Tu contraseña expira HOY, restablécela ahora</div>
               <div class="cardquiz__body">Por seguridad, tu contraseña vence hoy. Restablécela en este enlace antes de las 18:00 para no quedar bloqueado.</div>
             </div>
             <div class="cardquiz__btns"><button class="cardquiz__btn" data-choice="phishing">🎣 Phishing</button><button class="cardquiz__btn" data-choice="legit">✅ Legítimo</button></div>
@@ -367,7 +367,7 @@
           <div class="cardquiz__card" data-answer="verificar">
             <div class="cardquiz__mail"><div class="cardquiz__from">Respuesta de la IA</div><div class="cardquiz__body">«La capital de Australia es Sídney.»</div></div>
             <div class="cardquiz__btns"><button class="cardquiz__btn" data-choice="confiable">👍 Confiable</button><button class="cardquiz__btn" data-choice="verificar">🔍 Verificar</button></div>
-            <div class="cardquiz__verdict"><b>Verificar (y es falso):</b> la capital es Canberra. Los datos concretos —lugares, fechas, cifras— son donde más alucina la IA.</div>
+            <div class="cardquiz__verdict"><b>Verificar (y es falso):</b> la capital es Canberra. Los datos concretos (lugares, fechas, cifras) son donde más alucina la IA.</div>
           </div>
 
           <div class="cardquiz__card" data-answer="confiable">
@@ -446,7 +446,7 @@
         <span class="lab__pass">✓ Lección aprendida</span>
       </div>
       <div class="lab__body">
-        <p>Los orquestadores —<b>Workfront Fusion, n8n, Make, Zapier</b>— funcionan igual: algo <b>dispara</b> el flujo, unos <b>pasos</b> lo transforman (hoy, muchos con un <b>agente de IA</b>) y ocurre una <b>acción</b>. Arma un flujo válido añadiendo bloques. Meta: <b>disparador → agente de IA → acción</b>.</p>
+        <p>Los orquestadores (<b>Workfront Fusion, n8n, Make, Zapier</b>) funcionan igual: algo <b>dispara</b> el flujo, unos <b>pasos</b> lo transforman (hoy, muchos con un <b>agente de IA</b>) y ocurre una <b>acción</b>. Arma un flujo válido añadiendo bloques. Meta: <b>disparador → agente de IA → acción</b>.</p>
         <div class="media-frame">
           <div class="video-embed">
             <iframe src="https://www.youtube.com/embed/Fy1UCBcgF2o" title="Construir flujos con IA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
@@ -475,7 +475,7 @@
               </div>
               <ul class="evalcheck" style="margin-top:18px;">
                 <li data-flow="trigger"><span class="ic">✓</span><span><b>Empieza con un disparador</b><span class="hint">todo flujo arranca por un evento</span></span></li>
-                <li data-flow="agent"><span class="ic">✓</span><span><b>Incluye un agente de IA</b><span class="hint">el paso «inteligente» — lo que está de moda</span></span></li>
+                <li data-flow="agent"><span class="ic">✓</span><span><b>Incluye un agente de IA</b><span class="hint">el paso «inteligente», lo que está de moda</span></span></li>
                 <li data-flow="action"><span class="ic">✓</span><span><b>Termina con una acción</b><span class="hint">el flujo produce un resultado</span></span></li>
               </ul>
             </div>
@@ -510,8 +510,8 @@
       <div class="lab__body">
         <p>
           La IA no cobra por palabras, sino por <b>tokens</b>: trocitos de texto (~4 caracteres cada uno). Pagas por los
-          tokens que <b>envías</b> (tu prompt) y por los que la IA <b>responde</b> —y la respuesta suele costar bastante
-          más—. Mira el video y luego estima el costo de un prompt real:
+          tokens que <b>envías</b> (tu prompt) y por los que la IA <b>responde</b> (y la respuesta suele costar bastante
+          más). Mira el video y luego estima el costo de un prompt real:
         </p>
         <div class="media-frame">
           <div class="video-embed">
@@ -541,7 +541,7 @@
             <div>
               <div class="tokenlab__counts">
                 <div class="tokenlab__count"><span>Tokens de entrada</span><b data-tok="inCount">0</b></div>
-                <div class="tokenlab__count out"><span>Tokens de salida</span><b data-tok="outCount">—</b></div>
+                <div class="tokenlab__count out"><span>Tokens de salida</span><b data-tok="outCount">…</b></div>
               </div>
               <div class="tokenlab__viz-label">Así se trocea tu texto en tokens (aproximado):</div>
               <div class="tokenlab__viz" data-tok="viz"><span class="tokenlab__viz-empty">Escribe arriba para ver los tokens…</span></div>
@@ -556,15 +556,15 @@
               <tbody data-tok="rows"></tbody>
             </table>
           </div>
-          <p class="tokenlab__disclaimer">Precios de <b>ejemplo</b> (redondeados, ilustrativos) para comparar tramos —no son tarifas de ningún producto concreto—. Consulta la web de cada proveedor para los precios reales y actuales.</p>
+          <p class="tokenlab__disclaimer">Precios de <b>ejemplo</b> (redondeados, ilustrativos) para comparar tramos (no son tarifas de ningún producto concreto). Consulta la web de cada proveedor para los precios reales y actuales.</p>
           <div class="tokenlab__insight" data-tok="insight"></div>
 
           <div class="callout callout--tip" style="margin-top:24px;">
             <span class="label">Lección aprendida · cómo ahorrar</span>
             <h4>El costo lo mandan la salida y el tramo de modelo</h4>
             <p>Dos palancas bajan la factura sin perder calidad: <b>(1)</b> pedir respuestas más <b>cortas y al grano</b>
-            (la salida es lo más caro) y <b>(2)</b> usar el <b>modelo más barato que resuelva la tarea</b> —reserva el
-            premium solo para lo que de verdad lo necesita—. En un flujo que corre <b>miles de veces</b> (n8n, Make,
+            (la salida es lo más caro) y <b>(2)</b> usar el <b>modelo más barato que resuelva la tarea</b> (reserva el
+            premium solo para lo que de verdad lo necesita). En un flujo que corre <b>miles de veces</b> (n8n, Make,
             Fusion, Zapier), esa diferencia por ejecución se multiplica y decide si la automatización es rentable.</p>
           </div>
         </div>
