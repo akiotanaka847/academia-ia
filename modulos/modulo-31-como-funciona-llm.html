@@ -49,8 +49,8 @@
       <h1 class="reveal in">Cómo funciona un <em>LLM</em> por dentro</h1>
       <p class="lead reveal in">
         Hasta ahora usaste la IA como una caja negra que responde. En este módulo abrimos la caja:
-        verás <b>qué hace realmente</b> un modelo de lenguaje —tokens, embeddings, ventana de contexto,
-        temperatura— y por qué alucina. No para volverte ingeniero, sino para que <b>controles</b> la
+        verás <b>qué hace realmente</b> un modelo de lenguaje (tokens, embeddings, ventana de contexto,
+        temperatura) y por qué alucina. No para volverte ingeniero, sino para que <b>controles</b> la
         herramienta en vez de que ella te controle a ti.
       </p>
       <div class="mod-meta reveal in">
@@ -129,7 +129,7 @@
           <h2><span class="n">03</span> Embeddings: convertir significado en números</h2>
           <p>
             Para que una computadora «compare significados», primero traduce cada trozo de texto a una
-            lista larga de números —un <b>embedding</b>, o vector—. La magia es que <b>textos con significado
+            lista larga de números (un <b>embedding</b>, o vector). La magia es que <b>textos con significado
             parecido quedan cerca</b> en ese espacio numérico, aunque usen palabras distintas.
           </p>
           <div class="compare-grid">
@@ -156,7 +156,7 @@
           <p>
             Cuando una conversación se alarga y el modelo «olvida» algo que dijiste al inicio, no falló:
             eso viejo <b>se salió de la ventana</b>. El modelo no recuerda entre chats distintos ni guarda
-            nada por su cuenta —cada vez arranca en blanco y solo ve lo que cabe en la ventana de ese momento.
+            nada por su cuenta: cada vez arranca en blanco y solo ve lo que cabe en la ventana de ese momento.
           </p>
           <div class="callout callout--warn reveal">
             <span class="label">Precaución</span>
@@ -198,7 +198,7 @@
         <div class="content-block reveal" id="alucina">
           <h2><span class="n">06</span> Por qué alucina (y cómo reducirlo)</h2>
           <p>
-            Ahora se explica solo. Si el modelo predice <b>lo más plausible</b> —no lo más verdadero— y no
+            Ahora se explica solo. Si el modelo predice <b>lo más plausible</b>, no lo más verdadero, y no
             tiene una base de datos de hechos por dentro, entonces a veces genera algo que <i>suena</i>
             perfecto pero es <b>inventado</b>: una cita falsa, una ley que no existe, un número plausible.
             Eso es una <b>alucinación</b>, y no es un bug raro: es consecuencia directa de cómo funciona.
@@ -214,7 +214,7 @@
             <span class="label">Regla de oro</span>
             <h4>Confianza ≠ veracidad</h4>
             <p>El modelo dice una mentira con el mismo tono seguro con el que dice una verdad. Por eso el
-            siguiente módulo —<b>Evaluación y confiabilidad</b>— existe: antes de soltar un agente al mundo,
+            siguiente módulo (<b>Evaluación y confiabilidad</b>) existe: antes de soltar un agente al mundo,
             hay que <b>medir</b> qué tan seguido acierta. Nunca despliegues lo que no mediste.</p>
           </div>
         </div>
@@ -226,7 +226,7 @@
             <button class="quiz__opt" data-correct="false">Buscar la respuesta en una base de datos de hechos.</button>
             <button class="quiz__opt" data-correct="true">Predecir el siguiente token más probable a partir del texto que recibe.</button>
             <button class="quiz__opt" data-correct="false">Razonar con lógica formal como un humano.</button>
-            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Predice «lo que sigue». Todo lo demás —incluidas las alucinaciones— se explica desde ahí.</p></div></div>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Predice «lo que sigue». Todo lo demás, incluidas las alucinaciones, se explica desde ahí.</p></div></div>
           </div>
           <div class="quiz">
             <p class="quiz__q">2. Estás construyendo un agente que extrae el total de cada factura. ¿Qué temperatura conviene?</p>
