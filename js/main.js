@@ -301,7 +301,8 @@ if ("serviceWorker" in navigator) {
     catch (e) { return 0; }
   }
   function unlocked(st, id) {
-    if (nivelModulo(id) <= nivelExamen()) return true; // tu nivel del examen abre estos módulos
+    if (nivelModulo(id) <= 2) return true; // básico e intermedio (01-15): siempre abiertos, sin candado
+    if (nivelModulo(id) <= nivelExamen()) return true; // avanzado: si tu examen te colocó en avanzado
     const p = prevId(id); return !p || pctOf(st, p) >= UMBRAL; // si no, candado por progreso
   }
   function el(tag, cls, txt) {
