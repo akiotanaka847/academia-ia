@@ -890,3 +890,56 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .templab__out { font-size: .88rem; padding: 8px 12px; border-radius: 8px; background: var(--surface);
   border: 1px solid var(--border); }
 .templab__out.dup { border-color: var(--ok); background: #f0fdf4; }
+
+/* ============================================================
+   LABS 17-18 · Inyección de prompts y LLM como juez
+   ============================================================ */
+
+/* --- LAB 17 · Red teaming --- */
+.injlab__sys { font-family: var(--mono); font-size: .8rem; line-height: 1.5; background: #0b0b0f; color: #e7e7ee;
+  border-radius: var(--radius-sm, 12px); padding: 14px 16px; }
+.injlab__sys .k { color: #7dd3fc; }
+.injlab__sys .secret { color: #fca5a5; font-weight: 600; }
+.injlab__toggle { display: inline-flex; align-items: center; gap: 10px; font-size: .9rem; font-weight: 600;
+  padding: 10px 16px; border-radius: 999px; border: 1px solid var(--border-2); background: var(--surface);
+  cursor: pointer; transition: all .15s; }
+.injlab__toggle.on { background: #f0fdf4; border-color: var(--ok); color: #14532d; }
+.injlab__dot { width: 9px; height: 9px; border-radius: 99px; background: var(--err); }
+.injlab__toggle.on .injlab__dot { background: var(--ok); }
+.injlab__chat { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.injlab__msg { border-radius: 12px; padding: 11px 14px; font-size: .9rem; line-height: 1.5; }
+.injlab__msg.user { background: var(--accent-soft); border: 1px solid #dbe6ff; }
+.injlab__msg.bot { background: var(--surface); border: 1px solid var(--border); }
+.injlab__msg.leak { background: #fef2f2; border-color: #fecaca; }
+.injlab__msg.block { background: #f0fdf4; border-color: #bbf7d0; }
+.injlab__who { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 4px; }
+.injlab__verdict { margin-top: 14px; padding: 14px 16px; border-radius: 12px; font-size: .9rem; }
+.injlab__verdict.bad { background: #fef2f2; border-left: 3px solid var(--err); }
+.injlab__verdict.good { background: #f0fdf4; border-left: 3px solid var(--ok); }
+.injlab__verdict b { display: block; margin-bottom: 3px; }
+
+/* --- LAB 18 · LLM como juez --- */
+.judgelab__src { font-size: .88rem; line-height: 1.6; }
+.judgelab__cands { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin: 14px 0; }
+.judgelab__cand { border: 1px solid var(--border); border-radius: 12px; padding: 13px 15px; background: var(--surface);
+  cursor: pointer; transition: all .15s; }
+.judgelab__cand:hover { border-color: var(--ink); }
+.judgelab__cand.sel { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+.judgelab__cand h5 { font-family: var(--font); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-dim); margin: 0 0 6px; }
+.judgelab__cand p { font-size: .88rem; line-height: 1.5; margin: 0; }
+.judgelab__claims { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.judgelab__claim { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start;
+  font-size: .88rem; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); }
+.judgelab__claim.ok { border-color: #bbf7d0; background: #f0fdf4; }
+.judgelab__claim.no { border-color: #fecaca; background: #fef2f2; }
+.judgelab__claim .ic { font-size: 1rem; line-height: 1.3; }
+.judgelab__claim .why { display: block; font-size: .8rem; color: var(--text-soft); margin-top: 3px; }
+.judgelab__score { display: flex; align-items: baseline; gap: 10px; margin-top: 14px; padding: 14px 16px;
+  border-radius: 12px; background: var(--bg-alt); border: 1px solid var(--border); }
+.judgelab__score .n { font-family: var(--font); font-size: 2rem; font-weight: 800; letter-spacing: -.03em; }
+.judgelab__score.ok .n { color: var(--ok); }
+.judgelab__score.mid .n { color: var(--warn); }
+.judgelab__score.bad .n { color: var(--err); }
+.judgelab__score span { font-size: .88rem; color: var(--text-soft); }
