@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca de prompts · Academia IA</title>
+  <meta name="description" content="Plantillas de prompts reutilizables listas para copiar: comunicación, análisis de datos, gestión de proyectos con Adobe Workfront, prompts de sistema para agentes y técnicas avanzadas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+  <style>
+    .plib__intro { max-width: 760px; }
+    .plib__cat { margin-top: 40px; }
+    .plib__cat > h2 { font-family: var(--font); font-size: clamp(1.3rem, 1rem + 1.4vw, 1.7rem); margin: 0 0 4px; }
+    .plib__cat > p.plib__catsub { color: var(--text-soft); margin: 0 0 18px; }
+    .plib .code-block { margin: 0 0 18px; }
+    .plib .code-block__head { display: flex; align-items: center; gap: 6px; }
+    .prompt-when { font-size: .9rem; color: var(--text-soft); margin: 0 0 8px; }
+    .prompt-when b { color: var(--text); }
+    .prompt-copy {
+      margin-left: auto; font-family: var(--font); font-size: .78rem; font-weight: 600;
+      color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px; padding: 4px 12px; cursor: pointer; transition: all .15s;
+    }
+    .prompt-copy:hover { background: rgba(255,255,255,.26); }
+    .prompt-copy.ok { background: var(--ok); border-color: var(--ok); }
+    .plib .code-block pre { white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html#ruta">Temario</a></li>
+        <li><a href="tareas.html">Tareas</a></li>
+        <li><a href="laboratorios.html">Laboratorios</a></li>
+        <li><a href="glosario.html">Glosario</a></li>
+        <li><a href="index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head reveal in">
+        <span class="kicker">Recursos</span>
+        <h2>Biblioteca de <em>prompts</em></h2>
+        <p class="plib__intro">Plantillas listas para copiar y adaptar. Cambia lo que está entre [corchetes] por tu caso. Basadas en los patrones del <a href="modulos/modulo-02-ia-generativa.html">Módulo 02</a>: rol, contexto, formato y ejemplos.</p>
+      </div>
+
+      <div class="callout callout--tip reveal in" style="margin-bottom:8px;">
+        <span class="label">Cómo usarla</span>
+        <h4>Copia, pega y ajusta</h4>
+        <p>Pulsa <b>Copiar</b>, pega el prompt en tu herramienta (ChatGPT, Claude, Gemini o dentro de un agente en n8n / Workfront Fusion) y reemplaza los [corchetes]. Para tareas serias, baja la temperatura y verifica el resultado (Módulos 31 y 32).</p>
+      </div>
+
+      <div class="plib">
+
+        <!-- 1 -->
+        <div class="plib__cat reveal">
+          <h2>1 · Comunicación y redacción</h2>
+          <p class="plib__catsub">Escribir, resumir y reescribir más rápido, sin perder tu tono.</p>
+
+          <p class="prompt-when"><b>Cuándo:</b> tienes un texto largo y necesitas lo esencial.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Resumen ejecutivo</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Actúa como asistente ejecutivo. Resume el siguiente texto para una
+persona ocupada, en máximo 5 viñetas. Incluye solo lo accionable
+(decisiones, riesgos y próximos pasos). Si hay cifras clave, consérvalas.
+
+Texto:
+"""
+[pega aquí el texto]
+"""</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> redactar un correo profesional en segundos.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Correo profesional</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Escribe un correo en tono [cordial y profesional] para [destinatario]
+sobre [tema]. Objetivo del correo: [qué quiero lograr].
+Máximo 120 palabras, con un asunto claro y una llamada a la acción
+al final. No uses relleno.</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> el texto está, pero el tono no.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Reescribir en otro tono</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Reescribe el siguiente texto en un tono más [claro y cercano],
+manteniendo el significado y los datos. Evita tecnicismos innecesarios
+y frases largas. Devuélvelo listo para enviar.
+
+Texto:
+"""
+[pega aquí el texto]
+"""</code></pre>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="plib__cat reveal">
+          <h2>2 · Análisis y datos</h2>
+          <p class="plib__catsub">Convertir texto desordenado en información estructurada y decisiones.</p>
+
+          <p class="prompt-when"><b>Cuándo:</b> necesitas datos limpios que otra herramienta pueda usar.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Extraer datos a JSON</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Extrae del siguiente texto estos campos y devuélvelos SOLO como JSON
+válido, sin explicación. Si un campo no aparece, ponlo como null.
+
+Campos: { "cliente": "", "total": "", "moneda": "", "vencimiento": "" }
+
+Texto:
+"""
+[pega aquí el texto]
+"""</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> clasificar muchos elementos igual y en serie.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Clasificar</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Clasifica cada mensaje en una de estas categorías: [Urgente, Normal, Spam].
+Responde SOLO con la categoría, una por línea, en el mismo orden.
+
+Mensajes:
+1. [texto]
+2. [texto]
+3. [texto]</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> decidir entre opciones con criterios claros.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Comparar opciones</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Compara [opción A] y [opción B] para mi caso: [contexto].
+Devuélvelo en una tabla con estos criterios: costo, tiempo,
+riesgo y facilidad. Al final, una recomendación en una frase
+con su porqué.</code></pre>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="plib__cat reveal">
+          <h2>3 · Gestión de proyectos y Workfront</h2>
+          <p class="plib__catsub">Plantillas pensadas para el día a día en Adobe Workfront y equipos de proyecto.</p>
+
+          <p class="prompt-when"><b>Cuándo:</b> preparar el estado semanal de un proyecto.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Resumen de estado (Workfront)</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Actúa como gestor de proyectos. Con estos datos exportados de Workfront
+(tareas, responsables, fechas y avances), redacta un resumen de estado
+para dirección con esta estructura fija:
+
+• Avance general (una línea con % aproximado)
+• Logros de la semana
+• Riesgos y bloqueos (con responsable)
+• Próximos pasos
+
+Sé concreto y no inventes datos que no estén.
+
+Datos:
+"""
+[pega aquí el export de Workfront]
+"""</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> convertir notas sueltas en una actualización para dirección.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Actualización para stakeholders</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Convierte estas notas de avance en una actualización breve para
+[dirección/cliente], en 4 líneas máximo, tono claro y positivo pero
+honesto con los riesgos. Sin jerga interna.
+
+Notas:
+"""
+[pega aquí tus notas]
+"""</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> descomponer un objetivo grande en tareas de Workfront.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Desglosar en tareas</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Descompón este objetivo en una lista de tareas accionables para cargar
+en Workfront. Para cada tarea da: nombre corto, una descripción de una
+línea, un rol responsable sugerido y una estimación en horas.
+Devuélvelo como tabla.
+
+Objetivo: [describe el objetivo del proyecto]</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> escribir una descripción de tarea clara a partir de una idea vaga.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Descripción de tarea</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Escribe una descripción de tarea clara para Workfront a partir de esta
+idea: [idea]. Incluye: qué hay que hacer, resultado esperado (definición
+de "hecho") y cualquier dependencia. Máximo 80 palabras.</code></pre>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="plib__cat reveal">
+          <h2>4 · Prompts de sistema para agentes</h2>
+          <p class="plib__catsub">La base de un agente confiable (Módulos 12 y 15): rol, límites y formato.</p>
+
+          <p class="prompt-when"><b>Cuándo:</b> montar un asistente que responde con TUS datos.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Agente de soporte (RAG)</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Eres el asistente de [empresa/equipo]. Respondes preguntas usando ÚNICAMENTE
+la información del contexto que se te entrega. Reglas:
+- Si la respuesta no está en el contexto, di: "No lo sé con la información que tengo".
+- Cita de qué documento sale cada dato.
+- Tono: [profesional y cercano]. Idioma: español.
+- Nunca inventes datos, precios ni fechas.</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cuándo:</b> un agente que devuelve datos para otra automatización.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Agente extractor (salida fija)</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Eres un extractor de datos. Recibes texto y devuelves SIEMPRE un JSON válido
+con exactamente estos campos, sin ningún texto adicional antes o después:
+
+{ "asunto": "", "prioridad": "alta|media|baja", "accion_requerida": true }
+
+Si un dato no se puede determinar, usa null. No expliques tu razonamiento.</code></pre>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="plib__cat reveal">
+          <h2>5 · Técnicas avanzadas</h2>
+          <p class="plib__catsub">Patrones que suben la calidad (Módulo 02). Combínalos con los de arriba.</p>
+
+          <p class="prompt-when"><b>Pocos ejemplos (few-shot):</b> le muestras el criterio en vez de explicarlo.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Few-shot</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Clasifica el sentimiento del comentario en: Positivo, Neutral o Negativo.
+
+Ejemplos:
+"Me encantó la atención" -> Positivo
+"Llegó tarde pero funciona" -> Neutral
+"Un desastre, no lo recomiendo" -> Negativo
+
+Comentario: "[pega aquí]"</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Cadena de pensamiento:</b> para tareas con lógica o cálculo.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Razonar paso a paso</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Resuelve el siguiente problema. Primero razona paso a paso de forma breve,
+y al final da la respuesta en una línea que empiece con "Respuesta:".
+
+Problema: [describe el problema]</code></pre>
+          </div>
+
+          <p class="prompt-when"><b>Interacción invertida:</b> deja que la IA recolecte el contexto que le falta.</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">Que te pregunte primero</span><button class="prompt-copy" type="button">Copiar</button></div>
+            <pre><code>Quiero que me ayudes a [objetivo]. Antes de responder, hazme las
+preguntas que necesites para tener todo el contexto. Cuando tengas
+suficiente, dímelo y entonces genera el resultado.</code></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Biblioteca de prompts</span>
+        <a href="index.html" style="color:var(--accent);">Volver al índice →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.querySelectorAll(".prompt-copy").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var block = btn.closest(".code-block");
+        var code = block ? block.querySelector("code") : null;
+        if (!code) return;
+        var texto = code.innerText;
+        navigator.clipboard.writeText(texto).then(function () {
+          var previo = btn.textContent;
+          btn.textContent = "¡Copiado!";
+          btn.classList.add("ok");
+          setTimeout(function () { btn.textContent = previo; btn.classList.remove("ok"); }, 1500);
+        }).catch(function () {});
+      });
+    });
+  </script>
+</body>
+</html>
