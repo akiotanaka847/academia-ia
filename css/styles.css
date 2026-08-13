@@ -943,3 +943,64 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .judgelab__score.mid .n { color: var(--warn); }
 .judgelab__score.bad .n { color: var(--err); }
 .judgelab__score span { font-size: .88rem; color: var(--text-soft); }
+
+/* ============================================================
+   LABS 19-21 · Sesgo, ventana de contexto y function calling
+   ============================================================ */
+
+/* --- LAB 19 · Sesgo --- */
+.biaslab__cands { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.biaslab__cand { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+  border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; background: var(--surface); }
+.biaslab__cand.alto { border-color: #bbf7d0; background: #f0fdf4; }
+.biaslab__cand.bajo { border-color: #fecaca; background: #fef2f2; }
+.biaslab__perfil b { display: block; font-size: .92rem; }
+.biaslab__perfil span { font-size: .8rem; color: var(--text-soft); }
+.biaslab__score { font-family: var(--font); font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; }
+.biaslab__bar { grid-column: 1 / -1; height: 6px; border-radius: 99px; background: var(--border); overflow: hidden; }
+.biaslab__bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .5s; }
+.biaslab__mits { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.biaslab__mit { display: flex; align-items: flex-start; gap: 10px; font-size: .89rem; padding: 11px 14px;
+  border: 1px solid var(--border-2); border-radius: 10px; background: var(--surface); cursor: pointer; transition: all .15s; }
+.biaslab__mit.on { border-color: var(--ok); background: #f0fdf4; }
+.biaslab__mit .box { width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--border-2);
+  flex-shrink: 0; margin-top: 1px; display: grid; place-items: center; font-size: .7rem; color: #fff; }
+.biaslab__mit.on .box { background: var(--ok); border-color: var(--ok); }
+.biaslab__gap { margin-top: 14px; padding: 13px 16px; border-radius: 12px; font-size: .9rem; }
+.biaslab__gap.mal { background: #fef2f2; border-left: 3px solid var(--err); }
+.biaslab__gap.bien { background: #f0fdf4; border-left: 3px solid var(--ok); }
+
+/* --- LAB 20 · Ventana de contexto --- */
+.ctxlab__win { border: 2px solid var(--border-2); border-radius: 12px; padding: 10px; background: var(--bg-alt); }
+.ctxlab__meter { height: 10px; border-radius: 99px; background: var(--border); overflow: hidden; margin-bottom: 10px; }
+.ctxlab__meter i { display: block; height: 100%; background: var(--accent); transition: width .4s; }
+.ctxlab__meter.full i { background: var(--err); }
+.ctxlab__msgs { display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto; }
+.ctxlab__msg { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; font-size: .85rem;
+  padding: 8px 11px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); }
+.ctxlab__msg.fuera { opacity: .38; border-style: dashed; text-decoration: line-through; }
+.ctxlab__msg.clave { border-color: var(--accent); background: var(--accent-soft); }
+.ctxlab__msg.clave.fuera { border-color: var(--err); background: #fef2f2; }
+.ctxlab__msg .tk { font-family: var(--mono); font-size: .74rem; color: var(--text-dim); white-space: nowrap; }
+.ctxlab__test { margin-top: 14px; padding: 14px 16px; border-radius: 12px; }
+.ctxlab__test.si { background: #f0fdf4; border-left: 3px solid var(--ok); }
+.ctxlab__test.no { background: #fef2f2; border-left: 3px solid var(--err); }
+.ctxlab__test b { display: block; margin-bottom: 3px; }
+
+/* --- LAB 21 · Function calling --- */
+.fnlab__tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 10px; }
+.fnlab__tool { border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; background: var(--surface); }
+.fnlab__tool.pick { border-color: var(--accent); background: var(--accent-soft); box-shadow: var(--shadow-sm); }
+.fnlab__tool b { display: block; font-family: var(--mono); font-size: .84rem; }
+.fnlab__tool span { font-size: .78rem; color: var(--text-soft); }
+.fnlab__trace { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.fnlab__stepbox { border-left: 3px solid var(--border-2); padding: 9px 14px; background: var(--surface); border-radius: 0 9px 9px 0; }
+.fnlab__stepbox.think { border-left-color: var(--text-dim); }
+.fnlab__stepbox.act   { border-left-color: var(--accent); }
+.fnlab__stepbox.obs   { border-left-color: var(--warn); }
+.fnlab__stepbox.final { border-left-color: var(--ok); background: #f0fdf4; }
+.fnlab__k { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 3px; }
+.fnlab__stepbox pre { font-family: var(--mono); font-size: .78rem; margin: 4px 0 0; white-space: pre-wrap;
+  background: #0b0b0f; color: #e7e7ee; padding: 9px 11px; border-radius: 7px; overflow-x: auto; }
+.fnlab__stepbox p { margin: 0; font-size: .89rem; }

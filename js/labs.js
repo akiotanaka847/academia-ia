@@ -1491,3 +1491,300 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
     if (i === 0) setTimeout(() => evaluar(cand, card), 0);
   });
 })();
+
+/* =====================================================================
+   LAB 19 · Sesgo: una IA de selección entrenada con el pasado
+   El modelo aprendió de 10 años de contrataciones históricas y heredó
+   sus patrones. Las mitigaciones muestran cómo se corrige.
+   ===================================================================== */
+(function biasLab() {
+  const root = document.querySelector(".biaslab");
+  if (!root) return;
+
+  // Los 4 perfiles tienen LA MISMA experiencia y las mismas habilidades.
+  // Solo cambian dos rasgos que el modelo aprendió a premiar del histórico.
+  const PERFILES = [
+    { n: "Candidato A", uni: "privada de prestigio", pausa: false, base: 78 },
+    { n: "Candidato B", uni: "pública",              pausa: false, base: 78 },
+    { n: "Candidato C", uni: "privada de prestigio", pausa: true,  base: 78 },
+    { n: "Candidato D", uni: "pública",              pausa: true,  base: 78 },
+  ];
+
+  const mits = { anonimizar: false, pausas: false, humano: false };
+  const lista  = root.querySelector('[data-bias="lista"]');
+  const mitBox = root.querySelector('[data-bias="mits"]');
+  const gapEl  = root.querySelector('[data-bias="gap"]');
+  const badge  = root.closest(".lab").querySelector(".lab__pass");
+  let vioSesgo = false, vioCorregido = false;
+
+  function puntuar(p) {
+    let s = p.base;
+    // sesgo heredado del histórico: premia la universidad "de prestigio"
+    if (!mits.anonimizar) s += (p.uni.indexOf("prestigio") !== -1 ? 14 : -7);
+    // sesgo heredado: penaliza las pausas laborales (a menudo por cuidados familiares)
+    if (!mits.pausas && p.pausa) s -= 24;
+    return Math.max(0, Math.min(100, s));
+  }
+
+  function render() {
+    const puntos = PERFILES.map((p) => ({ p: p, s: puntuar(p) }));
+    const max = Math.max.apply(null, puntos.map((x) => x.s));
+    const min = Math.min.apply(null, puntos.map((x) => x.s));
+    const brecha = max - min;
+
+    while (lista.firstChild) lista.removeChild(lista.firstChild);
+    puntos.forEach((x) => {
+      const d = document.createElement("div");
+      d.className = "biaslab__cand" + (brecha > 5 ? (x.s === max ? " alto" : (x.s === min ? " bajo" : "")) : "");
+      const info = document.createElement("div"); info.className = "biaslab__perfil";
+      const nb = document.createElement("b"); nb.textContent = x.p.n;
+      const sp = document.createElement("span");
+      const rasgos = [];
+      rasgos.push(mits.anonimizar ? "universidad oculta" : "universidad " + x.p.uni);
+      if (x.p.pausa) rasgos.push(mits.pausas ? "pausa ignorada" : "pausa laboral de 2 años");
+      sp.textContent = "Misma experiencia y habilidades · " + rasgos.join(" · ");
+      info.appendChild(nb); info.appendChild(sp);
+      const sc = document.createElement("span"); sc.className = "biaslab__score"; sc.textContent = x.s;
+      const bar = document.createElement("div"); bar.className = "biaslab__bar";
+      const i = document.createElement("i"); i.style.width = x.s + "%"; bar.appendChild(i);
+      d.appendChild(info); d.appendChild(sc); d.appendChild(bar);
+      lista.appendChild(d);
+    });
+
+    gapEl.className = "biaslab__gap " + (brecha > 5 ? "mal" : "bien");
+    while (gapEl.firstChild) gapEl.removeChild(gapEl.firstChild);
+    const b = document.createElement("b");
+    const p = document.createElement("span");
+    if (brecha > 5) {
+      b.textContent = "⚠️ Brecha de " + brecha + " puntos entre perfiles equivalentes";
+      p.textContent = "Los cuatro tienen la misma experiencia y las mismas habilidades, pero el modelo los puntúa muy distinto. No es que «odie» a nadie: aprendió del histórico que la empresa contrataba así, y ahora lo repite a escala.";
+      vioSesgo = true;
+    } else {
+      b.textContent = "✅ Brecha de " + brecha + " puntos: perfiles equivalentes, puntuación equivalente";
+      p.textContent = mits.humano
+        ? "Con los datos sensibles fuera y una persona revisando la decisión final, el sistema evalúa lo que dice evaluar: la capacidad para el puesto."
+        : "Ya casi. Activa también la revisión humana: en decisiones que afectan a personas, la IA propone y un humano decide y responde.";
+      if (mits.humano) vioCorregido = true;
+    }
+    gapEl.appendChild(b); gapEl.appendChild(p);
+    if (vioSesgo && vioCorregido && badge) badge.classList.add("show");
+  }
+
+  const MITS = [
+    { k: "anonimizar", t: "Anonimizar los datos sensibles", d: "Quitar universidad, nombre y foto antes de puntuar." },
+    { k: "pausas",     t: "Ignorar las pausas laborales",   d: "Penalizarlas castiga sobre todo a quien cuidó de alguien." },
+    { k: "humano",     t: "Persona en el bucle",            d: "La IA propone un orden; una persona decide y responde." },
+  ];
+  MITS.forEach((m) => {
+    const d = document.createElement("div");
+    d.className = "biaslab__mit";
+    const box = document.createElement("span"); box.className = "box"; box.textContent = "✓";
+    const txt = document.createElement("div");
+    const t = document.createElement("b"); t.textContent = m.t;
+    const s = document.createElement("span"); s.style.display = "block";
+    s.style.fontSize = ".8rem"; s.style.color = "var(--text-soft)"; s.textContent = m.d;
+    txt.appendChild(t); txt.appendChild(s);
+    d.appendChild(box); d.appendChild(txt);
+    d.addEventListener("click", () => {
+      mits[m.k] = !mits[m.k];
+      d.classList.toggle("on", mits[m.k]);
+      render();
+    });
+    mitBox.appendChild(d);
+  });
+  render();
+})();
+
+/* =====================================================================
+   LAB 20 · Ventana de contexto: por qué la IA "se olvida"
+   La conversación crece, la ventana no. Lo viejo se sale y deja de existir
+   para el modelo. Incluye el efecto "perdido en el medio".
+   ===================================================================== */
+(function contextLab() {
+  const root = document.querySelector(".ctxlab");
+  if (!root) return;
+
+  const MSGS = [
+    { t: "Hola, soy Esteban Trujillo y llevo el proyecto Aurora.", tk: 120, clave: true },
+    { t: "Necesito preparar el informe trimestral.", tk: 90 },
+    { t: "Adjunto el export de tareas de Workfront (18 de 25 completadas).", tk: 260 },
+    { t: "También el desglose del presupuesto ejecutado.", tk: 240 },
+    { t: "Aquí están las actas de las tres últimas reuniones.", tk: 380 },
+    { t: "Y el listado de riesgos abiertos del equipo.", tk: 300 },
+    { t: "Resume los bloqueos por responsable, por favor.", tk: 110 },
+    { t: "Ahora agrupa los riesgos por severidad.", tk: 100 },
+    { t: "Y dime: ¿cómo me llamo y qué proyecto llevo?", tk: 90, pregunta: true },
+  ];
+  const TAMANOS = { pequena: 800, media: 1400, grande: 3000 };
+
+  const chips  = root.querySelector('[data-ctx="chips"]');
+  const meter  = root.querySelector('[data-ctx="meter"]');
+  const meterI = root.querySelector('[data-ctx="meterfill"]');
+  const info   = root.querySelector('[data-ctx="info"]');
+  const list   = root.querySelector('[data-ctx="msgs"]');
+  const test   = root.querySelector('[data-ctx="test"]');
+  const badge  = root.closest(".lab").querySelector(".lab__pass");
+  let tam = "media", vioOlvido = false, vioRecuerdo = false;
+
+  function render() {
+    const limite = TAMANOS[tam];
+    // se conservan los mensajes MÁS RECIENTES que quepan; los viejos se caen
+    let acc = 0;
+    const dentro = {};
+    for (let i = MSGS.length - 1; i >= 0; i--) {
+      if (acc + MSGS[i].tk <= limite) { dentro[i] = true; acc += MSGS[i].tk; }
+    }
+    const total = MSGS.reduce((a, m) => a + m.tk, 0);
+
+    while (list.firstChild) list.removeChild(list.firstChild);
+    MSGS.forEach((m, i) => {
+      const d = document.createElement("div");
+      d.className = "ctxlab__msg" + (m.clave ? " clave" : "") + (dentro[i] ? "" : " fuera");
+      const t = document.createElement("span");
+      t.textContent = (m.clave ? "🔑 " : "") + m.t;
+      const tk = document.createElement("span"); tk.className = "tk";
+      tk.textContent = m.tk + " tk" + (dentro[i] ? "" : " · FUERA");
+      d.appendChild(t); d.appendChild(tk);
+      list.appendChild(d);
+    });
+
+    const pct = Math.min(100, (acc / limite) * 100);
+    meterI.style.width = pct + "%";
+    meter.classList.toggle("full", pct > 92);
+    info.textContent = acc + " de " + limite + " tokens usados · la conversación completa pesa " + total + " tokens";
+
+    const recuerda = dentro[0];
+    test.className = "ctxlab__test " + (recuerda ? "si" : "no");
+    while (test.firstChild) test.removeChild(test.firstChild);
+    const b = document.createElement("b");
+    const p = document.createElement("span");
+    if (recuerda) {
+      b.textContent = "✅ «Te llamas Esteban Trujillo y llevas el proyecto Aurora.»";
+      p.textContent = "El mensaje con tu nombre sigue dentro de la ventana, así que el modelo puede leerlo y responder.";
+      vioRecuerdo = true;
+    } else {
+      b.textContent = "❌ «No tengo esa información en esta conversación.»";
+      p.textContent = "El mensaje donde te presentaste se salió de la ventana. Para el modelo ya no existe: no es que lo olvide, es que ya no lo puede leer. Por eso una conversación larga «pierde» lo del principio.";
+      vioOlvido = true;
+    }
+    test.appendChild(b); test.appendChild(p);
+    if (vioOlvido && vioRecuerdo && badge) badge.classList.add("show");
+  }
+
+  Object.keys(TAMANOS).forEach((k) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "xlab__chip" + (k === "media" ? " active" : "");
+    b.textContent = (k === "pequena" ? "Ventana pequeña" : k === "media" ? "Ventana media" : "Ventana grande") +
+      " (" + TAMANOS[k] + " tk)";
+    b.addEventListener("click", () => {
+      chips.querySelectorAll(".xlab__chip").forEach((x) => x.classList.remove("active"));
+      b.classList.add("active"); tam = k; render();
+    });
+    chips.appendChild(b);
+  });
+  render();
+})();
+
+/* =====================================================================
+   LAB 21 · Function calling: cómo el agente elige su herramienta
+   Muestra el bucle real: pensar, elegir herramienta, formatear la llamada
+   en JSON, observar el resultado y responder.
+   ===================================================================== */
+(function functionCallLab() {
+  const root = document.querySelector(".fnlab");
+  if (!root) return;
+
+  const TOOLS = [
+    { id: "buscar_workfront", desc: "Consulta tareas y proyectos" },
+    { id: "enviar_correo",    desc: "Envía un correo al equipo" },
+    { id: "calcular",         desc: "Hace operaciones numéricas" },
+  ];
+
+  const CASOS = [
+    {
+      q: "¿Cuántas tareas abiertas tiene el proyecto Aurora?",
+      pasos: [
+        { k: "think", txt: "Necesito datos que no tengo en memoria. Hay una herramienta para consultar proyectos." },
+        { k: "act", tool: "buscar_workfront", json: '{\n  "herramienta": "buscar_workfront",\n  "parametros": {\n    "proyecto": "Aurora",\n    "estado": "abierta"\n  }\n}' },
+        { k: "obs", json: '{ "tareas_abiertas": 7 }' },
+        { k: "final", txt: "El proyecto Aurora tiene 7 tareas abiertas." },
+      ],
+    },
+    {
+      q: "¿Qué porcentaje del presupuesto de 40 000 € llevamos si gastamos 22 000 €?",
+      pasos: [
+        { k: "think", txt: "Esto es una operación numérica. No hace falta consultar Workfront." },
+        { k: "act", tool: "calcular", json: '{\n  "herramienta": "calcular",\n  "parametros": {\n    "expresion": "22000 / 40000 * 100"\n  }\n}' },
+        { k: "obs", json: '{ "resultado": 55 }' },
+        { k: "final", txt: "Llevas ejecutado el 55 % del presupuesto." },
+      ],
+    },
+    {
+      q: "Mira las tareas atrasadas de Aurora y avisa al equipo por correo.",
+      pasos: [
+        { k: "think", txt: "Aquí hacen falta DOS herramientas, y en orden: primero consultar, después enviar." },
+        { k: "act", tool: "buscar_workfront", json: '{\n  "herramienta": "buscar_workfront",\n  "parametros": {\n    "proyecto": "Aurora",\n    "estado": "atrasada"\n  }\n}' },
+        { k: "obs", json: '{ "atrasadas": 3, "responsables": ["Ana", "Luis"] }' },
+        { k: "think", txt: "Ya tengo los datos. Ahora sí puedo redactar y enviar el aviso." },
+        { k: "act", tool: "enviar_correo", json: '{\n  "herramienta": "enviar_correo",\n  "parametros": {\n    "para": ["Ana", "Luis"],\n    "asunto": "3 tareas atrasadas en Aurora"\n  }\n}' },
+        { k: "obs", json: '{ "enviado": true }' },
+        { k: "final", txt: "Encontré 3 tareas atrasadas y avisé a Ana y Luis por correo." },
+      ],
+    },
+    {
+      q: "¿Qué es un proyecto?",
+      pasos: [
+        { k: "think", txt: "Es una pregunta general: puedo responder con lo que ya sé. No necesito ninguna herramienta." },
+        { k: "final", txt: "Un proyecto es un conjunto de tareas con un objetivo y un plazo definidos." },
+      ],
+    },
+  ];
+
+  const chips   = root.querySelector('[data-fn="chips"]');
+  const toolsEl = root.querySelector('[data-fn="tools"]');
+  const trace   = root.querySelector('[data-fn="trace"]');
+  const badge   = root.closest(".lab").querySelector(".lab__pass");
+  const vistos  = {};
+
+  const NOMBRES = { think: "1 · Pensar", act: "2 · Llamar a la herramienta", obs: "3 · Observar la respuesta", final: "4 · Responder" };
+
+  function correr(caso, idx) {
+    const usadas = caso.pasos.filter((p) => p.k === "act").map((p) => p.tool);
+    toolsEl.querySelectorAll(".fnlab__tool").forEach((el) => {
+      el.classList.toggle("pick", usadas.indexOf(el.dataset.tool) !== -1);
+    });
+
+    while (trace.firstChild) trace.removeChild(trace.firstChild);
+    caso.pasos.forEach((p) => {
+      const d = document.createElement("div");
+      d.className = "fnlab__stepbox " + p.k;
+      const k = document.createElement("span"); k.className = "fnlab__k"; k.textContent = NOMBRES[p.k];
+      d.appendChild(k);
+      if (p.txt) { const t = document.createElement("p"); t.textContent = p.txt; d.appendChild(t); }
+      if (p.json) { const pre = document.createElement("pre"); pre.textContent = p.json; d.appendChild(pre); }
+      trace.appendChild(d);
+    });
+    vistos[idx] = true;
+    if (Object.keys(vistos).length >= 3 && badge) badge.classList.add("show");
+  }
+
+  TOOLS.forEach((t) => {
+    const d = document.createElement("div");
+    d.className = "fnlab__tool"; d.dataset.tool = t.id;
+    const b = document.createElement("b"); b.textContent = t.id + "()";
+    const s = document.createElement("span"); s.textContent = t.desc;
+    d.appendChild(b); d.appendChild(s);
+    toolsEl.appendChild(d);
+  });
+  CASOS.forEach((c, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "xlab__chip" + (i === 0 ? " active" : "");
+    b.textContent = c.q;
+    b.addEventListener("click", () => {
+      chips.querySelectorAll(".xlab__chip").forEach((x) => x.classList.remove("active"));
+      b.classList.add("active"); correr(c, i);
+    });
+    chips.appendChild(b);
+  });
+  correr(CASOS[0], 0);
+})();

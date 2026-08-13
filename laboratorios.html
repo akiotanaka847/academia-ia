@@ -974,9 +974,118 @@
       </div>
     </section>
 
+    <!-- LAB 19 · Sesgo -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 19</span>
+        <h2>Sesgo: cuando la IA repite el pasado</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Un modelo no es «neutral» por defecto: aprende de datos históricos y <b>hereda sus patrones</b>. Aquí
+          tienes una IA que puntúa candidatos, entrenada con diez años de contrataciones de la empresa. Los cuatro
+          perfiles tienen <b>la misma experiencia y las mismas habilidades</b>. Mira qué nota les pone.
+        </p>
+
+        <h3>Puntuación del modelo</h3>
+        <div class="biaslab">
+          <div class="biaslab__cands" data-bias="lista"></div>
+          <div class="biaslab__gap" data-bias="gap"></div>
+
+          <p class="xlab__label" style="margin-top:18px;">Aplica las mitigaciones y mira qué pasa</p>
+          <div class="biaslab__mits" data-bias="mits"></div>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>El modelo no inventa el sesgo: lo amplifica</h4>
+            <p>Si el histórico premiaba cierta universidad y castigaba las pausas laborales (que recaen sobre todo
+            en quien cuidó de alguien), el modelo aprende justo eso y lo aplica a escala y a gran velocidad.
+            Por eso <b>revisar el sesgo no es opcional</b> y por eso, en decisiones que afectan a personas, la IA
+            propone y un humano decide y responde. Es el Módulo 21.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 20 · Ventana de contexto -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 20</span>
+        <h2>Ventana de contexto: por qué la IA «se olvida»</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          La <b>ventana de contexto</b> es todo lo que el modelo puede tener en mente a la vez. La conversación
+          crece, pero la ventana no: lo más viejo <b>se sale</b> y deja de existir para el modelo. Aquí lo ves en
+          directo con una conversación de trabajo. Fíjate en el mensaje marcado con 🔑.
+        </p>
+
+        <h3>Cambia el tamaño de la ventana</h3>
+        <div class="ctxlab">
+          <div class="xlab__row" data-ctx="chips"></div>
+
+          <div class="ctxlab__win">
+            <div class="ctxlab__meter" data-ctx="meter"><i data-ctx="meterfill"></i></div>
+            <p style="font-size:.8rem;color:var(--text-soft);margin:0 0 10px;" data-ctx="info"></p>
+            <div class="ctxlab__msgs" data-ctx="msgs"></div>
+          </div>
+
+          <p class="xlab__label" style="margin-top:16px;">Última pregunta: «¿cómo me llamo y qué proyecto llevo?»</p>
+          <div class="ctxlab__test" data-ctx="test"></div>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>No es que olvide: es que ya no lo puede leer</h4>
+            <p>Cuando una conversación larga «pierde» algo del principio, no falló el modelo: ese texto se salió
+            de la ventana. Dos consecuencias prácticas: <b>(1)</b> repite los datos clave cuando la charla se
+            alarga, y <b>(2)</b> no metas documentos enormes «por si acaso», porque llenan la ventana, diluyen lo
+            importante y suben el costo (Módulo 31).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 21 · Function calling -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 21</span>
+        <h2>Function calling: cómo el agente usa sus herramientas</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Un agente no responde de golpe: <b>razona en pasos</b>. Decide si necesita una herramienta, la llama
+          con un JSON bien formado, observa lo que devuelve y solo entonces responde. Aquí ves ese bucle por
+          dentro, con un agente que tiene tres herramientas.
+        </p>
+
+        <h3>Las herramientas del agente</h3>
+        <div class="fnlab">
+          <div class="fnlab__tools" data-fn="tools"></div>
+
+          <p class="xlab__label" style="margin-top:16px;">Elige qué le pides</p>
+          <div class="xlab__row" data-fn="chips"></div>
+
+          <p class="xlab__label">Traza del agente, paso a paso</p>
+          <div class="fnlab__trace" data-fn="trace"></div>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>La herramienta la elige el agente, y a veces no elige ninguna</h4>
+            <p>Fíjate en los cuatro casos: uno consulta datos, otro calcula, otro <b>encadena dos herramientas en
+            orden</b> y el último responde sin usar ninguna. Eso es exactamente lo que hace n8n o Workfront Fusion
+            por debajo cuando montas un agente. Y aquí conecta la seguridad: si una de esas herramientas envía
+            correos o mueve dinero, es donde quieres una persona aprobando (Módulos 12 y 33).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Dieciocho laboratorios y sumando</h4>
+      <h4>Veintiún laboratorios y sumando</h4>
       <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos,
       medir la calidad de un dataset, diseñar un system prompt… Dime cuáles quieres y los añadimos.</p>
     </div>
