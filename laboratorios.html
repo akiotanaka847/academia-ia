@@ -755,9 +755,145 @@
       </div>
     </section>
 
+    <!-- LAB 14 · Embeddings y similitud semántica -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 14</span>
+        <h2>Embeddings: cómo la IA mide el significado</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Para comparar significados, la IA convierte cada texto en una lista de números (un <b>embedding</b>).
+          Lo asombroso: los textos que <i>significan</i> lo mismo quedan <b>cerca</b> en ese espacio, aunque no
+          compartan ni una palabra. Es el motor de la búsqueda semántica y del RAG. Pruébalo:
+        </p>
+
+        <h3>Busca por significado, no por palabras</h3>
+        <p>Elige una búsqueda y mira qué términos recupera. Fíjate en la <b>similitud del coseno</b> (de 0 a 1) y en dónde cae tu búsqueda en el mapa.</p>
+
+        <div class="emblab">
+          <div class="xlab__row" data-emb="chips"></div>
+          <div class="emblab__grid">
+            <div>
+              <p class="xlab__label">Resultados por similitud</p>
+              <div class="emblab__rank" data-emb="rank"></div>
+            </div>
+            <div>
+              <p class="xlab__label">Mapa del espacio semántico</p>
+              <svg class="emblab__map" data-emb="map" viewBox="0 0 300 210" role="img" aria-label="Mapa de similitud semántica"></svg>
+              <div class="emblab__vec" data-emb="vec"></div>
+            </div>
+          </div>
+          <div class="callout callout--tip" style="margin-top:18px;">
+            <span class="label">Fíjate en esto</span>
+            <h4 data-emb="nota"></h4>
+          </div>
+
+          <div class="callout callout--info" style="margin-top:16px;">
+            <span class="label">Lección aprendida</span>
+            <h4>Buscar por significado, no por coincidencia de letras</h4>
+            <p>Una búsqueda tradicional falla si el usuario escribe «días libres» y tu documento dice «vacaciones».
+            Con embeddings, ambos son vectores cercanos y el sistema los conecta. Por eso el RAG (Módulo 07) puede
+            responder con tus documentos aunque nadie use exactamente las mismas palabras.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 15 · RAG en vivo -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 15</span>
+        <h2>RAG en vivo: trocear, recuperar y responder</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Un sistema RAG hace tres cosas: <b>trocea</b> tus documentos, <b>recupera</b> los trozos relevantes para
+          la pregunta y <b>redacta</b> la respuesta solo con eso. Aquí lo ves funcionando paso a paso, con el
+          documento de políticas de una empresa. Prueba también qué pasa cuando la respuesta <b>no está</b>.
+        </p>
+
+        <h3>Haz una pregunta y mira el pipeline completo</h3>
+
+        <div class="raglab">
+          <p class="xlab__label">1 · Elige la pregunta</p>
+          <div class="xlab__row" data-rag="chips"></div>
+
+          <p class="xlab__label">2 · Elige el tamaño de los trozos (chunking)</p>
+          <div class="xlab__row" data-rag="modos"></div>
+
+          <div class="raglab__steps">
+            <div class="raglab__step" data-rag="step"><b>Trocear</b><span>El documento se parte en pedazos</span></div>
+            <div class="raglab__step" data-rag="step"><b>Recuperar</b><span>Se traen los más relevantes</span></div>
+            <div class="raglab__step" data-rag="step"><b>Responder</b><span>Se redacta solo con eso</span></div>
+          </div>
+
+          <p class="xlab__label">Documento troceado (en verde, lo recuperado)</p>
+          <div class="xlab__panel raglab__doc" data-rag="doc"></div>
+
+          <div class="raglab__answer" data-rag="answer"></div>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>El troceo decide la calidad, y saber decir «no lo sé» es una función, no un fallo</h4>
+            <p>Si los trozos son muy pequeños, el dato se parte y la respuesta queda coja; si son enormes, entra
+            ruido y sube el costo. Y cuando preguntas algo que no está en la fuente, un sistema bien hecho
+            <b>lo admite</b> en vez de inventarlo: eso es exactamente lo que mides con el <i>groundedness</i>
+            del Módulo 32.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 16 · Temperatura -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 16</span>
+        <h2>Temperatura: el dial entre preciso y creativo</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Un modelo no elige «la» palabra siguiente: calcula la <b>probabilidad</b> de varias y escoge una. La
+          <b>temperatura</b> decide si se queda siempre con la más probable (preciso y repetible) o si se arriesga
+          con otras (creativo y variado). Muévela y genera cinco veces la misma frase:
+        </p>
+
+        <h3>Mueve la temperatura y genera</h3>
+
+        <div class="templab">
+          <div class="xlab__panel">
+            <p class="xlab__label">Temperatura: <span class="templab__val" data-temp="val">0.20</span></p>
+            <input class="templab__slider" type="range" min="0" max="1" step="0.05" value="0.2" data-temp="slider" aria-label="Temperatura" />
+            <p style="font-size:.82rem;color:var(--text-soft);margin:0;">0 = siempre la palabra más probable · 1 = mucha variedad</p>
+
+            <p class="xlab__label" style="margin-top:16px;">Probabilidad de la siguiente palabra</p>
+            <p style="font-size:.85rem;color:var(--text-soft);margin:0 0 4px;">Tras «El informe de ventas del trimestre fue…»</p>
+            <div class="templab__probs" data-temp="probs"></div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <button class="lab-btn" type="button" data-temp="gen">Generar 5 veces →</button>
+          </div>
+          <div class="templab__outs" data-temp="outs"></div>
+          <p style="font-size:.88rem;color:var(--text-soft);margin-top:10px;" data-temp="hint">Pulsa «Generar» para ver el efecto.</p>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>Para automatizar, temperatura baja</h4>
+            <p>Si un agente extrae el total de una factura o clasifica tickets, quieres que ante la misma entrada
+            dé <b>siempre la misma salida</b>: temperatura cerca de 0. Sube la temperatura solo cuando busques
+            ideas, nombres o variantes de texto. La creatividad es enemiga de la confiabilidad (Módulos 31 y 32).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Trece laboratorios y sumando</h4>
+      <h4>Dieciséis laboratorios y sumando</h4>
       <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos,
       medir la calidad de un dataset, diseñar un system prompt… Dime cuáles quieres y los añadimos.</p>
     </div>

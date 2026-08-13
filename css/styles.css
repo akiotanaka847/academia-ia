@@ -827,3 +827,66 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 
   .footer { padding: 44px 0 32px; }
 }
+
+/* ============================================================
+   LABS 14-16 · Embeddings, RAG en vivo y Temperatura
+   ============================================================ */
+
+/* --- Comunes a los tres --- */
+.xlab__row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.xlab__chip { font-family: var(--font); font-size: .85rem; font-weight: 600; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--border-2); background: var(--surface); color: var(--text); cursor: pointer; transition: all .15s; }
+.xlab__chip:hover { border-color: var(--ink); }
+.xlab__chip.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.xlab__label { font-family: var(--font); font-size: .8rem; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--text-dim); margin: 0 0 8px; }
+.xlab__panel { border: 1px solid var(--border); border-radius: var(--radius-sm, 12px); background: var(--bg-alt); padding: 16px; }
+
+/* --- LAB 14 · Embeddings --- */
+.emblab__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+@media (max-width: 860px) { .emblab__grid { grid-template-columns: 1fr; } }
+.emblab__rank { display: flex; flex-direction: column; gap: 7px; }
+.emblab__item { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center;
+  font-size: .9rem; padding: 7px 10px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); }
+.emblab__item.top { border-color: var(--ok); background: #f0fdf4; }
+.emblab__item.low { opacity: .55; }
+.emblab__term { font-weight: 600; min-width: 0; }
+.emblab__bar { grid-column: 1 / -1; height: 6px; border-radius: 99px; background: var(--border); overflow: hidden; }
+.emblab__bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .35s; }
+.emblab__item.top .emblab__bar i { background: var(--ok); }
+.emblab__score { font-family: var(--mono); font-size: .82rem; color: var(--text-soft); }
+.emblab__map { width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius-sm, 12px); background: var(--surface); }
+.emblab__vec { font-family: var(--mono); font-size: .78rem; color: var(--text-soft); word-break: break-all;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-top: 10px; }
+
+/* --- LAB 15 · RAG en vivo --- */
+.raglab__doc { font-size: .86rem; line-height: 1.5; max-height: 260px; overflow-y: auto; }
+.raglab__chunk { border: 1px dashed var(--border-2); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px;
+  background: var(--surface); transition: all .2s; }
+.raglab__chunk.hit { border-style: solid; border-color: var(--ok); background: #f0fdf4; }
+.raglab__chunk-n { font-family: var(--mono); font-size: .7rem; color: var(--text-dim); display: block; margin-bottom: 3px; }
+.raglab__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px; margin: 16px 0; }
+.raglab__step { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: var(--surface); }
+.raglab__step.on { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+.raglab__step b { display: block; font-size: .85rem; margin-bottom: 2px; }
+.raglab__step span { font-size: .78rem; color: var(--text-soft); }
+.raglab__answer { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 14px 16px;
+  border-radius: 0 10px 10px 0; margin-top: 14px; }
+.raglab__answer.nosabe { border-left-color: var(--warn); background: #fffbeb; }
+.raglab__answer b { display: block; margin-bottom: 4px; font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--text-dim); }
+.raglab__cita { font-size: .8rem; color: var(--text-soft); margin-top: 8px; font-style: italic; }
+
+/* --- LAB 16 · Temperatura --- */
+.templab__slider { width: 100%; margin: 6px 0 4px; accent-color: var(--accent); }
+.templab__val { font-family: var(--mono); font-weight: 600; color: var(--accent); }
+.templab__probs { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.templab__prob { display: grid; grid-template-columns: 110px 1fr auto; gap: 8px; align-items: center; font-size: .85rem; }
+.templab__prob .w { font-weight: 600; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.templab__prob .t { height: 14px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.templab__prob .t i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .3s; }
+.templab__prob .p { font-family: var(--mono); font-size: .78rem; color: var(--text-soft); min-width: 44px; text-align: right; }
+.templab__outs { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.templab__out { font-size: .88rem; padding: 8px 12px; border-radius: 8px; background: var(--surface);
+  border: 1px solid var(--border); }
+.templab__out.dup { border-color: var(--ok); background: #f0fdf4; }

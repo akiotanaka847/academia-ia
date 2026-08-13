@@ -945,3 +945,343 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   FIELDS.forEach((k) => setCheck(k, "none", "sin comprobar todavía"));
   dbEl.textContent = "// Aún no has enviado nada.";
 })();
+
+/* =====================================================================
+   LAB 14 · Embeddings y similitud semántica
+   Cada término es un vector de 5 dimensiones interpretables. La similitud
+   se calcula con coseno (lo mismo que hace una búsqueda semántica real).
+   La lección: encuentra por SIGNIFICADO, aunque no compartan palabras.
+   ===================================================================== */
+(function embeddingsLab() {
+  const root = document.querySelector(".emblab");
+  if (!root) return;
+
+  // dimensiones: [administración/dinero, proyecto/gestión, tecnología, personas/RRHH, tiempo/plazos]
+  const DIMS = ["dinero", "proyecto", "tecnología", "personas", "tiempo"];
+  const TERMS = [
+    { t: "factura",            v: [0.95, 0.25, 0.05, 0.10, 0.30] },
+    { t: "recibo de pago",     v: [0.93, 0.15, 0.05, 0.08, 0.20] },
+    { t: "presupuesto",        v: [0.88, 0.45, 0.05, 0.10, 0.35] },
+    { t: "nómina",             v: [0.85, 0.10, 0.05, 0.80, 0.30] },
+    { t: "tarea",              v: [0.15, 0.92, 0.20, 0.25, 0.55] },
+    { t: "proyecto",           v: [0.20, 0.95, 0.25, 0.30, 0.50] },
+    { t: "entregable",         v: [0.15, 0.90, 0.15, 0.20, 0.60] },
+    { t: "fecha límite",       v: [0.10, 0.80, 0.10, 0.15, 0.92] },
+    { t: "reunión de equipo",  v: [0.10, 0.60, 0.05, 0.75, 0.45] },
+    { t: "aprobación",         v: [0.45, 0.75, 0.10, 0.45, 0.40] },
+    { t: "servidor",           v: [0.05, 0.20, 0.95, 0.05, 0.10] },
+    { t: "base de datos",      v: [0.05, 0.15, 0.95, 0.05, 0.05] },
+    { t: "código fuente",      v: [0.05, 0.25, 0.90, 0.10, 0.10] },
+    { t: "vacaciones",         v: [0.20, 0.15, 0.02, 0.85, 0.60] },
+    { t: "contratar personal", v: [0.30, 0.35, 0.05, 0.92, 0.30] },
+    { t: "café",               v: [0.05, 0.02, 0.02, 0.30, 0.05] },
+  ];
+  const QUERIES = [
+    { q: "cobro pendiente",            v: [0.93, 0.25, 0.05, 0.10, 0.40], nota: "Ni una palabra en común con «factura», y aun así la encuentra." },
+    { q: "días libres",                v: [0.15, 0.12, 0.02, 0.88, 0.55], nota: "«Días libres» y «vacaciones» no comparten letras: comparten significado." },
+    { q: "¿cuándo hay que entregar?",  v: [0.10, 0.82, 0.10, 0.15, 0.92], nota: "Una pregunta entera se convierte en un vector, igual que una palabra." },
+    { q: "dónde se guardan los datos", v: [0.05, 0.15, 0.95, 0.05, 0.05], nota: "El vector cae en la zona técnica y trae los términos de esa zona." },
+  ];
+
+  const cos = (a, b) => {
+    let d = 0, na = 0, nb = 0;
+    for (let i = 0; i < a.length; i++) { d += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; }
+    return d / (Math.sqrt(na) * Math.sqrt(nb) || 1);
+  };
+
+  const chips = root.querySelector('[data-emb="chips"]');
+  const rank  = root.querySelector('[data-emb="rank"]');
+  const vecEl = root.querySelector('[data-emb="vec"]');
+  const noteEl= root.querySelector('[data-emb="nota"]');
+  const map   = root.querySelector('[data-emb="map"]');
+  const badge = root.closest(".lab").querySelector(".lab__pass");
+  let vistas = 0;
+
+  function dibujarMapa(query, ranked) {
+    while (map.firstChild) map.removeChild(map.firstChild);
+    const NS = "http://www.w3.org/2000/svg";
+    const W = 300, H = 210;
+    map.setAttribute("viewBox", "0 0 " + W + " " + H);
+    // proyección 2D: x = dinero+proyecto, y = tecnología+personas (solo para intuición visual)
+    const px = (v) => 28 + (v[0] * 0.55 + v[1] * 0.45) * (W - 56);
+    const py = (v) => H - 26 - (v[2] * 0.55 + v[3] * 0.45) * (H - 52);
+    const ejes = document.createElementNS(NS, "path");
+    ejes.setAttribute("d", "M24 " + (H - 22) + " H" + (W - 12) + " M24 " + (H - 22) + " V12");
+    ejes.setAttribute("stroke", "#dcdce3"); ejes.setAttribute("fill", "none");
+    map.appendChild(ejes);
+    ranked.forEach((r) => {
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", px(r.v)); c.setAttribute("cy", py(r.v));
+      c.setAttribute("r", r.s > 0.93 ? 6 : 4);
+      c.setAttribute("fill", r.s > 0.93 ? "#16a34a" : "#c9c9d2");
+      map.appendChild(c);
+      if (r.s > 0.93) {
+        const tx = document.createElementNS(NS, "text");
+        tx.setAttribute("x", px(r.v) + 9); tx.setAttribute("y", py(r.v) + 4);
+        tx.setAttribute("font-size", "10"); tx.setAttribute("fill", "#0b0b0f");
+        tx.textContent = r.t;
+        map.appendChild(tx);
+      }
+    });
+    const q = document.createElementNS(NS, "circle");
+    q.setAttribute("cx", px(query.v)); q.setAttribute("cy", py(query.v));
+    q.setAttribute("r", 7); q.setAttribute("fill", "none");
+    q.setAttribute("stroke", "#2563eb"); q.setAttribute("stroke-width", "2.5");
+    map.appendChild(q);
+    const qt = document.createElementNS(NS, "text");
+    qt.setAttribute("x", px(query.v) + 11); qt.setAttribute("y", py(query.v) - 6);
+    qt.setAttribute("font-size", "10"); qt.setAttribute("font-weight", "700"); qt.setAttribute("fill", "#2563eb");
+    qt.textContent = "tu búsqueda";
+    map.appendChild(qt);
+  }
+
+  function buscar(query) {
+    const ranked = TERMS.map((x) => ({ t: x.t, v: x.v, s: cos(query.v, x.v) }))
+                        .sort((a, b) => b.s - a.s);
+    while (rank.firstChild) rank.removeChild(rank.firstChild);
+    ranked.slice(0, 8).forEach((r, i) => {
+      const it = document.createElement("div");
+      it.className = "emblab__item" + (i < 2 ? " top" : (r.s < 0.7 ? " low" : ""));
+      const t = document.createElement("span"); t.className = "emblab__term";
+      t.textContent = (i === 0 ? "🥇 " : (i === 1 ? "🥈 " : "")) + r.t;
+      const s = document.createElement("span"); s.className = "emblab__score";
+      s.textContent = r.s.toFixed(3);
+      const bar = document.createElement("div"); bar.className = "emblab__bar";
+      const fill = document.createElement("i");
+      fill.style.width = Math.max(0, (r.s - 0.4) / 0.6 * 100) + "%";
+      bar.appendChild(fill);
+      it.appendChild(t); it.appendChild(s); it.appendChild(bar);
+      rank.appendChild(it);
+    });
+    vecEl.textContent = "«" + query.q + "» → [" + query.v.map((n) => n.toFixed(2)).join(", ") + "]"
+      + "   (dimensiones: " + DIMS.join(", ") + ")";
+    noteEl.textContent = query.nota;
+    dibujarMapa(query, ranked);
+    vistas++;
+    if (vistas >= 2 && badge) badge.classList.add("show");
+  }
+
+  QUERIES.forEach((query, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "xlab__chip" + (i === 0 ? " active" : "");
+    b.textContent = query.q;
+    b.addEventListener("click", () => {
+      chips.querySelectorAll(".xlab__chip").forEach((x) => x.classList.remove("active"));
+      b.classList.add("active");
+      buscar(query);
+    });
+    chips.appendChild(b);
+  });
+  buscar(QUERIES[0]);
+})();
+
+/* =====================================================================
+   LAB 15 · RAG en vivo: trocear, recuperar y responder
+   Muestra el pipeline completo y por qué el tamaño del trozo decide
+   la calidad de la respuesta. Incluye el caso clave: decir "no lo sé".
+   ===================================================================== */
+(function ragLab() {
+  const root = document.querySelector(".raglab");
+  if (!root) return;
+
+  const FRASES = [
+    "La política de vacaciones de la empresa otorga 22 días hábiles al año a todo el personal de planta.",
+    "Los días de vacaciones se acumulan mensualmente y deben solicitarse con 15 días de antelación.",
+    "Cada empleado puede gastar hasta 200 euros en material de oficina sin aprobación previa del responsable.",
+    "Cualquier gasto superior a 200 euros requiere la aprobación del jefe de área antes de realizar la compra.",
+    "El reembolso de gastos se solicita en Workfront adjuntando la factura escaneada en formato PDF.",
+    "El horario flexible permite entrar entre las 7:30 y las 10:00, cumpliendo 8 horas diarias.",
+  ];
+  const PREGUNTAS = [
+    { q: "¿Cuántos días de vacaciones tengo al año?", clave: ["vacaciones", "días", "año"], idx: [0], resp: "Tienes 22 días hábiles de vacaciones al año." },
+    { q: "¿Cuánto puedo gastar sin pedir permiso?",   clave: ["gastar", "aprobación", "euros"], idx: [2, 3], resp: "Puedes gastar hasta 200 euros en material de oficina sin aprobación previa. Por encima de esa cifra necesitas la aprobación del jefe de área." },
+    { q: "¿Cómo pido el reembolso de un gasto?",      clave: ["reembolso", "gastos", "factura"], idx: [4], resp: "Se solicita en Workfront adjuntando la factura escaneada en PDF." },
+    { q: "¿Puedo llevar mi perro a la oficina?",      clave: ["perro", "mascota"], idx: [], resp: null },
+  ];
+  const MODOS = {
+    pequeno:    { n: "Trozos muy pequeños", corte: 6,   aviso: "Cada trozo es media frase: se pierde el contexto y la respuesta queda coja." },
+    equilibrado:{ n: "Equilibrado",         corte: 999, aviso: "Cada trozo es una idea completa: es el punto dulce." },
+    grande:     { n: "Trozos muy grandes",  corte: -1,  aviso: "Todo el documento en un trozo: entra mucho ruido y sube el costo." },
+  };
+
+  const chips  = root.querySelector('[data-rag="chips"]');
+  const modos  = root.querySelector('[data-rag="modos"]');
+  const docEl  = root.querySelector('[data-rag="doc"]');
+  const steps  = root.querySelectorAll('[data-rag="step"]');
+  const ansEl  = root.querySelector('[data-rag="answer"]');
+  const badge  = root.closest(".lab").querySelector(".lab__pass");
+  let modo = "equilibrado", pregunta = PREGUNTAS[0], vioNoSe = false, vioBien = false;
+
+  function trocear() {
+    const c = MODOS[modo].corte;
+    if (c === -1) return [FRASES.join(" ")];
+    if (c === 999) return FRASES.slice();
+    // trozos muy pequeños: parte cada frase por la mitad (en palabras)
+    const out = [];
+    FRASES.forEach((f) => {
+      const w = f.split(" ");
+      const m = Math.ceil(w.length / 2);
+      out.push(w.slice(0, m).join(" "));
+      out.push(w.slice(m).join(" "));
+    });
+    return out;
+  }
+
+  function render() {
+    const trozos = trocear();
+    // recuperar: puntuar por palabras clave
+    const puntuados = trozos.map((t, i) => {
+      const low = t.toLowerCase();
+      let s = 0;
+      pregunta.clave.forEach((k) => { if (low.indexOf(k) !== -1) s++; });
+      return { t: t, i: i, s: s };
+    });
+    const max = Math.max.apply(null, puntuados.map((p) => p.s));
+    const hits = max > 0 ? puntuados.filter((p) => p.s === max).slice(0, 2) : [];
+
+    while (docEl.firstChild) docEl.removeChild(docEl.firstChild);
+    puntuados.forEach((p) => {
+      const d = document.createElement("div");
+      d.className = "raglab__chunk" + (hits.indexOf(p) !== -1 ? " hit" : "");
+      const n = document.createElement("span"); n.className = "raglab__chunk-n";
+      n.textContent = "trozo " + (p.i + 1) + (hits.indexOf(p) !== -1 ? " · RECUPERADO" : "");
+      const tx = document.createElement("span"); tx.textContent = p.t;
+      d.appendChild(n); d.appendChild(tx);
+      docEl.appendChild(d);
+    });
+
+    steps.forEach((s) => s.classList.add("on"));
+    while (ansEl.firstChild) ansEl.removeChild(ansEl.firstChild);
+    const lbl = document.createElement("b");
+    const p = document.createElement("p"); p.style.margin = "0";
+
+    if (!hits.length) {
+      ansEl.className = "raglab__answer nosabe";
+      lbl.textContent = "Respuesta del sistema";
+      p.textContent = "No lo sé: esa información no está en los documentos que me diste.";
+      const c = document.createElement("div"); c.className = "raglab__cita";
+      c.textContent = "Y esto es lo correcto. Un buen RAG admite lo que no sabe en vez de inventarlo.";
+      ansEl.appendChild(lbl); ansEl.appendChild(p); ansEl.appendChild(c);
+      vioNoSe = true;
+    } else {
+      ansEl.className = "raglab__answer";
+      lbl.textContent = "Respuesta del sistema";
+      if (modo === "pequeno" && pregunta.idx.length) {
+        p.textContent = hits.map((h) => h.t).join(" … ") + " (respuesta incompleta: el dato quedó partido entre trozos).";
+      } else {
+        p.textContent = pregunta.resp;
+        if (modo === "equilibrado") vioBien = true;
+      }
+      const c = document.createElement("div"); c.className = "raglab__cita";
+      c.textContent = "Fuente: trozo " + hits.map((h) => h.i + 1).join(" y ") + " · " + MODOS[modo].aviso;
+      ansEl.appendChild(lbl); ansEl.appendChild(p); ansEl.appendChild(c);
+    }
+    if (vioNoSe && vioBien && badge) badge.classList.add("show");
+  }
+
+  PREGUNTAS.forEach((q, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "xlab__chip" + (i === 0 ? " active" : "");
+    b.textContent = q.q;
+    b.addEventListener("click", () => {
+      chips.querySelectorAll(".xlab__chip").forEach((x) => x.classList.remove("active"));
+      b.classList.add("active"); pregunta = q; render();
+    });
+    chips.appendChild(b);
+  });
+  Object.keys(MODOS).forEach((k, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "xlab__chip" + (k === "equilibrado" ? " active" : "");
+    b.textContent = MODOS[k].n;
+    b.addEventListener("click", () => {
+      modos.querySelectorAll(".xlab__chip").forEach((x) => x.classList.remove("active"));
+      b.classList.add("active"); modo = k; render();
+    });
+    modos.appendChild(b);
+  });
+  render();
+})();
+
+/* =====================================================================
+   LAB 16 · Temperatura: el dial entre preciso y creativo
+   Un "mini modelo" con probabilidades reales de siguiente palabra.
+   Se aplica softmax con temperatura y se muestrea, igual que un LLM.
+   ===================================================================== */
+(function temperatureLab() {
+  const root = document.querySelector(".templab");
+  if (!root) return;
+
+  // cada paso: candidatos con su "logit" base (cuán probable es esa palabra)
+  const PASOS = [
+    { pre: "El informe de ventas del trimestre fue", cand: [["muy positivo", 3.2], ["sólido", 2.1], ["irregular", 1.2], ["espectacular", 0.6]] },
+    { pre: "y el equipo",                            cand: [["superó", 3.0], ["cumplió", 2.4], ["rozó", 1.0], ["pulverizó", 0.4]] },
+    { pre: "los objetivos",                          cand: [["previstos", 3.1], ["del plan", 2.2], ["más ambiciosos", 1.1], ["imposibles", 0.3]] },
+  ];
+
+  const slider = root.querySelector('[data-temp="slider"]');
+  const val    = root.querySelector('[data-temp="val"]');
+  const probs  = root.querySelector('[data-temp="probs"]');
+  const outs   = root.querySelector('[data-temp="outs"]');
+  const genBtn = root.querySelector('[data-temp="gen"]');
+  const hint   = root.querySelector('[data-temp="hint"]');
+  const badge  = root.closest(".lab").querySelector(".lab__pass");
+  let vioFrio = false, vioCaliente = false;
+
+  function softmax(cand, T) {
+    const t = Math.max(0.05, T);
+    const ex = cand.map((c) => Math.exp(c[1] / t));
+    const sum = ex.reduce((a, b) => a + b, 0);
+    return cand.map((c, i) => ({ w: c[0], p: ex[i] / sum }));
+  }
+
+  function pintarProbs() {
+    const T = parseFloat(slider.value);
+    const dist = softmax(PASOS[0].cand, T);
+    while (probs.firstChild) probs.removeChild(probs.firstChild);
+    dist.forEach((d) => {
+      const row = document.createElement("div"); row.className = "templab__prob";
+      const w = document.createElement("span"); w.className = "w"; w.textContent = d.w;
+      const t = document.createElement("div"); t.className = "t";
+      const i = document.createElement("i"); i.style.width = (d.p * 100).toFixed(1) + "%";
+      t.appendChild(i);
+      const p = document.createElement("span"); p.className = "p"; p.textContent = (d.p * 100).toFixed(1) + "%";
+      row.appendChild(w); row.appendChild(t); row.appendChild(p);
+      probs.appendChild(row);
+    });
+  }
+
+  function generar() {
+    const T = parseFloat(slider.value);
+    while (outs.firstChild) outs.removeChild(outs.firstChild);
+    const frases = [];
+    for (let n = 0; n < 5; n++) {
+      let frase = "";
+      PASOS.forEach((paso) => {
+        const dist = softmax(paso.cand, T);
+        let r = Math.random(), acc = 0, elegido = dist[0].w;
+        for (let i = 0; i < dist.length; i++) { acc += dist[i].p; if (r <= acc) { elegido = dist[i].w; break; } }
+        frase += (frase ? " " : "") + paso.pre + " " + elegido;
+      });
+      frases.push(frase + ".");
+    }
+    const iguales = frases.every((f) => f === frases[0]);
+    frases.forEach((f) => {
+      const d = document.createElement("div");
+      d.className = "templab__out" + (iguales ? " dup" : "");
+      d.textContent = f;
+      outs.appendChild(d);
+    });
+    if (T <= 0.2) { vioFrio = true; hint.textContent = iguales
+      ? "Temperatura baja: las 5 salidas son IDÉNTICAS. Esto es lo que quieres en una automatización."
+      : "Temperatura baja: las salidas casi no varían."; }
+    else if (T >= 0.8) { vioCaliente = true; hint.textContent = "Temperatura alta: cada ejecución sale distinta. Bien para ideas, mal para procesos que deben ser estables."; }
+    else { hint.textContent = "Temperatura media: hay algo de variación, pero se mantiene lo más probable."; }
+    if (vioFrio && vioCaliente && badge) badge.classList.add("show");
+  }
+
+  slider.addEventListener("input", () => { val.textContent = parseFloat(slider.value).toFixed(2); pintarProbs(); });
+  genBtn.addEventListener("click", generar);
+  val.textContent = parseFloat(slider.value).toFixed(2);
+  pintarProbs();
+})();
