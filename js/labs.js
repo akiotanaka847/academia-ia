@@ -1788,3 +1788,154 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   });
   correr(CASOS[0], 0);
 })();
+
+/* =====================================================================
+   LAB 22 · Precisión y exhaustividad: el umbral que decide
+   Un detector de facturas fraudulentas. Mover el umbral no "mejora" el
+   modelo: cambia QUÉ error prefieres cometer. Es la matriz de confusión
+   que enseñan todas las certificaciones de fundamentos.
+   ===================================================================== */
+(function confusionLab() {
+  const root = document.querySelector(".cmlab");
+  if (!root) return;
+
+  // 20 facturas: score = lo que el modelo cree (0-100), real = si de verdad era fraude
+  const CASOS = [
+    { s: 96, f: true }, { s: 93, f: true }, { s: 89, f: true }, { s: 84, f: true },
+    { s: 78, f: false }, { s: 74, f: true }, { s: 71, f: false }, { s: 66, f: true },
+    { s: 62, f: false }, { s: 58, f: true }, { s: 54, f: false }, { s: 49, f: false },
+    { s: 45, f: true }, { s: 41, f: false }, { s: 36, f: false }, { s: 30, f: false },
+    { s: 24, f: false }, { s: 18, f: false }, { s: 11, f: false }, { s: 5, f: false },
+  ];
+
+  const slider = root.querySelector('[data-cm="slider"]');
+  const val    = root.querySelector('[data-cm="val"]');
+  const items  = root.querySelector('[data-cm="items"]');
+  const cells  = { tp: root.querySelector('[data-cm="tp"]'), fp: root.querySelector('[data-cm="fp"]'),
+                   fn: root.querySelector('[data-cm="fn"]'), tn: root.querySelector('[data-cm="tn"]') };
+  const mets   = root.querySelector('[data-cm="metrics"]');
+  const hint   = root.querySelector('[data-cm="hint"]');
+  const badge  = root.closest(".lab").querySelector(".lab__pass");
+  let vioBajo = false, vioAlto = false;
+
+  function render() {
+    const u = parseInt(slider.value, 10);
+    val.textContent = u;
+    let tp = 0, fp = 0, fn = 0, tn = 0;
+    const clases = CASOS.map((c) => {
+      const marcada = c.s >= u;
+      if (marcada && c.f) { tp++; return "tp"; }
+      if (marcada && !c.f) { fp++; return "fp"; }
+      if (!marcada && c.f) { fn++; return "fn"; }
+      tn++; return "tn";
+    });
+
+    cells.tp.querySelector("b").textContent = tp;
+    cells.fp.querySelector("b").textContent = fp;
+    cells.fn.querySelector("b").textContent = fn;
+    cells.tn.querySelector("b").textContent = tn;
+
+    while (items.firstChild) items.removeChild(items.firstChild);
+    CASOS.forEach((c, i) => {
+      const d = document.createElement("div");
+      d.className = "cmlab__dot " + clases[i];
+      d.textContent = c.s;
+      d.title = "Modelo: " + c.s + " · Real: " + (c.f ? "fraude" : "legítima");
+      items.appendChild(d);
+    });
+
+    const prec = tp + fp ? (tp / (tp + fp)) * 100 : 0;
+    const rec  = tp + fn ? (tp / (tp + fn)) * 100 : 0;
+    const METS = [
+      { n: Math.round(prec) + "%", t: "Precisión: de las que marcó como fraude, cuántas lo eran de verdad." },
+      { n: Math.round(rec) + "%",  t: "Exhaustividad: del fraude real que había, cuánto llegó a detectar." },
+      { n: fp, t: "Falsas alarmas: facturas legítimas que molestaste sin motivo." },
+      { n: fn, t: "Fraude escapado: casos reales que dejaste pasar." },
+    ];
+    while (mets.firstChild) mets.removeChild(mets.firstChild);
+    METS.forEach((m) => {
+      const d = document.createElement("div"); d.className = "cmlab__metric";
+      const b = document.createElement("b"); b.textContent = m.n;
+      const s = document.createElement("span"); s.textContent = m.t;
+      d.appendChild(b); d.appendChild(s); mets.appendChild(d);
+    });
+
+    if (u <= 30) { vioBajo = true;
+      hint.textContent = "Umbral bajo: cazas casi todo el fraude, pero llenas de falsas alarmas a clientes legítimos. Útil si dejar pasar un fraude es carísimo.";
+    } else if (u >= 85) { vioAlto = true;
+      hint.textContent = "Umbral alto: casi no molestas a nadie, pero se te escapa fraude real. Útil si una falsa alarma cuesta más que el fraude que evita.";
+    } else {
+      hint.textContent = "Zona intermedia: el equilibrio depende de tu negocio, no del modelo. Aquí decides tú, no la IA.";
+    }
+    if (vioBajo && vioAlto && badge) badge.classList.add("show");
+  }
+
+  slider.addEventListener("input", render);
+  render();
+})();
+
+/* =====================================================================
+   LAB 23 · A/B de prompts: mide, no adivines
+   Dos prompts contra el mismo set de evaluación. El "obviamente mejor"
+   hay que demostrarlo con casos, incluidos los difíciles.
+   ===================================================================== */
+(function abPromptLab() {
+  const root = document.querySelector(".ablab");
+  if (!root) return;
+
+  const PROMPT_A = 'Dime el total de esta factura.';
+  const PROMPT_B = 'Extrae el total de la factura.\nResponde SOLO con JSON:\n{ "total": <número>, "moneda": "<ISO>" }\nSi no aparece un total, usa null.';
+
+  // Cada caso: entrada, lo esperado, y qué devuelve cada prompt
+  const CASOS = [
+    { e: "Total: 1.240,50 EUR",                    a: "El total es 1.240,50 euros.", ok_a: true,  b: '{"total":1240.50,"moneda":"EUR"}', ok_b: true, nota: "Caso fácil: los dos sacan el dato. (Aunque A responde en prosa, que tu automatización no puede leer.)" },
+    { e: "Importe a pagar: 890 USD",               a: "890 USD",                     ok_a: true,  b: '{"total":890,"moneda":"USD"}',     ok_b: true, nota: "Caso fácil otra vez. Aquí es donde uno se confía y da el prompt por bueno." },
+    { e: "TOTAL: 45,00",                           a: "45,00",                       ok_a: true,  b: '{"total":45,"moneda":null}',       ok_b: true, nota: "Sin moneda explícita, B la deja en null en vez de suponer una." },
+    { e: "Total de la factura: mil doscientos euros", a: "Mil doscientos euros.",    ok_a: true,  b: '{"total":1200,"moneda":"EUR"}',    ok_b: true, nota: "B además normaliza el número escrito en letras a 1200." },
+    { e: "Total: 300 EUR (pendiente de confirmar)", a: "300 EUR, pendiente.",        ok_a: true,  b: '{"total":300,"moneda":"EUR"}',     ok_b: true, nota: "Los dos ignoran el ruido y se quedan con el dato." },
+    { e: "Subtotal 100 · IVA 21 · TOTAL 121 EUR",  a: "El subtotal es 100 euros.",   ok_a: false, b: '{"total":121,"moneda":"EUR"}',     ok_b: true, nota: "❗ Con varios números, A se queda con el primero que ve: cobrarías 100 en vez de 121." },
+    { e: "Adjunto el pedido, ya hablamos del precio", a: "El total es 0 euros.",     ok_a: false, b: '{"total":null,"moneda":null}',     ok_b: true, nota: "❗ Sin total, A se lo inventa. B admite que no está: esa salida de escape es lo que evita el dato falso." },
+    { e: "Factura anulada. Total original: 500 EUR", a: "500 EUR",                   ok_a: false, b: '{"total":500,"moneda":"EUR"}',     ok_b: false, nota: "⚠️ Aquí fallan LOS DOS: la factura está anulada y ninguno lo detecta. Este es el caso que se te habría colado a producción." },
+  ];
+
+  const pA = root.querySelector('[data-ab="pa"]');
+  const pB = root.querySelector('[data-ab="pb"]');
+  const tbody = root.querySelector('[data-ab="rows"]');
+  const btn = root.querySelector('[data-ab="run"]');
+  const concl = root.querySelector('[data-ab="concl"]');
+  const badge = root.closest(".lab").querySelector(".lab__pass");
+
+  pA.querySelector("pre").textContent = PROMPT_A;
+  pB.querySelector("pre").textContent = PROMPT_B;
+
+  btn.addEventListener("click", () => {
+    let okA = 0, okB = 0;
+    while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+    CASOS.forEach((c, i) => {
+      if (c.ok_a) okA++;
+      if (c.ok_b) okB++;
+      const tr = document.createElement("tr");
+      const td1 = document.createElement("td");
+      const e = document.createElement("b"); e.textContent = c.e;
+      const n = document.createElement("span"); n.className = "ablab__caso"; n.textContent = c.nota;
+      td1.appendChild(e); td1.appendChild(n);
+      const td2 = document.createElement("td"); td2.className = "r " + (c.ok_a ? "ok" : "no"); td2.textContent = c.ok_a ? "✓" : "✕";
+      const td3 = document.createElement("td"); td3.className = "r " + (c.ok_b ? "ok" : "no"); td3.textContent = c.ok_b ? "✓" : "✕";
+      tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+      tbody.appendChild(tr);
+    });
+
+    pA.querySelector(".ablab__score").textContent = okA + "/" + CASOS.length;
+    pB.querySelector(".ablab__score").textContent = okB + "/" + CASOS.length;
+    pA.classList.toggle("win", okA > okB);
+    pB.classList.toggle("win", okB > okA);
+
+    while (concl.firstChild) concl.removeChild(concl.firstChild);
+    const b = document.createElement("b");
+    b.textContent = "Resultado medido: " + okB + "/" + CASOS.length + " contra " + okA + "/" + CASOS.length;
+    const p = document.createElement("span");
+    p.textContent = "Fíjate en la trampa: el prompt A acierta los cinco primeros casos. Si solo hubieras probado esos, lo habrías dado por bueno y habría llegado a producción cobrando 100 en vez de 121 e inventando totales que no existen. Y el último caso falla en los dos: ese es el que ni siquiera sabías que tenías. Añádelo al set y ya nunca se te escapará.";
+    concl.appendChild(b); concl.appendChild(p);
+    if (badge) badge.classList.add("show");
+  });
+})();

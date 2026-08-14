@@ -1083,9 +1083,122 @@
       </div>
     </section>
 
+    <!-- LAB 22 · Matriz de confusión -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 22</span>
+        <h2>Precisión y exhaustividad: el umbral que decide</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          Tienes una IA que marca facturas sospechosas de fraude. Le pones un <b>umbral</b>: a partir de qué
+          puntuación la marcas. Aquí está la trampa que casi nadie ve: mover el umbral <b>no mejora el modelo</b>,
+          solo cambia <b>qué error prefieres cometer</b>. Muévelo y míralo.
+        </p>
+
+        <h3>Mueve el umbral y observa los dos errores</h3>
+        <div class="cmlab">
+          <div class="xlab__panel">
+            <p class="xlab__label">Marcar como fraude a partir de: <span class="templab__val" data-cm="val">50</span></p>
+            <input class="templab__slider" type="range" min="0" max="100" step="1" value="50" data-cm="slider" aria-label="Umbral de decisión" />
+
+            <p class="xlab__label" style="margin-top:14px;">Las 20 facturas (el número es lo que cree el modelo)</p>
+            <div class="cmlab__items" data-cm="items"></div>
+            <div class="cmlab__leyenda">
+              <span><i style="background:#dcfce7;border:1.5px solid #16a34a;"></i>Fraude cazado</span>
+              <span><i style="background:#fef3c7;border:1.5px solid #d97706;"></i>Falsa alarma</span>
+              <span><i style="background:#fee2e2;border:1.5px solid #dc2626;"></i>Fraude escapado</span>
+              <span><i style="background:#fff;border:1.5px solid #dcdce3;"></i>Legítima, bien dejada pasar</span>
+            </div>
+          </div>
+
+          <div class="cmlab__matrix">
+            <div class="cmlab__hdr"></div>
+            <div class="cmlab__hdr">Era fraude</div>
+            <div class="cmlab__hdr">Era legítima</div>
+            <div class="cmlab__hdr">La marcaste</div>
+            <div class="cmlab__cell tp" data-cm="tp"><b>0</b><span>Acierto: fraude cazado</span></div>
+            <div class="cmlab__cell fp" data-cm="fp"><b>0</b><span>Falsa alarma</span></div>
+            <div class="cmlab__hdr">La dejaste pasar</div>
+            <div class="cmlab__cell fn" data-cm="fn"><b>0</b><span>Fraude escapado</span></div>
+            <div class="cmlab__cell tn" data-cm="tn"><b>0</b><span>Acierto: legítima</span></div>
+          </div>
+
+          <div class="cmlab__metrics" data-cm="metrics"></div>
+          <p style="font-size:.88rem;color:var(--text-soft);margin-top:12px;" data-cm="hint"></p>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>No existe el umbral «correcto»: existe el que encaja con tu negocio</h4>
+            <p>Subir el umbral sube la precisión y baja la exhaustividad, y al revés. Nunca puedes maximizar las
+            dos a la vez. Por eso la pregunta no es técnica sino de negocio: <b>¿qué duele más, molestar a un
+            cliente legítimo o dejar pasar un fraude?</b> Esa decisión la tomas tú, no el modelo. Y es la misma
+            lógica para un filtro de spam, un detector de tickets urgentes o cualquier clasificador que montes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB 23 · A/B de prompts -->
+    <section class="lab">
+      <div class="lab__head">
+        <span class="lab__num">LAB 23</span>
+        <h2>A/B de prompts: mide, no adivines</h2>
+        <span class="lab__pass">✓ Lección aprendida</span>
+      </div>
+      <div class="lab__body">
+        <p>
+          «Este prompt me parece mejor» no es una evaluación. Aquí tienes dos prompts para la misma tarea (sacar
+          el total de una factura) y un <b>set de evaluación</b> con ocho casos reales, incluidos los difíciles.
+          Pásalos por los dos y deja que los números decidan.
+        </p>
+
+        <h3>Los dos prompts que compiten</h3>
+        <div class="ablab">
+          <div class="ablab__prompts">
+            <div class="ablab__p" data-ab="pa">
+              <h5>Prompt A · directo</h5>
+              <pre></pre>
+              <span class="ablab__score">—</span>
+            </div>
+            <div class="ablab__p" data-ab="pb">
+              <h5>Prompt B · con rol, formato y salida de escape</h5>
+              <pre></pre>
+              <span class="ablab__score">—</span>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;">
+            <button class="lab-btn" type="button" data-ab="run">Pasar el set de evaluación →</button>
+          </div>
+
+          <div class="ablab__tests">
+            <table class="ablab__table">
+              <thead>
+                <tr><th>Caso de prueba · ¿extrajo el dato correcto?</th><th style="text-align:center;">A</th><th style="text-align:center;">B</th></tr>
+              </thead>
+              <tbody data-ab="rows"></tbody>
+            </table>
+          </div>
+
+          <div class="biaslab__gap bien" data-ab="concl" style="margin-top:4px;"></div>
+
+          <div class="callout callout--info" style="margin-top:18px;">
+            <span class="label">Lección aprendida</span>
+            <h4>El set de evaluación no solo elige ganador: te enseña dónde fallas</h4>
+            <p>Fíjate en el último caso (la factura anulada): <b>fallan los dos</b>. Sin un set de pruebas nunca
+            lo habrías visto, y ese error habría llegado a producción. Cada vez que algo falle de verdad,
+            añádelo al set: así ese fallo <b>no vuelve nunca</b>. Y corre el set entero cada vez que toques el
+            prompt, para no romper lo que ya funcionaba (Módulo 32).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="callout callout--info" style="margin-bottom:40px;">
       <span class="label">¿Y otros temas?</span>
-      <h4>Veintiún laboratorios y sumando</h4>
+      <h4>Veintitrés laboratorios y sumando</h4>
       <p>El mismo formato (video + simulador + insignia) sirve para más temas: comparar dos modelos,
       medir la calidad de un dataset, diseñar un system prompt… Dime cuáles quieres y los añadimos.</p>
     </div>
