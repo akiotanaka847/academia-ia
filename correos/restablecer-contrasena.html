@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Restablecer contraseña · Academia IA</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f6f7f9;">
+  <!-- Preheader: el texto gris que se ve en la bandeja antes de abrir -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">
+    Crea una contraseña nueva para tu cuenta de Academia IA. El enlace caduca en 1 hora.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f6f7f9;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;background-color:#ffffff;border-radius:16px;border:1px solid #e9e9ee;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:40px 32px 0 32px;">
+              <img src="https://academicoai.netlify.app/apple-touch-icon.png"
+                   width="56" height="56" alt="Academia IA"
+                   style="display:block;border:0;border-radius:12px;" />
+            </td>
+          </tr>
+
+          <!-- Marca -->
+          <tr>
+            <td align="center" style="padding:16px 32px 0 32px;">
+              <p style="margin:0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:#0b0b0f;">
+                Academia<span style="color:#2563eb;">IA</span>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Título -->
+          <tr>
+            <td align="center" style="padding:26px 32px 0 32px;">
+              <h1 style="margin:0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:26px;line-height:1.25;font-weight:800;letter-spacing:-0.02em;color:#0b0b0f;">
+                Crea una contraseña nueva
+              </h1>
+            </td>
+          </tr>
+
+          <!-- Texto -->
+          <tr>
+            <td align="center" style="padding:14px 40px 0 40px;">
+              <p style="margin:0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#55555f;">
+                Recibimos una solicitud para restablecer la contraseña de tu cuenta.
+                Pulsa el botón y elige una contraseña nueva.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Botón -->
+          <tr>
+            <td align="center" style="padding:28px 32px 0 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="border-radius:999px;background-color:#2563eb;">
+                    <a href="{{ .ConfirmationURL }}"
+                       style="display:inline-block;padding:15px 34px;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:999px;">
+                      Restablecer mi contraseña
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Caducidad -->
+          <tr>
+            <td align="center" style="padding:20px 40px 0 40px;">
+              <p style="margin:0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.6;color:#9a9aa6;">
+                Este enlace caduca en 1 hora y solo se puede usar una vez.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Aviso de seguridad -->
+          <tr>
+            <td style="padding:26px 40px 0 40px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f6f7f9;border-radius:12px;">
+                <tr>
+                  <td style="padding:14px 16px;">
+                    <p style="margin:0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.6;color:#55555f;">
+                      <strong style="color:#0b0b0f;">¿No fuiste tú?</strong><br />
+                      Puedes ignorar este correo sin hacer nada. Tu contraseña actual seguirá funcionando y nadie podrá entrar con este enlace.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Enlace de respaldo -->
+          <tr>
+            <td style="padding:22px 40px 0 40px;">
+              <p style="margin:0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#9a9aa6;">
+                Si el botón no funciona, copia y pega esta dirección en tu navegador:
+              </p>
+              <p style="margin:6px 0 0 0;font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:11px;line-height:1.5;color:#2563eb;word-break:break-all;">
+                {{ .ConfirmationURL }}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Pie -->
+          <tr>
+            <td align="center" style="padding:30px 32px 34px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td style="border-top:1px solid #e9e9ee;font-size:0;line-height:0;">&nbsp;</td></tr>
+              </table>
+              <p style="margin:18px 0 0 0;font-family:'Plus Jakarta Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#9a9aa6;">
+                Academia IA · Programa de formación interna<br />
+                Este es un correo automático, no hace falta responderlo.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
