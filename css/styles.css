@@ -87,6 +87,7 @@ ul { list-style: none; }
 .nav__links { display: flex; gap: 32px; align-items: center; }
 .nav__links a { font-size: .92rem; font-weight: 500; color: var(--text-soft); transition: color .2s; }
 .nav__links a:not(.nav__cta):hover { color: var(--text); }
+.nav__links a[aria-current="page"] { color: var(--text); font-weight: 600; }
 .nav__cta {
   padding: 9px 18px; background: var(--text); color: #fff !important;
   border-radius: 999px; font-size: .88rem; font-weight: 600; transition: background .2s, transform .2s;
@@ -1053,3 +1054,21 @@ a.card:hover .card__cover img { transform: scale(1.05); }
 .ablab__table td.r.ok { color: var(--ok); }
 .ablab__table td.r.no { color: var(--err); }
 .ablab__caso { font-size: .8rem; color: var(--text-soft); display: block; }
+
+/* ---------- Términos del glosario dentro de los módulos ---------- */
+.gloss-link { color: inherit; text-decoration: underline dotted var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: help; }
+.gloss-link:hover, .gloss-link:focus-visible { color: var(--accent); }
+.gloss-pop {
+  position: absolute; z-index: 60; width: min(320px, calc(100vw - 32px));
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg); padding: 14px 16px; font-size: .92rem; line-height: 1.5;
+}
+.gloss-pop[hidden] { display: none; }
+.gloss-pop strong { display: block; font-size: .98rem; margin-bottom: 4px; }
+.gloss-pop p { margin: 0 0 10px; color: var(--text-soft); }
+.gloss-pop a { font-weight: 600; color: var(--accent); font-size: .88rem; }
+
+/* Enlaces dentro del texto de los módulos: el reset global (a { color: inherit })
+   los dejaba idénticos al texto y nadie sabía que eran clicables */
+.content-block :is(p, li, td) a:not([class]) { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.content-block :is(p, li, td) a:not([class]):hover { color: var(--accent-hover); text-decoration-color: currentColor; }

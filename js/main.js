@@ -277,7 +277,7 @@ if ("serviceWorker" in navigator) {
 }
 
 /* ---------- 10. Progreso del curso: secciones plegables y desbloqueo ----------
-   Todo se construye desde aquí, sin tocar el HTML de los 30 módulos:
+   Todo se construye desde aquí, sin tocar el HTML de los 34 módulos:
    · cada .content-block se convierte en una sección plegable
    · el alumno marca cada sección como leída y responde el quiz
    · al llegar al 80% de las actividades se desbloquea el módulo siguiente
@@ -526,4 +526,152 @@ if ("serviceWorker" in navigator) {
     if (head && head.parentNode) head.parentNode.insertBefore(bar, head.nextSibling);
     else ruta.appendChild(bar);
   }
+})();
+
+/* ---------- 11. Términos del glosario enlazados dentro de los módulos ----------
+   Lee glosario.html (única fuente de verdad: no se duplican definiciones aquí)
+   y convierte la PRIMERA aparición de cada término en un enlace. Al tocarlo se
+   abre una tarjeta con la definición, sin salir del módulo.
+   · No se enlaza el término en el módulo donde se enseña (sería redundante).
+   · Se omiten términos demasiado comunes y sentidos distintos (el «token» de
+     Telegram es una llave, no el token de un modelo de lenguaje). */
+(function glosarioEnModulos() {
+  if (!document.querySelector(".mod-hero") || location.pathname.indexOf("/modulos/") === -1) return;
+
+  const CACHE = "academiaia-glosario-v2";
+  const MAX_ENLACES = 10;
+  const OMITIR = ["inteligencia-artificial", "prompt", "evaluacion"];
+  const OMITIR_EN = { token: ["13", "24"] }; // módulos donde la palabra significa otra cosa
+  const EXCLUIR = "a, code, pre, kbd, h1, h2, h3, h4, h5, h6, button, label, figcaption, script, style, svg, input, textarea, .quiz, .toc, .mod-nav, .label, .src, .n";
+  function numMod(ruta) { return ((ruta || "").match(/modulo-(\d+)/) || [])[1] || ""; }
+  const modActual = numMod(location.pathname);
+
+  function cargar() {
+    try { const c = sessionStorage.getItem(CACHE); if (c) return Promise.resolve(JSON.parse(c)); } catch (e) {}
+    return fetch("../glosario.html").then(function (r) { return r.ok ? r.text() : ""; }).then(function (html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const lista = Array.prototype.map.call(doc.querySelectorAll(".gloss__item[id]"), function (it) {
+        const def = it.querySelector(".gloss__def").cloneNode(true);
+        const mod = def.querySelector('a[href*="modulos/"]');
+        Array.prototype.forEach.call(def.querySelectorAll("a"), function (a) { a.remove(); });
+        return { id: it.id, term: it.querySelector(".gloss__term").textContent.trim(),
+                 def: def.textContent.trim(), mod: mod ? numMod(mod.getAttribute("href")) : "" };
+      });
+      try { sessionStorage.setItem(CACHE, JSON.stringify(lista)); } catch (e) {}
+      return lista;
+    });
+  }
+
+  // "Alucinación" debe encontrar "alucinaciones"; "Multi-agente" también "multiagente"
+  const VOCAL = { a: "[aá]", e: "[eé]", i: "[ií]", o: "[oó]", u: "[uúü]" };
+  function patron(t) {
+    return t.toLowerCase().split("").map(function (c) {
+      if (VOCAL[c]) return VOCAL[c];
+      if (c === " ") return "\\s+";
+      if (c === "-") return "[-\\s]?";
+      return c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }).join("") + "(?:es|s)?";
+  }
+
+  function preparar(lista) {
+    const formas = [];
+    lista.forEach(function (g) {
+      if (OMITIR.indexOf(g.id) !== -1 || g.mod === modActual) return;
+      if (OMITIR_EN[g.id] && OMITIR_EN[g.id].indexOf(modActual) !== -1) return;
+      const base = g.term.replace(/\s*\(.*?\)\s*/g, "").trim();
+      formas.push({ g: g, txt: base });
+      const sigla = (g.term.match(/\(([A-Z]{2,5})\)/) || [])[1];
+      if (sigla && sigla !== "IA") formas.push({ g: g, txt: sigla });
+    });
+    formas.sort(function (a, b) { return b.txt.length - a.txt.length; }); // "Agente autónomo" antes que "Agente"
+    formas.forEach(function (f) { f.sigla = f.txt.length <= 5 && f.txt === f.txt.toUpperCase(); });
+    const re = new RegExp("(?<![\\p{L}\\p{N}])(?:" + formas.map(function (f) { return "(" + patron(f.txt) + ")"; }).join("|") + ")(?![\\p{L}\\p{N}])", "giu");
+    return { formas: formas, re: re };
+  }
+
+  function enlazar(lista) {
+    if (!lista || !lista.length) return;
+    const p = preparar(lista);
+    const usados = {};
+    let total = 0;
+    const nodos = [];
+    document.querySelectorAll(".content-block").forEach(function (bloque) {
+      const w = document.createTreeWalker(bloque, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) {
+          return n.data.trim() && !n.parentElement.closest(EXCLUIR) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      while (w.nextNode()) nodos.push(w.currentNode);
+    });
+
+    nodos.forEach(function (nodo) {
+      let resto = nodo;
+      while (resto && total < MAX_ENLACES) {
+        let hallado = null;
+        for (const m of resto.data.matchAll(p.re)) {
+          const i = m.slice(1).findIndex(function (x) { return x !== undefined; });
+          const f = p.formas[i];
+          if (usados[f.g.id]) continue;
+          if (f.sigla && [f.txt, f.txt + "s", f.txt + "es"].indexOf(m[0]) === -1) continue; // siglas: solo en mayúsculas
+          hallado = { m: m, g: f.g };
+          break;
+        }
+        if (!hallado) break;
+        const medio = resto.splitText(hallado.m.index);
+        resto = medio.splitText(hallado.m[0].length);
+        const a = document.createElement("a");
+        a.className = "gloss-link";
+        a.href = "../glosario.html#" + hallado.g.id;
+        a.textContent = medio.data;
+        a.dataset.g = hallado.g.id;
+        medio.replaceWith(a);
+        usados[hallado.g.id] = hallado.g;
+        total++;
+      }
+    });
+
+    if (total) tarjeta(usados);
+  }
+
+  // Una sola tarjeta flotante reutilizable, posicionada bajo (o sobre) el término
+  function tarjeta(usados) {
+    const pop = document.createElement("div");
+    pop.className = "gloss-pop";
+    pop.setAttribute("role", "dialog");
+    pop.hidden = true;
+    const titulo = document.createElement("strong");
+    const def = document.createElement("p");
+    const ver = document.createElement("a");
+    ver.textContent = "Ver en el glosario →";
+    pop.append(titulo, def, ver);
+    document.body.appendChild(pop);
+    let abierto = null;
+
+    function cerrar() { pop.hidden = true; abierto = null; }
+    function abrir(link) {
+      const g = usados[link.dataset.g];
+      titulo.textContent = g.term;
+      def.textContent = g.def;
+      ver.href = link.href;
+      pop.setAttribute("aria-label", g.term);
+      pop.hidden = false;
+      const r = link.getBoundingClientRect();
+      const ancho = pop.offsetWidth, alto = pop.offsetHeight;
+      const x = Math.min(Math.max(16, r.left), window.innerWidth - ancho - 16);
+      const abajo = r.bottom + 8 + alto < window.innerHeight;
+      pop.style.left = (x + window.scrollX) + "px";
+      pop.style.top = ((abajo ? r.bottom + 8 : r.top - alto - 8) + window.scrollY) + "px";
+      abierto = link;
+    }
+
+    document.addEventListener("click", function (e) {
+      const link = e.target.closest && e.target.closest(".gloss-link");
+      if (link) { e.preventDefault(); if (abierto === link) cerrar(); else abrir(link); return; }
+      if (!pop.contains(e.target)) cerrar();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") cerrar(); });
+    window.addEventListener("resize", cerrar);
+  }
+
+  cargar().then(enlazar).catch(function () {});
 })();

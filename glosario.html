@@ -25,6 +25,8 @@
     .gloss__term { font-family: var(--font); font-weight: 700; font-size: 1rem; margin: 0 0 4px; }
     .gloss__def { margin: 0; color: var(--text-soft); font-size: .92rem; line-height: 1.5; }
     .gloss__def a { color: var(--accent); white-space: nowrap; }
+    .gloss__item { scroll-margin-top: calc(var(--nav-h, 64px) + 20px); transition: border-color .3s, box-shadow .3s; }
+    .gloss__item:target { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
   </style>
 </head>
 <body>
@@ -39,6 +41,7 @@
         <li><a href="tareas.html">Tareas</a></li>
         <li><a href="laboratorios.html">Laboratorios</a></li>
         <li><a href="prompts.html">Prompts</a></li>
+        <li><a href="glosario.html" aria-current="page">Glosario</a></li>
         <li><a href="index.html" class="nav__cta">Volver al índice</a></li>
       </ul>
       <button class="nav__burger" aria-label="Menú">
@@ -58,61 +61,61 @@
       <div class="gloss__group reveal">
         <h2>Fundamentos</h2>
         <div class="gloss">
-          <div class="gloss__item"><h3 class="gloss__term">Inteligencia Artificial (IA)</h3><p class="gloss__def">Software que hace tareas que asociamos a la inteligencia humana: entender lenguaje, reconocer imágenes, decidir.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Machine Learning (ML)</h3><p class="gloss__def">Rama de la IA donde el sistema aprende patrones de los datos, en vez de seguir reglas escritas a mano.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">IA Generativa</h3><p class="gloss__def">IA que crea contenido nuevo (texto, imagen, audio, video), no solo clasifica o predice. <a href="modulos/modulo-02-ia-generativa.html">Mód. 02</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">LLM (modelo de lenguaje grande)</h3><p class="gloss__def">El motor detrás de ChatGPT o Claude: predice el siguiente trozo de texto más probable. <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Alucinación</h3><p class="gloss__def">Cuando el modelo genera algo que suena convincente pero es inventado o falso.</p></div>
+          <div class="gloss__item" id="inteligencia-artificial"><h3 class="gloss__term">Inteligencia Artificial (IA)</h3><p class="gloss__def">Software que hace tareas que asociamos a la inteligencia humana: entender lenguaje, reconocer imágenes, decidir. <a href="modulos/modulo-01-introduccion-ia.html">Mód. 01</a></p></div>
+          <div class="gloss__item" id="machine-learning"><h3 class="gloss__term">Machine Learning (ML)</h3><p class="gloss__def">Rama de la IA donde el sistema aprende patrones de los datos, en vez de seguir reglas escritas a mano. <a href="modulos/modulo-01-introduccion-ia.html">Mód. 01</a></p></div>
+          <div class="gloss__item" id="ia-generativa"><h3 class="gloss__term">IA Generativa</h3><p class="gloss__def">IA que crea contenido nuevo (texto, imagen, audio, video), no solo clasifica o predice. <a href="modulos/modulo-02-ia-generativa.html">Mód. 02</a></p></div>
+          <div class="gloss__item" id="llm"><h3 class="gloss__term">LLM (modelo de lenguaje grande)</h3><p class="gloss__def">El motor detrás de ChatGPT o Claude: predice el siguiente trozo de texto más probable. <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
+          <div class="gloss__item" id="alucinacion"><h3 class="gloss__term">Alucinación</h3><p class="gloss__def">Cuando el modelo genera algo que suena convincente pero es inventado o falso. <a href="modulos/modulo-32-evaluacion-confiabilidad.html">Mód. 32</a></p></div>
         </div>
       </div>
 
       <div class="gloss__group reveal">
         <h2>Cómo funciona por dentro</h2>
         <div class="gloss">
-          <div class="gloss__item"><h3 class="gloss__term">Token</h3><p class="gloss__def">El trozo de texto con el que trabaja el modelo (no ve palabras, ve tokens). Define costo y límites. <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Embedding</h3><p class="gloss__def">Un texto convertido en una lista de números; los de significado parecido quedan cerca. Es la base del RAG.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Ventana de contexto</h3><p class="gloss__def">Todo lo que el modelo puede tener en mente a la vez: instrucción, historial y documentos. Su memoria de trabajo.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Temperatura</h3><p class="gloss__def">El dial que decide si el modelo responde preciso y repetible (baja) o creativo y variado (alta).</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Prompt</h3><p class="gloss__def">La instrucción que le das al modelo. Un buen prompt condiciona toda la respuesta.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Prompt de sistema</h3><p class="gloss__def">Las instrucciones base que definen el comportamiento de un agente en toda la conversación.</p></div>
+          <div class="gloss__item" id="token"><h3 class="gloss__term">Token</h3><p class="gloss__def">El trozo de texto con el que trabaja el modelo (no ve palabras, ve tokens). Define costo y límites. <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
+          <div class="gloss__item" id="embedding"><h3 class="gloss__term">Embedding</h3><p class="gloss__def">Un texto convertido en una lista de números; los de significado parecido quedan cerca. Es la base del RAG. <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
+          <div class="gloss__item" id="ventana-de-contexto"><h3 class="gloss__term">Ventana de contexto</h3><p class="gloss__def">Todo lo que el modelo puede tener en mente a la vez: instrucción, historial y documentos. Su memoria de trabajo. <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
+          <div class="gloss__item" id="temperatura"><h3 class="gloss__term">Temperatura</h3><p class="gloss__def">El dial que decide si el modelo responde preciso y repetible (baja) o creativo y variado (alta). <a href="modulos/modulo-31-como-funciona-llm.html">Mód. 31</a></p></div>
+          <div class="gloss__item" id="prompt"><h3 class="gloss__term">Prompt</h3><p class="gloss__def">La instrucción que le das al modelo. Un buen prompt condiciona toda la respuesta. <a href="modulos/modulo-03-chatbots.html">Mód. 03</a></p></div>
+          <div class="gloss__item" id="prompt-de-sistema"><h3 class="gloss__term">Prompt de sistema</h3><p class="gloss__def">Las instrucciones base que definen el comportamiento de un agente en toda la conversación. <a href="modulos/modulo-12-anatomia-agente.html">Mód. 12</a></p></div>
         </div>
       </div>
 
       <div class="gloss__group reveal">
         <h2>Construir con IA</h2>
         <div class="gloss">
-          <div class="gloss__item"><h3 class="gloss__term">API</h3><p class="gloss__def">La forma en que dos programas se hablan: cómo tu código le pide algo a un servicio. <a href="modulos/modulo-05-api.html">Mód. 05</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">JSON</h3><p class="gloss__def">El formato de texto estándar para intercambiar datos estructurados entre programas. <a href="modulos/modulo-06-json.html">Mód. 06</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">RAG</h3><p class="gloss__def">Técnica donde la IA busca en tus documentos antes de responder, para contestar con datos reales. <a href="modulos/modulo-07-front-back-rag.html">Mód. 07</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Base vectorial</h3><p class="gloss__def">Base de datos que guarda embeddings y encuentra los más parecidos a una consulta (búsqueda semántica).</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Chunking</h3><p class="gloss__def">Partir un documento en trozos manejables antes de convertirlos en embeddings para el RAG.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Fine-tuning</h3><p class="gloss__def">Reentrenar un modelo con muchos ejemplos para especializarlo. Es el último recurso frente a prompt y RAG. <a href="modulos/modulo-20-elegir-modelo.html">Mód. 20</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Agente</h3><p class="gloss__def">Una IA que no solo responde: usa herramientas y decide pasos para cumplir un objetivo. <a href="modulos/modulo-12-anatomia-agente.html">Mód. 12</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Agente autónomo</h3><p class="gloss__def">Agente que recibe un objetivo y planifica y ejecuta los pasos por su cuenta. <a href="modulos/modulo-15-agentes-autonomos.html">Mód. 15</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Multi-agente</h3><p class="gloss__def">Varios agentes especializados que se coordinan como un equipo. <a href="modulos/modulo-30-flujos-agenticos.html">Mód. 30</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Guardrail</h3><p class="gloss__def">Un límite o control que envuelve al modelo para evitar respuestas o acciones indebidas. <a href="modulos/modulo-33-seguridad-red-teaming.html">Mód. 33</a></p></div>
+          <div class="gloss__item" id="api"><h3 class="gloss__term">API</h3><p class="gloss__def">La forma en que dos programas se hablan: cómo tu código le pide algo a un servicio. <a href="modulos/modulo-05-api.html">Mód. 05</a></p></div>
+          <div class="gloss__item" id="json"><h3 class="gloss__term">JSON</h3><p class="gloss__def">El formato de texto estándar para intercambiar datos estructurados entre programas. <a href="modulos/modulo-06-json.html">Mód. 06</a></p></div>
+          <div class="gloss__item" id="rag"><h3 class="gloss__term">RAG</h3><p class="gloss__def">Técnica donde la IA busca en tus documentos antes de responder, para contestar con datos reales. <a href="modulos/modulo-07-front-back-rag.html">Mód. 07</a></p></div>
+          <div class="gloss__item" id="base-vectorial"><h3 class="gloss__term">Base vectorial</h3><p class="gloss__def">Base de datos que guarda embeddings y encuentra los más parecidos a una consulta (búsqueda semántica). <a href="modulos/modulo-08-bases-datos.html">Mód. 08</a></p></div>
+          <div class="gloss__item" id="chunking"><h3 class="gloss__term">Chunking</h3><p class="gloss__def">Partir un documento en trozos manejables antes de convertirlos en embeddings para el RAG. <a href="modulos/modulo-07-front-back-rag.html">Mód. 07</a></p></div>
+          <div class="gloss__item" id="fine-tuning"><h3 class="gloss__term">Fine-tuning</h3><p class="gloss__def">Reentrenar un modelo con muchos ejemplos para especializarlo. Es el último recurso frente a prompt y RAG. <a href="modulos/modulo-20-elegir-modelo.html">Mód. 20</a></p></div>
+          <div class="gloss__item" id="agente"><h3 class="gloss__term">Agente</h3><p class="gloss__def">Una IA que no solo responde: usa herramientas y decide pasos para cumplir un objetivo. <a href="modulos/modulo-12-anatomia-agente.html">Mód. 12</a></p></div>
+          <div class="gloss__item" id="agente-autonomo"><h3 class="gloss__term">Agente autónomo</h3><p class="gloss__def">Agente que recibe un objetivo y planifica y ejecuta los pasos por su cuenta. <a href="modulos/modulo-15-agentes-autonomos.html">Mód. 15</a></p></div>
+          <div class="gloss__item" id="multi-agente"><h3 class="gloss__term">Multi-agente</h3><p class="gloss__def">Varios agentes especializados que se coordinan como un equipo. <a href="modulos/modulo-30-flujos-agenticos.html">Mód. 30</a></p></div>
+          <div class="gloss__item" id="guardrail"><h3 class="gloss__term">Guardrail</h3><p class="gloss__def">Un límite o control que envuelve al modelo para evitar respuestas o acciones indebidas. <a href="modulos/modulo-33-seguridad-red-teaming.html">Mód. 33</a></p></div>
         </div>
       </div>
 
       <div class="gloss__group reveal">
         <h2>Confiabilidad y seguridad</h2>
         <div class="gloss">
-          <div class="gloss__item"><h3 class="gloss__term">Evaluación</h3><p class="gloss__def">Medir qué tan bien funciona un sistema de IA con un conjunto de casos de prueba. <a href="modulos/modulo-32-evaluacion-confiabilidad.html">Mód. 32</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Groundedness (fundamento)</h3><p class="gloss__def">Qué tanto de la respuesta está respaldado por la fuente, en vez de inventado.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Inyección de prompts</h3><p class="gloss__def">Ataque donde un texto malicioso le da órdenes ocultas a un agente. <a href="modulos/modulo-33-seguridad-red-teaming.html">Mód. 33</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Red teaming</h3><p class="gloss__def">Atacar tu propio sistema a propósito para encontrar fallos antes de desplegarlo.</p></div>
+          <div class="gloss__item" id="evaluacion"><h3 class="gloss__term">Evaluación</h3><p class="gloss__def">Medir qué tan bien funciona un sistema de IA con un conjunto de casos de prueba. <a href="modulos/modulo-32-evaluacion-confiabilidad.html">Mód. 32</a></p></div>
+          <div class="gloss__item" id="groundedness"><h3 class="gloss__term">Groundedness (fundamento)</h3><p class="gloss__def">Qué tanto de la respuesta está respaldado por la fuente, en vez de inventado. <a href="modulos/modulo-32-evaluacion-confiabilidad.html">Mód. 32</a></p></div>
+          <div class="gloss__item" id="inyeccion-de-prompts"><h3 class="gloss__term">Inyección de prompts</h3><p class="gloss__def">Ataque donde un texto malicioso le da órdenes ocultas a un agente. <a href="modulos/modulo-33-seguridad-red-teaming.html">Mód. 33</a></p></div>
+          <div class="gloss__item" id="red-teaming"><h3 class="gloss__term">Red teaming</h3><p class="gloss__def">Atacar tu propio sistema a propósito para encontrar fallos antes de desplegarlo. <a href="modulos/modulo-33-seguridad-red-teaming.html">Mód. 33</a></p></div>
         </div>
       </div>
 
       <div class="gloss__group reveal">
         <h2>Producción y herramientas</h2>
         <div class="gloss">
-          <div class="gloss__item"><h3 class="gloss__term">VPS</h3><p class="gloss__def">Un servidor en la nube, tuyo y siempre encendido, para hostear agentes 24/7. <a href="modulos/modulo-34-desplegar-hostear-agentes.html">Mód. 34</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Docker</h3><p class="gloss__def">Empaqueta una app y sus dependencias en un contenedor que corre igual en todos lados.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Self-hosted</h3><p class="gloss__def">Que corre en tu propio servidor, con tus claves y tus datos, sin depender de la nube de un tercero.</p></div>
-          <div class="gloss__item"><h3 class="gloss__term">n8n</h3><p class="gloss__def">Herramienta para construir automatizaciones y agentes conectando servicios, con o sin código. <a href="modulos/modulo-29-automatizaciones-recetas.html">Mód. 29</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">Workfront Fusion</h3><p class="gloss__def">El orquestador de Adobe Workfront para automatizar flujos entre aplicaciones. <a href="modulos/modulo-10-workfront-fusion.html">Mód. 10</a></p></div>
-          <div class="gloss__item"><h3 class="gloss__term">NotebookLM</h3><p class="gloss__def">Herramienta de Google que responde a partir de tus propios documentos, citando la fuente. <a href="modulos/modulo-04-notebooklm.html">Mód. 04</a></p></div>
+          <div class="gloss__item" id="vps"><h3 class="gloss__term">VPS</h3><p class="gloss__def">Un servidor en la nube, tuyo y siempre encendido, para hostear agentes 24/7. <a href="modulos/modulo-34-desplegar-hostear-agentes.html">Mód. 34</a></p></div>
+          <div class="gloss__item" id="docker"><h3 class="gloss__term">Docker</h3><p class="gloss__def">Empaqueta una app y sus dependencias en un contenedor que corre igual en todos lados. <a href="modulos/modulo-34-desplegar-hostear-agentes.html">Mód. 34</a></p></div>
+          <div class="gloss__item" id="self-hosted"><h3 class="gloss__term">Self-hosted</h3><p class="gloss__def">Que corre en tu propio servidor, con tus claves y tus datos, sin depender de la nube de un tercero. <a href="modulos/modulo-34-desplegar-hostear-agentes.html">Mód. 34</a></p></div>
+          <div class="gloss__item" id="n8n"><h3 class="gloss__term">n8n</h3><p class="gloss__def">Herramienta para construir automatizaciones y agentes conectando servicios, con o sin código. <a href="modulos/modulo-29-automatizaciones-recetas.html">Mód. 29</a></p></div>
+          <div class="gloss__item" id="workfront-fusion"><h3 class="gloss__term">Workfront Fusion</h3><p class="gloss__def">El orquestador de Adobe Workfront para automatizar flujos entre aplicaciones. <a href="modulos/modulo-10-workfront-fusion.html">Mód. 10</a></p></div>
+          <div class="gloss__item" id="notebooklm"><h3 class="gloss__term">NotebookLM</h3><p class="gloss__def">Herramienta de Google que responde a partir de tus propios documentos, citando la fuente. <a href="modulos/modulo-04-notebooklm.html">Mód. 04</a></p></div>
         </div>
       </div>
 
