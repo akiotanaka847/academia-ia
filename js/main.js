@@ -41,14 +41,24 @@
   // Si la comprobación se atasca, no dejamos la página en blanco para siempre
   const salvavidas = setTimeout(function () { aLogin("lento"); }, 9000);
 
+  // Las secciones que pintan progreso esperan a esta promesa: así se dibujan con
+  // lo guardado en la cuenta y no con lo que (quizá atrasado) tenga este navegador
+  let avisarListo;
+  window.cuentaProgreso = { listo: new Promise(function (r) { avisarListo = r; }), cambio: function () {} };
+
   import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm")
     .then(function (mod) {
       const sb = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       return sb.auth.getSession().then(function (res) {
         const sesion = res && res.data ? res.data.session : null;
         if (!sesion) { clearTimeout(salvavidas); aLogin(); return; }
-        return sb.from("perfiles").select("aprobado, nombre, email").eq("id", sesion.user.id).maybeSingle()
-          .then(function (r) {
+        const pc = window.progresoCuenta;
+        // perfil y progreso en paralelo: sincronizar no alarga la espera
+        return Promise.all([
+          sb.from("perfiles").select("aprobado, nombre, email").eq("id", sesion.user.id).maybeSingle(),
+          pc ? pc.traer(sb) : null
+        ]).then(function (res) {
+            const r = res[0];
             clearTimeout(salvavidas);
             if (!r.data || !r.data.aprobado) {
               sb.auth.signOut();
@@ -56,6 +66,8 @@
               return;
             }
             montarSalir(sb, r.data, sesion.user); // barra: saludo + cerrar sesión
+            if (pc) pc.conectar(sb, sesion.user.id, res[1]); // nunca lanza: un fallo aquí no bloquea el curso
+            avisarListo();
             mostrar(); // sesión válida y aprobada: adelante
           });
       });
@@ -93,12 +105,202 @@
       btn.disabled = true;
       btn.textContent = "Saliendo…";
       const fin = function () { window.location.replace(base + "acceso.html"); };
-      sb.auth.signOut().then(fin).catch(fin);
+      const pc = window.progresoCuenta;
+      // primero sube lo pendiente (tras cerrar sesión ya no se podría), sin esperar más de 3 s
+      const tope = new Promise(function (r) { setTimeout(r, 3000); });
+      Promise.race([pc ? pc.vaciar() : null, tope])
+        .then(function () { return sb.auth.signOut(); })
+        .then(fin).catch(fin);
     });
     li.appendChild(btn);
     links.appendChild(li);
   }
 })();
+
+/* ---------- 0b. Progreso guardado en la cuenta ----------
+   El avance vive en dos sitios: este navegador (localStorage: rápido y sirve
+   sin internet) y la tabla «progreso» de Supabase, que sigue a la persona en
+   cualquier dispositivo. Al entrar se comparan y, por cada módulo, gana el
+   cambio más reciente; después cada cambio se sube en segundo plano.
+   El nivel del examen NO se sube desde aquí: se deduce de examen_resultados,
+   que solo escribe el servidor al calificar (nadie se lo puede inventar).
+   Tabla y reglas RLS: sql/supabase-setup.sql. */
+window.progresoCuenta = (function () {
+  const K = { progreso: "academiaia-progreso", tareas: "academiaia-tareas", nivel: "academiaia-nivel",
+              meta: "academiaia-sync", cuenta: "academiaia-cuenta" };
+  const ESPERA_MAX = 5000; // si Supabase tarda más, se sigue con lo local
+  const RANGO = { intermedio: 2, avanzado: 3 };
+  let sb = null, uid = null, temporizador = null, cola = Promise.resolve();
+  const pendientes = new Set();
+
+  function leer(k, def) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? def : v; } catch (e) { return def; } }
+  function escribir(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function crudo(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lista(x) { return Array.isArray(x) ? x : []; }
+  // Postgres devuelve microsegundos; Date.parse solo necesita milisegundos
+  function fecha(s) { const t = Date.parse(String(s || "").replace(/(\.\d{3})\d+/, "$1")); return isNaN(t) ? 0 : t; }
+
+  function traer(cliente) {
+    const consultas = Promise.all([
+      cliente.from("progreso").select("modulo, secciones, quiz, total, pct, actualizado_en"),
+      cliente.from("examen_resultados").select("tipo, objetivo, colocado, aprobado")
+    ]).then(function (r) {
+      if (r[0].error) return null; // sin datos fiables de la cuenta no se toca nada
+      return { filas: r[0].data || [], examenes: r[1].error ? [] : (r[1].data || []) };
+    }, function () { return null; });
+    const limite = new Promise(function (ok) { setTimeout(function () { ok(null); }, ESPERA_MAX); });
+    return Promise.race([consultas, limite]);
+  }
+
+  // Progreso de antes de sincronizar contra lo de la cuenta: se suma, no se elige
+  function unir(a, s) {
+    const secciones = Array.from(new Set(lista(a.secciones).concat(lista(s.secciones))));
+    const total = Math.max(a.total || 0, s.total || 0);
+    const quiz = !!(a.quiz || s.quiz);
+    const calc = total ? Math.round(Math.min(secciones.length + (quiz ? 1 : 0), total) / total * 100) : 0;
+    const r = { secciones: secciones, quiz: quiz, total: total, pct: Math.max(a.pct || 0, s.pct || 0, calc) };
+    if (a.validado) r.validado = true;
+    return r;
+  }
+
+  function fusionar(filas) {
+    const local = leer(K.progreso, {}), tareas = leer(K.tareas, {}), meta = leer(K.meta, {});
+    const t = meta.t || (meta.t = {});
+    const servidor = {};
+    filas.forEach(function (f) { servidor[f.modulo] = f; });
+    if (servidor.tareas && servidor.tareas.total > (meta.totalTareas || 0)) meta.totalTareas = servidor.tareas.total;
+    const claves = new Set(Object.keys(local).concat(Object.keys(servidor)));
+    if (Object.keys(tareas).length || t.tareas) claves.add("tareas");
+    const subir = [];
+
+    claves.forEach(function (clave) {
+      const s = servidor[clave], esTareas = clave === "tareas";
+      const hayLocal = esTareas ? (Object.keys(tareas).length > 0 || !!t.tareas) : !!local[clave];
+      const tl = t[clave] || 0, ts = s ? fecha(s.actualizado_en) : 0;
+      if (!s) { if (hayLocal) subir.push(clave); return; }       // solo existe aquí: se sube
+      if (!hayLocal || (tl && ts > tl)) {                        // la cuenta es más reciente: se baja
+        if (esTareas) {
+          Object.keys(tareas).forEach(function (k) { delete tareas[k]; });
+          lista(s.secciones).forEach(function (id) { tareas[id] = true; });
+        } else {
+          local[clave] = { secciones: lista(s.secciones), quiz: !!s.quiz, total: s.total || 0, pct: s.pct || 0 };
+        }
+        t[clave] = ts;
+        return;
+      }
+      if (tl > ts) { subir.push(clave); return; }                // este navegador es más reciente
+      if (!tl) {                                                 // de antes de sincronizar: se unen
+        if (esTareas) lista(s.secciones).forEach(function (id) { tareas[id] = true; });
+        else local[clave] = unir(local[clave], s);
+        subir.push(clave);
+      }
+    });
+
+    escribir(K.progreso, local); escribir(K.tareas, tareas); escribir(K.meta, meta);
+    return subir;
+  }
+
+  // Marca como validados los módulos que cubre un nivel (lo usa también examen.js).
+  // Nunca baja el nivel: un diagnóstico peor no quita lo que ya se ganó.
+  function validarHasta(nivel) {
+    const actual = crudo(K.nivel);
+    if (RANGO[actual] > (RANGO[nivel] || 0)) nivel = actual;
+    const hasta = nivel === "avanzado" ? 15 : (nivel === "intermedio" ? 8 : 0);
+    if (!hasta) return;
+    try { localStorage.setItem(K.nivel, nivel); } catch (e) {}
+    const st = leer(K.progreso, {});
+    for (let n = 1; n <= hasta; n++) {
+      const id = String(n).padStart(2, "0");
+      st[id] = Object.assign({ secciones: [], quiz: false, total: 1 }, st[id], { pct: 100, validado: true });
+    }
+    escribir(K.progreso, st);
+  }
+
+  function nivelDeLosExamenes(examenes) {
+    let mejor = null;
+    lista(examenes).forEach(function (e) {
+      const nv = e.tipo === "diagnostico" ? e.colocado : (e.aprobado ? e.objetivo : null);
+      if (RANGO[nv] && (!mejor || RANGO[nv] > RANGO[mejor])) mejor = nv;
+    });
+    return mejor;
+  }
+
+  function fila(clave, meta) {
+    const base = { usuario_id: uid, modulo: clave, actualizado_en: new Date(meta.t[clave]).toISOString() };
+    if (clave === "tareas") {
+      const ids = Object.keys(leer(K.tareas, {}));
+      const enPagina = document.querySelectorAll(".task__check").length;
+      if (enPagina) meta.totalTareas = enPagina;
+      const total = meta.totalTareas || 0;
+      return Object.assign(base, { secciones: ids, quiz: false, total: total,
+        pct: total ? Math.round(Math.min(ids.length, total) / total * 100) : 0 });
+    }
+    const r = leer(K.progreso, {})[clave];
+    if (!r) return null;
+    return Object.assign(base, { secciones: lista(r.secciones), quiz: !!r.quiz, total: r.total || 0, pct: Math.round(r.pct || 0) });
+  }
+
+  function vaciar() {
+    clearTimeout(temporizador); temporizador = null;
+    if (!sb || !pendientes.size) return cola;
+    const meta = leer(K.meta, {}); meta.t = meta.t || {};
+    const filas = Array.from(pendientes).map(function (c) {
+      if (!meta.t[c]) meta.t[c] = Date.now();
+      return fila(c, meta);
+    }).filter(Boolean);
+    pendientes.clear();
+    escribir(K.meta, meta);
+    if (filas.length) {
+      // en cola, para que dos envíos seguidos no lleguen al revés. Si falla (sin
+      // internet), no pasa nada: la hora local queda por delante y se reintenta al volver
+      cola = cola.then(function () {
+        return sb.from("progreso").upsert(filas, { onConflict: "usuario_id,modulo" }).then(function () {}, function () {});
+      });
+    }
+    return cola;
+  }
+
+  function cambio(clave) {
+    const meta = leer(K.meta, {}); meta.t = meta.t || {};
+    meta.t[clave] = Date.now();
+    escribir(K.meta, meta);
+    pendientes.add(clave);
+    clearTimeout(temporizador);
+    temporizador = setTimeout(vaciar, 400);
+  }
+
+  function conectar(cliente, idUsuario, datos) {
+    sb = cliente; uid = idUsuario;
+    if (window.cuentaProgreso) window.cuentaProgreso.cambio = cambio;
+    else window.cuentaProgreso = { listo: Promise.resolve(), cambio: cambio };
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden" && pendientes.size) vaciar();
+    });
+    try {
+      // ¿lo guardado aquí es de otra cuenta? (equipo compartido): no se mezcla
+      const duena = crudo(K.cuenta);
+      if (duena && duena !== idUsuario) {
+        [K.progreso, K.tareas, K.nivel, K.meta].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+      }
+      try { localStorage.setItem(K.cuenta, idUsuario); } catch (e) {}
+      if (datos) {
+        fusionar(datos.filas).forEach(function (c) { pendientes.add(c); });
+        const nv = nivelDeLosExamenes(datos.examenes);
+        if (nv) validarHasta(nv);
+      }
+      const actual = crudo(K.nivel);
+      if (RANGO[actual]) validarHasta(actual); // repone las marcas si se bajó un registro sin ellas
+      if (pendientes.size) temporizador = setTimeout(vaciar, 1500);
+    } catch (e) {}
+  }
+
+  return { traer: traer, conectar: conectar, vaciar: vaciar, validarHasta: validarHasta };
+})();
+
+// Avisa de un cambio local para que se suba a la cuenta (si hay sesión)
+function avisarCambio(clave) { const c = window.cuentaProgreso; if (c) c.cambio(clave); }
+// Ejecuta fn cuando el progreso de la cuenta ya está en este navegador
+function despuesDeLaCuenta(fn) { const c = window.cuentaProgreso; (c ? c.listo : Promise.resolve()).then(fn); }
 
 /* ---------- 1. Revelar elementos al hacer scroll ----------
    Usamos IntersectionObserver: el navegador nos avisa cuándo un
@@ -201,10 +403,10 @@ document.querySelectorAll(".card__cover img, .mod-cover img, .content-img img, .
 
 /* ---------- 8. Página de Tareas: progreso guardado ----------
    Guardamos qué tareas están marcadas en localStorage (una "memoria" del
-   navegador que persiste al cerrar la pestaña). Sin backend ni base de datos:
-   todo vive en el cliente. */
+   navegador que persiste al cerrar la pestaña) y la sección 0b lo sube a la
+   cuenta, para verlas igual en el teléfono y en el computador. */
 const taskChecks = document.querySelectorAll(".task__check");
-if (taskChecks.length) {
+if (taskChecks.length) despuesDeLaCuenta(function tareasGuardadas() {
   const STORAGE_KEY = "academiaia-tareas";
   const fill = document.querySelector(".progress-fill");
   const countEl = document.querySelector(".progress-count b");
@@ -246,6 +448,7 @@ if (taskChecks.length) {
       else delete s[c.dataset.task];
       save(s);
       refresh();
+      avisarCambio("tareas");
     })
   );
 
@@ -257,9 +460,10 @@ if (taskChecks.length) {
       localStorage.removeItem(STORAGE_KEY);
       taskChecks.forEach((c) => (c.checked = false));
       refresh();
+      avisarCambio("tareas"); // el reinicio también viaja: si no, la cuenta lo devolvería
     });
   }
-}
+});
 
 /* ---------- 9. Año dinámico en el footer ---------- */
 const yearEl = document.querySelector("[data-year]");
@@ -281,10 +485,10 @@ if ("serviceWorker" in navigator) {
    · cada .content-block se convierte en una sección plegable
    · el alumno marca cada sección como leída y responde el quiz
    · al llegar al 80% de las actividades se desbloquea el módulo siguiente
-   El progreso vive en localStorage. Es un control de avance pedagógico,
-   NO una barrera de seguridad: lo que corre en el navegador siempre se
-   puede saltar (justo lo que enseña el LAB 13). */
-(function progresoDelCurso() {
+   El progreso vive en localStorage y se sincroniza con la cuenta (0b). Es un
+   control de avance pedagógico, NO una barrera de seguridad: lo que corre en
+   el navegador siempre se puede saltar (justo lo que enseña el LAB 13). */
+despuesDeLaCuenta(function progresoDelCurso() {
   const KEY = "academiaia-progreso";
   const UMBRAL = 80; // % de actividades para desbloquear el siguiente módulo
 
@@ -348,6 +552,7 @@ if ("serviceWorker" in navigator) {
     const rec = (state[here] && typeof state[here] === "object") ? state[here] : {};
     let leidas = Array.isArray(rec.secciones) ? rec.secciones.slice() : [];
     let quizHecho = rec.quiz === true;
+    const validado = rec.validado === true; // lo validó el examen de nivelación
 
     const quizBlock = blocks.filter((b) => b.querySelector(".quiz"))[0] || null;
     const secciones = blocks.filter((b) => b !== quizBlock);
@@ -394,15 +599,20 @@ if ("serviceWorker" in navigator) {
       });
       if (i === 0) open(block); // la primera abierta, el resto plegadas
     });
+    // descartar secciones que ya no existen (el módulo cambió o vienen de otra versión)
+    leidas = leidas.filter((id) => secciones.some((b) => b.id === id));
 
     function render() {
       const done = leidas.length + (quizHecho ? 1 : 0);
-      const pct = total ? Math.round((done / total) * 100) : 0;
+      const calc = total ? Math.round((done / total) * 100) : 0;
+      const pct = validado ? 100 : calc;
       fill.style.width = pct + "%";
       pctEl.textContent = pct + "%";
       bar.classList.toggle("done", pct >= UMBRAL);
       const need = Math.ceil((UMBRAL / 100) * total);
-      hint.textContent = pct >= UMBRAL
+      hint.textContent = validado && calc < 100
+        ? "Validado con tu examen de nivelación. Las secciones quedan para repasar cuando quieras."
+        : pct >= UMBRAL
         ? "¡Módulo completado! Ya puedes pasar al siguiente."
         : done + " de " + total + " actividades · te faltan " + Math.max(0, need - done) +
           " para llegar al " + UMBRAL + "% y desbloquear el módulo siguiente.";
@@ -413,8 +623,12 @@ if ("serviceWorker" in navigator) {
     function persist() {
       const pct = render();
       const st = load();
-      st[here] = { secciones: leidas, quiz: quizHecho, total: total, pct: pct };
+      const nuevo = { secciones: leidas, quiz: quizHecho, total: total, pct: pct };
+      if (validado) nuevo.validado = true;
+      if (JSON.stringify(st[here]) === JSON.stringify(nuevo)) return; // nada cambió: nada que subir
+      st[here] = nuevo;
       save(st);
+      avisarCambio(here);
     }
 
     // --- Botón "marcar como leída" en cada sección ---
@@ -471,7 +685,8 @@ if ("serviceWorker" in navigator) {
     });
     if (window.location.hash) {
       const t = document.getElementById(window.location.hash.slice(1));
-      if (t && t.classList.contains("cb")) open(t);
+      // las secciones se pliegan después de traer la cuenta: hay que volver a ubicarla
+      if (t && t.classList.contains("cb")) { open(t); t.scrollIntoView(); }
     }
 
     persist();
@@ -526,7 +741,7 @@ if ("serviceWorker" in navigator) {
     if (head && head.parentNode) head.parentNode.insertBefore(bar, head.nextSibling);
     else ruta.appendChild(bar);
   }
-})();
+});
 
 /* ---------- 11. Términos del glosario enlazados dentro de los módulos ----------
    Lee glosario.html (única fuente de verdad: no se duplican definiciones aquí)

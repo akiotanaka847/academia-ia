@@ -90,18 +90,12 @@ async function calificar() {
   mostrarResultado(data);
 }
 
+// Tu nivel abre los módulos de ese nivel. La regla vive en main.js (sección 0b)
+// porque también la aplica al entrar desde otro dispositivo, leyendo
+// examen_resultados: así el nivel te sigue sin que el navegador lo suba.
 function desbloquearHasta(nivel) {
-  try { localStorage.setItem("academiaia-nivel", nivel); } catch (e) {} // tu nivel abre los módulos de ese nivel
-  const KEY = "academiaia-progreso";
-  let hasta = nivel === "avanzado" ? 15 : (nivel === "intermedio" ? 8 : 0);
-  if (!hasta) return;
-  let st = {};
-  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
-  for (let n = 1; n <= hasta; n++) {
-    const id = String(n).padStart(2, "0");
-    st[id] = { secciones: [], quiz: true, total: 1, pct: 100, validado: true };
-  }
-  try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+  if (window.progresoCuenta) { window.progresoCuenta.validarHasta(nivel); return; }
+  try { localStorage.setItem("academiaia-nivel", nivel); } catch (e) {}
 }
 
 function mostrarResultado(r) {

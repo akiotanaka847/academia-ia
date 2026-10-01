@@ -9,6 +9,7 @@ Programa interno de formación en Inteligencia Artificial aplicada al trabajo. D
 - **23 laboratorios interactivos** ([`laboratorios.html`](laboratorios.html)) que corren en el navegador, inspirados en las certificaciones de IBM, AWS, Microsoft y Google.
 - **Biblioteca de prompts** ([`prompts.html`](prompts.html)) y **glosario** ([`glosario.html`](glosario.html)).
 - **Examen de nivelación** ([`examen.html`](examen.html)) calificado en el servidor (Supabase).
+- **Progreso en la cuenta**: módulos, tareas y nivel se guardan en Supabase y siguen a cada persona en el teléfono y el computador.
 
 ## Estructura
 
