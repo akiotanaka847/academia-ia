@@ -317,6 +317,7 @@ const revealObserver = new IntersectionObserver(
   },
   { threshold: 0.12 }
 );
+document.documentElement.classList.add("js-reveal"); // desde aquí el CSS puede ocultar lo que aún no apareció
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
 /* ---------- 2. Barra de progreso de lectura ----------
@@ -515,6 +516,8 @@ despuesDeLaCuenta(function progresoDelCurso() {
     if (txt != null) e.textContent = txt;
     return e;
   }
+  // Icono de línea del set .ico (css/styles.css): decorativo, el texto lo explica
+  function icono(nombre) { const i = el("span", "ico ico--" + nombre); i.setAttribute("aria-hidden", "true"); return i; }
   function open(b) { b.classList.add("open"); const h = b.querySelector(".cb__head"); if (h) h.setAttribute("aria-expanded", "true"); }
   function close(b) { b.classList.remove("open"); const h = b.querySelector(".cb__head"); if (h) h.setAttribute("aria-expanded", "false"); }
 
@@ -535,7 +538,7 @@ despuesDeLaCuenta(function progresoDelCurso() {
       const need = prevId(here);
       article.textContent = "";
       const box = el("div", "modlock");
-      box.appendChild(el("div", "modlock__ic", "🔒"));
+      box.appendChild(el("div", "modlock__ic")).appendChild(icono("lock"));
       box.appendChild(el("h3", null, "Módulo bloqueado"));
       box.appendChild(el("p", null,
         "Para abrir este módulo necesitas completar al menos el " + UMBRAL + "% del módulo " +
@@ -588,9 +591,9 @@ despuesDeLaCuenta(function progresoDelCurso() {
       head.setAttribute("aria-expanded", "false");
       const title = el("span", "cb__title");
       if (h2) { while (h2.firstChild) title.appendChild(h2.firstChild); h2.remove(); }
-      head.appendChild(el("span", "cb__dot", "✓"));
+      head.appendChild(el("span", "cb__dot")).appendChild(icono("check"));
       head.appendChild(title);
-      head.appendChild(el("span", "cb__chev", "⌄"));
+      head.appendChild(el("span", "cb__chev")).appendChild(icono("chevron-down"));
 
       block.appendChild(head);
       block.appendChild(panel);
@@ -639,7 +642,8 @@ despuesDeLaCuenta(function progresoDelCurso() {
       function sync() {
         const done = leidas.indexOf(block.id) !== -1;
         block.classList.toggle("read", done);
-        btn.textContent = done ? "✓ Leída" : "Marcar como leída";
+        btn.textContent = done ? " Leída" : "Marcar como leída";
+        if (done) btn.prepend(icono("check"));
       }
       btn.addEventListener("click", () => {
         const i = leidas.indexOf(block.id);
@@ -709,9 +713,11 @@ despuesDeLaCuenta(function progresoDelCurso() {
     if (!unlocked(st, id)) {
       card.classList.add("locked");
       card.setAttribute("aria-disabled", "true");
-      cover.appendChild(el("span", "card__state", "🔒"));
+      const candado = cover.appendChild(el("span", "card__state"));
+      candado.appendChild(icono("lock"));
+      candado.title = "Bloqueado";
     } else if (p >= UMBRAL) {
-      cover.appendChild(el("span", "card__state ok", "✓ " + p + "%"));
+      cover.appendChild(el("span", "card__state ok", " " + p + "%")).prepend(icono("check"));
     } else if (p > 0) {
       cover.appendChild(el("span", "card__state mid", p + "%"));
     }

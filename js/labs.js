@@ -7,6 +7,30 @@
    ===================================================================== */
 
 /* ---------------------------------------------------------------------
+   ICONOS DE LÍNEA EN LUGAR DE EMOJI
+   Si un mensaje empieza con uno de estos símbolos, pintarConIcono() lo
+   cambia por un icono SVG del set .ico (css/styles.css) con aria-hidden;
+   el texto queda igual para los lectores de pantalla.
+--------------------------------------------------------------------- */
+const LAB_ICONOS = {
+  "✅": "check-circle", "⛔": "ban", "🔓": "unlock", "🛡": "shield-check", "⚠": "alert",
+  "💡": "bulb", "🚨": "alert", "❌": "x-circle", "❗": "alert", "🔑": "key", "🥇": "award", "🥈": "award",
+};
+function labIcono(nombre) {
+  const i = document.createElement("span");
+  i.className = "ico ico--" + nombre;
+  i.setAttribute("aria-hidden", "true");
+  return i;
+}
+function pintarConIcono(el, texto) {
+  const s = String(texto).replace(/^(\S)\uFE0F/u, "$1"); // 🛡️ y ⚠️ llevan un selector de variación
+  const emoji = Object.keys(LAB_ICONOS).find((e) => s.indexOf(e) === 0);
+  el.textContent = "";
+  if (!emoji) { el.textContent = s; return; }
+  el.append(labIcono(LAB_ICONOS[emoji]), " " + s.slice(emoji.length).trimStart());
+}
+
+/* ---------------------------------------------------------------------
    LAB 1 · SQL INJECTION
    El usuario prueba una inyección en un login ficticio, ve cómo rompe la
    versión "vulnerable" y cómo la versión "segura" (parametrizada) la bloquea.
@@ -58,7 +82,7 @@
 
   function setResult(cls, text) {
     resultEl.className = "sqlab__result" + (cls ? " " + cls : "");
-    resultEl.textContent = text;
+    pintarConIcono(resultEl, text);
   }
 
   function render() {
@@ -76,7 +100,7 @@
 
       if (inj) {
         sawInjection = true;
-        setResult("ok", "🔓 Acceso concedido — ¡inyección exitosa! La comilla cerró el texto y el OR hizo la condición SIEMPRE verdadera. El atacante entró sin credenciales.");
+        setResult("ok", "🔓 Acceso concedido: ¡inyección exitosa! La comilla cerró el texto y el OR hizo la condición SIEMPRE verdadera. El atacante entró sin credenciales.");
       } else if (u === VALID.user && p === VALID.pass) {
         setResult("", "✅ Acceso concedido (credenciales correctas).");
       } else {
@@ -94,7 +118,7 @@
 
       if (inj) {
         sawBlocked = true;
-        setResult("safe", "🛡️ Acceso denegado — inyección bloqueada. El texto se trató como un DATO literal, no como código SQL. Ningún usuario se llama así, por eso no entra.");
+        setResult("safe", "🛡️ Acceso denegado: inyección bloqueada. El texto se trató como un DATO literal, no como código SQL. Ningún usuario se llama así, por eso no entra.");
       } else if (u === VALID.user && p === VALID.pass) {
         setResult("safe", "✅ Acceso concedido (credenciales correctas).");
       } else {
@@ -441,7 +465,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
         ? "Escribe un prompt para evaluarlo."
         : met === 4
         ? "¡Excelente! Tu prompt tiene las 4 piezas."
-        : "Te faltan piezas — revisa la lista.";
+        : "Te faltan piezas: revisa la lista.";
     }
     if (met === 4 && passBadge) passBadge.classList.add("show");
   }
@@ -462,11 +486,11 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   const passBadge = lab.closest(".lab").querySelector(".lab__pass");
 
   const BLOCKS = {
-    disparador: { name: "Disparador", icon: "⚡", desc: "Cuando pasa algo (correo, tarea, horario…)" },
-    agente: { name: "Agente de IA", icon: "🤖", desc: "La IA razona, decide o genera" },
-    accion: { name: "Herramienta / Acción", icon: "🔧", desc: "Hace algo: crear, enviar, guardar" },
-    router: { name: "Router / Condición", icon: "🔀", desc: "Si… entonces… (bifurca)" },
-    humano: { name: "Revisión humana", icon: "👤", desc: "Una persona aprueba antes de seguir" },
+    disparador: { name: "Disparador", icon: "zap", desc: "Cuando pasa algo (correo, tarea, horario…)" },
+    agente: { name: "Agente de IA", icon: "sparkle", desc: "La IA razona, decide o genera" },
+    accion: { name: "Herramienta / Acción", icon: "wrench", desc: "Hace algo: crear, enviar, guardar" },
+    router: { name: "Router / Condición", icon: "split", desc: "Si… entonces… (bifurca)" },
+    humano: { name: "Revisión humana", icon: "user", desc: "Una persona aprueba antes de seguir" },
   };
   let flow = [];
 
@@ -504,7 +528,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
 
       const ic = document.createElement("span");
       ic.className = "flowlab__step-ic";
-      ic.textContent = b.icon;
+      ic.appendChild(labIcono(b.icon));
 
       const txt = document.createElement("div");
       const nm = document.createElement("b");
@@ -655,11 +679,11 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
       const spread =
         (prem.in * inTok + prem.out * outTok) /
         (eco.in * inTok + eco.out * outTok);
-      insightEl.textContent =
+      pintarConIcono(insightEl,
         "💡 Tu respuesta (" + outTok + " tokens) pesa más que tu pregunta (" + inTok +
         " tokens) y la salida se cobra más cara: en el tramo equilibrado, responder cuesta " +
         "≈ " + ratio.toFixed(1) + "× lo que tu prompt. Además, elegir el tramo premium en vez " +
-        "del económico multiplica el costo ≈ " + spread.toFixed(0) + "× para el mismo trabajo.";
+        "del económico multiplica el costo ≈ " + spread.toFixed(0) + "× para el mismo trabajo.");
       insightEl.classList.add("show");
     } else {
       insightEl.classList.remove("show");
@@ -706,7 +730,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
   }
   function setStatus(cls, text) {
     statusEl.className = "scrlab__status" + (cls ? " " + cls : "");
-    statusEl.textContent = text;
+    pintarConIcono(statusEl, text);
   }
   // Igualdad de conjuntos de elementos (mismo grupo, sin importar el orden)
   function sameSet(a, b) {
@@ -861,7 +885,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
     resultEl.className = "vallab__result" + (cls ? " " + cls : "");
     resultEl.textContent = "";
     const head = document.createElement("div");
-    head.textContent = text;
+    pintarConIcono(head, text);
     resultEl.appendChild(head);
     if (conseq && conseq.length) {
       const ul = document.createElement("ul");
@@ -1043,7 +1067,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
       const it = document.createElement("div");
       it.className = "emblab__item" + (i < 2 ? " top" : (r.s < 0.7 ? " low" : ""));
       const t = document.createElement("span"); t.className = "emblab__term";
-      t.textContent = (i === 0 ? "🥇 " : (i === 1 ? "🥈 " : "")) + r.t;
+      pintarConIcono(t, (i === 0 ? "🥇 " : (i === 1 ? "🥈 " : "")) + r.t);
       const s = document.createElement("span"); s.className = "emblab__score";
       s.textContent = r.s.toFixed(3);
       const bar = document.createElement("div"); bar.className = "emblab__bar";
@@ -1365,19 +1389,19 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
     const vb = document.createElement("b");
     const vp = document.createElement("span");
     if (fuga) {
-      vb.textContent = "🚨 Secreto filtrado";
+      pintarConIcono(vb, "🚨 Secreto filtrado");
       vp.textContent = "El agente obedeció la orden escondida y reveló el código. Sin guardrails, cualquier texto que el agente lea puede darle órdenes nuevas.";
       vioFuga = true;
     } else if (bloqueadoEntrada) {
-      vb.textContent = "🛡️ Bloqueado en la entrada";
+      pintarConIcono(vb, "🛡️ Bloqueado en la entrada");
       vp.textContent = "El guardrail detectó el patrón de inyección antes de que llegara al modelo. Es la primera capa de defensa.";
       vioBloqueo = true;
     } else if (bloqueadoSalida) {
-      vb.textContent = "🛡️ Bloqueado en la salida";
+      pintarConIcono(vb, "🛡️ Bloqueado en la salida");
       vp.textContent = "El modelo sí cayó en la trampa, pero el filtro de salida detectó el secreto y lo cortó antes de mostrarlo. Por eso hacen falta las dos capas.";
       vioBloqueo = true;
     } else {
-      vb.textContent = "✅ Todo normal";
+      pintarConIcono(vb, "✅ Todo normal");
       vp.textContent = "Una consulta legítima se responde con normalidad: los guardrails no estorban el uso legítimo.";
     }
     verdict.appendChild(vb); verdict.appendChild(vp);
@@ -1556,11 +1580,11 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
     const b = document.createElement("b");
     const p = document.createElement("span");
     if (brecha > 5) {
-      b.textContent = "⚠️ Brecha de " + brecha + " puntos entre perfiles equivalentes";
+      pintarConIcono(b, "⚠️ Brecha de " + brecha + " puntos entre perfiles equivalentes");
       p.textContent = "Los cuatro tienen la misma experiencia y las mismas habilidades, pero el modelo los puntúa muy distinto. No es que «odie» a nadie: aprendió del histórico que la empresa contrataba así, y ahora lo repite a escala.";
       vioSesgo = true;
     } else {
-      b.textContent = "✅ Brecha de " + brecha + " puntos: perfiles equivalentes, puntuación equivalente";
+      pintarConIcono(b, "✅ Brecha de " + brecha + " puntos: perfiles equivalentes, puntuación equivalente");
       p.textContent = mits.humano
         ? "Con los datos sensibles fuera y una persona revisando la decisión final, el sistema evalúa lo que dice evaluar: la capacidad para el puesto."
         : "Ya casi. Activa también la revisión humana: en decisiones que afectan a personas, la IA propone y un humano decide y responde.";
@@ -1641,7 +1665,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
       const d = document.createElement("div");
       d.className = "ctxlab__msg" + (m.clave ? " clave" : "") + (dentro[i] ? "" : " fuera");
       const t = document.createElement("span");
-      t.textContent = (m.clave ? "🔑 " : "") + m.t;
+      pintarConIcono(t, (m.clave ? "🔑 " : "") + m.t);
       const tk = document.createElement("span"); tk.className = "tk";
       tk.textContent = m.tk + " tk" + (dentro[i] ? "" : " · FUERA");
       d.appendChild(t); d.appendChild(tk);
@@ -1659,11 +1683,11 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
     const b = document.createElement("b");
     const p = document.createElement("span");
     if (recuerda) {
-      b.textContent = "✅ «Te llamas Esteban Trujillo y llevas el proyecto Aurora.»";
+      pintarConIcono(b, "✅ «Te llamas Esteban Trujillo y llevas el proyecto Aurora.»");
       p.textContent = "El mensaje con tu nombre sigue dentro de la ventana, así que el modelo puede leerlo y responder.";
       vioRecuerdo = true;
     } else {
-      b.textContent = "❌ «No tengo esa información en esta conversación.»";
+      pintarConIcono(b, "❌ «No tengo esa información en esta conversación.»");
       p.textContent = "El mensaje donde te presentaste se salió de la ventana. Para el modelo ya no existe: no es que lo olvide, es que ya no lo puede leer. Por eso una conversación larga «pierde» lo del principio.";
       vioOlvido = true;
     }
@@ -1917,7 +1941,7 @@ document.querySelectorAll(".cardquiz").forEach((quiz) => {
       const tr = document.createElement("tr");
       const td1 = document.createElement("td");
       const e = document.createElement("b"); e.textContent = c.e;
-      const n = document.createElement("span"); n.className = "ablab__caso"; n.textContent = c.nota;
+      const n = document.createElement("span"); n.className = "ablab__caso"; pintarConIcono(n, c.nota);
       td1.appendChild(e); td1.appendChild(n);
       const td2 = document.createElement("td"); td2.className = "r " + (c.ok_a ? "ok" : "no"); td2.textContent = c.ok_a ? "✓" : "✕";
       const td3 = document.createElement("td"); td3.className = "r " + (c.ok_b ? "ok" : "no"); td3.textContent = c.ok_b ? "✓" : "✕";

@@ -161,7 +161,9 @@ function mostrarResultado(r) {
     const acert = !!d.acierto;
     const el = document.createElement("div");
     el.className = "exam-rev " + (acert ? "ok" : "no");
-    const qq = document.createElement("div"); qq.className = "exam-rev__q"; qq.textContent = (acert ? "✓ " : "✗ ") + q.pregunta;
+    const qq = document.createElement("div"); qq.className = "exam-rev__q"; qq.textContent = " " + q.pregunta;
+    const ic = document.createElement("span"); ic.className = "ico ico--" + (acert ? "check-circle" : "x-circle");
+    ic.setAttribute("aria-hidden", "true"); qq.prepend(ic);
     const aa = document.createElement("div"); aa.className = "exam-rev__a";
     const tuTxt = q.opciones && q.opciones[respuestas[q.id]] !== undefined ? q.opciones[respuestas[q.id]] : "(sin responder)";
     const coTxt = q.opciones && q.opciones[d.correcta] !== undefined ? q.opciones[d.correcta] : "—";

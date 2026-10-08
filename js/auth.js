@@ -273,7 +273,7 @@ async function entrar(ev) {
 
   if (errOtp) {
     if (esLimiteCorreo(errOtp)) {
-      msg("err", "Tu contraseña es correcta, pero el servicio de correo está saturado ahora mismo (límite del plan gratuito de Supabase). Espera a que termine la cuenta atrás y pulsa «Reenviar correo» —o pide que se configure un proveedor de correo propio para que deje de pasar.");
+      msg("err", "Tu contraseña es correcta, pero el servicio de correo está saturado ahora mismo (límite del plan gratuito de Supabase). Espera a que termine la cuenta atrás y pulsa «Reenviar correo», o pide que se configure un proveedor de correo propio para que deje de pasar.");
     } else {
       msg("err", "No se pudo enviar el correo: " + errOtp.message);
     }

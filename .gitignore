@@ -1,3 +1,8 @@
 # Configuración local del entorno (no necesaria para el sitio publicado)
 .claude/
 .DS_Store
+
+# Investigación (notas e informes): no se publican en el sitio
+research_notes/
+reports/
+.playwright-mcp/
