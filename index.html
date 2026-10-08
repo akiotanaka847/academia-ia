@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -47,7 +47,7 @@
   <header class="hero">
     <div class="container hero__grid">
       <div class="reveal in">
-        <span class="kicker">Programa de formación interna · 2026</span>
+        <span class="mono hero__kicker">Programa de formación interna · 2026</span>
         <h1 class="hero__title">Inteligencia<br>Artificial, <em>aplicada</em><br>a tu trabajo.</h1>
         <p class="hero__lead">
           Un programa práctico, de los fundamentos a los agentes autónomos. Aprende a automatizar
@@ -66,16 +66,22 @@
         </div>
       </div>
 
-      <figure class="hero__fig reveal in">
-        <div class="frame">
-          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&q=80" alt="Sistema de inteligencia artificial" />
-        </div>
-        <figcaption class="hero__figcap"><span>Fig. 01 · Sistemas inteligentes</span><span>MMXXVI</span></figcaption>
+      <figure class="hero__fig hero__fig--ruta reveal in">
+        <div class="frame frame--ruta dotgrid"><svg class="ruta" viewBox="0 0 528 268" role="img" aria-labelledby="ruta-desc"><desc id="ruta-desc">Ruta de 10 niveles del programa</desc><line class="ruta__col" x1="48" y1="104" x2="48" y2="178"/><line class="ruta__col" x1="148" y1="104" x2="148" y2="178"/><line class="ruta__col" x1="248" y1="104" x2="248" y2="178"/><line class="ruta__col" x1="348" y1="104" x2="348" y2="178"/><line class="ruta__col" x1="448" y1="104" x2="448" y2="178"/><path class="ruta__seg" data-seg="1" d="M48 196H148"/><path class="ruta__seg" data-seg="2" d="M148 196H248"/><path class="ruta__seg" data-seg="3" d="M248 196H348"/><path class="ruta__seg" data-seg="4" d="M348 196H448"/><path class="ruta__seg" data-seg="5" d="M448 196a55 55 0 0 0 0-110"/><path class="ruta__seg" data-seg="6" d="M448 86H348"/><path class="ruta__seg" data-seg="7" d="M348 86H248"/><path class="ruta__seg" data-seg="8" d="M248 86H148"/><path class="ruta__seg" data-seg="9" d="M148 86H48"/><g class="ruta__nodo" data-nivel="01"><circle class="ruta__halo" cx="48" cy="196" r="17"/><circle class="ruta__punto" cx="48" cy="196" r="6.5"/><text x="48" y="220" text-anchor="middle">01</text></g><g class="ruta__nodo" data-nivel="02"><circle class="ruta__halo" cx="148" cy="196" r="17"/><circle class="ruta__punto" cx="148" cy="196" r="6.5"/><text x="148" y="220" text-anchor="middle">02</text></g><g class="ruta__nodo" data-nivel="03"><circle class="ruta__halo" cx="248" cy="196" r="17"/><circle class="ruta__punto" cx="248" cy="196" r="6.5"/><text x="248" y="220" text-anchor="middle">03</text></g><g class="ruta__nodo" data-nivel="04"><circle class="ruta__halo" cx="348" cy="196" r="17"/><circle class="ruta__punto" cx="348" cy="196" r="6.5"/><text x="348" y="220" text-anchor="middle">04</text></g><g class="ruta__nodo" data-nivel="05"><circle class="ruta__halo" cx="448" cy="196" r="17"/><circle class="ruta__punto" cx="448" cy="196" r="6.5"/><text x="448" y="220" text-anchor="middle">05</text></g><g class="ruta__nodo" data-nivel="06"><circle class="ruta__halo" cx="448" cy="86" r="17"/><circle class="ruta__punto" cx="448" cy="86" r="6.5"/><text x="448" y="70" text-anchor="middle">06</text></g><g class="ruta__nodo" data-nivel="07"><circle class="ruta__halo" cx="348" cy="86" r="17"/><circle class="ruta__punto" cx="348" cy="86" r="6.5"/><text x="348" y="70" text-anchor="middle">07</text></g><g class="ruta__nodo" data-nivel="08"><circle class="ruta__halo" cx="248" cy="86" r="17"/><circle class="ruta__punto" cx="248" cy="86" r="6.5"/><text x="248" y="70" text-anchor="middle">08</text></g><g class="ruta__nodo" data-nivel="09"><circle class="ruta__halo" cx="148" cy="86" r="17"/><circle class="ruta__punto" cx="148" cy="86" r="6.5"/><text x="148" y="70" text-anchor="middle">09</text></g><g class="ruta__nodo" data-nivel="10"><circle class="ruta__halo" cx="48" cy="86" r="17"/><circle class="ruta__punto" cx="48" cy="86" r="6.5"/><text x="48" y="70" text-anchor="middle">10</text></g><g class="ruta__nota" hidden><rect width="164" height="24" rx="6"/><text x="12" y="16"></text></g></svg></div>
+        <figcaption class="hero__figcap"><span>Fig. 01 · Tu ruta</span><span class="ruta__cuenta">10 niveles</span></figcaption>
       </figure>
     </div>
   </header>
 
   <main>
+  <section class="reanudar-wrap"><div class="container">
+    <div class="reanudar" id="reanudar" hidden>
+      <div class="reanudar__top"><span class="mono reanudar__titulo">Continúa donde lo dejaste</span><span class="mono reanudar__donde"></span></div>
+      <div class="reanudar__body"><div class="reanudar__info"><h3></h3><p></p>
+        <div class="reanudar__meter"><div class="meter"><i></i></div><span></span></div></div>
+        <a href="#" class="btn btn--primary reanudar__btn"><span class="reanudar__verbo">Continuar</span> <span class="arrow">→</span></a></div>
+    </div>
+  </div></section>
   <!-- ============ TEMARIO ============ -->
   <section class="section" id="ruta">
     <div class="container">
@@ -102,36 +108,44 @@
           <span class="level__tag basico">Básico</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-01-introduccion-ia.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="Inteligencia artificial" loading="lazy" /><span class="card__num">01</span></div>
+          <a class="card card--mod" href="modulos/modulo-01-introduccion-ia.html" data-mod="01" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 01 · Módulo</span><span class="card__big">01</span></div>
             <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">25 min</span></div>
               <h4>Introducción a la IA</h4>
               <p>Qué es (y qué no es) la inteligencia artificial, el machine learning y cómo llegamos a ChatGPT.</p>
-              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
             </div>
           </a>
-          <a class="card" href="modulos/modulo-02-ia-generativa.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80" alt="IA generativa" loading="lazy" /><span class="card__num">02</span></div>
+          <a class="card card--mod" href="modulos/modulo-02-ia-generativa.html" data-mod="02" data-secciones="6">
+            <div class="card__band dotgrid"><span class="mono">Nivel 01 · Módulo</span><span class="card__big">02</span></div>
             <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">20 min</span></div>
               <h4>IA Generativa</h4>
               <p>Texto, imágenes, audio y video: cómo los modelos crean y por qué son una revolución.</p>
-              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+              <div class="card__meta"><span class="mono">6 secciones · quiz</span><span class="chip chip--lab">LAB 08</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
             </div>
           </a>
-          <a class="card" href="modulos/modulo-03-chatbots.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Chatbot" loading="lazy" /><span class="card__num">03</span></div>
+          <a class="card card--mod" href="modulos/modulo-03-chatbots.html" data-mod="03" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 01 · Módulo</span><span class="card__big">03</span></div>
             <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
               <h4>Chatbots como herramienta</h4>
               <p>ChatGPT, Claude y Gemini: cómo hablarles bien (prompting) para obtener resultados útiles.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 04</span><span class="chip chip--lab">LAB 09</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
             </div>
           </a>
-          <a class="card" href="modulos/modulo-04-notebooklm.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80" alt="Aprendizaje" loading="lazy" /><span class="card__num">04</span></div>
+          <a class="card card--mod" href="modulos/modulo-04-notebooklm.html" data-mod="04" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 01 · Módulo</span><span class="card__big">04</span></div>
             <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">20 min</span></div>
               <h4>Aprender con NotebookLM</h4>
               <p>Domina cualquier tema a partir de tus propios documentos, con respuestas citadas.</p>
-              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
             </div>
           </a>
         </div>
@@ -145,25 +159,45 @@
           <span class="level__tag basico">Básico</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-05-api.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="API" loading="lazy" /><span class="card__num">05</span></div>
-            <div class="card__body"><h4>¿Qué es una API?</h4><p>El «enchufe» que conecta programas entre sí y la base de toda automatización.</p>
-              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-05-api.html" data-mod="05" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 02 · Módulo</span><span class="card__big">05</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">25 min</span></div>
+              <h4>¿Qué es una API?</h4>
+              <p>El «enchufe» que conecta programas entre sí y la base de toda automatización.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 05</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-06-json.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&q=80" alt="Datos JSON" loading="lazy" /><span class="card__num">06</span></div>
-            <div class="card__body"><h4>JSON y tipos de datos</h4><p>Cómo viaja la información entre sistemas: texto, números, listas y objetos.</p>
-              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-06-json.html" data-mod="06" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 02 · Módulo</span><span class="card__big">06</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">20 min</span></div>
+              <h4>JSON y tipos de datos</h4>
+              <p>Cómo viaja la información entre sistemas: texto, números, listas y objetos.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span><span class="chip chip--lab">LAB 03</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-07-front-back-rag.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Front y back" loading="lazy" /><span class="card__num">07</span></div>
-            <div class="card__body"><h4>Front, Back y RAG</h4><p>Frontend, backend y RAG (búsqueda + IA) explicados sin tecnicismos.</p>
-              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-07-front-back-rag.html" data-mod="07" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 02 · Módulo</span><span class="card__big">07</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">25 min</span></div>
+              <h4>Front, Back y RAG</h4>
+              <p>Frontend, backend y RAG (búsqueda + IA) explicados sin tecnicismos.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 15</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-08-bases-datos.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80" alt="Base de datos" loading="lazy" /><span class="card__num">08</span></div>
-            <div class="card__body"><h4>Bases de datos relacionales</h4><p>Tablas y relaciones: por qué tu agente necesita una memoria ordenada.</p>
-              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-08-bases-datos.html" data-mod="08" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 02 · Módulo</span><span class="card__big">08</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">25 min</span></div>
+              <h4>Bases de datos relacionales</h4>
+              <p>Tablas y relaciones: por qué tu agente necesita una memoria ordenada.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span><span class="chip chip--lab">LAB 01</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -176,20 +210,35 @@
           <span class="level__tag inter">Intermedio</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-09-mapear-procesos.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Mapeo de procesos" loading="lazy" /><span class="card__num">09</span></div>
-            <div class="card__body"><h4>Identificar y mapear procesos</h4><p>Cómo detectar qué tareas conviene automatizar, antes de tocar ninguna herramienta.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-09-mapear-procesos.html" data-mod="09" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 03 · Módulo</span><span class="card__big">09</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
+              <h4>Identificar y mapear procesos</h4>
+              <p>Cómo detectar qué tareas conviene automatizar, antes de tocar ninguna herramienta.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-10-workfront-fusion.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Workfront Fusion" loading="lazy" /><span class="card__num">10</span></div>
-            <div class="card__body"><h4>Automatización con Workfront Fusion</h4><p>Nuestro orquestador: escenarios, módulos y conexiones. Con n8n, Make y Zapier como alternativas.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-10-workfront-fusion.html" data-mod="10" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 03 · Módulo</span><span class="card__big">10</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>Automatización con Workfront Fusion</h4>
+              <p>Nuestro orquestador: escenarios, módulos y conexiones. Con n8n, Make y Zapier como alternativas.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-11-creacion-web.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80" alt="Desarrollo web" loading="lazy" /><span class="card__num">11</span></div>
-            <div class="card__body"><h4>Creación de páginas web</h4><p>De la idea al sitio publicado (como esta academia) sin ser programador.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-11-creacion-web.html" data-mod="11" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 03 · Módulo</span><span class="card__big">11</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
+              <h4>Creación de páginas web</h4>
+              <p>De la idea al sitio publicado (como esta academia) sin ser programador.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span><span class="chip chip--lab">LAB 13</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -202,25 +251,45 @@
           <span class="level__tag inter">Intermedio</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-12-anatomia-agente.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Agente de IA" loading="lazy" /><span class="card__num">12</span></div>
-            <div class="card__body"><h4>Anatomía de un agente</h4><p>Memoria, prompts de sistema y herramientas: lo que convierte un chat en un agente.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-12-anatomia-agente.html" data-mod="12" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 04 · Módulo</span><span class="card__big">12</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>Anatomía de un agente</h4>
+              <p>Memoria, prompts de sistema y herramientas: lo que convierte un chat en un agente.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 21</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-13-agente-telegram.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=800&q=80" alt="Telegram" loading="lazy" /><span class="card__num">13</span></div>
-            <div class="card__body"><h4>Tu agente en Telegram</h4><p>Un bot conectado a IA que responde a tu equipo las 24 horas.</p>
-              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-13-agente-telegram.html" data-mod="13" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 04 · Módulo</span><span class="card__big">13</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">40 min</span></div>
+              <h4>Tu agente en Telegram</h4>
+              <p>Un bot conectado a IA que responde a tu equipo las 24 horas.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-14-whatsapp.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=800&q=80" alt="WhatsApp" loading="lazy" /><span class="card__num">14</span></div>
-            <div class="card__body"><h4>Conectar a WhatsApp</h4><p>Lleva tu agente al canal donde ya están tus clientes y compañeros.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-14-whatsapp.html" data-mod="14" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 04 · Módulo</span><span class="card__big">14</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>Conectar a WhatsApp</h4>
+              <p>Lleva tu agente al canal donde ya están tus clientes y compañeros.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-15-agentes-autonomos.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="Agente autónomo" loading="lazy" /><span class="card__num">15</span></div>
-            <div class="card__body"><h4>Agentes autónomos</h4><p>Agentes que planifican, deciden y ejecutan varios pasos solos, con límites claros.</p>
-              <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-15-agentes-autonomos.html" data-mod="15" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 04 · Módulo</span><span class="card__big">15</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">45 min</span></div>
+              <h4>Agentes autónomos</h4>
+              <p>Agentes que planifican, deciden y ejecutan varios pasos solos, con límites claros.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -233,35 +302,65 @@
           <span class="level__tag avanz">Avanzado</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-16-github.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&q=80" alt="GitHub" loading="lazy" /><span class="card__num">16</span></div>
-            <div class="card__body"><h4>Por qué necesitas GitHub</h4><p>Versiona tu trabajo, publica webs y accede al ecosistema donde viven las skills y los agentes.</p>
-              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-16-github.html" data-mod="16" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 05 · Módulo</span><span class="card__big">16</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">25 min</span></div>
+              <h4>Por qué necesitas GitHub</h4>
+              <p>Versiona tu trabajo, publica webs y accede al ecosistema donde viven las skills y los agentes.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-17-skills.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80" alt="Skill" loading="lazy" /><span class="card__num">17</span></div>
-            <div class="card__body"><h4>¿Qué es una Skill?</h4><p>Skills, archivos <code>.md</code> y cómo crear una para ampliar lo que la IA sabe hacer.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-17-skills.html" data-mod="17" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 05 · Módulo</span><span class="card__big">17</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>¿Qué es una Skill?</h4>
+              <p>Skills, archivos <code>.md</code> y cómo crear una para ampliar lo que la IA sabe hacer.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-18-extensiones.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Extensiones" loading="lazy" /><span class="card__num">18</span></div>
-            <div class="card__body"><h4>Extensiones y capacidades</h4><p>Skills, herramientas, conectores (MCP) y extensiones: qué es cada una y cómo combinarlas.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-18-extensiones.html" data-mod="18" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 05 · Módulo</span><span class="card__big">18</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
+              <h4>Extensiones y capacidades</h4>
+              <p>Skills, herramientas, conectores (MCP) y extensiones: qué es cada una y cómo combinarlas.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-19-skills-proveedores.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Ecosistema cloud" loading="lazy" /><span class="card__num">19</span></div>
-            <div class="card__body"><h4>Claude, Gemini y OpenAI</h4><p>El ecosistema cloud de cada proveedor y qué ofrece frente a los demás.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-19-skills-proveedores.html" data-mod="19" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 05 · Módulo</span><span class="card__big">19</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
+              <h4>Claude, Gemini y OpenAI</h4>
+              <p>El ecosistema cloud de cada proveedor y qué ofrece frente a los demás.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-20-elegir-modelo.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80" alt="Elegir modelo" loading="lazy" /><span class="card__num">20</span></div>
-            <div class="card__body"><h4>¿Qué modelo elegir?</h4><p>Guía práctica para escoger el modelo correcto según coste, velocidad y tarea.</p>
-              <div class="card__foot"><span>25 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-20-elegir-modelo.html" data-mod="20" data-secciones="6">
+            <div class="card__band dotgrid"><span class="mono">Nivel 05 · Módulo</span><span class="card__big">20</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">25 min</span></div>
+              <h4>¿Qué modelo elegir?</h4>
+              <p>Guía práctica para escoger el modelo correcto según coste, velocidad y tarea.</p>
+              <div class="card__meta"><span class="mono">6 secciones · quiz</span><span class="chip chip--lab">LAB 11</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-21-privacidad-gobernanza.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="Seguridad" loading="lazy" /><span class="card__num">21</span></div>
-            <div class="card__body"><h4>Privacidad, gobernanza y permisos</h4><p>Configura la IA de forma segura: datos, accesos y cumplimiento.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-21-privacidad-gobernanza.html" data-mod="21" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 05 · Módulo</span><span class="card__big">21</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>Privacidad, gobernanza y permisos</h4>
+              <p>Configura la IA de forma segura: datos, accesos y cumplimiento.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 07</span><span class="chip chip--lab">LAB 19</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -274,20 +373,35 @@
           <span class="level__tag avanz">Avanzado</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-22-scraping-fundamentos.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&q=80" alt="Scraping" loading="lazy" /><span class="card__num">22</span></div>
-            <div class="card__body"><h4>Nociones fundamentales</h4><p>Qué es el web scraping, cuándo es legal y ético, y las herramientas básicas.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-22-scraping-fundamentos.html" data-mod="22" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 06 · Módulo</span><span class="card__big">22</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
+              <h4>Nociones fundamentales</h4>
+              <p>Qué es el web scraping, cuándo es legal y ético, y las herramientas básicas.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 12</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-23-scraping-avanzado.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Scraping avanzado" loading="lazy" /><span class="card__num">23</span></div>
-            <div class="card__body"><h4>Scraping avanzado</h4><p>Páginas dinámicas, paginación y cómo evitar bloqueos con buenas prácticas.</p>
-              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-23-scraping-avanzado.html" data-mod="23" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 06 · Módulo</span><span class="card__big">23</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">40 min</span></div>
+              <h4>Scraping avanzado</h4>
+              <p>Páginas dinámicas, paginación y cómo evitar bloqueos con buenas prácticas.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-24-apis-ocultas.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="APIs ocultas" loading="lazy" /><span class="card__num">24</span></div>
-            <div class="card__body"><h4>APIs ocultas</h4><p>Descubre las APIs que las webs usan por detrás para obtener datos limpios.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-24-apis-ocultas.html" data-mod="24" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 06 · Módulo</span><span class="card__big">24</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>APIs ocultas</h4>
+              <p>Descubre las APIs que las webs usan por detrás para obtener datos limpios.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -300,15 +414,25 @@
           <span class="level__tag avanz">Avanzado</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-25-workfront-ia.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Adobe Workfront" loading="lazy" /><span class="card__num">25</span></div>
-            <div class="card__body"><h4>Adobe Workfront + IA</h4><p>Automatiza proyectos, aprobaciones y reportes en Workfront con agentes de IA.</p>
-              <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-25-workfront-ia.html" data-mod="25" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 07 · Módulo</span><span class="card__big">25</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">45 min</span></div>
+              <h4>Adobe Workfront + IA</h4>
+              <p>Automatiza proyectos, aprobaciones y reportes en Workfront con agentes de IA.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-26-proyecto-final.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Proyecto final" loading="lazy" /><span class="card__num">26</span></div>
-            <div class="card__body"><h4>Proyecto final</h4><p>Diseña, construye y presenta tu propio agente para un proceso real de la empresa.</p>
-              <div class="card__foot"><span>PROYECTO</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-26-proyecto-final.html" data-mod="26" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 07 · Módulo</span><span class="card__big">26</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">Proyecto</span></div>
+              <h4>Proyecto final</h4>
+              <p>Diseña, construye y presenta tu propio agente para un proceso real de la empresa.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -321,25 +445,45 @@
           <span class="level__tag avanz">Avanzado</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-27-videos-ia.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80" alt="Videos con IA" loading="lazy" /><span class="card__num">27</span></div>
-            <div class="card__body"><h4>Crear videos con IA</h4><p>Avatares que hablan, video desde texto y voces realistas: de un guion a un video sin grabar.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-27-videos-ia.html" data-mod="27" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 08 · Módulo</span><span class="card__big">27</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>Crear videos con IA</h4>
+              <p>Avatares que hablan, video desde texto y voces realistas: de un guion a un video sin grabar.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-28-linkedin-portafolio.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80" alt="Portafolio web" loading="lazy" /><span class="card__num">28</span></div>
-            <div class="card__body"><h4>De LinkedIn a portafolio web</h4><p>Convierte tu perfil en una página profesional con IA, sin código, y publícala gratis.</p>
-              <div class="card__foot"><span>35 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-28-linkedin-portafolio.html" data-mod="28" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 08 · Módulo</span><span class="card__big">28</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">35 min</span></div>
+              <h4>De LinkedIn a portafolio web</h4>
+              <p>Convierte tu perfil en una página profesional con IA, sin código, y publícala gratis.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-29-automatizaciones-recetas.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Automatizaciones" loading="lazy" /><span class="card__num">29</span></div>
-            <div class="card__body"><h4>Automatizaciones prácticas</h4><p>Recetas de automatización con IA listas para copiar: bandeja inteligente, respuestas y reportes.</p>
-              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-29-automatizaciones-recetas.html" data-mod="29" data-secciones="4">
+            <div class="card__band dotgrid"><span class="mono">Nivel 08 · Módulo</span><span class="card__big">29</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">40 min</span></div>
+              <h4>Automatizaciones prácticas</h4>
+              <p>Recetas de automatización con IA listas para copiar: bandeja inteligente, respuestas y reportes.</p>
+              <div class="card__meta"><span class="mono">4 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-30-flujos-agenticos.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Flujos agénticos" loading="lazy" /><span class="card__num">30</span></div>
-            <div class="card__body"><h4>Flujos agénticos avanzados</h4><p>De un agente a varios coordinados: patrones multi-agente y cuándo (y cuándo no) usarlos.</p>
-              <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-30-flujos-agenticos.html" data-mod="30" data-secciones="5">
+            <div class="card__band dotgrid"><span class="mono">Nivel 08 · Módulo</span><span class="card__big">30</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">40 min</span></div>
+              <h4>Flujos agénticos avanzados</h4>
+              <p>De un agente a varios coordinados: patrones multi-agente y cuándo (y cuándo no) usarlos.</p>
+              <div class="card__meta"><span class="mono">5 secciones · quiz</span><span class="chip chip--lab">LAB 10</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -352,20 +496,35 @@
           <span class="level__tag avanz">Avanzado</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-31-como-funciona-llm.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="Cómo funciona un LLM por dentro" loading="lazy" /><span class="card__num">31</span></div>
-            <div class="card__body"><h4>Cómo funciona un LLM por dentro</h4><p>Tokens, embeddings, ventana de contexto y temperatura: por qué la IA responde (y alucina) como lo hace.</p>
-              <div class="card__foot"><span>18 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-31-como-funciona-llm.html" data-mod="31" data-secciones="6">
+            <div class="card__band dotgrid"><span class="mono">Nivel 09 · Módulo</span><span class="card__big">31</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">18 min</span></div>
+              <h4>Cómo funciona un LLM por dentro</h4>
+              <p>Tokens, embeddings, ventana de contexto y temperatura: por qué la IA responde (y alucina) como lo hace.</p>
+              <div class="card__meta"><span class="mono">6 secciones · quiz</span><span class="chip chip--lab">LAB 14</span><span class="chip chip--lab">LAB 16</span><span class="chip chip--lab">LAB 20</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-32-evaluacion-confiabilidad.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Evaluación y confiabilidad de sistemas de IA" loading="lazy" /><span class="card__num">32</span></div>
-            <div class="card__body"><h4>Evaluación y confiabilidad</h4><p>Mide si tu agente sirve: sets de prueba, LLM-como-juez y detección de alucinaciones. Nunca despliegues a ciegas.</p>
-              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-32-evaluacion-confiabilidad.html" data-mod="32" data-secciones="6">
+            <div class="card__band dotgrid"><span class="mono">Nivel 09 · Módulo</span><span class="card__big">32</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">20 min</span></div>
+              <h4>Evaluación y confiabilidad</h4>
+              <p>Mide si tu agente sirve: sets de prueba, LLM-como-juez y detección de alucinaciones. Nunca despliegues a ciegas.</p>
+              <div class="card__meta"><span class="mono">6 secciones · quiz</span><span class="chip chip--lab">LAB 18</span><span class="chip chip--lab">LAB 22</span><span class="chip chip--lab">LAB 23</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
-          <a class="card" href="modulos/modulo-33-seguridad-red-teaming.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="Seguridad de IA y red teaming" loading="lazy" /><span class="card__num">33</span></div>
-            <div class="card__body"><h4>Seguridad de IA y red teaming</h4><p>Inyección de prompts, guardrails y cómo atacar tu propio agente antes de soltarlo al mundo.</p>
-              <div class="card__foot"><span>20 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-33-seguridad-red-teaming.html" data-mod="33" data-secciones="6">
+            <div class="card__band dotgrid"><span class="mono">Nivel 09 · Módulo</span><span class="card__big">33</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">20 min</span></div>
+              <h4>Seguridad de IA y red teaming</h4>
+              <p>Inyección de prompts, guardrails y cómo atacar tu propio agente antes de soltarlo al mundo.</p>
+              <div class="card__meta"><span class="mono">6 secciones · quiz</span><span class="chip chip--lab">LAB 17</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -378,10 +537,15 @@
           <span class="level__tag avanz">Avanzado</span>
         </div>
         <div class="cards">
-          <a class="card" href="modulos/modulo-34-desplegar-hostear-agentes.html">
-            <div class="card__cover"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Desplegar y hostear agentes" loading="lazy" /><span class="card__num">34</span></div>
-            <div class="card__body"><h4>Desplegar y hostear tus agentes</h4><p>De tu laptop a la nube 24/7: VPS (Hetzner, Hostinger), Docker, y agentes self-hosted como Hermes Agent y n8n.</p>
-              <div class="card__foot"><span>30 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+          <a class="card card--mod" href="modulos/modulo-34-desplegar-hostear-agentes.html" data-mod="34" data-secciones="6">
+            <div class="card__band dotgrid"><span class="mono">Nivel 10 · Módulo</span><span class="card__big">34</span></div>
+            <div class="card__body">
+              <div class="card__row"><span class="chip card__estado">Por empezar</span><span class="mono">30 min</span></div>
+              <h4>Desplegar y hostear tus agentes</h4>
+              <p>De tu laptop a la nube 24/7: VPS (Hetzner, Hostinger), Docker, y agentes self-hosted como Hermes Agent y n8n.</p>
+              <div class="card__meta"><span class="mono">6 secciones · quiz</span></div>
+              <span class="card__cta">Empezar <span class="arrow">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -412,8 +576,8 @@
         <div class="card card--plain reveal">
           <span class="marker">Cohorte · Avanzado</span>
           <h4>Autonomía y scraping</h4>
-          <p>Niveles 5 a 7. Skills, gobernanza, scraping avanzado y el caso real con Workfront.</p>
-          <ul class="bullets" style="margin-top:18px;"><li>Skills y extensiones</li><li>Web scraping avanzado</li><li>Proyecto final en la empresa</li></ul>
+          <p>Niveles 5 a 10. Skills, gobernanza, scraping, el caso real con Workfront, evaluación y seguridad de IA, y despliegue.</p>
+          <ul class="bullets" style="margin-top:18px;"><li>Skills, scraping y Workfront + IA</li><li>Evaluación y seguridad de IA</li><li>Agentes en producción 24/7</li></ul>
         </div>
       </div>
     </div>

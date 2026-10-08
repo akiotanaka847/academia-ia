@@ -536,6 +536,16 @@ despuesDeLaCuenta(function progresoDelCurso() {
     // --- Bloqueo: el módulo anterior no llega al umbral ---
     if (!unlocked(state, here)) {
       const need = prevId(here);
+      // Antes de vaciar el artículo guardamos los títulos: así el candado muestra
+      // qué trae el módulo en vez de un callejón sin salida
+      const temario = blocks.filter((b) => !b.querySelector(".quiz")).map((b) => {
+        const h2 = b.querySelector("h2");
+        if (!h2) return "";
+        const copia = h2.cloneNode(true);
+        const n = copia.querySelector(".n");
+        if (n) n.remove();
+        return copia.textContent.trim();
+      }).filter(Boolean);
       article.textContent = "";
       const box = el("div", "modlock");
       box.appendChild(el("div", "modlock__ic")).appendChild(icono("lock"));
@@ -547,6 +557,17 @@ despuesDeLaCuenta(function progresoDelCurso() {
       a.href = prevA ? prevA.getAttribute("href") : "../index.html#ruta";
       a.textContent = "Ir al módulo " + need + " →";
       box.appendChild(a);
+      const examen = el("a", "btn btn--text", "O valida tu nivel con el examen");
+      examen.href = "../examen.html";
+      box.appendChild(examen);
+      if (temario.length) {
+        const prev = el("div", "modlock__temario");
+        prev.appendChild(el("span", "mono", "Lo que verás en este módulo"));
+        const ol = el("ol");
+        temario.forEach((t) => ol.appendChild(el("li", null, t)));
+        prev.appendChild(ol);
+        box.appendChild(prev);
+      }
       article.appendChild(box);
       return;
     }
@@ -697,31 +718,194 @@ despuesDeLaCuenta(function progresoDelCurso() {
     return;
   }
 
-  /* ===== B · Índice: candados y progreso en las tarjetas ===== */
-  const cards = document.querySelectorAll("a.card[href*='modulo-']");
+  /* ===== B · Índice: tarjetas de plataforma, progreso por nivel, ruta y «reanudar» ===== */
+  const cards = Array.prototype.slice.call(document.querySelectorAll("a.card[href*='modulo-']"));
   if (!cards.length) return;
   const st = load();
   let suma = 0, completados = 0;
+  const NS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs) {
+    const e = document.createElementNS(NS, tag);
+    Object.keys(attrs).forEach((k) => e.setAttribute(k, attrs[k]));
+    return e;
+  }
 
-  cards.forEach((card) => {
+  // Lo que se sabe de cada módulo: nivel, actividades hechas y si está abierto
+  const info = cards.map((card) => {
     const id = modId(card.getAttribute("href"));
-    if (!id) return;
-    const p = pctOf(st, id);
-    suma += p;
-    if (p >= UMBRAL) completados++;
-    const cover = card.querySelector(".card__cover") || card;
-    if (!unlocked(st, id)) {
-      card.classList.add("locked");
-      card.setAttribute("aria-disabled", "true");
-      const candado = cover.appendChild(el("span", "card__state"));
-      candado.appendChild(icono("lock"));
-      candado.title = "Bloqueado";
-    } else if (p >= UMBRAL) {
-      cover.appendChild(el("span", "card__state ok", " " + p + "%")).prepend(icono("check"));
-    } else if (p > 0) {
-      cover.appendChild(el("span", "card__state mid", p + "%"));
+    const nivelEl = card.closest(".level");
+    const numEl = nivelEl ? nivelEl.querySelector(".level__num") : null;
+    const nivel = numEl ? (numEl.textContent.match(/\d+/) || [""])[0] : "";
+    const rec = (st[id] && typeof st[id] === "object") ? st[id] : {};
+    // secciones + quiz; un total de 1 es el registro mínimo que deja el examen sin abrir el módulo
+    const total = rec.total > 1 ? rec.total : (parseInt(card.dataset.secciones, 10) || 0) + 1;
+    const validado = rec.validado === true; // lo acreditó el examen de nivelación
+    const reales = Math.min(total, (Array.isArray(rec.secciones) ? rec.secciones.length : 0) + (rec.quiz ? 1 : 0));
+    const hechas = validado ? total : reales;
+    const pct = pctOf(st, id);
+    return { card, id, nivel, nivelEl, total, hechas, reales, pct, validado, abierto: unlocked(st, id), ok: validado || pct >= UMBRAL };
+  });
+
+  // Mini ruta del nivel dentro de la tarjeta: un punto por módulo, anillo en este
+  function posicion(enNivel, idx) {
+    const paso = 18, x0 = 8, w = x0 * 2 + paso * (enNivel.length - 1);
+    const svg = svgEl("svg", { class: "card__pos", width: w, height: 16, viewBox: "0 0 " + w + " 16", "aria-hidden": "true" });
+    if (enNivel.length > 1) svg.appendChild(svgEl("path", { class: "linea", d: "M" + x0 + " 8H" + (x0 + paso * (enNivel.length - 1)) }));
+    enNivel.forEach((o, j) => {
+      const cx = x0 + paso * j;
+      svg.appendChild(svgEl("circle", { class: "p" + (o.ok ? " hecho" : ""), cx: cx, cy: 8, r: 4.5 }));
+      if (j === idx) svg.appendChild(svgEl("circle", { class: "aro", cx: cx, cy: 8, r: 7 }));
+    });
+    return svg;
+  }
+
+  info.forEach((m) => {
+    suma += m.pct;
+    if (m.pct >= UMBRAL) completados++;
+    const c = m.card;
+    const chip = c.querySelector(".card__estado");
+    const cta = c.querySelector(".card__cta");
+    const body = c.querySelector(".card__body");
+    const band = c.querySelector(".card__band");
+    const estado = !m.abierto ? "bloqueado" : (m.ok ? "completado" : (m.pct > 0 ? "en-curso" : "nuevo"));
+    c.classList.add(estado === "bloqueado" ? "locked" : estado);
+
+    if (chip) {
+      chip.textContent = "";
+      chip.className = "chip card__estado";
+      if (estado === "bloqueado") { chip.classList.add("chip--lock"); chip.append(icono("lock"), " Bloqueado"); }
+      else if (estado === "completado") { chip.classList.add("chip--ok"); chip.append(icono("check"), m.validado && m.reales < m.total ? " Validado" : " Completado"); }
+      else if (estado === "en-curso") { chip.classList.add("chip--curso"); chip.textContent = "En curso"; }
+      else chip.textContent = "Por empezar";
+    }
+    if (band) {
+      const enNivel = info.filter((o) => o.nivel === m.nivel);
+      band.appendChild(posicion(enNivel, enNivel.indexOf(m)));
+    }
+    if (body && cta && (estado === "en-curso" || estado === "completado")) {
+      const prog = el("div", "card__prog");
+      const meter = el("div", "meter" + (estado === "completado" ? " meter--ok" : ""));
+      const fill = el("i");
+      fill.style.width = (m.validado ? 100 : Math.min(100, m.pct)) + "%";
+      meter.appendChild(fill);
+      prog.appendChild(meter);
+      prog.appendChild(el("span", null, m.validado && m.reales < m.total ? "Por examen" : m.hechas + " de " + m.total));
+      body.insertBefore(prog, cta);
+    }
+    if (body && cta && estado === "bloqueado") {
+      const prev = prevId(m.id);
+      const cond = el("div", "card__cond");
+      cond.appendChild(icono("lock"));
+      cond.appendChild(el("span", null, "Completa el " + UMBRAL + " % del módulo " + prev + " (llevas " + pctOf(st, prev) +
+        " %) o valida tu nivel con el examen."));
+      body.insertBefore(cond, cta);
+    }
+    if (cta) {
+      const verbo = { "nuevo": "Empezar", "en-curso": "Continuar", "completado": "Repasar", "bloqueado": "Ver temario" }[estado];
+      cta.textContent = verbo + " ";
+      cta.appendChild(el("span", "arrow", "→"));
     }
   });
+
+  // Progreso local de cada nivel («2 de 4 módulos»): cerca y visible, no un % global lejano
+  document.querySelectorAll(".level").forEach((lv) => {
+    const head = lv.querySelector(".level__header");
+    const numEl = lv.querySelector(".level__num");
+    if (!head || !numEl) return;
+    const nv = (numEl.textContent.match(/\d+/) || [""])[0];
+    const mods = info.filter((o) => o.nivel === nv);
+    if (!mods.length) return;
+    const ok = mods.filter((o) => o.ok).length;
+    const box = el("div", "level__prog");
+    if (ok === mods.length) {
+      box.appendChild(icono("check"));
+      box.appendChild(el("span", null, "Nivel completado"));
+      box.style.color = "var(--ok)";
+    } else {
+      box.appendChild(el("span", null, ok + " de " + mods.length + " módulos"));
+      const meter = el("div", "meter");
+      const fill = el("i");
+      fill.style.width = Math.round((ok / mods.length) * 100) + "%";
+      meter.appendChild(fill);
+      box.appendChild(meter);
+    }
+    head.appendChild(box);
+  });
+
+  // Ruta de los 10 niveles en el hero: azul lo completado, halo en el nivel actual
+  const mapa = document.querySelector(".ruta");
+  if (mapa) {
+    const niveles = Array.prototype.map.call(document.querySelectorAll(".level .level__num"),
+      (n) => (n.textContent.match(/\d+/) || [""])[0]);
+    const completo = (nv) => info.filter((o) => o.nivel === nv).every((o) => o.ok);
+    const a = niveles.findIndex((nv) => !completo(nv)); // -1: programa terminado
+    const nodos = Array.prototype.slice.call(mapa.querySelectorAll(".ruta__nodo"));
+    nodos.forEach((g, k) => {
+      g.classList.toggle("hecho", a === -1 || k < a);
+      g.classList.toggle("actual", k === a);
+    });
+    mapa.querySelectorAll(".ruta__seg").forEach((sg) => {
+      const j = parseInt(sg.dataset.seg, 10);
+      sg.classList.toggle("hecho", a === -1 || j <= a);
+    });
+    const cuenta = document.querySelector(".ruta__cuenta");
+    if (cuenta) cuenta.textContent = (a === -1 ? niveles.length : a) + " de " + niveles.length + " niveles";
+    const nota = mapa.querySelector(".ruta__nota");
+    const destino = nodos[a === -1 ? nodos.length - 1 : a];
+    if (nota && destino) {
+      const punto = destino.querySelector(".ruta__punto");
+      const cx = parseFloat(punto.getAttribute("cx")), cy = parseFloat(punto.getAttribute("cy"));
+      const sinEmpezar = info.every((o) => o.pct === 0 && !o.validado);
+      const txt = nota.querySelector("text");
+      txt.textContent = a === -1 ? "PROGRAMA COMPLETO"
+        : "NIVEL " + niveles[a] + " · " + (sinEmpezar ? "EMPIEZA AQUÍ" : "EN CURSO");
+      nota.removeAttribute("hidden");
+      const ancho = Math.ceil(txt.getComputedTextLength ? txt.getComputedTextLength() : 140) + 24;
+      const rect = nota.querySelector("rect");
+      rect.setAttribute("width", ancho);
+      const x = Math.max(4, Math.min(528 - ancho - 4, cx - ancho / 2));
+      const y = cy > 150 ? cy - 48 : cy + 24; // entre las dos filas de la ruta
+      nota.setAttribute("transform", "translate(" + x + " " + y + ")");
+    }
+  }
+
+  // «Continúa donde lo dejaste»: el último módulo que tocaste (en cualquier
+  // dispositivo, gracias a la hora que guarda la sección 0b) o el siguiente que toca
+  const rean = document.getElementById("reanudar");
+  if (rean) {
+    let horas = {};
+    try { horas = (JSON.parse(localStorage.getItem("academiaia-sync")) || {}).t || {}; } catch (e) {}
+    const enCurso = info.filter((o) => o.abierto && !o.ok && o.pct > 0)
+      .sort((x, y) => (horas[y.id] || 0) - (horas[x.id] || 0));
+    let m = enCurso[0], modo = "continuar";
+    if (!m) {
+      m = info.find((o) => o.abierto && !o.ok);
+      modo = info.some((o) => o.pct > 0 || o.validado) ? "siguiente" : "empezar";
+    }
+    const q = (sel) => rean.querySelector(sel);
+    const fill = q(".meter > i");
+    if (m) {
+      q(".reanudar__titulo").textContent = { continuar: "Continúa donde lo dejaste", siguiente: "Tu siguiente módulo", empezar: "Empieza aquí" }[modo];
+      q(".reanudar__donde").textContent = "Nivel " + m.nivel + " · Módulo " + m.id;
+      q("h3").textContent = m.card.querySelector("h4").textContent;
+      q("p").textContent = m.card.querySelector("p").textContent;
+      fill.style.width = Math.min(100, m.pct) + "%";
+      q(".reanudar__meter span").textContent = m.hechas + " de " + m.total + " actividades";
+      q(".reanudar__btn").href = m.card.getAttribute("href");
+      q(".reanudar__verbo").textContent = modo === "continuar" ? "Continuar" : "Empezar";
+    } else {
+      q(".reanudar__titulo").textContent = "Programa completado";
+      q(".reanudar__donde").textContent = info.length + " de " + info.length + " módulos";
+      q("h3").textContent = "Terminaste los " + info.length + " módulos";
+      q("p").textContent = "Repasa cuando quieras o sigue practicando en los laboratorios.";
+      fill.style.width = "100%";
+      fill.parentNode.classList.add("meter--ok");
+      q(".reanudar__meter span").textContent = "100 %";
+      q(".reanudar__btn").href = "laboratorios.html";
+      q(".reanudar__verbo").textContent = "Ir a los laboratorios";
+    }
+    rean.hidden = false;
+  }
 
   // Barra global del curso, al principio del temario
   const ruta = document.getElementById("ruta");
