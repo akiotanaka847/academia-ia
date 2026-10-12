@@ -53,10 +53,14 @@
         const sesion = res && res.data ? res.data.session : null;
         if (!sesion) { clearTimeout(salvavidas); aLogin(); return; }
         const pc = window.progresoCuenta;
+        // Una página con <meta name="academia-revision"> aún no está publicada: solo la ven
+        // los administradores (perfiles.es_admin, que nadie puede cambiarse desde el sitio)
+        const enRevision = !!document.querySelector('meta[name="academia-revision"]');
         // perfil y progreso en paralelo: sincronizar no alarga la espera
         return Promise.all([
           sb.from("perfiles").select("aprobado, nombre, email").eq("id", sesion.user.id).maybeSingle(),
-          pc ? pc.traer(sb) : null
+          pc ? pc.traer(sb) : null,
+          enRevision ? sb.from("perfiles").select("es_admin").eq("id", sesion.user.id).maybeSingle() : null
         ]).then(function (res) {
             const r = res[0];
             clearTimeout(salvavidas);
@@ -68,11 +72,36 @@
             montarSalir(sb, r.data, sesion.user); // barra: saludo + cerrar sesión
             if (pc) pc.conectar(sb, sesion.user.id, res[1]); // nunca lanza: un fallo aquí no bloquea el curso
             avisarListo();
+            if (enRevision && !(res[2] && res[2].data && res[2].data.es_admin)) taparRevision();
             mostrar(); // sesión válida y aprobada: adelante
           });
       });
     })
     .catch(function () { clearTimeout(salvavidas); aLogin("error"); });
+
+  // Quien no administra ve un aviso en lugar de la página en revisión
+  function taparRevision() {
+    document.querySelectorAll(".mod-hero, .mod-hero ~ section").forEach(function (n) { n.remove(); });
+    const seccion = document.createElement("section");
+    seccion.className = "section";
+    const contenedor = document.createElement("div");
+    contenedor.className = "container";
+    const caja = document.createElement("div");
+    caja.className = "modlock";
+    const titulo = document.createElement("h3");
+    titulo.textContent = "Clase en revisión";
+    const texto = document.createElement("p");
+    texto.textContent = "Esta clase todavía no está publicada. Muy pronto la verás en el temario.";
+    const volver = document.createElement("a");
+    volver.className = "btn btn--primary";
+    volver.href = base + "index.html#ruta";
+    volver.textContent = "Volver al temario";
+    caja.append(titulo, texto, volver);
+    contenedor.appendChild(caja);
+    seccion.appendChild(contenedor);
+    const nav = document.querySelector(".nav");
+    if (nav) nav.after(seccion); else document.body.prepend(seccion);
+  }
 
   // Inyecta en la barra un saludo y un botón "Cerrar sesión" (en las 33 páginas).
   function montarSalir(sb, perfil, user) {
@@ -381,6 +410,13 @@ document.querySelectorAll(".quiz").forEach((quiz) => {
       if (!isCorrect) {
         // resaltar también cuál era la correcta
         quiz.querySelector('[data-correct="true"]').classList.add("correct");
+        // la explicación viene rotulada «Correcto» en el HTML: si falló, que no parezca que acertó
+        const caja = feedback && feedback.querySelector(".callout--tip");
+        if (caja) {
+          caja.classList.replace("callout--tip", "callout--warn");
+          const rotulo = caja.querySelector(".label");
+          if (rotulo) rotulo.textContent = "La respuesta era otra";
+        }
       }
       if (feedback) feedback.classList.add("show");
     });
@@ -786,7 +822,7 @@ despuesDeLaCuenta(function progresoDelCurso() {
   const MAX_ENLACES = 10;
   const OMITIR = ["inteligencia-artificial", "prompt", "evaluacion"];
   const OMITIR_EN = { token: ["13", "24"] }; // módulos donde la palabra significa otra cosa
-  const EXCLUIR = "a, code, pre, kbd, h1, h2, h3, h4, h5, h6, button, label, figcaption, script, style, svg, input, textarea, .quiz, .toc, .mod-nav, .label, .src, .n";
+  const EXCLUIR = "a, code, pre, kbd, h1, h2, h3, h4, h5, h6, button, label, figcaption, script, style, svg, input, textarea, .quiz, .toc, .mod-nav, .label, .src, .n, .lema, .agente-sim, .entregable";
   function numMod(ruta) { return ((ruta || "").match(/modulo-(\d+)/) || [])[1] || ""; }
   const modActual = numMod(location.pathname);
 

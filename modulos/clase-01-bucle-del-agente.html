@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase práctica · Construye tu primer agente · Academia IA</title>
+  <meta name="description" content="Clase práctica: arma un agente de IA pieza por pieza, pruébalo con un proyecto de ejemplo de Workfront y llévate sus instrucciones y una skill lista para usar." />
+  <!-- En revisión: solo la ven los administradores (perfiles.es_admin). Quita esta línea para publicarla a todos. -->
+  <meta name="academia-revision" content="solo administradores" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../laboratorios.html">Laboratorios</a></li>
+        <li><a href="../prompts.html">Prompts</a></li>
+        <li><a href="../glosario.html">Glosario</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>/</span>
+        <a href="../index.html#ruta">Nivel 04 · Agentes de IA</a> <span>/</span>
+        <span>Clase práctica</span>
+      </div>
+      <span class="kicker reveal in">Clase práctica · Nivel 04 · Agentes de IA</span>
+      <h1 class="reveal in">Construye tu primer <em>agente</em></h1>
+      <p class="lead reveal in">
+        Todos los agentes de IA, del asistente que programa a un bot de WhatsApp, repiten el mismo ciclo:
+        <b>observar, pensar y actuar</b>. En esta clase lo armas pieza por pieza, lo pruebas con un proyecto
+        de ejemplo de Workfront y te llevas un agente listo para usar en tu trabajo.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Clase práctica</span>
+        <span class="mod-meta__item">Antes: Módulo 12</span>
+        <span class="mod-meta__item">Te llevas: instrucciones y una skill</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80" alt="Personas revisando un proyecto en el computador" />
+        <span class="mod-cover__badge">Aprende · Constrúyelo · Llévatelo</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <ol class="pasos reveal">
+          <li><a href="#idea"><b>1</b>La idea</a></li>
+          <li><a href="#problema"><b>2</b>El problema</a></li>
+          <li><a href="#concepto"><b>3</b>El concepto</a></li>
+          <li><a href="#construye"><b>4</b>Constrúyelo</a></li>
+          <li><a href="#usalo"><b>5</b>Úsalo</a></li>
+          <li><a href="#llevatelo"><b>6</b>Llévatelo</a></li>
+        </ol>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> La idea</h2>
+          <blockquote class="lema">
+            Un agente es un modelo de lenguaje dentro de un ciclo: mira, decide, actúa y vuelve a mirar,
+            hasta que termina su objetivo.
+          </blockquote>
+          <p>Al terminar esta clase podrás:</p>
+          <ul class="bullets">
+            <li>Explicar las cinco piezas que necesita cualquier agente para funcionar.</li>
+            <li>Reconocer qué falla cuando falta una de ellas (y por qué el agente «inventa» o se queda dando vueltas).</li>
+            <li>Llevarlo a tu Workfront real: con un escenario de Workfront Fusion o con Claude y el conector de Workfront.</li>
+            <li>Usar unas instrucciones y una skill listas para revisar proyectos atrasados.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="problema">
+          <h2><span class="n">02</span> El problema</h2>
+          <p>
+            Le preguntas a un chatbot: <b>«¿Qué tareas del proyecto Aurora están atrasadas?»</b>. Responde con
+            seguridad, pero no puede abrir Workfront ni mirar una sola fecha: solo completa texto. Si no tiene el
+            dato, lo adivina, y lo dice con la misma confianza que si lo supiera.
+          </p>
+          <p>
+            Un agente resuelve eso con una idea sencilla: en vez de contestar de golpe, se detiene, usa una
+            herramienta (por ejemplo, consultar Workfront), lee el resultado y sigue pensando con datos reales.
+            Todo lo demás (memoria, permisos, varios pasos) gira alrededor de ese ciclo.
+          </p>
+        </div>
+
+        <div class="content-block reveal" id="concepto">
+          <h2><span class="n">03</span> El concepto</h2>
+          <p>El ciclo tiene tres momentos que se repiten hasta cumplir el objetivo:</p>
+          <div class="ciclo" role="img" aria-label="Ciclo del agente: piensa, actúa, observa y vuelve a pensar hasta terminar">
+            <div class="ciclo__paso"><span class="ico ico--sparkle" aria-hidden="true"></span><b>Piensa</b><span>¿Qué necesito saber o hacer ahora?</span></div>
+            <span class="ciclo__flecha" aria-hidden="true">→</span>
+            <div class="ciclo__paso"><span class="ico ico--zap" aria-hidden="true"></span><b>Actúa</b><span>Usa una herramienta: buscar, enviar, calcular.</span></div>
+            <span class="ciclo__flecha" aria-hidden="true">→</span>
+            <div class="ciclo__paso"><span class="ico ico--search" aria-hidden="true"></span><b>Observa</b><span>Lee el resultado y decide si ya terminó.</span></div>
+          </div>
+          <p class="ciclo__vuelta">Si todavía no termina, vuelve a pensar con lo que acaba de ver. Si ya cumplió, responde.</p>
+
+          <h3>Las cinco piezas</h3>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>1 · Modelo<span class="src">El cerebro</span></h4><ul><li>Entiende y decide</li><li>Claude, ChatGPT, Gemini</li></ul></div>
+            <div class="compare-card"><h4>2 · Instrucciones<span class="src">El objetivo y las reglas</span></h4><ul><li>Qué debe lograr</li><li>Qué no debe hacer nunca</li></ul></div>
+            <div class="compare-card"><h4>3 · Herramientas<span class="src">Sus manos</span></h4><ul><li>Lo único que puede hacer</li><li>Solo las que necesita</li></ul></div>
+            <div class="compare-card"><h4>4 · Memoria<span class="src">Lo que ya vio</span></h4><ul><li>Los pasos de este ciclo</li><li>Evita repetir trabajo</li></ul></div>
+            <div class="compare-card"><h4>5 · Parada<span class="src">Cuándo termina</span></h4><ul><li>Objetivo cumplido</li><li>Un tope de vueltas</li></ul></div>
+          </div>
+          <div class="callout callout--warn reveal">
+            <span class="label">Errores típicos</span>
+            <h4>Lo que sale mal cuando falta una pieza</h4>
+            <p>Sin herramientas, inventa. Sin memoria, repite lo mismo. Sin parada, no termina (y cada vuelta
+            cuesta dinero). Con herramientas de más o reglas vagas, hace cosas que nadie pidió. Lo vas a ver con
+            tus propios ojos en el siguiente paso.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="construye">
+          <h2><span class="n">04</span> Constrúyelo</h2>
+          <p>
+            Arma tu agente eligiendo sus piezas y ejecútalo. La misión es siempre la misma: <b>revisar el proyecto
+            Aurora, encontrar las tareas atrasadas y avisar a sus responsables</b>. Prueba primero con piezas
+            incompletas: es la forma más rápida de entender para qué sirve cada una.
+          </p>
+          <p class="nota-pie-clase"><b>Es una simulación:</b> el proyecto Aurora y sus tareas son de ejemplo. No se
+          conecta a tu Workfront ni envía mensajes. En el paso 5 ves cómo hacerlo con tu Workfront real.</p>
+          <div class="agente-sim">
+            <div class="agente-sim__piezas">
+              <fieldset class="agente-sim__grupo">
+                <legend>Instrucciones</legend>
+                <label><input type="radio" name="instr" value="vagas" checked /> Vagas: «Ayúdame con mis proyectos»</label>
+                <label><input type="radio" name="instr" value="claras" /> Claras: «Revisa las tareas atrasadas del proyecto que te indique y avisa a cada responsable. No cambies fechas ni estados.»</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Herramientas</legend>
+                <label><input type="checkbox" name="tool" value="buscar" /> Buscar tareas en Workfront</label>
+                <label><input type="checkbox" name="tool" value="enviar" /> Enviar un mensaje al responsable</label>
+                <label><input type="checkbox" name="tool" value="cambiar" checked /> Cambiar fechas en Workfront</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Memoria y parada</legend>
+                <label><input type="checkbox" name="memoria" /> Memoria: recuerda lo que ya hizo en este ciclo</label>
+                <label><input type="checkbox" name="parada" /> Parada: termina al cumplir el objetivo (o al llegar a 6 vueltas)</label>
+              </fieldset>
+              <button type="button" class="lab-btn agente-sim__run">Ejecutar el agente</button>
+              <span class="lab__pass clase-pass"><span class="ico ico--check" aria-hidden="true"></span> Agente funcionando</span>
+            </div>
+            <div class="agente-sim__salida">
+              <div class="agente-sim__mision"><b>Misión</b> Revisa el proyecto Aurora: ¿qué tareas están atrasadas? Avisa a sus responsables. <span>Hoy es 8 de octubre.</span></div>
+              <ol class="traza" aria-live="polite"></ol>
+              <div class="agente-sim__veredicto" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="usalo">
+          <h2><span class="n">05</span> Úsalo</h2>
+          <p>Las cinco piezas existen en cualquier herramienta. Así se ven en las dos con las que trabajamos sobre Workfront:</p>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th>Pieza</th><th>En Workfront Fusion (un escenario)</th><th>En Claude (con el conector de Workfront)</th></tr></thead>
+              <tbody>
+                <tr><td><b>Modelo</b></td><td data-col="En Workfront Fusion">El módulo de IA (HTTP u OpenAI/Azure)</td><td data-col="En Claude con el conector">El modelo que eliges en el chat</td></tr>
+                <tr><td><b>Instrucciones</b></td><td data-col="En Workfront Fusion">El prompt que escribes en ese módulo</td><td data-col="En Claude con el conector">Las instrucciones del proyecto (las del paso 6)</td></tr>
+                <tr><td><b>Herramientas</b></td><td data-col="En Workfront Fusion">Los módulos «Workfront › Search» y «Create a record», y Teams</td><td data-col="En Claude con el conector">El conector: busca tareas y deja comentarios</td></tr>
+                <tr><td><b>Memoria</b></td><td data-col="En Workfront Fusion">Los datos que pasan de un módulo al siguiente</td><td data-col="En Claude con el conector">La conversación y los archivos del proyecto</td></tr>
+                <tr><td><b>Parada</b></td><td data-col="En Workfront Fusion">El escenario termina al recorrer todas las tareas</td><td data-col="En Claude con el conector">Claude decide cuándo terminó; tú apruebas antes de comentar</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Hay una diferencia clave: en Fusion los pasos los fijas tú y la IA solo redacta (es un <b>flujo</b>).
+            Con el conector, Claude decide qué consultar y qué hacer (es un <b>agente</b>). Para empezar, el flujo es
+            más predecible.
+          </p>
+          <h3>Pruébalo en Workfront Fusion</h3>
+          <ol class="bullets bullets--num">
+            <li>Crea un escenario y prográmalo para que corra cada mañana a las 8.</li>
+            <li>Agrega «Workfront › Search» para traer las tareas del proyecto con fecha vencida y avance menor al 100%.</li>
+            <li>Agrega el módulo de IA, como en el <a href="modulo-10-workfront-fusion.html">Módulo 10</a>, con este prompt: «Redacta un aviso cordial de máximo 3 líneas para [responsable] sobre la tarea [nombre], que venció el [fecha] y va en [avance]».</li>
+            <li>Agrega «Workfront › Create a record» para dejar ese aviso como comentario en la tarea, o envíalo por Teams.</li>
+            <li>Pruébalo con «Run once» en un proyecto de ensayo antes de activarlo.</li>
+          </ol>
+          <div class="callout callout--info reveal">
+            <span class="label">Buena práctica</span>
+            <h4>Empieza sin permisos para cambiar nada</h4>
+            <p>Los primeros días deja que el agente solo lea y avise. Cuando confíes en sus resultados, decide
+            si le das una herramienta que modifique Workfront, y siempre con una persona que apruebe.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="llevatelo">
+          <h2><span class="n">06</span> Llévatelo</h2>
+          <p>Esto es lo que te llevas de la clase. Cópialo o descárgalo y adáptalo a tu proyecto.</p>
+
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Instrucciones para Claude</span><h4>Agente de seguimiento de proyectos</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="instrucciones-agente">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="instrucciones-agente" data-archivo="instrucciones-agente-seguimiento.md">Descargar .md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="instrucciones-agente">Eres el asistente de seguimiento del equipo de [nombre del equipo].
+
+Objetivo: cuando te lo pida, revisa el proyecto [nombre del proyecto] en Workfront, encuentra las tareas atrasadas y avisa a cada responsable.
+
+Una tarea está atrasada si su fecha de entrega ya pasó y no está al 100%.
+
+Pasos:
+1. Busca las tareas del proyecto con el conector de Workfront.
+2. Para cada tarea atrasada, redacta un aviso breve para su responsable con: nombre de la tarea, fecha de entrega y porcentaje de avance.
+3. Muéstrame los avisos. Cuando los apruebe, déjalos como comentario en cada tarea.
+4. Termina con un resumen para [quien coordina el proyecto]: cuántas tareas revisaste y a quién avisaste.
+
+Reglas:
+- No cambies fechas, estados ni responsables: solo lees y comentas.
+- No publiques ningún comentario sin mi aprobación.
+- Si no puedes consultar Workfront, dilo; nunca inventes tareas ni fechas.
+- Tono cordial y directo, en español, máximo 3 líneas por aviso.</pre>
+          </div>
+
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Skill para Claude</span><h4>seguimiento-de-proyectos</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="skill-seguimiento">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="skill-seguimiento" data-archivo="SKILL.md">Descargar SKILL.md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="skill-seguimiento">---
+name: seguimiento-de-proyectos
+description: Revisa un proyecto, detecta tareas atrasadas y redacta los avisos para sus responsables. Úsala cuando te pidan revisar atrasos, preparar recordatorios o resumir el estado de entregas.
+---
+
+# Seguimiento de proyectos
+
+## Cuándo usarla
+Cuando el usuario pida revisar atrasos de un proyecto, preparar recordatorios o resumir el estado de las entregas.
+
+## Cómo trabajar
+1. Pide o lee la lista de tareas con: nombre, responsable, fecha de entrega y porcentaje de avance.
+2. Marca como atrasada toda tarea con fecha vencida que no esté al 100%.
+3. Redacta un aviso por responsable (máximo 3 líneas): tarea, fecha y avance.
+4. Cierra con un resumen: total revisado, atrasadas y a quién avisar.
+
+## Reglas
+- No inventes datos: si falta la fecha o el responsable, pregunta.
+- No propongas mover fechas salvo que te lo pidan.
+- Escribe en español, con tono cordial y directo.</pre>
+          </div>
+          <p class="nota-pie-clase">¿Cómo se instala una skill en Claude? Lo viste en el <a href="modulo-17-skills.html">Módulo 17</a>.</p>
+        </div>
+
+        <div class="content-block reveal" id="practica">
+          <h2><span class="n">07</span> Practica</h2>
+          <ol class="bullets bullets--num">
+            <li>En el simulador, activa todo menos la memoria. ¿En qué paso se pierde el agente y por qué?</li>
+            <li>Agrega a las instrucciones una regla para que avise también a quien coordina el proyecto cuando una tarea lleve más de 7 días vencida.</li>
+            <li>Adapta las instrucciones a otro proceso tuyo, por ejemplo, revisar solicitudes que llevan más de 3 días sin aprobar.</li>
+          </ol>
+          <h3>Palabras clave</h3>
+          <dl class="terminos">
+            <dt><a href="../glosario.html#agente">Agente</a></dt><dd>Un modelo que usa herramientas en un ciclo para cumplir un objetivo.</dd>
+            <dt><a href="../glosario.html#prompt-de-sistema">Prompt de sistema</a></dt><dd>Las instrucciones base: objetivo, reglas y tono del agente.</dd>
+            <dt>Herramienta</dt><dd>Una acción concreta que el agente puede pedir: buscar, enviar, calcular.</dd>
+            <dt>Condición de parada</dt><dd>La regla que dice cuándo termina: objetivo cumplido o un tope de vueltas.</dd>
+            <dt><a href="../glosario.html#alucinacion">Alucinación</a></dt><dd>Lo que pasa cuando el modelo responde sin datos: inventa con seguridad.</dd>
+          </dl>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">08</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. Un agente sin herramienta para consultar Workfront te dice qué tareas están atrasadas. ¿Qué pasó?</p>
+            <button class="quiz__opt" data-correct="false">Tiene acceso a Workfront por su entrenamiento.</button>
+            <button class="quiz__opt" data-correct="true">Inventó la respuesta: sin herramienta, solo puede adivinar.</button>
+            <button class="quiz__opt" data-correct="false">Usó la memoria para saberlo.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Sin una herramienta que lea los datos, el modelo completa texto plausible. Eso es una alucinación.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. Tu agente repite la misma búsqueda una y otra vez. ¿Qué pieza le falta?</p>
+            <button class="quiz__opt" data-correct="true">La memoria de lo que ya hizo en el ciclo.</button>
+            <button class="quiz__opt" data-correct="false">Un modelo más grande.</button>
+            <button class="quiz__opt" data-correct="false">Más herramientas.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Sin memoria olvida que ya buscó y vuelve a empezar. La parada evita que siga para siempre.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. ¿Por qué no darle «cambiar fechas» a un agente que solo debe avisar?</p>
+            <button class="quiz__opt" data-correct="false">Porque el agente se vuelve más lento.</button>
+            <button class="quiz__opt" data-correct="false">Porque las herramientas cuestan más.</button>
+            <button class="quiz__opt" data-correct="true">Porque podría «resolver» el atraso moviendo fechas, algo que nadie pidió.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Dale solo las herramientas que necesita. Es el principio de mínimo privilegio.</p></div></div>
+          </div>
+        </div>
+
+        <p class="credito-formato">Formato de clase inspirado en <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">AI Engineering from Scratch</a> (licencia MIT): aprende, constrúyelo, úsalo y llévatelo.</p>
+
+        <div class="mod-nav reveal">
+          <a href="modulo-12-anatomia-agente.html"><span>← Antes</span><b>12 · Anatomía de un agente</b></a>
+          <a href="../index.html#ruta" class="next"><span>Siguiente →</span><b>Volver al temario</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En esta clase</h5>
+          <a href="#idea">La idea</a>
+          <a href="#problema">El problema</a>
+          <a href="#concepto">El concepto</a>
+          <a href="#construye">Constrúyelo</a>
+          <a href="#usalo">Úsalo</a>
+          <a href="#llevatelo">Llévatelo</a>
+          <a href="#practica">Practica</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Clase práctica</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/clases.js"></script>
+</body>
+</html>
