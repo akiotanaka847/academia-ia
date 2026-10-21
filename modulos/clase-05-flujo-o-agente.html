@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 5 · ¿Flujo o agente? · Academia IA</title>
+  <meta name="description" content="Clase 5 de la ruta práctica: los cinco patrones de flujo, cuándo conviene un agente y cómo se arma cada uno en Workfront Fusion." />
+  <!-- En revisión: solo la ven los administradores (perfiles.es_admin). Quita esta línea para publicarla a todos. -->
+  <meta name="academia-revision" content="solo administradores" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../laboratorios.html">Laboratorios</a></li>
+        <li><a href="../prompts.html">Prompts</a></li>
+        <li><a href="../glosario.html">Glosario</a></li>
+        <li><a href="ruta-agentes.html" class="nav__cta">Ruta de agentes</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>/</span>
+        <a href="ruta-agentes.html">Ruta práctica: agentes</a> <span>/</span>
+        <span>Clase 5</span>
+      </div>
+      <span class="kicker reveal in">Ruta práctica · Clase 5 de 8</span>
+      <h1 class="reveal in">¿Flujo o <em>agente</em>?</h1>
+      <p class="lead reveal in">
+        No todo necesita un agente. La mayoría de los procesos se resuelven mejor con un <b>flujo de pasos conocidos</b>, que es más barato y predecible. Aquí aprendes los cinco patrones que usan los equipos de IA y cuándo dar el salto a un agente.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Clase práctica</span>
+        <span class="mod-meta__item">Antes: Módulo 30</span>
+        <span class="mod-meta__item">Te llevas: un árbol de decisión</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1400&q=80" alt="Equipo trabajando en una mesa con computadores" />
+        <span class="mod-cover__badge">Aprende · Constrúyelo · Llévatelo</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <ol class="pasos reveal">
+          <li><a href="#idea"><b>1</b>La idea</a></li>
+          <li><a href="#problema"><b>2</b>El problema</a></li>
+          <li><a href="#concepto"><b>3</b>El concepto</a></li>
+          <li><a href="#construye"><b>4</b>Constrúyelo</a></li>
+          <li><a href="#usalo"><b>5</b>Úsalo</a></li>
+          <li><a href="#llevatelo"><b>6</b>Llévatelo</a></li>
+        </ol>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> La idea</h2>
+          <blockquote class="lema">
+            Usa el sistema más simple que resuelva el problema: un flujo cuando conoces los pasos, un agente solo
+            cuando no los conoces.
+          </blockquote>
+          <p>Al terminar esta clase podrás:</p>
+          <ul class="bullets">
+            <li>Distinguir un flujo (tú fijas los pasos) de un agente (la IA decide los pasos).</li>
+            <li>Reconocer los cinco patrones de flujo que usan los equipos de IA y para qué sirve cada uno.</li>
+            <li>Saber cuándo vale la pena un agente, y cuándo varios.</li>
+            <li>Armar cada patrón con módulos de Workfront Fusion.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="problema">
+          <h2><span class="n">02</span> El problema</h2>
+          <p>
+            «Hagamos un agente» se volvió la respuesta a todo. Pero un agente es más lento, cuesta distinto en cada
+            ejecución y es más difícil de auditar: para saber qué hizo hay que leer su registro, no su diseño.
+          </p>
+          <p>
+            La mayoría de los procesos de un equipo, como clasificar solicitudes, armar un reporte o revisar un texto,
+            <b>siempre siguen los mismos pasos</b>. Para eso, un flujo con IA en los pasos justos es más barato, más
+            rápido y más fácil de explicar. Saber elegir es la habilidad que más dinero ahorra en un proyecto de IA.
+          </p>
+        </div>
+
+        <div class="content-block reveal" id="concepto">
+          <h2><span class="n">03</span> El concepto</h2>
+          <h3>Flujo o agente</h3>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th></th><th>Flujo</th><th>Agente</th></tr></thead>
+              <tbody>
+                <tr><td><b>¿Quién decide los pasos?</b></td><td data-col="Flujo">Tú, al diseñarlo</td><td data-col="Agente">El modelo, en cada vuelta</td></tr>
+                <tr><td><b>Costo por ejecución</b></td><td data-col="Flujo">Acotado y conocido</td><td data-col="Agente">Variable: depende de cuántas vueltas dé</td></tr>
+                <tr><td><b>Previsibilidad</b></td><td data-col="Flujo">Alta</td><td data-col="Agente">Menor</td></tr>
+                <tr><td><b>Auditoría</b></td><td data-col="Flujo">Lees el escenario</td><td data-col="Agente">Revisas el registro de cada ejecución</td></tr>
+                <tr><td><b>Ideal para</b></td><td data-col="Flujo">Procesos que se repiten</td><td data-col="Agente">Problemas abiertos, de pasos desconocidos</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Ambos usan el mismo bloque base: <b>un modelo con superpoderes</b>, es decir, con herramientas
+            (clase 2), conexión a tus sistemas (clase 3) y memoria (clase 4). La diferencia es quién decide el
+            orden de los pasos.
+          </p>
+
+          <h3>Los cinco patrones de flujo</h3>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>1 · Cadena<span class="src">Paso tras paso</span></h4><ul><li>Cada paso usa el resultado del anterior</li><li>Con controles entre pasos</li></ul></div>
+            <div class="compare-card"><h4>2 · Enrutamiento<span class="src">Clasificar y derivar</span></h4><ul><li>Un clasificador elige el camino</li><li>Cada tipo de caso, su tratamiento</li></ul></div>
+            <div class="compare-card"><h4>3 · En paralelo<span class="src">Varios a la vez</span></h4><ul><li>Partes independientes al mismo tiempo</li><li>O la misma pregunta varias veces, y se vota</li></ul></div>
+            <div class="compare-card"><h4>4 · Orquestador y trabajadores<span class="src">Repartir según el caso</span></h4><ul><li>Un coordinador decide qué hace cada especialista</li><li>Luego une los resultados</li></ul></div>
+            <div class="compare-card"><h4>5 · Evaluador y optimizador<span class="src">Proponer y revisar</span></h4><ul><li>Uno redacta, otro revisa con criterios</li><li>Se corrige hasta pasar, con tope</li></ul></div>
+          </div>
+
+          <h3>Cuándo sí conviene un agente</h3>
+          <ul class="bullets">
+            <li><b>Problemas abiertos:</b> el siguiente paso depende de lo que encontraste en el anterior.</li>
+            <li><b>Duración incierta:</b> no sabes si serán 3 pasos o 30.</li>
+            <li><b>Terreno nuevo:</b> todavía no sabes cuál es el flujo correcto. Primero exploras con un agente y después lo conviertes en flujo.</li>
+          </ul>
+
+          <h3>¿Y varios agentes?</h3>
+          <p>
+            Cuando un agente no alcanza, se combinan varios: un <b>supervisor</b> que reparte a especialistas, una
+            <b>jerarquía</b> de equipos o varios agentes que <b>debaten</b> antes de decidir. Cada agente extra suma
+            costo y puntos de falla, así que la regla es la misma: empieza con uno y agrega solo cuando sea necesario.
+            Lo viste en el <a href="modulo-30-flujos-agenticos.html">Módulo 30</a>.
+          </p>
+          <div class="callout callout--info reveal">
+            <span class="label">Buena práctica</span>
+            <h4>De agente a flujo</h4>
+            <p>Explora un proceso nuevo con un agente, mira en su registro qué pasos repite siempre y conviértelos
+            en un escenario de Fusion. Ganas costo fijo y previsibilidad, y el agente queda solo para lo que de verdad
+            es abierto.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="construye">
+          <h2><span class="n">04</span> Constrúyelo</h2>
+          <p>
+            Seis casos reales de un equipo que trabaja con Workfront. Elige el patrón que mejor resuelve cada uno y
+            comprueba. Pista: cada patrón se usa una sola vez.
+          </p>
+          <div class="agente-sim" data-sim="patrones">
+            <div class="agente-sim__piezas">
+              <fieldset class="agente-sim__grupo">
+                <legend>Elige un patrón para cada caso</legend>
+                <label class="agente-sim__caso"><b>Caso 1.</b> Clasificar cada solicitud nueva y mandarla a la cola de su equipo.
+                  <select name="caso1"><option value="">Elige un patrón</option><option value="cadena">Cadena</option><option value="enrutamiento">Enrutamiento</option><option value="paralelo">En paralelo</option><option value="orquestador">Orquestador y trabajadores</option><option value="evaluador">Evaluador y optimizador</option><option value="agente">Agente</option></select></label>
+                <label class="agente-sim__caso"><b>Caso 2.</b> Del brief a la pieza: resumir, escribir 3 titulares y verificar el manual de marca.
+                  <select name="caso2"><option value="">Elige un patrón</option><option value="cadena">Cadena</option><option value="enrutamiento">Enrutamiento</option><option value="paralelo">En paralelo</option><option value="orquestador">Orquestador y trabajadores</option><option value="evaluador">Evaluador y optimizador</option><option value="agente">Agente</option></select></label>
+                <label class="agente-sim__caso"><b>Caso 3.</b> Reporte semanal: revisar 12 proyectos y juntar un resumen.
+                  <select name="caso3"><option value="">Elige un patrón</option><option value="cadena">Cadena</option><option value="enrutamiento">Enrutamiento</option><option value="paralelo">En paralelo</option><option value="orquestador">Orquestador y trabajadores</option><option value="evaluador">Evaluador y optimizador</option><option value="agente">Agente</option></select></label>
+                <label class="agente-sim__caso"><b>Caso 4.</b> Respuesta a un cliente molesto que debe pasar una revisión de tono y política.
+                  <select name="caso4"><option value="">Elige un patrón</option><option value="cadena">Cadena</option><option value="enrutamiento">Enrutamiento</option><option value="paralelo">En paralelo</option><option value="orquestador">Orquestador y trabajadores</option><option value="evaluador">Evaluador y optimizador</option><option value="agente">Agente</option></select></label>
+                <label class="agente-sim__caso"><b>Caso 5.</b> Lanzamiento: un coordinador reparte el trabajo entre copy, diseño y medios según la campaña.
+                  <select name="caso5"><option value="">Elige un patrón</option><option value="cadena">Cadena</option><option value="enrutamiento">Enrutamiento</option><option value="paralelo">En paralelo</option><option value="orquestador">Orquestador y trabajadores</option><option value="evaluador">Evaluador y optimizador</option><option value="agente">Agente</option></select></label>
+                <label class="agente-sim__caso"><b>Caso 6.</b> Investigar por qué el proyecto Boreal se retrasa, sin saber qué revisar primero.
+                  <select name="caso6"><option value="">Elige un patrón</option><option value="cadena">Cadena</option><option value="enrutamiento">Enrutamiento</option><option value="paralelo">En paralelo</option><option value="orquestador">Orquestador y trabajadores</option><option value="evaluador">Evaluador y optimizador</option><option value="agente">Agente</option></select></label>
+              </fieldset>
+              <button type="button" class="lab-btn agente-sim__run">Comprobar</button>
+              <span class="lab__pass clase-pass"><span class="ico ico--check" aria-hidden="true"></span> 6 de 6</span>
+            </div>
+            <div class="agente-sim__salida">
+              <div class="agente-sim__mision"><b>Reto</b> Elige el patrón más simple que resuelve cada caso. <span>Si dudas, pregúntate: ¿conozco los pasos de antemano?</span></div>
+              <ol class="traza" aria-live="polite"></ol>
+              <div class="agente-sim__veredicto" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="usalo">
+          <h2><span class="n">05</span> Úsalo</h2>
+          <p>Así se arma cada patrón con módulos de Workfront Fusion (lo básico de Fusion está en el <a href="modulo-10-workfront-fusion.html">Módulo 10</a>):</p>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th>Patrón</th><th>Módulos de Fusion</th><th>Ejemplo</th></tr></thead>
+              <tbody>
+                <tr><td><b>Cadena</b></td><td data-col="Módulos de Fusion">Módulos de IA en fila, con un filtro entre pasos</td><td data-col="Ejemplo">Brief, titulares y revisión de marca</td></tr>
+                <tr><td><b>Enrutamiento</b></td><td data-col="Módulos de Fusion">Un módulo de IA que clasifica y un Router</td><td data-col="Ejemplo">Cada solicitud nueva a su cola</td></tr>
+                <tr><td><b>En paralelo</b></td><td data-col="Módulos de Fusion">Iterator, un módulo de IA por elemento y un aggregator</td><td data-col="Ejemplo">Resumen de 12 proyectos</td></tr>
+                <tr><td><b>Orquestador</b></td><td data-col="Módulos de Fusion">Un módulo de IA que arma el plan y un Router hacia escenarios especialistas</td><td data-col="Ejemplo">Lanzamiento de campaña</td></tr>
+                <tr><td><b>Evaluador y optimizador</b></td><td data-col="Módulos de Fusion">Un módulo redacta, otro evalúa con una rúbrica y se repite con tope de intentos</td><td data-col="Ejemplo">Respuesta a un cliente</td></tr>
+                <tr><td><b>Agente</b></td><td data-col="Módulos de Fusion">«Process a user prompt» del conector Workfront MCP, o Claude con conectores</td><td data-col="Ejemplo">Investigar un retraso</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout--info reveal">
+            <span class="label">Combínalos</span>
+            <h4>Un agente puede ser un paso dentro de un flujo</h4>
+            <p>Lo más común en la práctica es un flujo con un solo paso abierto: por ejemplo, un Router que manda los
+            casos raros al módulo «Process a user prompt» y los normales por un camino fijo. Tienes previsibilidad
+            donde se puede y flexibilidad donde hace falta.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="llevatelo">
+          <h2><span class="n">06</span> Llévatelo</h2>
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Guía rápida</span><h4>Árbol de decisión: ¿flujo o agente?</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="arbol-decision">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="arbol-decision" data-archivo="flujo-o-agente.md">Descargar .md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="arbol-decision"># ¿Flujo o agente?
+
+1. ¿Conozco los pasos de antemano?
+   - Sí: es un FLUJO. Sigue en 2.
+   - No: piensa en un AGENTE. Sigue en 5.
+
+2. ¿Cada paso usa el resultado del anterior?
+   - Sí: CADENA, con un control entre pasos.
+
+3. ¿Hay tipos de casos que van por caminos distintos?
+   - Sí: ENRUTAMIENTO (un clasificador y un Router).
+
+4. ¿Hay muchas partes independientes?
+   - Sí: EN PARALELO (Iterator y aggregator).
+   ¿Hay un criterio de calidad que revisar antes de entregar?
+   - Sí: súmale EVALUADOR Y OPTIMIZADOR, con tope de intentos.
+
+5. ¿El trabajo se reparte entre especialistas según el caso?
+   - Sí: ORQUESTADOR Y TRABAJADORES.
+   - No: un AGENTE con pocas herramientas, permisos mínimos y tope de vueltas.
+
+6. Antes de lanzar, responde:
+   - ¿Cuánto cuesta cada ejecución, en el peor caso?
+   - ¿Quién revisa el registro y cada cuánto?
+   - ¿Qué pasa si falla a mitad de camino?
+
+Regla de oro: empieza por lo más simple.
+Cuando un agente repita siempre los mismos pasos, conviértelo en flujo.</pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="practica">
+          <h2><span class="n">07</span> Practica</h2>
+          <ol class="bullets bullets--num">
+            <li>Haz una lista de tres procesos de tu equipo y clasifica cada uno con el árbol de decisión.</li>
+            <li>Toma una idea de «agente» que hayas escuchado en tu empresa y rediséñala como flujo. ¿Qué paso, si alguno, necesita de verdad un agente?</li>
+            <li>Elige un proceso donde la calidad importe mucho y describe la rúbrica que usaría un evaluador.</li>
+          </ol>
+          <h3>Palabras clave</h3>
+          <dl class="terminos">
+            <dt>Flujo</dt><dd>Un proceso con pasos fijos que tú diseñas, donde la IA trabaja en algunos de ellos.</dd>
+            <dt>Enrutamiento</dt><dd>Clasificar cada caso y mandarlo por el camino que le corresponde.</dd>
+            <dt>Orquestador</dt><dd>Un modelo que decide qué trabajo hace cada especialista y une los resultados.</dd>
+            <dt>Evaluador y optimizador</dt><dd>Un modelo propone, otro revisa con criterios, y se corrige hasta pasar.</dd>
+            <dt><a href="../glosario.html#multi-agente">Multi-agente</a></dt><dd>Varios agentes que se reparten un trabajo. Más poder, pero más costo y más puntos de falla.</dd>
+          </dl>
+          <h3>Para profundizar</h3>
+          <ul class="bullets para-profundizar">
+            <li><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/14-agent-engineering/12-anthropic-workflow-patterns" target="_blank" rel="noopener">Workflow Patterns</a> y <a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/14-agent-engineering/28-orchestration-patterns" target="_blank" rel="noopener">Orchestration Patterns</a>, lecciones de AI Engineering from Scratch.</li>
+            <li><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">Building effective agents</a>, donde Anthropic describe los cinco patrones.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">08</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. Un proceso siempre sigue los mismos cuatro pasos. ¿Qué conviene?</p>
+            <button class="quiz__opt" data-correct="true">Un flujo, con IA en los pasos que la necesiten.</button>
+            <button class="quiz__opt" data-correct="false">Un agente, por si cambian los pasos.</button>
+            <button class="quiz__opt" data-correct="false">Varios agentes que debatan.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Si conoces los pasos, un flujo es más barato, más rápido y más fácil de auditar.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. Tienes que resumir 30 proyectos que no dependen entre sí. ¿Qué patrón usas?</p>
+            <button class="quiz__opt" data-correct="false">Cadena.</button>
+            <button class="quiz__opt" data-correct="true">En paralelo.</button>
+            <button class="quiz__opt" data-correct="false">Evaluador y optimizador.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Partes independientes se procesan a la vez y luego se juntan. En Fusion: Iterator y aggregator.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. ¿Cuándo sí vale la pena un agente?</p>
+            <button class="quiz__opt" data-correct="false">Siempre que haya IA de por medio.</button>
+            <button class="quiz__opt" data-correct="false">Cuando el proceso es muy repetitivo.</button>
+            <button class="quiz__opt" data-correct="true">Cuando no puedes saber los pasos de antemano.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El agente brilla en problemas abiertos. Para lo demás, un flujo.</p></div></div>
+          </div>
+        </div>
+
+        <p class="credito-formato">Ruta basada en la de ingeniería de agentes de <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">AI Engineering from Scratch</a> (licencia MIT), adaptada a nuestro trabajo con Workfront, Fusion y Claude.</p>
+
+        <div class="mod-nav reveal">
+          <a href="clase-04-contexto-memoria.html"><span>← Antes</span><b>Clase 4 · Contexto y memoria</b></a>
+          <a href="clase-06-fallas-y-ataques.html" class="next"><span>Siguiente →</span><b>Clase 6 · Cuando el agente falla</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En esta clase</h5>
+          <a href="#idea">La idea</a>
+          <a href="#problema">El problema</a>
+          <a href="#concepto">El concepto</a>
+          <a href="#construye">Constrúyelo</a>
+          <a href="#usalo">Úsalo</a>
+          <a href="#llevatelo">Llévatelo</a>
+          <a href="#practica">Practica</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Ruta práctica de agentes</span>
+        <a href="ruta-agentes.html" style="color:var(--accent);">Ver las 8 clases →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/clases.js"></script>
+</body>
+</html>

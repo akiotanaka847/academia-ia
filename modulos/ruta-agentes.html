@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruta práctica · Construye agentes de IA · Academia IA</title>
+  <meta name="description" content="Ruta práctica de 8 clases para construir agentes de IA con Workfront, Fusion y Claude: del bucle del agente a producción, con simuladores y plantillas." />
+  <!-- En revisión: solo la ven los administradores (perfiles.es_admin). Quita esta línea para publicarla a todos. -->
+  <meta name="academia-revision" content="solo administradores" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../laboratorios.html">Laboratorios</a></li>
+        <li><a href="../prompts.html">Prompts</a></li>
+        <li><a href="../glosario.html">Glosario</a></li>
+        <li><a href="../index.html" class="nav__cta">Volver al índice</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>/</span>
+        <span>Ruta práctica: agentes</span>
+      </div>
+      <span class="kicker reveal in">Ruta práctica · 8 clases</span>
+      <h1 class="reveal in">Construye agentes de <em>IA</em></h1>
+      <p class="lead reveal in">
+        Ocho clases para pasar de la idea a un agente que trabaja de verdad con Workfront: cómo piensa, qué
+        herramientas usa, cómo se conecta por MCP con Workfront y Fusion, qué recuerda, cuándo conviene un flujo,
+        cómo se defiende, cómo se evalúa y cómo se lanza a producción.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">8 clases</span>
+        <span class="mod-meta__item">Unas 6 horas</span>
+        <span class="mod-meta__item">Con Workfront, Fusion y Claude</span>
+        <span class="mod-meta__item">Te llevas: 13 plantillas</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container">
+      <div class="ruta-intro reveal">
+        <p>Cada clase sigue el mismo recorrido, para que aprendas haciendo:</p>
+        <ol class="pasos">
+          <li><a href="clase-01-bucle-del-agente.html#idea"><b>1</b>La idea</a></li>
+          <li><a href="clase-01-bucle-del-agente.html#problema"><b>2</b>El problema</a></li>
+          <li><a href="clase-01-bucle-del-agente.html#concepto"><b>3</b>El concepto</a></li>
+          <li><a href="clase-01-bucle-del-agente.html#construye"><b>4</b>Constrúyelo</a></li>
+          <li><a href="clase-01-bucle-del-agente.html#usalo"><b>5</b>Úsalo</a></li>
+          <li><a href="clase-01-bucle-del-agente.html#llevatelo"><b>6</b>Llévatelo</a></li>
+        </ol>
+        <ul class="bullets">
+          <li><b>Constrúyelo</b> es un simulador: armas el agente, lo ejecutas y ves paso a paso qué hace, sin tocar sistemas reales.</li>
+          <li><b>Úsalo</b> te muestra cómo hacerlo en Workfront Fusion y en Claude, incluida la conexión por MCP.</li>
+          <li><b>Llévatelo</b> te deja plantillas listas para copiar o descargar: instrucciones, skills, checklists y prompts.</li>
+        </ul>
+        <p class="nota-pie-clase">Antes de empezar, conviene haber visto el <a href="modulo-12-anatomia-agente.html">Módulo 12 · Anatomía de un agente</a>.</p>
+      </div>
+
+      <div class="section__head reveal" style="margin-top:56px;margin-bottom:32px;">
+        <span class="kicker">Las ocho clases</span>
+        <h2>De tu primer agente a uno en <em>producción</em>.</h2>
+        <p>Hazlas en orden: cada clase usa lo que aprendiste en la anterior.</p>
+      </div>
+
+      <div class="cards">
+        <a class="card" href="clase-01-bucle-del-agente.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Personas revisando un proyecto en el computador" loading="lazy" /><span class="card__num">1</span></div>
+          <div class="card__body"><h4>Construye tu primer agente</h4><p>El ciclo piensa, actúa y observa, y las cinco piezas que todo agente necesita.</p>
+            <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-02-herramientas.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Cables de red conectados a un servidor" loading="lazy" /><span class="card__num">2</span></div>
+          <div class="card__body"><h4>Herramientas que el agente entiende</h4><p>Nombre, descripción, parámetros y errores: cómo diseñar herramientas que el modelo use bien.</p>
+            <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-03-mcp-workfront-fusion.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Circuito electrónico de cerca" loading="lazy" /><span class="card__num">3</span></div>
+          <div class="card__body"><h4>Conecta tu agente con MCP</h4><p>Claude maneja tus escenarios de Fusion, y Fusion tiene su propio agente para Workfront.</p>
+            <div class="card__foot"><span>50 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-04-contexto-memoria.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="Representación de una red neuronal" loading="lazy" /><span class="card__num">4</span></div>
+          <div class="card__body"><h4>Contexto y memoria</h4><p>El contexto justo para cada tarea y una nota de memoria que no olvida los acuerdos.</p>
+            <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-05-flujo-o-agente.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Equipo trabajando en una mesa con computadores" loading="lazy" /><span class="card__num">5</span></div>
+          <div class="card__body"><h4>¿Flujo o agente?</h4><p>Los cinco patrones de flujo, cuándo conviene un agente y cómo se arma cada uno en Fusion.</p>
+            <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-06-fallas-y-ataques.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="Candado sobre un fondo de datos" loading="lazy" /><span class="card__num">6</span></div>
+          <div class="card__body"><h4>Cuando el agente falla</h4><p>Los cinco modos de falla, la inyección de prompts y una defensa en varias capas.</p>
+            <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-07-evalua-tu-agente.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Panel con gráficos de métricas" loading="lazy" /><span class="card__num">7</span></div>
+          <div class="card__body"><h4>Evalúa a tu agente</h4><p>Un set de casos, un juez con rúbrica y cómo evitar que una mejora rompa lo que funcionaba.</p>
+            <div class="card__foot"><span>40 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+        <a class="card" href="clase-08-a-produccion.html">
+          <div class="card__cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Red de conexiones sobre el planeta" loading="lazy" /><span class="card__num">8</span></div>
+          <div class="card__body"><h4>Del piloto a producción</h4><p>Cómo se ejecuta, topes, confirmaciones, alertas, apagado y un lanzamiento gradual.</p>
+            <div class="card__foot"><span>45 MIN</span><span class="card__link">Abrir <span class="arrow">→</span></span></div></div>
+        </a>
+      </div>
+
+      <div class="section__head reveal" style="margin-top:64px;margin-bottom:24px;">
+        <span class="kicker">Con el temario</span>
+        <h2>Cada clase práctica tiene su módulo <em>teórico</em>.</h2>
+        <p>Si quieres más contexto antes de una clase, este es el módulo que la acompaña.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="tabla-piezas">
+          <thead><tr><th>Clase práctica</th><th>Módulo que la acompaña</th></tr></thead>
+          <tbody>
+            <tr><td><b>1 · Construye tu primer agente</b></td><td data-col="Módulo"><a href="modulo-12-anatomia-agente.html">12 · Anatomía de un agente</a></td></tr>
+            <tr><td><b>2 · Herramientas que el agente entiende</b></td><td data-col="Módulo"><a href="modulo-05-api.html">05 · ¿Qué es una API?</a></td></tr>
+            <tr><td><b>3 · Conecta tu agente con MCP</b></td><td data-col="Módulo"><a href="modulo-18-extensiones.html">18 · Extensiones y capacidades</a> y <a href="modulo-10-workfront-fusion.html">10 · Workfront Fusion</a></td></tr>
+            <tr><td><b>4 · Contexto y memoria</b></td><td data-col="Módulo"><a href="modulo-31-como-funciona-llm.html">31 · Cómo funciona un LLM por dentro</a></td></tr>
+            <tr><td><b>5 · ¿Flujo o agente?</b></td><td data-col="Módulo"><a href="modulo-30-flujos-agenticos.html">30 · Flujos agénticos avanzados</a></td></tr>
+            <tr><td><b>6 · Cuando el agente falla</b></td><td data-col="Módulo"><a href="modulo-33-seguridad-red-teaming.html">33 · Seguridad de IA y red teaming</a></td></tr>
+            <tr><td><b>7 · Evalúa a tu agente</b></td><td data-col="Módulo"><a href="modulo-32-evaluacion-confiabilidad.html">32 · Evaluación y confiabilidad</a></td></tr>
+            <tr><td><b>8 · Del piloto a producción</b></td><td data-col="Módulo"><a href="modulo-34-desplegar-hostear-agentes.html">34 · Desplegar y hostear agentes</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="credito-formato" style="margin-top:32px;">Ruta basada en la de ingeniería de agentes de <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">AI Engineering from Scratch</a> (licencia MIT), adaptada a nuestro trabajo con Workfront, Fusion y Claude.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Ruta práctica de agentes</span>
+        <a href="../index.html" style="color:var(--accent);">Ver todos los módulos →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 4 · Contexto y memoria · Academia IA</title>
+  <meta name="description" content="Clase 4 de la ruta práctica: decide qué entra en el contexto de tu agente y qué debe recordar entre conversaciones." />
+  <!-- En revisión: solo la ven los administradores (perfiles.es_admin). Quita esta línea para publicarla a todos. -->
+  <meta name="academia-revision" content="solo administradores" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../laboratorios.html">Laboratorios</a></li>
+        <li><a href="../prompts.html">Prompts</a></li>
+        <li><a href="../glosario.html">Glosario</a></li>
+        <li><a href="ruta-agentes.html" class="nav__cta">Ruta de agentes</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>/</span>
+        <a href="ruta-agentes.html">Ruta práctica: agentes</a> <span>/</span>
+        <span>Clase 4</span>
+      </div>
+      <span class="kicker reveal in">Ruta práctica · Clase 4 de 8</span>
+      <h1 class="reveal in">Contexto y <em>memoria</em></h1>
+      <p class="lead reveal in">
+        Todo lo que el agente sabe en un momento es lo que cabe en su contexto. Meter de más cuesta dinero y lo distrae; meter de menos lo hace olvidar acuerdos. Aquí aprendes a <b>armar el contexto justo</b> y a darle memoria.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Clase práctica</span>
+        <span class="mod-meta__item">Antes: Módulo 31</span>
+        <span class="mod-meta__item">Te llevas: una nota de memoria del proyecto</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1400&q=80" alt="Representación de una red neuronal" />
+        <span class="mod-cover__badge">Aprende · Constrúyelo · Llévatelo</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <ol class="pasos reveal">
+          <li><a href="#idea"><b>1</b>La idea</a></li>
+          <li><a href="#problema"><b>2</b>El problema</a></li>
+          <li><a href="#concepto"><b>3</b>El concepto</a></li>
+          <li><a href="#construye"><b>4</b>Constrúyelo</a></li>
+          <li><a href="#usalo"><b>5</b>Úsalo</a></li>
+          <li><a href="#llevatelo"><b>6</b>Llévatelo</a></li>
+        </ol>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> La idea</h2>
+          <blockquote class="lema">
+            El contexto es el presupuesto del agente, no un cajón: todo lo que entra se paga en cada vuelta y
+            compite por la atención del modelo.
+          </blockquote>
+          <p>Al terminar esta clase podrás:</p>
+          <ul class="bullets">
+            <li>Explicar qué entra en el contexto de un agente y cuánto pesa cada parte.</li>
+            <li>Armar un contexto justo: lo que la tarea necesita y nada más.</li>
+            <li>Distinguir la memoria de corto plazo de la de largo plazo.</li>
+            <li>Darle a tu agente una nota de memoria que sobreviva entre conversaciones.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="problema">
+          <h2><span class="n">02</span> El problema</h2>
+          <p>
+            Hace dos semanas tu equipo acordó con el cliente que <b>ninguna fecha se mueve sin el OK de Luis</b>.
+            Hoy Marta le pide al agente mover la entrega del banner, y el agente le dice que sí. El acuerdo estaba
+            en la conversación, pero entre cientos de mensajes: o no cupo, o el modelo lo pasó por alto.
+          </p>
+          <p>
+            Y hay un segundo problema que no se ve: si el agente carga toda la conversación, todo el proyecto y
+            todas las herramientas, <b>paga por ese texto en cada vuelta del ciclo</b>. Un agente que da 10 vueltas
+            con 20.000 tokens de contexto procesa 200.000 tokens para responder una sola pregunta.
+          </p>
+        </div>
+
+        <div class="content-block reveal" id="concepto">
+          <h2><span class="n">03</span> El concepto</h2>
+          <h3>Qué hay dentro del contexto</h3>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Instrucciones<span class="src">Siempre presentes</span></h4><ul><li>Objetivo, reglas y tono</li><li>Cortas y estables</li></ul></div>
+            <div class="compare-card"><h4>Herramientas<span class="src">Sus descripciones</span></h4><ul><li>Cada una ocupa espacio</li><li>40 herramientas pesan mucho</li></ul></div>
+            <div class="compare-card"><h4>Datos<span class="src">Lo que trae de Workfront</span></h4><ul><li>Tareas, comentarios, documentos</li><li>Solo los que la tarea necesita</li></ul></div>
+            <div class="compare-card"><h4>Historial<span class="src">La conversación</span></h4><ul><li>Crece con cada mensaje</li><li>Mejor resumido</li></ul></div>
+            <div class="compare-card"><h4>Memoria<span class="src">Lo que no se puede olvidar</span></h4><ul><li>Decisiones y preferencias</li><li>Vive fuera y se carga al empezar</li></ul></div>
+          </div>
+
+          <h3>Tres razones para no meter todo</h3>
+          <ol class="bullets bullets--num">
+            <li><b>Costo:</b> cada vuelta del agente vuelve a enviar el contexto completo.</li>
+            <li><b>Atención:</b> con mucho relleno, lo que queda en medio se pierde. En inglés lo llaman «lost in the middle».</li>
+            <li><b>Límite:</b> si no cabe, algo se recorta, y casi siempre es lo más antiguo, justo donde estaban los acuerdos.</li>
+          </ol>
+
+          <h3>Cuatro técnicas para el contexto justo</h3>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th>Técnica</th><th>Qué haces</th><th>Ejemplo con Workfront</th></tr></thead>
+              <tbody>
+                <tr><td><b>Seleccionar</b></td><td data-col="Qué haces">Cargas solo lo que la tarea necesita</td><td data-col="Ejemplo con Workfront">Solo tareas abiertas, con fecha y responsable</td></tr>
+                <tr><td><b>Resumir</b></td><td data-col="Qué haces">Conviertes lo largo en lo esencial</td><td data-col="Ejemplo con Workfront">Tres semanas de chat en diez líneas de decisiones</td></tr>
+                <tr><td><b>Buscar al momento</b></td><td data-col="Qué haces">El agente trae el dato cuando lo necesita, en vez de cargarlo todo (así funciona RAG)</td><td data-col="Ejemplo con Workfront">Consulta una tarea con el conector cuando hace falta</td></tr>
+                <tr><td><b>Ordenar</b></td><td data-col="Qué haces">Lo crítico al inicio o al final, nunca enterrado</td><td data-col="Ejemplo con Workfront">Las reglas del cliente arriba, en las instrucciones</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Memoria de corto y de largo plazo</h3>
+          <p>
+            Piensa en un computador: el contexto es la <b>memoria RAM</b> (rápida, pequeña, se borra al terminar) y
+            la memoria de largo plazo es el <b>disco</b> (grande, permanente, se consulta cuando hace falta). Un
+            agente bien armado lleva al contexto solo lo de hoy y guarda fuera lo que debe recordar siempre: las
+            decisiones, las preferencias y el glosario del proyecto. Al empezar, lee esa nota; al terminar,
+            propone qué agregarle.
+          </p>
+          <div class="callout callout--warn reveal">
+            <span class="label">Ojo</span>
+            <h4>La memoria también se puede envenenar</h4>
+            <p>Si ayer el agente guardó una nota equivocada (o alguien le hizo guardar una falsa), hoy la leerá como
+            verdad. Revisa lo que entra a la memoria, igual que revisas lo que sale.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="construye">
+          <h2><span class="n">04</span> Constrúyelo</h2>
+          <p>
+            Arma el contexto del agente y mira el medidor: tu presupuesto es de <b>12.000 tokens por consulta</b>.
+            Las ventanas reales son más grandes, pero el costo y la atención se comportan igual. Luego pregúntale
+            al agente y mira qué responde.
+          </p>
+          <p class="nota-pie-clase"><b>Es una simulación</b> con datos de ejemplo. Los pesos en tokens son aproximados.</p>
+          <div class="agente-sim" data-sim="contexto">
+            <div class="agente-sim__piezas">
+              <fieldset class="agente-sim__grupo">
+                <legend>Instrucciones y memoria</legend>
+                <label><input type="checkbox" name="instr" checked /> Instrucciones del agente (600 tokens)</label>
+                <label><input type="checkbox" name="memoria" /> Nota de memoria del proyecto (300 tokens)</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Herramientas</legend>
+                <label><input type="radio" name="tools" value="todas" checked /> Las 40 del servidor (6.000 tokens)</label>
+                <label><input type="radio" name="tools" value="justas" /> Solo las 3 que usa (450 tokens)</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Datos del proyecto</legend>
+                <label><input type="radio" name="datos" value="todo" checked /> Exportación completa: 220 tareas (9.000 tokens)</label>
+                <label><input type="radio" name="datos" value="abiertas" /> Solo tareas abiertas, con fecha y responsable (900 tokens)</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Historial</legend>
+                <label><input type="radio" name="historial" value="completo" checked /> Tres semanas de conversación (7.000 tokens)</label>
+                <label><input type="radio" name="historial" value="resumen" /> Resumen de lo decidido (500 tokens)</label>
+                <label><input type="radio" name="historial" value="nada" /> Nada (0 tokens)</label>
+              </fieldset>
+              <div class="medidor">
+                <div class="medidor__top"><span>Contexto por consulta</span><b class="medidor__valor"></b></div>
+                <div class="medidor__barra"><i></i></div>
+                <p class="medidor__nota">Cada vuelta del agente vuelve a enviar todo esto.</p>
+              </div>
+              <button type="button" class="lab-btn agente-sim__run">Preguntar al agente</button>
+              <span class="lab__pass clase-pass"><span class="ico ico--check" aria-hidden="true"></span> Contexto justo</span>
+            </div>
+            <div class="agente-sim__salida">
+              <div class="agente-sim__mision"><b>Situación</b> Marta escribe en el chat del proyecto Aurora. <span>Hace dos semanas se acordó con el cliente: ninguna fecha se mueve sin el OK de Luis.</span></div>
+              <ol class="traza" aria-live="polite"></ol>
+              <div class="agente-sim__veredicto" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="usalo">
+          <h2><span class="n">05</span> Úsalo</h2>
+          <h3>En Claude</h3>
+          <ol class="bullets bullets--num">
+            <li>Crea un proyecto para tu equipo. En sus instrucciones deja lo estable: objetivo, reglas y tono.</li>
+            <li>Sube como archivo del proyecto la nota de memoria del paso 6. Claude la consulta cuando la necesita.</li>
+            <li>Al cerrar una conversación importante, pídele: «Propón qué agregar a la nota de memoria». Revisa y actualiza el archivo.</li>
+            <li>Si una conversación se alarga demasiado, empieza una nueva con un resumen de lo decidido.</li>
+          </ol>
+          <h3>En Workfront Fusion</h3>
+          <ol class="bullets bullets--num">
+            <li>Al traer datos de Workfront, mapea solo los campos que el agente necesita, no el registro completo.</li>
+            <li>En el módulo «Process a user prompt», limita «Read-only tools» a las que usa: las descripciones de herramientas también ocupan contexto.</li>
+            <li>Usa un data store de Fusion como memoria de largo plazo: guarda las decisiones o el último estado revisado y léelo al inicio de la siguiente ejecución.</li>
+          </ol>
+          <div class="callout callout--info reveal">
+            <span class="label">Regla práctica</span>
+            <h4>Si lo necesita siempre, va en las instrucciones. Si lo necesita a veces, que lo busque.</h4>
+            <p>Las reglas del cliente van arriba, en las instrucciones. Los datos de una tarea los trae el agente con
+            una herramienta cuando los necesita. Y lo que debe recordar entre semanas vive en la nota de memoria.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="llevatelo">
+          <h2><span class="n">06</span> Llévatelo</h2>
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Plantilla</span><h4>Nota de memoria del proyecto</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="nota-memoria">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="nota-memoria" data-archivo="memoria-proyecto.md">Descargar .md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="nota-memoria"># Memoria del proyecto [nombre]
+Última actualización: [fecha] · Responsable: [nombre]
+
+## Objetivo del proyecto
+[Una o dos frases]
+
+## Personas y roles
+- [Nombre]: [rol]. Aprueba [qué].
+- [Nombre]: [rol].
+
+## Decisiones (la más reciente arriba)
+| Fecha | Decisión | Quién la tomó |
+|---|---|---|
+| [24 sep] | [Ninguna fecha se mueve sin el OK de Luis] | [Cliente y Luis] |
+
+## Preferencias del cliente
+- [Tono, formatos, horarios, palabras que no usar]
+
+## Glosario del proyecto
+- [Término]: [qué significa aquí]
+
+## Lo que el agente nunca debe hacer
+- [Mover fechas sin aprobación]
+- [Hablar del presupuesto con proveedores]
+
+## Instrucción para el agente
+Lee esta nota antes de responder. Si algo de la conversación contradice una decisión, menciónalo.
+Al terminar, propón qué agregar a esta nota, pero no la cambies sin aprobación.</pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="practica">
+          <h2><span class="n">07</span> Practica</h2>
+          <ol class="bullets bullets--num">
+            <li>En el simulador, busca la combinación más liviana que todavía responde bien. ¿Cuántos tokens ahorraste frente a la inicial?</li>
+            <li>Toma una conversación larga de un proyecto tuyo y resúmela en cinco decisiones con fecha y responsable.</li>
+            <li>Para un agente de Fusion, haz la lista de los campos de la tarea que de verdad necesita.</li>
+          </ol>
+          <h3>Palabras clave</h3>
+          <dl class="terminos">
+            <dt><a href="../glosario.html#ventana-de-contexto">Ventana de contexto</a></dt><dd>Todo lo que el modelo puede «ver» en un momento: instrucciones, herramientas, datos e historial.</dd>
+            <dt><a href="../glosario.html#token">Token</a></dt><dd>La unidad en que el modelo lee y cobra el texto. Una palabra suele ser uno o dos tokens.</dd>
+            <dt>Ingeniería de contexto</dt><dd>Decidir qué entra al contexto, en qué orden y qué se queda fuera.</dd>
+            <dt>Memoria de largo plazo</dt><dd>Información guardada fuera del contexto (notas, archivos, data stores) que el agente lee cuando la necesita.</dd>
+            <dt><a href="../glosario.html#rag">RAG</a></dt><dd>Buscar la información relevante en el momento y pasársela al modelo, en vez de cargarlo todo.</dd>
+          </dl>
+          <h3>Para profundizar</h3>
+          <ul class="bullets para-profundizar">
+            <li><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/11-llm-engineering/05-context-engineering" target="_blank" rel="noopener">Context Engineering</a> y <a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/14-agent-engineering/07-memory-virtual-context-memgpt" target="_blank" rel="noopener">Agent Memory</a>, lecciones de AI Engineering from Scratch.</li>
+            <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective context engineering for AI agents</a>, la guía de Anthropic.</li>
+            <li><a href="modulo-31-como-funciona-llm.html">Módulo 31</a>: cómo funciona la ventana de contexto por dentro.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">08</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. ¿Por qué no conviene cargar todo el proyecto en el contexto del agente?</p>
+            <button class="quiz__opt" data-correct="false">Porque el modelo no sabe leer tablas largas.</button>
+            <button class="quiz__opt" data-correct="true">Porque se paga en cada vuelta y lo importante se pierde entre el relleno.</button>
+            <button class="quiz__opt" data-correct="false">Porque Workfront no lo permite.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Más contexto no es mejor contexto: cuesta más y distrae al modelo.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Dónde guardas una decisión del cliente que el agente debe respetar durante meses?</p>
+            <button class="quiz__opt" data-correct="false">En la conversación: ahí ya está.</button>
+            <button class="quiz__opt" data-correct="true">En una nota de memoria que el agente lee al empezar.</button>
+            <button class="quiz__opt" data-correct="false">En la descripción de una herramienta.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La conversación se alarga, se recorta y se olvida. Una nota de memoria es corta, revisable y siempre está.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. Una regla clave quedó a la mitad de un historial larguísimo. ¿Qué es lo más probable?</p>
+            <button class="quiz__opt" data-correct="true">Que el modelo la pase por alto.</button>
+            <button class="quiz__opt" data-correct="false">Que la recuerde mejor por estar en el medio.</button>
+            <button class="quiz__opt" data-correct="false">Que el agente se detenga.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Lo del medio recibe menos atención. Lo crítico va al inicio, en las instrucciones, o en la nota de memoria.</p></div></div>
+          </div>
+        </div>
+
+        <p class="credito-formato">Ruta basada en la de ingeniería de agentes de <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">AI Engineering from Scratch</a> (licencia MIT), adaptada a nuestro trabajo con Workfront, Fusion y Claude.</p>
+
+        <div class="mod-nav reveal">
+          <a href="clase-03-mcp-workfront-fusion.html"><span>← Antes</span><b>Clase 3 · Conecta tu agente con MCP</b></a>
+          <a href="clase-05-flujo-o-agente.html" class="next"><span>Siguiente →</span><b>Clase 5 · ¿Flujo o agente?</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En esta clase</h5>
+          <a href="#idea">La idea</a>
+          <a href="#problema">El problema</a>
+          <a href="#concepto">El concepto</a>
+          <a href="#construye">Constrúyelo</a>
+          <a href="#usalo">Úsalo</a>
+          <a href="#llevatelo">Llévatelo</a>
+          <a href="#practica">Practica</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Ruta práctica de agentes</span>
+        <a href="ruta-agentes.html" style="color:var(--accent);">Ver las 8 clases →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/clases.js"></script>
+</body>
+</html>

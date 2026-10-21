@@ -1231,3 +1231,35 @@ h1, h2, h3, h4, .card__body h4, figcaption, .lead { text-wrap: balance; }
   .tabla-piezas td:first-child { font-size: 1rem; color: var(--text); }
   .tabla-piezas td[data-col]::before { content: attr(data-col); display: block; margin-top: 8px; font-size: .74rem; font-weight: 700; color: var(--accent-hover); }
 }
+
+/* ---------- Ruta práctica de agentes: piezas extra de los simuladores ---------- */
+.traza__paso--dato { background: var(--bg-alt); }
+.traza__paso--dato .ico { color: var(--text-soft); }
+.traza__paso--ok { border-color: #cdefd6; background: #f6fef9; }
+.traza__paso--ok .ico, .traza__paso--bloqueo .ico { color: var(--ok); }
+.traza__paso--falla { border-color: #fecaca; background: #fef2f2; }
+.traza__paso--falla .ico { color: var(--err); }
+.traza__paso--aviso { border-color: #fde68a; background: #fffbeb; }
+.traza__paso--aviso .ico { color: var(--warn); }
+.traza__paso--humano { border-color: #d6e2ff; background: #f8faff; }
+.traza__paso--humano .ico { color: var(--accent-hover); }
+.traza__paso--bloqueo { border-color: #cdefd6; background: #f6fef9; }
+.traza__paso--dia { background: transparent; border: 0; padding: 10px 2px 0; }
+.traza__paso--dia b { color: var(--text); font-size: .82rem; }
+.agente-sim__grupo select { display: block; width: 100%; margin: 4px 0 10px; padding: 9px 10px; border: 1px solid var(--border-2); border-radius: 8px; background: var(--surface); font: inherit; font-size: .88rem; color: var(--text); }
+.agente-sim__grupo .agente-sim__caso { display: block; font-size: .88rem; line-height: 1.45; color: var(--text-soft); margin-bottom: 4px; }
+.agente-sim__caso b { color: var(--text); }
+.medidor { width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); padding: 12px 14px; }
+.medidor__top { display: flex; justify-content: space-between; gap: 10px; font-size: .84rem; color: var(--text-soft); margin-bottom: 8px; }
+.medidor__top b { color: var(--text); }
+.medidor__barra { height: 10px; border-radius: 999px; background: var(--bg-alt); overflow: hidden; }
+.medidor__barra i { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--ok); transition: width .3s ease, background-color .3s ease; }
+.medidor--aviso .medidor__barra i { background: #d97706; }
+.medidor--mal .medidor__barra i { background: var(--err); }
+.medidor__nota { margin: 8px 0 0; font-size: .8rem; color: var(--text-dim); }
+.clase-num { display: inline-block; margin-bottom: 8px; font-size: .78rem; font-weight: 700; color: var(--accent-hover); }
+.ruta-intro { max-width: 760px; }
+.ruta-intro .bullets li { font-size: .98rem; }
+.para-profundizar { margin-top: 18px; }
+.para-profundizar li { font-size: .93rem; }
+.credito-formato a, .ruta-intro p a:not([class]), .tabla-piezas a:not([class]) { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }

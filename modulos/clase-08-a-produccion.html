@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 8 · Del piloto a producción · Academia IA</title>
+  <meta name="description" content="Clase 8 de la ruta práctica: cómo se ejecuta un agente en producción y los controles que necesita: topes, confirmaciones, alertas y apagado." />
+  <!-- En revisión: solo la ven los administradores (perfiles.es_admin). Quita esta línea para publicarla a todos. -->
+  <meta name="academia-revision" content="solo administradores" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../laboratorios.html">Laboratorios</a></li>
+        <li><a href="../prompts.html">Prompts</a></li>
+        <li><a href="../glosario.html">Glosario</a></li>
+        <li><a href="ruta-agentes.html" class="nav__cta">Ruta de agentes</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>/</span>
+        <a href="ruta-agentes.html">Ruta práctica: agentes</a> <span>/</span>
+        <span>Clase 8</span>
+      </div>
+      <span class="kicker reveal in">Ruta práctica · Clase 8 de 8</span>
+      <h1 class="reveal in">Del piloto a <em>producción</em></h1>
+      <p class="lead reveal in">
+        Que un agente funcione en una demo no significa que esté listo para correr solo todos los días. Aquí eliges <b>cómo se ejecuta</b> y le pones los controles que lo mantienen seguro cuando nadie lo mira.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">45 minutos</span>
+        <span class="mod-meta__item">Clase práctica</span>
+        <span class="mod-meta__item">Antes: Módulo 34</span>
+        <span class="mod-meta__item">Te llevas: un plan de lanzamiento</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80" alt="Red de conexiones sobre el planeta" />
+        <span class="mod-cover__badge">Aprende · Constrúyelo · Llévatelo</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <ol class="pasos reveal">
+          <li><a href="#idea"><b>1</b>La idea</a></li>
+          <li><a href="#problema"><b>2</b>El problema</a></li>
+          <li><a href="#concepto"><b>3</b>El concepto</a></li>
+          <li><a href="#construye"><b>4</b>Constrúyelo</a></li>
+          <li><a href="#usalo"><b>5</b>Úsalo</a></li>
+          <li><a href="#llevatelo"><b>6</b>Llévatelo</a></li>
+        </ol>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> La idea</h2>
+          <blockquote class="lema">
+            En producción la pregunta no es si algo va a fallar, sino qué control lo atrapa cuando falle.
+          </blockquote>
+          <p>Al terminar esta clase podrás:</p>
+          <ul class="bullets">
+            <li>Elegir cómo se ejecuta un agente: a demanda, programado, por evento o en segundo plano.</li>
+            <li>Ponerle los controles de producción: topes, confirmaciones, alertas y un interruptor de apagado.</li>
+            <li>Lanzarlo de forma gradual, con criterios claros para ampliarlo.</li>
+            <li>Vigilar su costo y su registro con las herramientas de Fusion.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="problema">
+          <h2><span class="n">02</span> El problema</h2>
+          <p>
+            En la demo, el agente corrió una vez y tú estabas mirando. En producción corre doscientas veces por
+            semana y nadie mira. Workfront a veces no responde, alguien edita trescientas tareas de golpe y un
+            pedido ambiguo («arregla esto como puedas») lo lleva a proponer cambios riesgosos.
+          </p>
+          <p>
+            Nada de eso es raro: es lo normal. Por eso un agente listo para producción no es el que nunca falla,
+            sino <b>el que tiene un control para cada falla</b> y alguien que revisa que esos controles funcionen.
+          </p>
+        </div>
+
+        <div class="content-block reveal" id="concepto">
+          <h2><span class="n">03</span> El concepto</h2>
+          <h3>¿Cómo se ejecuta?</h3>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th>Forma</th><th>Cuándo corre</th><th>Con Workfront</th><th>Cuidado</th></tr></thead>
+              <tbody>
+                <tr><td><b>A demanda</b></td><td data-col="Cuándo corre">Cuando alguien lo pide</td><td data-col="Con Workfront">Claude con conectores, o «Run once»</td><td data-col="Cuidado">Si nadie pregunta, nadie revisa</td></tr>
+                <tr><td><b>Programado</b></td><td data-col="Cuándo corre">A una hora fija</td><td data-col="Con Workfront">Un escenario de Fusion cada mañana</td><td data-col="Cuidado">Si falla un día, que se note</td></tr>
+                <tr><td><b>Por evento</b></td><td data-col="Cuándo corre">Cuando algo cambia</td><td data-col="Con Workfront">Un escenario instantáneo con webhook</td><td data-col="Cuidado">Una avalancha de cambios lo dispara cientos de veces</td></tr>
+                <tr><td><b>En segundo plano</b></td><td data-col="Cuándo corre">Trabajos largos, en cola</td><td data-col="Con Workfront">Escenarios encadenados</td><td data-col="Cuidado">Si se corta a la mitad, debe retomar donde quedó</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Los controles de producción</h3>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>Tope de gasto<span class="src">Y de vueltas</span></h4><ul><li>Un máximo por ejecución y por mes</li><li>Al llegar, se detiene y avisa</li></ul></div>
+            <div class="compare-card"><h4>Proponer y confirmar<span class="src">Antes de escribir</span></h4><ul><li>El agente propone el cambio</li><li>Una persona lo confirma</li></ul></div>
+            <div class="compare-card"><h4>Alertas y registro<span class="src">Que nada falle en silencio</span></h4><ul><li>Cada falla deja rastro y avisa</li><li>Alguien revisa el registro</li></ul></div>
+            <div class="compare-card"><h4>Interruptor de apagado<span class="src">En un clic</span></h4><ul><li>Pausar sin depender de nadie más</li><li>Probarlo antes de necesitarlo</li></ul></div>
+            <div class="compare-card"><h4>Puntos de control<span class="src">Para trabajos largos</span></h4><ul><li>Guarda el avance por etapas</li><li>Si falla, retoma, no empieza de cero</li></ul></div>
+            <div class="compare-card"><h4>Lanzamiento gradual<span class="src">De a poco</span></h4><ul><li>Primero un equipo piloto</li><li>Se amplía con criterios claros</li></ul></div>
+          </div>
+
+          <h3>Qué mirar cada semana</h3>
+          <ul class="bullets">
+            <li><b>Ejecuciones:</b> cuántas hubo y cuántas fallaron.</li>
+            <li><b>Costo:</b> operaciones de Fusion y consumo de IA, frente al tope.</li>
+            <li><b>Calidad:</b> una muestra de resultados revisada por una persona y las quejas recibidas.</li>
+            <li><b>Incidentes:</b> qué pasó y qué control lo atrapó (o cuál faltó).</li>
+          </ul>
+          <div class="callout callout--warn reveal">
+            <span class="label">Dónde falla producción</span>
+            <h4>Tres errores que se repiten</h4>
+            <p><b>Sin alertas:</b> el agente falla en silencio durante días. <b>Reintentos sin fin:</b> cada
+            reintento cuesta, y un error que se repite puede agotar el presupuesto. <b>Sin dueño:</b> si nadie es
+            responsable del agente, nadie revisa su registro.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="construye">
+          <h2><span class="n">04</span> Constrúyelo</h2>
+          <p>
+            Tu agente de seguimiento pasa a producción. Elige cómo se ejecuta y qué controles tiene, y simula su
+            primera semana. Los incidentes van a ocurrir igual: lo que cambia es si un control los atrapa.
+          </p>
+          <p class="nota-pie-clase"><b>Es una simulación</b> con incidentes de ejemplo.</p>
+          <div class="agente-sim" data-sim="produccion">
+            <div class="agente-sim__piezas">
+              <fieldset class="agente-sim__grupo">
+                <legend>¿Cómo se ejecuta?</legend>
+                <label><input type="radio" name="forma" value="demanda" /> A demanda: cuando alguien lo pide</label>
+                <label><input type="radio" name="forma" value="programado" /> Programado: cada día a las 8</label>
+                <label><input type="radio" name="forma" value="evento" checked /> Por evento: cada vez que cambia una tarea</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Controles</legend>
+                <label><input type="checkbox" name="control" value="tope" /> Tope de gasto y de ejecuciones</label>
+                <label><input type="checkbox" name="control" value="confirmar" /> Proponer y luego confirmar los cambios</label>
+                <label><input type="checkbox" name="control" value="alertas" /> Alertas y registro revisado</label>
+                <label><input type="checkbox" name="control" value="apagado" /> Interruptor de apagado</label>
+                <label><input type="checkbox" name="control" value="gradual" /> Lanzamiento gradual: primero un equipo</label>
+              </fieldset>
+              <button type="button" class="lab-btn agente-sim__run">Simular la semana</button>
+              <span class="lab__pass clase-pass"><span class="ico ico--check" aria-hidden="true"></span> Listo para producción</span>
+            </div>
+            <div class="agente-sim__salida">
+              <div class="agente-sim__mision"><b>Primera semana</b> Cinco días, cuatro incidentes. <span>¿Cuántos atrapan tus controles?</span></div>
+              <ol class="traza" aria-live="polite"></ol>
+              <div class="agente-sim__veredicto" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="usalo">
+          <h2><span class="n">05</span> Úsalo</h2>
+          <h3>Los controles en Workfront Fusion</h3>
+          <ol class="bullets bullets--num">
+            <li><b>Cuándo corre:</b> programa el escenario o, si debe reaccionar a cambios, usa un escenario instantáneo con webhook y ponle un tope.</li>
+            <li><b>Interruptor:</b> desactivar el escenario lo detiene. Con el servidor MCP de Fusion, también puedes pedírselo a Claude.</li>
+            <li><b>Costo:</b> revisa el consumo de operaciones. Recuerda que la IA administrada por Adobe tiene un tope de 25 dólares al mes por organización, compartido entre todos los escenarios.</li>
+            <li><b>Registro:</b> el historial de ejecuciones del escenario, el «Audit Trail» de cada ejecución del módulo de IA y el registro de actividad de Fusion (quién cambió qué).</li>
+            <li><b>Confirmación:</b> que el agente proponga (por ejemplo, con un borrador o una aprobación en Workfront) y que una persona confirme antes del paso que escribe.</li>
+          </ol>
+          <div class="callout callout--info reveal">
+            <span class="label">Con el servidor MCP de Fusion</span>
+            <h4>La revisión semanal, en una pregunta</h4>
+            <p>Con Fusion conectado en Claude (clase 3) puedes pedir el resumen de la semana: ejecuciones y fallas,
+            operaciones gastadas y cambios recientes en el escenario. Claude usa las herramientas de historial,
+            consumo y registro de actividad, y tú solo revisas el resultado. El prompt está en el paso 6.</p>
+          </div>
+          <h3>Un lanzamiento en cuatro etapas</h3>
+          <ol class="bullets bullets--num">
+            <li><b>Ensayo:</b> proyecto de prueba o ambiente non-production, con el set de casos de la clase 7.</li>
+            <li><b>Piloto:</b> un equipo, solo lectura y comentarios, con revisión diaria del registro.</li>
+            <li><b>Ampliación:</b> más equipos, cuando el piloto cumple los criterios acordados.</li>
+            <li><b>Operación:</b> revisión semanal, dueño definido y set de casos que crece con cada error.</li>
+          </ol>
+        </div>
+
+        <div class="content-block reveal" id="llevatelo">
+          <h2><span class="n">06</span> Llévatelo</h2>
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Plantilla</span><h4>Plan de lanzamiento del agente</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="plan-lanzamiento">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="plan-lanzamiento" data-archivo="plan-de-lanzamiento.md">Descargar .md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="plan-lanzamiento"># Plan de lanzamiento: [nombre del agente]
+
+## Datos básicos
+- Qué hace: [una frase]
+- Dueño: [nombre] · Suplente: [nombre]
+- Cómo se ejecuta: [a demanda / programado / por evento]
+- Herramientas que escribe: [solo comentar]
+
+## Controles
+- Tope: [máximo de ejecuciones por día] y [gasto máximo por mes]
+- Confirmación humana para: [cambiar fechas, enviar a clientes]
+- Alertas a: [persona o canal] cuando [falla una ejecución / se llega al tope]
+- Cómo se apaga: [desactivar el escenario X] · Quién puede: [nombres]
+
+## Etapas
+1. Ensayo: [fechas] · Set de casos aprobado: [8 de 8]
+2. Piloto con [equipo]: [fechas]
+3. Ampliación si se cumple:
+   - [2 semanas sin incidentes graves]
+   - [95% de resultados revisados correctos]
+   - [Costo dentro del tope]
+4. Operación: revisión semanal los [día]
+
+## Si algo sale mal
+1. Apagar el agente.
+2. Avisar a [personas].
+3. Revisar el registro y el Audit Trail.
+4. Corregir y agregar el caso al set de pruebas.
+5. Volver a encender solo si el set completo pasa.</pre>
+          </div>
+
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Prompt para Claude</span><h4>Revisión semanal con el servidor MCP de Fusion</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="revision-semanal">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="revision-semanal" data-archivo="revision-semanal.md">Descargar .md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="revision-semanal">Usa solo herramientas de lectura del conector de Workfront Fusion.
+
+Revisa el escenario «[nombre del escenario]» de los últimos 7 días y dame:
+1. Ejecuciones: cuántas hubo, cuántas fallaron y el motivo de cada falla.
+2. Consumo: operaciones usadas esta semana y comparación con la semana anterior.
+3. Cambios: quién modificó el escenario y cuándo (registro de actividad).
+4. Alertas: cualquier cosa fuera de lo normal (picos de ejecuciones, fallas repetidas).
+
+Formato: una tabla por punto y, al final, tres acciones recomendadas.
+No ejecutes, actives, desactives ni modifiques nada sin preguntarme.</pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="practica">
+          <h2><span class="n">07</span> Practica</h2>
+          <ol class="bullets bullets--num">
+            <li>En el simulador, compara «Programado» con «Por evento». ¿Qué control deja de ser imprescindible y por qué?</li>
+            <li>Completa el plan de lanzamiento para un agente de tu equipo, aunque todavía sea una idea.</li>
+            <li>Define tres criterios medibles para pasar del piloto a todo el equipo.</li>
+          </ol>
+          <h3>Palabras clave</h3>
+          <dl class="terminos">
+            <dt>Producción</dt><dd>Cuando el agente trabaja de verdad, con datos reales y sin alguien mirando cada paso.</dd>
+            <dt>Tope de gasto</dt><dd>Un límite de costo o de ejecuciones que, al alcanzarse, detiene al agente y avisa.</dd>
+            <dt>Proponer y confirmar</dt><dd>El agente prepara el cambio y una persona lo aprueba antes de aplicarlo.</dd>
+            <dt>Interruptor de apagado</dt><dd>La forma de detener al agente de inmediato. En inglés, «kill switch».</dd>
+            <dt>Lanzamiento gradual</dt><dd>Abrir el agente primero a un grupo pequeño y ampliarlo con criterios.</dd>
+          </dl>
+          <h3>Para profundizar</h3>
+          <ul class="bullets para-profundizar">
+            <li><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/14-agent-engineering/29-production-runtimes" target="_blank" rel="noopener">Production Runtimes</a> y <a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/15-autonomous-systems/14-kill-switches-canaries" target="_blank" rel="noopener">Kill Switches and Canaries</a>, lecciones de AI Engineering from Scratch.</li>
+            <li><a href="https://experienceleague.adobe.com/en/docs/workfront-fusion/using/set-up-and-manage-fusion/use-fusion-mcp-server/fusion-mcp-server-tools" target="_blank" rel="noopener">Herramientas del servidor MCP de Fusion</a>, incluidas las de ejecuciones, consumo y registro de actividad.</li>
+            <li><a href="modulo-34-desplegar-hostear-agentes.html">Módulo 34</a>: desplegar y hostear tus agentes.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">08</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. Tu agente se activa cada vez que cambia una tarea. ¿Qué control es imprescindible?</p>
+            <button class="quiz__opt" data-correct="true">Un tope de gasto y de ejecuciones.</button>
+            <button class="quiz__opt" data-correct="false">Un modelo más rápido.</button>
+            <button class="quiz__opt" data-correct="false">Más herramientas.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Una edición masiva puede dispararlo cientos de veces. El tope lo detiene y te avisa.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué significa «proponer y confirmar»?</p>
+            <button class="quiz__opt" data-correct="false">Que el agente confirma sus propios cambios.</button>
+            <button class="quiz__opt" data-correct="true">Que el agente prepara el cambio y una persona lo aprueba antes de aplicarlo.</button>
+            <button class="quiz__opt" data-correct="false">Que el agente solo puede leer.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El agente hace el trabajo pesado y la decisión final la toma una persona.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. ¿Para qué sirve un lanzamiento gradual?</p>
+            <button class="quiz__opt" data-correct="false">Para que el agente aprenda solo.</button>
+            <button class="quiz__opt" data-correct="false">Para gastar menos en licencias.</button>
+            <button class="quiz__opt" data-correct="true">Para que, si algo falla, el daño quede en un grupo pequeño.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Empiezas con un equipo piloto y amplías solo cuando se cumplen los criterios acordados.</p></div></div>
+          </div>
+        </div>
+
+        <p class="credito-formato">Ruta basada en la de ingeniería de agentes de <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">AI Engineering from Scratch</a> (licencia MIT), adaptada a nuestro trabajo con Workfront, Fusion y Claude.</p>
+
+        <div class="mod-nav reveal">
+          <a href="clase-07-evalua-tu-agente.html"><span>← Antes</span><b>Clase 7 · Evalúa a tu agente</b></a>
+          <a href="ruta-agentes.html" class="next"><span>Siguiente →</span><b>Volver a la ruta</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En esta clase</h5>
+          <a href="#idea">La idea</a>
+          <a href="#problema">El problema</a>
+          <a href="#concepto">El concepto</a>
+          <a href="#construye">Constrúyelo</a>
+          <a href="#usalo">Úsalo</a>
+          <a href="#llevatelo">Llévatelo</a>
+          <a href="#practica">Practica</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Ruta práctica de agentes</span>
+        <a href="ruta-agentes.html" style="color:var(--accent);">Ver las 8 clases →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/clases.js"></script>
+</body>
+</html>

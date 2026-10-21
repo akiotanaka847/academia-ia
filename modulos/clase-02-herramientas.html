@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 2 · Herramientas que el agente entiende · Academia IA</title>
+  <meta name="description" content="Clase 2 de la ruta práctica: diseña herramientas que un agente elija y use bien: nombre, descripción, parámetros y mensajes de error." />
+  <!-- En revisión: solo la ven los administradores (perfiles.es_admin). Quita esta línea para publicarla a todos. -->
+  <meta name="academia-revision" content="solo administradores" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Academia IA" />
+</head>
+<body>
+
+  <div class="progress-bar"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="brand">Academia<span class="brand__mark">IA</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html#ruta">Temario</a></li>
+        <li><a href="../tareas.html">Tareas</a></li>
+        <li><a href="../laboratorios.html">Laboratorios</a></li>
+        <li><a href="../prompts.html">Prompts</a></li>
+        <li><a href="../glosario.html">Glosario</a></li>
+        <li><a href="ruta-agentes.html" class="nav__cta">Ruta de agentes</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mod-hero">
+    <div class="container">
+      <div class="breadcrumb reveal in">
+        <a href="../index.html">Inicio</a> <span>/</span>
+        <a href="ruta-agentes.html">Ruta práctica: agentes</a> <span>/</span>
+        <span>Clase 2</span>
+      </div>
+      <span class="kicker reveal in">Ruta práctica · Clase 2 de 8</span>
+      <h1 class="reveal in">Herramientas que el agente <em>entiende</em></h1>
+      <p class="lead reveal in">
+        Un agente solo puede hacer lo que sus herramientas le permiten, y solo las usa bien si entiende <b>para qué sirve cada una</b>. Aquí aprendes a describirlas como lo hacen los equipos que construyen agentes de verdad.
+      </p>
+      <div class="mod-meta reveal in">
+        <span class="mod-meta__item">40 minutos</span>
+        <span class="mod-meta__item">Clase práctica</span>
+        <span class="mod-meta__item">Antes: Clase 1</span>
+        <span class="mod-meta__item">Te llevas: una ficha para diseñar herramientas</span>
+      </div>
+      <div class="mod-cover reveal in">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80" alt="Cables de red conectados a un servidor" />
+        <span class="mod-cover__badge">Aprende · Constrúyelo · Llévatelo</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="container mod-layout">
+      <article>
+
+        <ol class="pasos reveal">
+          <li><a href="#idea"><b>1</b>La idea</a></li>
+          <li><a href="#problema"><b>2</b>El problema</a></li>
+          <li><a href="#concepto"><b>3</b>El concepto</a></li>
+          <li><a href="#construye"><b>4</b>Constrúyelo</a></li>
+          <li><a href="#usalo"><b>5</b>Úsalo</a></li>
+          <li><a href="#llevatelo"><b>6</b>Llévatelo</a></li>
+        </ol>
+
+        <div class="content-block reveal" id="idea">
+          <h2><span class="n">01</span> La idea</h2>
+          <blockquote class="lema">
+            Una herramienta es un contrato: el modelo pide, tu sistema ejecuta. Si el contrato es confuso, el
+            agente se equivoca aunque la herramienta funcione perfecto.
+          </blockquote>
+          <p>Al terminar esta clase podrás:</p>
+          <ul class="bullets">
+            <li>Explicar los cuatro pasos de una llamada a una herramienta y quién hace cada uno.</li>
+            <li>Diseñar el nombre, la descripción y los parámetros de una herramienta para que el modelo la elija bien.</li>
+            <li>Escribir mensajes de error que le enseñen al agente qué hacer.</li>
+            <li>Reconocer las herramientas de Workfront y Fusion que tu agente puede usar, y cuáles leen o escriben.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="problema">
+          <h2><span class="n">02</span> El problema</h2>
+          <p>
+            Tu herramienta para buscar tareas funciona sin errores, pero el agente la usa mal: la elige cuando le
+            piden <b>crear</b> una tarea, le pasa una frase donde esperabas un estado o se rinde ante el primer
+            error. Pruebas un modelo más caro y pasa lo mismo.
+          </p>
+          <p>
+            Casi nunca es culpa del modelo. El modelo solo ve <b>el nombre, la descripción y los parámetros</b>
+            de cada herramienta, y con eso decide. En pruebas públicas, cambiar solo esos textos mueve entre 10 y
+            20 puntos el acierto al elegir herramientas. Diseñarlas bien es la mejora más barata que existe.
+          </p>
+        </div>
+
+        <div class="content-block reveal" id="concepto">
+          <h2><span class="n">03</span> El concepto</h2>
+          <h3>Los cuatro pasos de una llamada</h3>
+          <div class="compare-grid">
+            <div class="compare-card"><h4>1 · Describir<span class="src">Lo haces tú</span></h4><ul><li>Nombre, descripción y parámetros</li><li>El modelo los lee antes de decidir</li></ul></div>
+            <div class="compare-card"><h4>2 · Decidir<span class="src">Lo hace el modelo</span></h4><ul><li>Elige la herramienta</li><li>Llena los parámetros</li></ul></div>
+            <div class="compare-card"><h4>3 · Ejecutar<span class="src">Lo hace tu sistema</span></h4><ul><li>El modelo nunca ejecuta nada</li><li>Aquí se revisan los permisos</li></ul></div>
+            <div class="compare-card"><h4>4 · Observar<span class="src">Vuelve al modelo</span></h4><ul><li>El resultado, o el error, como texto</li><li>Con eso decide el siguiente paso</li></ul></div>
+          </div>
+          <p>
+            Fíjate en el paso 3: el modelo solo <b>pide</b>. Quien ejecuta es tu sistema (Workfront, Fusion, el
+            conector). Por eso los permisos se ponen en las herramientas, no en las instrucciones: una regla en el
+            prompt se puede ignorar, una herramienta que no existe no se puede usar.
+          </p>
+
+          <h3>Así se ve una herramienta por dentro</h3>
+          <p>Cada herramienta se describe con un esquema como este. Todo lo que ves aquí lo lee el modelo:</p>
+          <div class="code-block">
+            <div class="code-block__head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:8px;">buscar_tareas.json</span></div>
+            <pre><code>{
+  "name": "buscar_tareas",
+  "description": "Úsala cuando pidan ver tareas de un proyecto, por estado o por responsable. No la uses para crear ni cambiar tareas.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "proyecto":    { "type": "string", "description": "Nombre exacto del proyecto, por ejemplo Aurora" },
+      "estado":      { "type": "string", "enum": ["abierta", "atrasada", "terminada"] },
+      "responsable": { "type": "string", "description": "Opcional. Nombre de la persona" }
+    },
+    "required": ["proyecto"]
+  }
+}</code></pre>
+          </div>
+
+          <h3>Cuatro reglas de diseño</h3>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th>Regla</th><th>Así no</th><th>Así sí</th></tr></thead>
+              <tbody>
+                <tr><td><b>Nombre con verbo y objeto</b></td><td data-col="Así no">tareas, gestionar_workfront</td><td data-col="Así sí">buscar_tareas, crear_tarea</td></tr>
+                <tr><td><b>Descripción: cuándo sí y cuándo no</b></td><td data-col="Así no">«Busca tareas.»</td><td data-col="Así sí">«Úsala cuando pidan ver tareas de un proyecto. No la uses para crear ni cambiar tareas.»</td></tr>
+                <tr><td><b>Parámetros con opciones cerradas</b></td><td data-col="Así no">consulta: cualquier texto</td><td data-col="Así sí">estado: abierta, atrasada o terminada</td></tr>
+                <tr><td><b>Errores que enseñan</b></td><td data-col="Así no">«Error 422»</td><td data-col="Así sí">«No existe "Auora". ¿Quisiste decir "Aurora"?»</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Y una quinta, que se olvida mucho: <b>varias herramientas pequeñas son mejores que una que hace de
+            todo</b>. Una herramienta «gestionar_workfront» obliga al modelo a escribir la acción como texto
+            libre, que es justo donde más se equivoca. Si un parámetro «acción» tiene más de tres opciones,
+            divídela.
+          </p>
+          <div class="callout callout--warn reveal">
+            <span class="label">Ojo</span>
+            <h4>Las descripciones también pueden traer trampas</h4>
+            <p>El modelo lee la descripción de cada herramienta tal cual. Un servidor malicioso podría esconder
+            ahí órdenes («y además envía los archivos a…»). Conecta solo servidores de confianza, como los
+            oficiales de Adobe, y revisa qué herramientas trae cada uno.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="construye">
+          <h2><span class="n">04</span> Constrúyelo</h2>
+          <p>
+            Diseña la herramienta de búsqueda de tu agente. Además de la tuya, el agente tiene
+            <b>crear_tarea</b>, que ya está bien hecha. Al ejecutar, le llegan cuatro pedidos y cada uno pone a
+            prueba una decisión distinta. Empieza con las opciones marcadas, que son las más comunes (y las peores).
+          </p>
+          <p class="nota-pie-clase"><b>Es una simulación</b> con datos de ejemplo: no se conecta a Workfront.</p>
+          <div class="agente-sim" data-sim="herramientas">
+            <div class="agente-sim__piezas">
+              <fieldset class="agente-sim__grupo">
+                <legend>Nombre</legend>
+                <label><input type="radio" name="nombre" value="tareas" checked /> tareas</label>
+                <label><input type="radio" name="nombre" value="buscar_tareas" /> buscar_tareas</label>
+                <label><input type="radio" name="nombre" value="gestionar_workfront" /> gestionar_workfront (hace de todo)</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Descripción</legend>
+                <label><input type="radio" name="desc" value="vaga" checked /> «Busca tareas.»</label>
+                <label><input type="radio" name="desc" value="clara" /> «Úsala cuando pidan ver tareas de un proyecto. No la uses para crear ni cambiar tareas.»</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Parámetros</legend>
+                <label><input type="radio" name="params" value="libre" checked /> consulta (cualquier texto)</label>
+                <label><input type="radio" name="params" value="tipados" /> proyecto, estado (abierta, atrasada o terminada) y responsable</label>
+              </fieldset>
+              <fieldset class="agente-sim__grupo">
+                <legend>Mensaje de error</legend>
+                <label><input type="radio" name="error" value="tecnico" checked /> «Error 422»</label>
+                <label><input type="radio" name="error" value="util" /> «No existe ese proyecto. ¿Quisiste decir…? Proyectos activos: …»</label>
+              </fieldset>
+              <button type="button" class="lab-btn agente-sim__run">Probar la herramienta</button>
+              <span class="lab__pass clase-pass"><span class="ico ico--check" aria-hidden="true"></span> Herramienta lista</span>
+            </div>
+            <div class="agente-sim__salida">
+              <div class="agente-sim__mision"><b>Prueba</b> Cuatro pedidos reales sobre el proyecto Aurora. <span>Herramientas del agente: la tuya y crear_tarea.</span></div>
+              <ol class="traza" aria-live="polite"></ol>
+              <div class="agente-sim__veredicto" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="usalo">
+          <h2><span class="n">05</span> Úsalo</h2>
+          <p>
+            Con Workfront no tienes que programar herramientas: el <b>servidor MCP de Workfront</b> ya trae las
+            suyas, diseñadas con estas mismas reglas. Lo que sí decides es <b>cuáles puede usar tu agente</b>.
+            Estas son algunas:
+          </p>
+          <div class="table-wrap">
+            <table class="tabla-piezas">
+              <thead><tr><th>Herramienta</th><th>Qué hace</th><th>Tipo</th></tr></thead>
+              <tbody>
+                <tr><td><b>insights_find_workfront_data</b></td><td data-col="Qué hace">Busca, filtra, ordena y resume datos de Workfront</td><td data-col="Tipo">Lectura</td></tr>
+                <tr><td><b>insights_summarize_object</b></td><td data-col="Qué hace">Resume un proyecto, tarea u otro objeto</td><td data-col="Tipo">Lectura</td></tr>
+                <tr><td><b>comment-stream_create_comment</b></td><td data-col="Qué hace">Deja un comentario en un objeto</td><td data-col="Tipo">Escritura</td></tr>
+                <tr><td><b>workflow_update_any_object</b></td><td data-col="Qué hace">Actualiza tareas, proyectos y otros objetos</td><td data-col="Tipo">Escritura</td></tr>
+                <tr><td><b>workflow_delete_any_object</b></td><td data-col="Qué hace">Borra objetos (siempre pide confirmación)</td><td data-col="Tipo">Escritura</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ol class="bullets bullets--num">
+            <li><b>En Workfront:</b> el administrador decide qué se permite. Las herramientas de lectura vienen activadas y las de escritura, apagadas.</li>
+            <li><b>En Fusion:</b> en el módulo «Process a user prompt» eliges qué herramientas puede usar en «Read-only tools» y «Write/delete tools».</li>
+            <li><b>En Claude:</b> en la configuración de cada conector puedes apagar las herramientas que no quieras, y Claude te pide permiso antes de usarlas.</li>
+          </ol>
+          <div class="callout callout--info reveal">
+            <span class="label">Tus escenarios también son herramientas</span>
+            <h4>Diseña cada escenario de Fusion como una herramienta</h4>
+            <p>Con el servidor MCP de Fusion, Claude puede ejecutar un escenario y leer su resultado. Ponle a cada
+            escenario un nombre con verbo («Generar reporte semanal de Aurora») y una descripción con cuándo
+            usarlo, y haz que, si falla, el error diga qué pasó. Lo ves en la <a href="clase-03-mcp-workfront-fusion.html">clase 3</a>.</p>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="llevatelo">
+          <h2><span class="n">06</span> Llévatelo</h2>
+          <p>Usa esta ficha cada vez que diseñes una herramienta, un escenario que otro agente va a usar o una skill.</p>
+          <div class="entregable">
+            <div class="entregable__head">
+              <div><span class="entregable__tag">Plantilla</span><h4>Ficha de herramienta</h4></div>
+              <div class="entregable__acciones">
+                <button type="button" class="lab-btn lab-btn--ghost" data-copiar="ficha-herramienta">Copiar</button>
+                <button type="button" class="lab-btn lab-btn--ghost" data-descargar="ficha-herramienta" data-archivo="ficha-herramienta.md">Descargar .md</button>
+              </div>
+            </div>
+            <pre class="entregable__texto" id="ficha-herramienta"># Ficha de herramienta
+
+## Nombre (verbo + objeto, sin datos dentro)
+[buscar_tareas]
+
+## Descripción (dos frases)
+Úsala cuando [situación en la que sí sirve].
+No la uses para [casos parecidos en los que no sirve].
+
+## Parámetros
+| Nombre | Tipo | ¿Obligatorio? | Opciones o ejemplo |
+|---|---|---|---|
+| [proyecto] | texto | sí | Aurora |
+| [estado] | opción | no | abierta, atrasada o terminada |
+
+## Qué devuelve
+[Lista de tareas con nombre, responsable, fecha y avance]
+
+## Errores (escritos para el modelo)
+- Si [no existe el proyecto]: «[No existe X. Proyectos activos: …]»
+- Si [falta un permiso]: «[No tienes permiso para … Pídelo a …]»
+
+## Permisos
+- ¿Lee o escribe? [Solo lee]
+- ¿Necesita aprobación humana? [No]
+
+## Checklist
+- [ ] El nombre dice qué hace sin leer la descripción.
+- [ ] La descripción dice cuándo NO usarla.
+- [ ] Todo lo que tiene opciones fijas es una lista cerrada.
+- [ ] Cada error dice qué pasó y cómo seguir.
+- [ ] Hace una sola cosa.</pre>
+          </div>
+        </div>
+
+        <div class="content-block reveal" id="practica">
+          <h2><span class="n">07</span> Practica</h2>
+          <ol class="bullets bullets--num">
+            <li>En el simulador, cambia solo la descripción y deja lo demás como estaba. ¿Qué pedido se arregla?</li>
+            <li>Escribe la descripción de dos herramientas parecidas («buscar_solicitudes» y «crear_solicitud») para que el modelo nunca las confunda.</li>
+            <li>Piensa en un escenario de Fusion de tu equipo. Escríbele un nombre con verbo y una descripción con «úsalo cuando» y «no lo uses para».</li>
+          </ol>
+          <h3>Palabras clave</h3>
+          <dl class="terminos">
+            <dt>Herramienta</dt><dd>Una acción que el agente puede pedir y que tu sistema ejecuta.</dd>
+            <dt>Llamada a herramienta</dt><dd>El pedido estructurado del modelo: qué herramienta y con qué parámetros. También se le dice «function calling».</dd>
+            <dt>Esquema</dt><dd>La descripción formal de la herramienta: nombre, descripción y parámetros con sus tipos.</dd>
+            <dt>Opciones cerradas</dt><dd>Un parámetro que solo acepta valores de una lista. En inglés, «enum».</dd>
+            <dt>Mínimo privilegio</dt><dd>Darle al agente solo las herramientas y permisos que necesita para su tarea.</dd>
+          </dl>
+          <h3>Para profundizar</h3>
+          <ul class="bullets para-profundizar">
+            <li><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/13-tools-and-protocols/05-tool-schema-design" target="_blank" rel="noopener">Tool Schema Design</a> y <a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/13-tools-and-protocols/01-the-tool-interface" target="_blank" rel="noopener">The Tool Interface</a>, lecciones de AI Engineering from Scratch.</li>
+            <li><a href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener">Writing effective tools for agents</a>, la guía de Anthropic.</li>
+            <li><a href="https://experienceleague.adobe.com/en/docs/workfront/using/basics/workfront-mcp-server/workfront-mcp-server-tools" target="_blank" rel="noopener">Herramientas del servidor MCP de Workfront</a>, la lista oficial.</li>
+          </ul>
+        </div>
+
+        <div class="content-block reveal" id="quiz">
+          <h2><span class="n">08</span> Comprueba lo aprendido</h2>
+          <div class="quiz">
+            <p class="quiz__q">1. Cuando un agente «usa» una herramienta, ¿quién la ejecuta de verdad?</p>
+            <button class="quiz__opt" data-correct="false">El modelo de IA.</button>
+            <button class="quiz__opt" data-correct="true">Tu sistema (Workfront, Fusion o el conector), después de que el modelo la pide.</button>
+            <button class="quiz__opt" data-correct="false">El usuario, a mano.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>El modelo solo pide. Por eso los permisos se controlan en las herramientas y no en el prompt.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">2. ¿Qué descripción ayuda más al modelo a no confundir dos herramientas parecidas?</p>
+            <button class="quiz__opt" data-correct="false">Una muy corta: «Busca tareas».</button>
+            <button class="quiz__opt" data-correct="true">Una que diga cuándo usarla y cuándo no usarla.</button>
+            <button class="quiz__opt" data-correct="false">Una que explique cómo está programada por dentro.</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>La frase «No la uses para…» es la que separa una herramienta de su vecina más parecida.</p></div></div>
+          </div>
+          <div class="quiz">
+            <p class="quiz__q">3. ¿Qué mensaje de error es mejor para un agente?</p>
+            <button class="quiz__opt" data-correct="false">«Error 422».</button>
+            <button class="quiz__opt" data-correct="false">Ninguno: es mejor no mostrarle errores.</button>
+            <button class="quiz__opt" data-correct="true">«No existe "Auora". ¿Quisiste decir "Aurora"?»</button>
+            <div class="quiz__feedback"><div class="callout callout--tip" style="margin:0;"><span class="label">Correcto</span><p>Un error que dice qué pasó y cómo seguir permite que el agente se corrija solo, en lugar de rendirse o inventar.</p></div></div>
+          </div>
+        </div>
+
+        <p class="credito-formato">Ruta basada en la de ingeniería de agentes de <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">AI Engineering from Scratch</a> (licencia MIT), adaptada a nuestro trabajo con Workfront, Fusion y Claude.</p>
+
+        <div class="mod-nav reveal">
+          <a href="clase-01-bucle-del-agente.html"><span>← Antes</span><b>Clase 1 · Construye tu primer agente</b></a>
+          <a href="clase-03-mcp-workfront-fusion.html" class="next"><span>Siguiente →</span><b>Clase 3 · Conecta tu agente con MCP</b></a>
+        </div>
+      </article>
+
+      <aside>
+        <nav class="toc">
+          <h5>En esta clase</h5>
+          <a href="#idea">La idea</a>
+          <a href="#problema">El problema</a>
+          <a href="#concepto">El concepto</a>
+          <a href="#construye">Constrúyelo</a>
+          <a href="#usalo">Úsalo</a>
+          <a href="#llevatelo">Llévatelo</a>
+          <a href="#practica">Practica</a>
+          <a href="#quiz">Comprueba lo aprendido</a>
+        </nav>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding-top:0;">
+        <span>© <span data-year>2026</span> · Academia IA · Ruta práctica de agentes</span>
+        <a href="ruta-agentes.html" style="color:var(--accent);">Ver las 8 clases →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/clases.js"></script>
+</body>
+</html>
