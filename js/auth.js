@@ -25,9 +25,9 @@ const SUPABASE_ANON_KEY =
 
 export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Segundo factor por correo (código/enlace). TEMPORALMENTE desactivado porque
-// el correo gratis de Supabase está limitado (error 429) y eso bloquea el
-// login. Poner en true otra vez cuando Resend (SMTP propio) esté configurado.
+// Segundo factor por correo (código/enlace). Desactivado desde que el correo
+// gratis de Supabase se saturaba (error 429). Desde octubre de 2026 el envío
+// sale por SMTP propio (Gmail), así que se puede volver a activar si se decide.
 // Con esto, el acceso sigue protegido por CONTRASEÑA + APROBACIÓN del admin
 // (esa aprobación no se puede saltar: ver RLS en sql/supabase-setup.sql).
 const SEGUNDO_FACTOR = false;
@@ -302,7 +302,7 @@ async function recuperar(ev) {
 
   if (error) {
     if (esLimiteCorreo(error)) return msg("err", "El correo está limitado ahora mismo. Espera un poco e inténtalo otra vez.");
-    if (esFalloDeEnvio(error)) return msg("err", "El servidor de correo rechazó el envío. Suele faltar verificar el dominio en el proveedor de correo (Resend). Avisa al administrador.");
+    if (esFalloDeEnvio(error)) return msg("err", "No pudimos enviarte el correo en este momento. Inténtalo de nuevo en unos minutos y, si sigue fallando, avisa al administrador del curso.");
     return msg("err", "No se pudo enviar: " + detalleError(error));
   }
   // Por seguridad, el mismo mensaje exista o no la cuenta (no revelamos quién está registrado).
